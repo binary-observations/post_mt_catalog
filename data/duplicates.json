@@ -1,0 +1,1375 @@
+[
+  {
+    "System Name": "HR 6819",
+    "Type1": "B2-3Ve",
+    "Type2": "SS",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2020A&A...641A..43B"
+    ],
+    "Notes": "Galactic BH impostor",
+    "RA": [
+      NaN,
+      274.28139,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -56.02335,
+      NaN
+    ],
+    "Period": [
+      0.112,
+      40.335,
+      0.112
+    ],
+    "Eccentricity": [
+      NaN,
+      0.0,
+      NaN
+    ],
+    "M1": [
+      3.0,
+      6.0,
+      5.0
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.1,
+      0.4,
+      0.3
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      0.0133,
+      0.0667,
+      0.0133
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "J0553-1349",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      88.4715,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -13.83202,
+      0.0
+    ],
+    "Period": [
+      0.05,
+      189.1,
+      0.05
+    ],
+    "Eccentricity": [
+      0.0007,
+      0.3879,
+      0.0007
+    ],
+    "M1": [
+      0.06,
+      0.98,
+      0.06
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.05,
+      1.33,
+      0.05
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0006,
+      0.2258,
+      0.0006
+    ]
+  },
+  {
+    "System Name": "J2057-4742",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      314.4933,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -47.70061,
+      0.0
+    ],
+    "Period": [
+      0.07,
+      230.15,
+      0.07
+    ],
+    "Eccentricity": [
+      0.0026,
+      0.3095,
+      0.0026
+    ],
+    "M1": [
+      0.031,
+      1.048,
+      0.031
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.04,
+      1.31,
+      0.04
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0014,
+      0.1799,
+      0.0014
+    ]
+  },
+  {
+    "System Name": "J1553-6846",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      238.39374,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -68.77867,
+      0.0
+    ],
+    "Period": [
+      0.11,
+      310.17,
+      0.11
+    ],
+    "Eccentricity": [
+      0.0021,
+      0.5314,
+      0.0021
+    ],
+    "M1": [
+      0.05,
+      1.04,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.032,
+      1.323,
+      0.032
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.009,
+      0.406,
+      0.009
+    ]
+  },
+  {
+    "System Name": "J2102+3703",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      315.61966,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      37.0637,
+      0.0
+    ],
+    "Period": [
+      0.26,
+      481.04,
+      0.26
+    ],
+    "Eccentricity": [
+      0.009,
+      0.448,
+      0.009
+    ],
+    "M1": [
+      0.03,
+      1.03,
+      0.03
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.034,
+      1.473,
+      0.034
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.011,
+      0.173,
+      0.011
+    ]
+  },
+  {
+    "System Name": "J0003-5604",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      0.85767,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -56.07555,
+      0.0
+    ],
+    "Period": [
+      0.29,
+      561.83,
+      0.29
+    ],
+    "Eccentricity": [
+      0.005,
+      0.795,
+      0.005
+    ],
+    "M1": [
+      0.03,
+      0.802,
+      0.03
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.04,
+      1.34,
+      0.04
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.02,
+      0.519,
+      0.02
+    ]
+  },
+  {
+    "System Name": "J1733+5808",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      263.39531,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      58.14627,
+      0.0
+    ],
+    "Period": [
+      0.31,
+      570.94,
+      0.31
+    ],
+    "Eccentricity": [
+      0.001,
+      0.3093,
+      0.001
+    ],
+    "M1": [
+      0.05,
+      1.16,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.03,
+      1.362,
+      0.03
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0007,
+      0.2189,
+      0.0007
+    ]
+  },
+  {
+    "System Name": "J2145+2837",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      326.35323,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      28.62378,
+      0.0
+    ],
+    "Period": [
+      0.7,
+      889.5,
+      0.7
+    ],
+    "Eccentricity": [
+      0.0035,
+      0.584,
+      0.0035
+    ],
+    "M1": [
+      0.05,
+      0.95,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.035,
+      1.396,
+      0.035
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.005,
+      0.269,
+      0.005
+    ]
+  },
+  {
+    "System Name": "J2244-2236",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      341.20236,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -22.60209,
+      0.0
+    ],
+    "Period": [
+      0.5,
+      938.3,
+      0.5
+    ],
+    "Eccentricity": [
+      0.0011,
+      0.5666,
+      0.0011
+    ],
+    "M1": [
+      0.03,
+      1.002,
+      0.03
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.023,
+      1.443,
+      0.023
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0011,
+      0.337,
+      0.0011
+    ]
+  },
+  {
+    "System Name": "J0824+5254",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      126.15392,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      52.90759,
+      0.0
+    ],
+    "Period": [
+      3.3,
+      1026.7,
+      3.3
+    ],
+    "Eccentricity": [
+      0.012,
+      0.686,
+      0.012
+    ],
+    "M1": [
+      0.03,
+      1.102,
+      0.03
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.034,
+      1.604,
+      0.034
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.011,
+      0.268,
+      0.011
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 3184973512776788352",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      70.8058,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -9.61837,
+      0.0
+    ],
+    "Period": [
+      0.49151,
+      442.89795,
+      0.49151
+    ],
+    "Eccentricity": [
+      0.00685,
+      0.04874,
+      0.00685
+    ],
+    "M1": [
+      0.0573,
+      0.82289,
+      0.05435
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.55272,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 827780115089819008",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      147.52926,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      51.48152,
+      0.0
+    ],
+    "Period": [
+      0.18419,
+      135.57223,
+      0.18419
+    ],
+    "Eccentricity": [
+      0.02017,
+      0.04183,
+      0.02017
+    ],
+    "M1": [
+      0.05298,
+      0.94451,
+      0.05179
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.53823,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 1356012606612285312",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      250.30311,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      40.47373,
+      0.0
+    ],
+    "Period": [
+      0.22215,
+      164.19689,
+      0.22215
+    ],
+    "Eccentricity": [
+      0.02598,
+      0.05218,
+      0.02598
+    ],
+    "M1": [
+      0.07276,
+      0.93176,
+      0.05563
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.55863,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 1479598198906350336",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      217.15099,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      33.97195,
+      0.0
+    ],
+    "Period": [
+      3.296,
+      741.99263,
+      3.296
+    ],
+    "Eccentricity": [
+      0.01536,
+      0.04949,
+      0.01536
+    ],
+    "M1": [
+      0.04952,
+      0.54855,
+      0.05019
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.46271,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Lamost J140757.38+390704.9",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB/SB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.4840G"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      211.98878,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      39.11804,
+      0.0
+    ],
+    "Period": [
+      15.4357,
+      780.13201,
+      15.4357
+    ],
+    "Eccentricity": [
+      0.04675,
+      0.48388,
+      0.04675
+    ],
+    "M1": [
+      0.03618,
+      0.56304,
+      0.03618
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.03036,
+      0.43507,
+      0.03036
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 2130220598189285248",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      287.64674,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      45.24253,
+      0.0
+    ],
+    "Period": [
+      0.26999,
+      165.74292,
+      0.26999
+    ],
+    "Eccentricity": [
+      0.03461,
+      0.14916,
+      0.03461
+    ],
+    "M1": [
+      0.06975,
+      0.78666,
+      0.05319
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.49219,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 4597300184386198912",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      266.43821,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      30.13102,
+      0.0
+    ],
+    "Period": [
+      0.16536,
+      173.90962,
+      0.16536
+    ],
+    "Eccentricity": [
+      0.02543,
+      0.06198,
+      0.02543
+    ],
+    "M1": [
+      0.05579,
+      0.90429,
+      0.05342
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.58567,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 1141991435610545792",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      108.80452,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      79.76424,
+      0.0
+    ],
+    "Period": [
+      3.84343,
+      771.26897,
+      3.84343
+    ],
+    "Eccentricity": [
+      0.01232,
+      0.75014,
+      0.01232
+    ],
+    "M1": [
+      0.05698,
+      0.94014,
+      0.0554
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.94858,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 2507419263368252928",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      29.84844,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -0.76303,
+      0.0
+    ],
+    "Period": [
+      0.86698,
+      571.9507,
+      0.86698
+    ],
+    "Eccentricity": [
+      0.01523,
+      0.05613,
+      0.01523
+    ],
+    "M1": [
+      0.06849,
+      0.85816,
+      0.05616
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.54609,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 6363206632725892096",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "AB"
+    ],
+    "Reference": [
+      "2024MNRAS.529.3729S"
+    ],
+    "Notes": "",
+    "RA": [
+      0.0,
+      308.94013,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -76.89188,
+      0.0
+    ],
+    "Period": [
+      0.04983,
+      85.25625,
+      0.04983
+    ],
+    "Eccentricity": [
+      0.01918,
+      0.05011,
+      0.01918
+    ],
+    "M1": [
+      0.05252,
+      0.7798,
+      0.04994
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.5385,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "SDSSJ141134.70+102839.7",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "SB"
+    ],
+    "Reference": [
+      "2012MNRAS.419..806R"
+    ],
+    "Notes": "MS masses (M1) reported here are the value from the 'M2' column in the reference (https://www.sdss-wdms.org/parameters.php); Corresponds to ID 1112",
+    "RA": [
+      NaN,
+      212.89458,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      10.47769,
+      NaN
+    ],
+    "Period": [
+      0.0,
+      4.02024,
+      0.0
+    ],
+    "Eccentricity": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M1": [
+      0.072,
+      0.38,
+      0.072
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.079,
+      0.54,
+      0.079
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  },
+  {
+    "System Name": "SDSSJ172406.14+562003.0",
+    "Type1": "MS",
+    "Type2": "WD",
+    "Detection Method": [
+      "SB"
+    ],
+    "Reference": [
+      "2012MNRAS.419..806R"
+    ],
+    "Notes": "MS masses (M1) reported here are the value from the 'M2' column in the reference (https://www.sdss-wdms.org/parameters.php); Corresponds to ID 1396",
+    "RA": [
+      NaN,
+      261.02558,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      56.33417,
+      NaN
+    ],
+    "Period": [
+      0.0,
+      7.99246,
+      0.0
+    ],
+    "Eccentricity": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M1": [
+      0.072,
+      0.361,
+      0.072
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.011,
+      0.443,
+      0.011
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ]
+  }
+]
