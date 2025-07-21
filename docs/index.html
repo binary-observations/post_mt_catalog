@@ -5,12 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post Mass Transfer Review</title>
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #fff3db; color: #222; }
-    header { background: #e6896d; color: #fff; padding: 2rem 1rem 1rem 1rem; text-align: center; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f0fbff; color: #222; }
+    header {
+      background: white;
+      color: #000;
+      padding: 0.1rem 0.1rem 0.1rem 0.1rem;
+      text-align: center;
+      border: 10px solid #f39e54; /* outer orange */
+      border-radius: 100px;
+      box-sizing: border-box;
+    }
+    .header-inset-1 {
+      border: 12px solid #31bbc5cf; /* middle blue */
+      padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+      border-radius: 100px;
+      background: white;
+      box-sizing: border-box;
+    }
     nav { margin: 1rem 0; }
     nav a { color: #ffffff; margin: 0 1rem; text-decoration: none; font-weight: bold; }
     nav a:hover { text-decoration: underline; }
-    section { max-width: 800px; margin: 2rem auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 2rem; outline: 6px solid #79980a; }
+    section {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #0001;
+      padding: 2rem;
+      outline: 6px solid #eccd69;
+    }
     h2 { border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
     img.plot { max-width: 100%; display: block; margin: 1rem auto; border: 1px solid #ccc; border-radius: 4px; outline: 1px solid #bbb; }
     code, pre { background: #f4f4f4; border-radius: 1px; padding: 2px 1px; }
@@ -27,61 +50,78 @@
 </head>
 <body>
   <header>
-    <h1>Post Mass Transfer Review</h1>
-    <p>A collaborative project to catalog and analyze post-mass transfer binary systems.</p>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#data">Data Structure</a>
-      <a href="#results">Results</a>
-      <a href="#plots">Plots</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="header-inset-1">
+      <h1>Post Mass Transfer Catalog</h1>
+      <p>A collaborative project to catalog and analyze post-mass transfer binary systems.</p>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#data">Data Structure</a>
+        <a href="#results">Results</a>
+        <a href="#plots">Plots</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
 <!-- ######################################################################################### -->
-  <section id="about">
+  <section id="about"><div class="section-border-inner">
     <h2>About</h2>
     <p>This project aims to provide a comprehensive catalog and analysis of post-mass transfer binary systems, including their key properties and observational data. The data is structured for easy analysis and reproducibility, supporting the astrophysics community in understanding binary evolution.</p>
-  </section>
+  </div></section>
+
+<!-- ######################################################################################### -->
+<section id="Download"><div class="section-border-inner">
+  <h2>Download catalog</h2>
+  <p>You can download the catalog in JSON format <a href="../data/post_mt_systems.json">here</a>.</p>
 
 
-  <!-- ######################################################################################### -->
-  <section id="data">
-    <h2>Data Structure</h2>
-    <p>All systems are stored in a table with the following columns (with key quantities as <code>[err-, value, err+]</code> triplets):</p>
-    <pre><code>System Name, RA, Dec, Period, Eccentricity, M1, M1_sin3i, M2, M2_sin3i, q, Mass Function, Type1, Type2, Detection Method, Reference, Notes</code></pre>
-    <p>Example entry:</p>
-    <pre><code>{
-  "System Name": "Example system",
-  "RA": [0.005, 150.025, 0.005],
-  "Dec": [0.004, -45.123, 0.004],
-  "Period": [0.2, 12.5, 0.3],
-  "Eccentricity": [0.02, 0.30, 0.03],
-  "M1": [0.5, 5.0, 0.5],
-  ...
+  <h3>Data Structure</h3>
+  <p>All systems are stored in a json dictionary with at least the following columns (with key quantities as <code>[err-, value, err+]</code> triplets):</p>
+  <pre><code>System Name, RA, Dec, Period, Eccentricity, M1, M1_sin3i, M2, M2_sin3i, q, Mass Function, Type1, Type2, Detection Method, Reference, Notes</code></pre>
+  <p>Example entry:</p>
+  <pre><code>{
+"System Name": "Example system",
+"RA": [0.005, 150.025, 0.005],
+"Dec": [0.004, -45.123, 0.004],
+"Period": [0.2, 12.5, 0.3],
+"Eccentricity": [0.02, 0.30, 0.03],
+"M1": [0.5, 5.0, 0.5],
+...
 }</code></pre>
-    <p>Missing values are represented as <code>np.nan</code>. Lower/upper limits are handled using the <code>M1_sin3i</code> and <code>M2_sin3i</code> columns.</p>
-  </section>
+  <p>Missing values are represented as <code>np.nan</code>. Lower/upper limits are handled using the <code>M1_sin3i</code> and <code>M2_sin3i</code> columns.</p>
+
+
+</section>
 
 
   <!-- ######################################################################################### -->
-  <section id="results">
-    <h2>Results</h2>
+  <section id="paper"><div class="section-border-inner">
+    <h2>Catalog description paper</h2>
+    <p>The paper that describes this catalog can be found <a href="../writing/main.pdf">here</a>.</p>
+
     <p>Processed tables and data products are available in the <code>result_tables/</code> directory. Each file contains results for different post-mass transfer systems. See the project repository for details.</p>
-  </section>
+  </div></section>
 
 
 <!-- ######################################################################################### -->
-  <section id="plots">
-    <h2>Plots</h2>
+  <section id="plots"><div class="section-border-inner">
+    <h2>Interactive Plots</h2>
+
+    <p>Have fun exploring the data below!  
+      The interactive plots are generated using the <a href="https://plotly.com/python/">Plotly</a> library. You can find the code for the plots in the <code>plots/</code> directory.
+    </p>
+
     <iframe src="interactive_period_vs_eccentricity.html" width="100%" height="500" style="border:none;"></iframe>
     <iframe src="interactive_period_vs_m2.html" width="100%" height="500" style="border:none;"></iframe>
-  </section>
+  </div></section>
+
 
 
   <!-- ######################################################################################### -->
-  <section id="Add missing systems">
+  <section id="add_missing_systems"><div class="section-border-inner">
+
     <h2>Add missing systems</h2>
+
     <p>For questions or contributions, please open an issue or pull request on the <a href="https://github.com/LiekeVanSon/post_mt_catalog">GitHub repository</a>.</p>
     
     <div id="contribution-form">
@@ -169,7 +209,7 @@
         padding: 1rem;
         background: #f8f9fa;
         border-radius: 8px;
-        outline: 4px solid #6B850C;
+        outline: 2px solid #2B8180;
       }
       .form-group,
       .form-group input,
@@ -258,7 +298,7 @@
         ];
       }
     </script>
-  </section>
+  </div></section>
 
   <footer>
     &copy; 2025 L. van Son &amp; Collaborators. Powered by GitHub Pages.
