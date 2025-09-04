@@ -40,6 +40,7 @@ def class_from_table_path(table_path):
         'bss_data.h5': 'Blue Straggler Stars',
         'contact1.h5': 'contact binaries',
         'ns_table.h5': 'Neutron star (d)',
+        'young_psr_table.h5': 'Neutron star (d)',
         'stripped_star_table.h5': 'Stripped stars (d)'
     }
 
@@ -84,6 +85,12 @@ for n, table_path in enumerate(list_of_tables):
                     uperr = float(f[col][idx, 2])
                     # Pre-format the list as a compact string
                     entry[col] = [round(loerr, 5), round(val, 5), round(uperr, 5)]
+
+                # Remove example placeholder systems
+                sys_name = entry.get('System Name', '')
+                if isinstance(sys_name, str) and 'example_system' in sys_name.lower():
+                    # skip this placeholder/example entry
+                    continue
 
                 # Add class information based on the table filename / path
                 try:
