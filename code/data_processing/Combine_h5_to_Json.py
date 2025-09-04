@@ -2,8 +2,15 @@ import pandas as pd
 import h5py
 import json
 from io import StringIO
-import os
+import os, sys
 import argparse
+
+# Ensure project root is on sys.path so `import paths` finds the top-level paths.py
+from pathlib import Path
+proj_root = Path('/Users/liekevanson/Documents/Projects/post_mt_review').resolve()
+if str(proj_root) not in sys.path:
+    sys.path.insert(0, str(proj_root))
+
 from paths import RESULT_TABLES, DATA_DIR
 
 # === CONFIGURATION ===
@@ -18,6 +25,37 @@ input_h5_path = args.input_h5_path
 output_json_path = args.output_json_path
 
 triplet_cols = ["RA", "Dec", "Period", "Eccentricity", "M1", "M1_sin3i", "M2", "M2_sin3i", "q", "Mass Function"]
+
+
+def class_from_table_path(table_path):
+    """Determine object class based on the table file path or name."""
+    p = Path(table_path)
+    name = p.name.lower()
+    full = str(p).lower()
+
+    mapping = {
+        'algols.h5': 'Algols',
+        'be_sdob_table.h5': 'Hot subdwarfs (d)',
+        'bh_table.h5': 'Black Holes (d)',
+        'bss_data.h5': 'Blue Straggler Stars',
+        'contact1.h5': 'contact binaries',
+        'ns_table.h5': 'Neutron star (d)',
+        'stripped_star_table.h5': 'Stripped stars (d)'
+    }
+
+    # WDMS subdirectory -> White Dwarf (d)
+    if 'wdms' in full:
+        return 'White Dwarf (d)'
+
+    # Exact filename mapping
+    if name in mapping:
+        return mapping[name]
+
+    # Any table name containing 'wr' -> Wolf-Rayet
+    if 'wr' in name:
+        return 'Wolf-Rayet (d)'
+
+    return 'Unclassified'
 
 # === COLLECT FILES ===
 list_of_tables = []
@@ -46,6 +84,12 @@ for n, table_path in enumerate(list_of_tables):
                     uperr = float(f[col][idx, 2])
                     # Pre-format the list as a compact string
                     entry[col] = [round(loerr, 5), round(val, 5), round(uperr, 5)]
+
+                # Add class information based on the table filename / path
+                try:
+                    entry['class'] = class_from_table_path(table_path)
+                except Exception:
+                    entry['class'] = 'Unclassified'
 
                 all_systems.append(entry)
 
