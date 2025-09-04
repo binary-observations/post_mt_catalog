@@ -1,9 +1,10 @@
 import json
 import numpy as np
 from pathlib import Path
-from paths import MAIN_CATALOG, DATA_DIR # central paths
+from paths import MAIN_CATALOG, DATA_DIR, PLOTS_DIR # central paths
 from astropy.coordinates import SkyCoord
 import astropy.units as u
+import matplotlib.pyplot as plt
 
 ################################################################################
 # === USER INPUT Constants ===
@@ -32,6 +33,67 @@ def extract_central_value(entry, key):
         return np.nan
 def extract_column(data, key):
     return [extract_central_value(entry, key) for entry in data]
+
+
+def plot_catalog_on_sky(catalog=None, coords_list=None, names=None, annotate=False, save_path=None, figsize=(8, 6)):
+    """Plot catalog sources on the sky.
+
+    Provide either `catalog` (list of dicts with RA/Dec triplets) or `coords_list` (list of astropy.coordinates.SkyCoord).
+    - names: optional list of labels to annotate points (used when coords_list supplied)
+    - annotate: boolean, whether to draw text labels next to points
+    - save_path: optional path to save the figure; if None the figure is shown
+    """
+    # Build coords and names from catalog if needed
+    if coords_list is None:
+        if catalog is None:
+            raise ValueError('Either catalog or coords_list must be provided')
+        ra_vals = extract_column(catalog, 'RA')
+        dec_vals = extract_column(catalog, 'Dec')
+        coords = []
+        names = [] if names is None else list(names)
+        for entry, ra, dec in zip(catalog, ra_vals, dec_vals):
+            if ra is None or dec is None:
+                continue
+            try:
+                if np.isnan(ra) or np.isnan(dec):
+                    continue
+            except Exception:
+                pass
+            coords.append(SkyCoord(ra=ra * u.deg, dec=dec * u.deg, frame='icrs'))
+            if names is not None:
+                names.append(entry.get('System Name', ''))
+    else:
+        coords = list(coords_list)
+
+    if len(coords) == 0:
+        print('No valid coordinates to plot.')
+        return
+
+    ras = np.array([c.ra.deg for c in coords])
+    decs = np.array([c.dec.deg for c in coords])
+
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.scatter(ras, decs, s=2, alpha=0.8)
+    ax.set_xlabel('RA (deg)')
+    ax.set_ylabel('Dec (deg)')
+    ax.set_title('Catalog sources (RA / Dec)')
+    # In astronomy plots RA is often shown increasing to the left
+    ax.invert_xaxis()
+
+    if annotate and names:
+        for x, y, txt in zip(ras, decs, names):
+            ax.text(x, y, str(txt), fontsize=6, alpha=0.9)
+
+    if save_path:
+        save_path = Path(save_path)
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        fig.savefig(str(save_path), dpi=150, bbox_inches='tight')
+        print(f'Saved sky plot to {save_path}')
+    else:
+        plt.show()
+
+    plt.close(fig)
+
 
 # Function to resolve duplicate entries in the catalog
 def resolve_duplicates(data, overlapping_pairs, names, valid_names):
@@ -207,6 +269,14 @@ if overlapping_pairs:
         json.dump(cleaned_catalog, f, indent=2)
     print(f"Updated catalog written to {DATA_DIR}/ 'cleaned_catalog.json'.")
 
+
+# === STEP 4: Optional plot the systems on the sky ===
+p = Path('data') / 'post_mt_systems.json'
+print(f"Reading catalog: {p.resolve()}")
+data = read_json_file(p)
+
+plot_catalog_on_sky(catalog=data, save_path=Path('plots') / 'sky_locations.png', annotate=False)
+print(f"Saved plot to {Path('plots') / 'sky_locations.png'}")
 
 
 
