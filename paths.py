@@ -12,6 +12,9 @@ WRITING_DIR = PROJECT_ROOT / "writing"
 DOCS_DIR = PROJECT_ROOT / "docs"
 PLOTS_DIR = PROJECT_ROOT / "plots"
 
+# result tables (h5 files etc.)
+RESULT_TABLES = DATA_DIR / "result_tables"
+
 # Example: frequently used files
 MAIN_CATALOG = DATA_DIR / "post_mt_systems.json"
 DUMMY_CATALOG = DATA_DIR / "dummy.json"

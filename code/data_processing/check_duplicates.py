@@ -1,9 +1,7 @@
 import json
 import numpy as np
-import sys
 from pathlib import Path
-sys.path.append('/Users/lvanson/Documents/Projects/post_mt_review')
-from paths import MAIN_CATALOG, DATA_DIR # is "../data/post_mt_systems.json"  # or dummy.json
+from paths import MAIN_CATALOG, DATA_DIR # central paths
 from astropy.coordinates import SkyCoord
 import astropy.units as u
 

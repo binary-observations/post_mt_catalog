@@ -4,12 +4,13 @@ import json
 from io import StringIO
 import os
 import argparse
+from paths import RESULT_TABLES, DATA_DIR
 
 # === CONFIGURATION ===
 # Set up argument parser
 parser = argparse.ArgumentParser(description="Combine post-mass-transfer system tables into a single JSON file.")
-parser.add_argument("input_h5_path", type=str, help="Path to the directory containing .h5 files.",default="../result_tables")
-parser.add_argument("output_json_path", type=str, help="Path to save the combined JSON output. (must include outp filename)",  default="../data/post_mt_systems.json")
+parser.add_argument("input_h5_path", type=str, nargs='?', help="Path to the directory containing .h5 files.", default=str(RESULT_TABLES))
+parser.add_argument("output_json_path", type=str, nargs='?', help="Path to save the combined JSON output. (must include outp filename)",  default=str(DATA_DIR / "post_mt_systems.json"))
 args = parser.parse_args()
 
 # Use parsed arguments

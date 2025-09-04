@@ -2,8 +2,10 @@ import json
 import numpy as np
 import pandas as pd
 import plotly.express as px
+from pathlib import Path
+from paths import MAIN_CATALOG, DOCS_DIR
 
-file_path = "../data/post_mt_systems.json"  # or dummy.json
+file_path = MAIN_CATALOG
 
 def read_json_file(file_path):
     try:
@@ -27,7 +29,7 @@ def extract_central_value(entry, key):
 def extract_column(data, key):
     return [extract_central_value(entry, key) for entry in data]
 
-data = read_json_file(file_path)
+data = read_json_file(str(file_path))
 if data is None:
     print("No data loaded. Exiting.")
     exit(1)
@@ -50,7 +52,9 @@ plot2_df = pd.DataFrame({
 
 # Create and save interactive plots
 fig1 = px.scatter(plot1_df, x='Period', y='Eccentricity', title='Period vs Eccentricity')
-fig1.write_html('../docs/interactive_period_vs_eccentricity.html', include_plotlyjs='cdn')
+out1 = DOCS_DIR / 'interactive_period_vs_eccentricity.html'
+fig1.write_html(str(out1), include_plotlyjs='cdn')
 
 fig2 = px.scatter(plot2_df, x='Period', y='M2', title='Period vs M2')
-fig2.write_html('../docs/interactive_period_vs_m2.html', include_plotlyjs='cdn') 
+out2 = DOCS_DIR / 'interactive_period_vs_m2.html'
+fig2.write_html(str(out2), include_plotlyjs='cdn')
