@@ -73,7 +73,7 @@ def plot_catalog_on_sky(catalog=None, coords_list=None, names=None, annotate=Fal
     decs = np.array([c.dec.deg for c in coords])
 
     fig, ax = plt.subplots(figsize=figsize)
-    ax.scatter(ras, decs, s=2, alpha=0.8)
+    ax.scatter(ras, decs, s=3, alpha=0.8, marker ='o',facecolors='none', edgecolors='blue', linewidth=0.5)
     ax.set_xlabel('RA (deg)')
     ax.set_ylabel('Dec (deg)')
     ax.set_title('Catalog sources (RA / Dec)')
@@ -87,7 +87,7 @@ def plot_catalog_on_sky(catalog=None, coords_list=None, names=None, annotate=Fal
     if save_path:
         save_path = Path(save_path)
         save_path.parent.mkdir(parents=True, exist_ok=True)
-        fig.savefig(str(save_path), dpi=150, bbox_inches='tight')
+        fig.savefig(str(save_path), dpi=500, bbox_inches='tight')
         print(f'Saved sky plot to {save_path}')
     else:
         plt.show()
@@ -275,8 +275,8 @@ p = Path('data') / 'post_mt_systems.json'
 print(f"Reading catalog: {p.resolve()}")
 data = read_json_file(p)
 
-plot_catalog_on_sky(catalog=data, save_path=Path('plots') / 'sky_locations.png', annotate=False)
-print(f"Saved plot to {Path('plots') / 'sky_locations.png'}")
+plot_catalog_on_sky(catalog=data, save_path=Path('plots') / 'sky_locations.pdf', annotate=False)
+print(f"Saved plot to {Path('plots') / 'sky_locations.pdf'}")
 
 
 
