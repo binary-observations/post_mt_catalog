@@ -10,7 +10,7 @@ proj_root = Path('/Users/liekevanson/Documents/Projects/post_mt_review').resolve
 if str(proj_root) not in sys.path:
     sys.path.insert(0, str(proj_root))
 
-from paths import MAIN_CATALOG, DOCS_DIR
+from paths import MAIN_CATALOG, DOCS_DIR, PLOTS_DIR
 file_path = MAIN_CATALOG
 
 def read_json_file(file_path):
@@ -133,6 +133,14 @@ fig1.update_xaxes(type='log', title_text='$P\;\mathrm{(days)}$',title_font=dict(
 fig1.update_yaxes(title_text='$\mathrm{Eccentricity}$', title_font=dict(size=20))
 out1 = DOCS_DIR / 'interactive_period_vs_eccentricity.html'
 fig1.write_html(str(out1), include_plotlyjs='cdn', include_mathjax='cdn')
+# Also export PDF to PLOTS_DIR (requires kaleido)
+try:
+    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
+    out1_pdf = PLOTS_DIR / 'interactive_period_vs_eccentricity.pdf'
+    fig1.write_image(str(out1_pdf))
+    print(f'Wrote PDF: {out1_pdf}')
+except Exception as e:
+    print('Could not write PDF for fig1 :', e)
 
 
 
@@ -162,6 +170,12 @@ fig2.update_xaxes(type='log', title_text='$P\;\mathrm{(days)}$', title_font=dict
 fig2.update_yaxes(type='log', title_text='$\mathrm{Donor \ mass, \,} M_2\; (M_\odot)$', title_font=dict(size=20) )
 out2 = DOCS_DIR / 'interactive_period_vs_m2.html'
 fig2.write_html(str(out2), include_plotlyjs='cdn', include_mathjax='cdn')
+try:
+    out2_pdf = PLOTS_DIR / 'interactive_period_vs_m2.pdf'
+    fig2.write_image(str(out2_pdf))
+    print(f'Wrote PDF: {out2_pdf}')
+except Exception as e:
+    print('Could not write PDF for fig2 :', e)
 
 
 
@@ -191,3 +205,9 @@ fig3.update_xaxes(type='log',title_text='$\mathrm{Accretor \ mass, \,} M_1\; (M_
 fig3.update_yaxes(type='log',title_text='$\mathrm{Donor \ mass, \,} M_2\; (M_\odot)$', title_font=dict(size=18))
 out3 = DOCS_DIR / 'interactive_m2_vs_m1.html'
 fig3.write_html(str(out3), include_plotlyjs='cdn', include_mathjax='cdn')
+try:
+    out3_pdf = PLOTS_DIR / 'interactive_m2_vs_m1.pdf'
+    fig3.write_image(str(out3_pdf))
+    print(f'Wrote PDF: {out3_pdf}')
+except Exception as e:
+    print('Could not write PDF for fig3 :', e)
