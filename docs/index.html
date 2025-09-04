@@ -11,14 +11,14 @@
       color: #000;
       padding: 0.1rem 0.1rem 0.1rem 0.1rem;
       text-align: center;
-      border: 10px solid #f39e54; /* outer orange */
-      border-radius: 100px;
+      border: 4px solid #31bbc5cf; /* outer orange */ 31bbc5cf
+      border-radius: 3px;
       box-sizing: border-box;
     }
     .header-inset-1 {
-      border: 12px solid #31bbc5cf; /* middle blue */
+      border: 10px solid #eccd69; /* middle blue */ 31bbc5cf
       padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-      border-radius: 100px;
+      border-radius: 2px;
       background: white;
       box-sizing: border-box;
     }
@@ -55,7 +55,7 @@
       <p>A collaborative project to catalog and analyze post-mass transfer binary systems.</p>
       <nav>
         <a href="#about">About</a>
-        <a href="#data">Data Structure</a>
+        <a href="#data">Data</a>
         <a href="#results">Results</a>
         <a href="#plots">Plots</a>
         <a href="#contact">Contact</a>
@@ -69,10 +69,215 @@
     <p>This project aims to provide a comprehensive catalog and analysis of post-mass transfer binary systems, including their key properties and observational data. The data is structured for easy analysis and reproducibility, supporting the astrophysics community in understanding binary evolution.</p>
   </div></section>
 
+
 <!-- ######################################################################################### -->
-<section id="Download"><div class="section-border-inner">
-  <h2>Download catalog</h2>
+<section id="data"><div class="section-border-inner">
+  <h2>Data</h2>
+
   <p>You can download the catalog in JSON format <a href="https://github.com/binary-observations/post_mt_catalog/blob/master/data/cleaned_catalog.json">here</a>.</p>
+  
+
+  <!-- ################################################# -->
+   <!-- Showing the table as an interactive element -->
+  <!-- ################################################# -->
+  <div id="data-app">
+    <div id="data-controls" style="margin:1rem 0; display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
+      <button id="load-remote">Load catalog from GitHub (fetch & render)</button>
+      <input type="search" id="global-search" placeholder="Search table..." style="flex:1; min-width:180px; padding:0.4rem;">
+      <label>Page size:
+        <select id="page-size">
+          <option>25</option>
+          <option selected>50</option>
+          <option>100</option>
+        </select>
+      </label>
+      <div id="pagination" style="margin-left:auto; display:flex; gap:0.5rem; align-items:center;"></div>
+    </div>
+
+    <div id="table-container" style="overflow:auto; max-height:500px; border:1px solid #ddd; border-radius:6px;">
+      <table id="data-table" style="width:100%; border-collapse:collapse; min-width:700px;">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <div id="data-status" style="margin-top:0.5rem; color:#666; font-size:0.95rem;"></div>
+  </div>
+
+  <style>
+    #data-table thead th { position: sticky; top: 0; background: #fafafa; border-bottom:2px solid #ddd; padding:0.5rem; text-align:left; }
+    #data-table tbody td { border-bottom:1px solid #f1f1f1; padding:0.45rem; vertical-align:top; }
+    #data-table tr:nth-child(even) td { background:#fcfeff; }
+    #data-table code { background:transparent; padding:0; }
+    #data-controls button { background:#2d3e50; color:white; border:none; padding:0.4rem 0.7rem; border-radius:4px; cursor:pointer; }
+    #data-controls button:hover { background:#1a252f; }
+  </style>
+
+  <script>
+    (function(){
+      const RAW_URL = 'https://raw.githubusercontent.com/binary-observations/post_mt_catalog/master/data/cleaned_catalog.json';
+      let rawData = null; // original parsed JSON
+      let records = []; // normalized array of objects
+      let filtered = [];
+      let pageSize = 50;
+      let currentPage = 1;
+
+      const els = {
+        loadRemote: document.getElementById('load-remote'),
+        // local file input removed per user request
+        search: document.getElementById('global-search'),
+        pageSizeSelect: document.getElementById('page-size'),
+        table: document.getElementById('data-table'),
+        thead: document.querySelector('#data-table thead'),
+        tbody: document.querySelector('#data-table tbody'),
+        pagination: document.getElementById('pagination'),
+        status: document.getElementById('data-status')
+      };
+
+      function setStatus(msg){ els.status.textContent = msg; }
+
+      async function fetchRemote(){
+        setStatus('Fetching JSON from GitHub...');
+        try{
+          const res = await fetch(RAW_URL);
+          if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+          const text = await res.text();
+          try {
+            rawData = JSON.parse(text);
+          } catch(parseErr){
+            // try to clean a few common non-JSON tokens (np.nan, NaN, nan) then parse
+            const cleaned = text
+              .replace(/np\.nan/gi, 'null')
+              .replace(/\bNaN\b/g, 'null')
+              .replace(/\bnan\b/g, 'null');
+            try {
+              rawData = JSON.parse(cleaned);
+            } catch(finalErr){
+              throw new Error('unable to parse JSON (contains non-standard tokens like NaN)');
+            }
+          }
+          normalizeData();
+          setStatus(`Loaded ${records.length} records from remote.`);
+        }catch(err){
+          setStatus('Failed to load remote JSON: ' + err.message);
+        }
+      }
+
+      function normalizeData(){
+        // Accept either array of objects, or dict of name->object
+        if(Array.isArray(rawData)){
+          records = rawData.map((r,i)=> ({_index:i, ...r}));
+        } else if(rawData && typeof rawData === 'object'){
+          // If keys are system names and values are objects
+          records = Object.entries(rawData).map(([k,v],i)=> ({_index:i, 'System Name': k, ...v}));
+        } else {
+          records = [];
+        }
+        filtered = records.slice();
+        currentPage = 1;
+        renderTable();
+      }
+
+      function getAllKeys(arr){
+        const keys = new Set();
+        arr.forEach(o=>{
+          if(o && typeof o === 'object') Object.keys(o).forEach(k=>keys.add(k));
+        });
+        return Array.from(keys);
+      }
+
+      function formatCell(value){
+        if(value === null || value === undefined) return '';
+        if(Array.isArray(value)){
+          // common pattern [err-, value, err+]
+          if(value.length===3 && value.every(v=> typeof v === 'number' || v===null)){
+            return `[${value.map(v=> v===null ? '' : v).join(', ')}]`;
+          }
+          return JSON.stringify(value);
+        }
+        if(typeof value === 'object') return JSON.stringify(value);
+        return String(value);
+      }
+
+      function renderTable(){
+        pageSize = parseInt(els.pageSizeSelect.value,10) || 50;
+        // build header from keys in filtered (or records)
+        const keys = getAllKeys(records);
+        // ensure System Name first if present
+        const sortedKeys = keys.includes('System Name') ? ['System Name', ...keys.filter(k=>k!=='System Name')] : keys;
+
+        // render thead
+        els.thead.innerHTML = '';
+        const tr = document.createElement('tr');
+        sortedKeys.forEach(k=>{
+          const th = document.createElement('th'); th.textContent = k; tr.appendChild(th);
+        });
+        els.thead.appendChild(tr);
+
+        // filter by search
+        const q = (els.search.value || '').trim().toLowerCase();
+        if(q){
+          filtered = records.filter(r=> JSON.stringify(r).toLowerCase().includes(q));
+        } else {
+          filtered = records.slice();
+        }
+
+        const total = filtered.length;
+        const totalPages = Math.max(1, Math.ceil(total / pageSize));
+        if(currentPage > totalPages) currentPage = totalPages;
+        const start = (currentPage-1)*pageSize;
+        const pageItems = filtered.slice(start, start+pageSize);
+
+        // render tbody
+        els.tbody.innerHTML = '';
+        pageItems.forEach(item=>{
+          const tr = document.createElement('tr');
+          sortedKeys.forEach(k=>{
+            const td = document.createElement('td');
+            td.textContent = formatCell(item[k]);
+            tr.appendChild(td);
+          });
+          els.tbody.appendChild(tr);
+        });
+
+        renderPagination(total, totalPages);
+      }
+
+      function renderPagination(total, totalPages){
+        els.pagination.innerHTML = '';
+        const info = document.createElement('span');
+        info.style.color = '#444';
+        const start = total===0 ? 0 : (currentPage-1)*pageSize+1;
+        const end = Math.min(total, currentPage*pageSize);
+        info.textContent = `${start}-${end} of ${total}`;
+        els.pagination.appendChild(info);
+
+        const btn = (text, cb, disabled)=>{
+          const b = document.createElement('button'); b.textContent = text; b.disabled = !!disabled;
+          b.style.padding='0.3rem 0.5rem'; b.style.border='1px solid #ccc'; b.style.borderRadius='4px'; b.style.background='white';
+          b.addEventListener('click', cb);
+          return b;
+        };
+
+        els.pagination.appendChild(btn('Prev', ()=>{ if(currentPage>1){ currentPage--; renderTable(); } }, currentPage<=1));
+        els.pagination.appendChild(btn('Next', ()=>{ if(currentPage<totalPages){ currentPage++; renderTable(); } }, currentPage>=totalPages));
+      }
+
+      // wire events
+  els.loadRemote.addEventListener('click', async ()=>{ await fetchRemote(); });
+      els.pageSizeSelect.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
+      els.search.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
+
+      // auto-load remote on page open (can be removed if you prefer click)
+      fetchRemote();
+    })();
+  </script>
+
+
+  <!-- ################################################# -->
+   <!-- More info on the data structure -->
+  <!-- ################################################# -->  <br>
+  <hr>
 
   <h3>Data Structure</h3>
   <p>All systems are stored in a json dictionary with at least the following columns (with key quantities as <code>[err-, value, err+]</code> triplets):</p>
