@@ -88,7 +88,7 @@ for n, table_path in enumerate(list_of_tables):
 
                 # Remove example placeholder systems
                 sys_name = entry.get('System Name', '')
-                if isinstance(sys_name, str) and 'example_system' in sys_name.lower():
+                if isinstance(sys_name, str) and 'example' in sys_name.lower():
                     # skip this placeholder/example entry
                     continue
 
