@@ -104,6 +104,59 @@ for n, table_path in enumerate(list_of_tables):
         print(f"Error processing {table_path}: {e}")
         continue
 
+# === OPTIONAL: run duplicate-detection + resolution from check_duplicates.py
+try:
+    import importlib.util
+    cd_path = Path(proj_root) / 'code' / 'data_processing' / 'check_duplicates.py'
+    if cd_path.exists():
+        spec = importlib.util.spec_from_file_location('check_duplicates', str(cd_path))
+        cd = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(cd)
+
+        # build names and coordinate lists compatible with check_duplicates functions
+        names = [entry.get('System Name', f'System_{i}') for i, entry in enumerate(all_systems)]
+        ra_vals = cd.extract_column(all_systems, 'RA')
+        dec_vals = cd.extract_column(all_systems, 'Dec')
+
+        coords = []
+        valid_names = []
+        for name, ra, dec in zip(names, ra_vals, dec_vals):
+            try:
+                if not (np.isnan(ra) or np.isnan(dec)):
+                    coords.append(cd.SkyCoord(ra=ra * cd.u.deg, dec=dec * cd.u.deg, frame='icrs'))
+                    valid_names.append(name)
+            except Exception:
+                continue
+
+        overlapping_pairs = []
+        if len(coords) > 1:
+            all_coords = cd.SkyCoord([c for c in coords])
+            sep_matrix = all_coords[:, None].separation(all_coords[None, :]).to(cd.u.arcsec).value
+            i_idx, j_idx = np.triu_indices_from(sep_matrix, k=1)
+            close_pairs = np.where(sep_matrix[i_idx, j_idx] < cd.threshold.to(cd.u.arcsec).value)[0]
+            for idx in close_pairs:
+                overlapping_pairs.append((i_idx[idx], j_idx[idx]))
+
+        if overlapping_pairs:
+            print(f"Found {len(overlapping_pairs)} overlapping coordinate pairs — resolving duplicates programmatically...")
+            try:
+                cleaned_catalog, duplicates = cd.resolve_duplicates(all_systems, overlapping_pairs, names, valid_names)
+                all_systems = cleaned_catalog
+                # optionally write duplicates file
+                try:
+                    with (Path(output_json_path).parent / 'duplicates.json').open('w') as fdup:
+                        json.dump(duplicates, fdup, indent=2)
+                    print(f"Wrote {len(duplicates)} duplicates to {Path(output_json_path).parent / 'duplicates.json'}")
+                except Exception:
+                    pass
+            except Exception as e:
+                print(f"Error while resolving duplicates: {e}")
+    else:
+        print('check_duplicates.py not found; skipping duplicate resolution')
+except Exception as e:
+    print(f"Failed to run duplicate-resolution: {e}")
+
+
 # === OUTPUT ===
 # Dump with indent but ensure compact lists by avoiding advanced encoders
 with open(output_json_path, "w") as f_out:
