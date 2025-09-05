@@ -74,7 +74,7 @@
 <section id="data"><div class="section-border-inner">
   <h2>Data</h2>
 
-  <p>You can download the catalog in JSON format <a href="https://github.com/binary-observations/post_mt_catalog/blob/master/data/cleaned_catalog.json">here</a>.</p>
+  <p>You can download the catalog in JSON format <a href="https://github.com/binary-observations/post_mt_catalog/blob/master/data/post_mt_systems.json">here</a>.</p>
   
 
   <!-- ################################################# -->
@@ -261,6 +261,22 @@
               } else {
                 // fallback to default formatting
                 td.textContent = formatCell(val);
+              }
+            } else if(typeof k === 'string' && /^simbad_byname$/i.test(k.trim())){
+              if(val){
+                const a = document.createElement('a');
+                a.href = String(val);
+                a.target = '_blank'; a.rel = 'noopener noreferrer';
+                a.textContent = 'SIMBAD (name)';
+                td.appendChild(a);
+              }
+            } else if(typeof k === 'string' && /^simbad_bycoords$/i.test(k.trim())){
+              if(val){
+                const a = document.createElement('a');
+                a.href = String(val);
+                a.target = '_blank'; a.rel = 'noopener noreferrer';
+                a.textContent = 'SIMBAD (coords)';
+                td.appendChild(a);
               }
             } else {
               td.textContent = formatCell(val);

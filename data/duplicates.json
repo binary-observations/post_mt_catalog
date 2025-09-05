@@ -191,70 +191,6 @@
     "class": "Neutron star (d)"
   },
   {
-    "System Name": "J1553-6846",
-    "Type1": "MS",
-    "Type2": "NS",
-    "Detection Method": [
-      "AB",
-      "RV"
-    ],
-    "Reference": [
-      "2024OJAp....7E..58E"
-    ],
-    "Notes": "Discovery Paper",
-    "RA": [
-      0.0,
-      238.39374,
-      0.0
-    ],
-    "Dec": [
-      0.0,
-      -68.77867,
-      0.0
-    ],
-    "Period": [
-      0.11,
-      310.17,
-      0.11
-    ],
-    "Eccentricity": [
-      0.0021,
-      0.5314,
-      0.0021
-    ],
-    "M1": [
-      0.05,
-      1.04,
-      0.05
-    ],
-    "M1_sin3i": [
-      NaN,
-      NaN,
-      NaN
-    ],
-    "M2": [
-      0.032,
-      1.323,
-      0.032
-    ],
-    "M2_sin3i": [
-      NaN,
-      NaN,
-      NaN
-    ],
-    "q": [
-      NaN,
-      NaN,
-      NaN
-    ],
-    "Mass Function": [
-      0.009,
-      0.406,
-      0.009
-    ],
-    "class": "Neutron star (d)"
-  },
-  {
     "System Name": "J2102+3703",
     "Type1": "MS",
     "Type2": "NS",
@@ -571,6 +507,70 @@
       0.0011,
       0.337,
       0.0011
+    ],
+    "class": "Neutron star (d)"
+  },
+  {
+    "System Name": "J0824+5254",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      126.15392,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      52.90759,
+      0.0
+    ],
+    "Period": [
+      3.3,
+      1026.7,
+      3.3
+    ],
+    "Eccentricity": [
+      0.012,
+      0.686,
+      0.012
+    ],
+    "M1": [
+      0.03,
+      1.102,
+      0.03
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.034,
+      1.604,
+      0.034
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.011,
+      0.268,
+      0.011
     ],
     "class": "Neutron star (d)"
   },

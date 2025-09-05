@@ -4,6 +4,7 @@ import json
 from io import StringIO
 import os, sys
 import argparse
+from urllib.parse import quote_plus
 
 # Ensure project root is on sys.path so `import paths` finds the top-level paths.py
 from pathlib import Path
@@ -58,6 +59,21 @@ def class_from_table_path(table_path):
 
     return 'Unclassified'
 
+
+def make_simbad_url_from_name(name:str):
+    """Return a Simbad object URL for a given identifier/name."""
+    if not name: return None
+    return f"https://simbad.cds.unistra.fr/simbad/sim-id?Ident={quote_plus(name)}&output.format=ASCII"
+
+
+def make_simbad_url_from_coords(ra_deg, dec_deg, radius_arcsec=5):
+    """Return a Simbad coordinate-search URL using decimal degrees and radius in arcsec."""
+    try:
+        coords = f"{float(ra_deg)} {float(dec_deg)}"
+    except Exception:
+        return None
+    return f"https://simbad.cds.unistra.fr/simbad/sim-coo?Coord={quote_plus(coords)}&Radius={radius_arcsec}&Radius.unit=arcsec&output.format=ASCII"
+
 # === COLLECT FILES ===
 list_of_tables = []
 for root, dirs, files in os.walk(input_h5_path):
@@ -97,6 +113,26 @@ for n, table_path in enumerate(list_of_tables):
                     entry['class'] = class_from_table_path(table_path)
                 except Exception:
                     entry['class'] = 'Unclassified'
+
+                # Add Simbad links (by name and by coordinates) to help quick lookup on SIMBAD
+                try:
+                    # By name (if present)
+                    sys_name = entry.get('System Name')
+                    entry['Simbad_ByName'] = make_simbad_url_from_name(sys_name) if sys_name else None
+
+                    # By coordinates (extract central values from triplets if available)
+                    ra_trip = entry.get('RA')
+                    dec_trip = entry.get('Dec')
+                    ra_val = None
+                    dec_val = None
+                    if isinstance(ra_trip, (list, tuple)) and len(ra_trip) >= 2:
+                        ra_val = ra_trip[1]
+                    if isinstance(dec_trip, (list, tuple)) and len(dec_trip) >= 2:
+                        dec_val = dec_trip[1]
+                    entry['Simbad_ByCoords'] = make_simbad_url_from_coords(ra_val, dec_val) if (ra_val is not None and dec_val is not None) else None
+                except Exception:
+                    entry['Simbad_ByName'] = None
+                    entry['Simbad_ByCoords'] = None
 
                 all_systems.append(entry)
 
