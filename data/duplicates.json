@@ -60,7 +60,8 @@
       NaN,
       NaN
     ],
-    "class": "Stripped stars (d)"
+    "class": "Stripped stars (d)",
+    "Simbad": null
   },
   {
     "System Name": "J0553-1349",
@@ -124,7 +125,8 @@
       0.2258,
       0.0006
     ],
-    "class": "Neutron star (d)"
+    "class": "Neutron star (d)",
+    "Simbad": null
   },
   {
     "System Name": "J2057-4742",
@@ -188,7 +190,73 @@
       0.1799,
       0.0014
     ],
-    "class": "Neutron star (d)"
+    "class": "Neutron star (d)",
+    "Simbad": null
+  },
+  {
+    "System Name": "J1553-6846",
+    "Type1": "MS",
+    "Type2": "NS",
+    "Detection Method": [
+      "AB",
+      "RV"
+    ],
+    "Reference": [
+      "2024OJAp....7E..58E"
+    ],
+    "Notes": "Discovery Paper",
+    "RA": [
+      0.0,
+      238.39374,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -68.77867,
+      0.0
+    ],
+    "Period": [
+      0.11,
+      310.17,
+      0.11
+    ],
+    "Eccentricity": [
+      0.0021,
+      0.5314,
+      0.0021
+    ],
+    "M1": [
+      0.05,
+      1.04,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      0.032,
+      1.323,
+      0.032
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.009,
+      0.406,
+      0.009
+    ],
+    "class": "Neutron star (d)",
+    "Simbad": null
   },
   {
     "System Name": "J2102+3703",
@@ -252,7 +320,8 @@
       0.173,
       0.011
     ],
-    "class": "Neutron star (d)"
+    "class": "Neutron star (d)",
+    "Simbad": null
   },
   {
     "System Name": "J0003-5604",
@@ -316,7 +385,8 @@
       0.519,
       0.02
     ],
-    "class": "Neutron star (d)"
+    "class": "Neutron star (d)",
+    "Simbad": null
   },
   {
     "System Name": "J1733+5808",
@@ -380,7 +450,8 @@
       0.2189,
       0.0007
     ],
-    "class": "Neutron star (d)"
+    "class": "Neutron star (d)",
+    "Simbad": null
   },
   {
     "System Name": "J2145+2837",
@@ -444,7 +515,8 @@
       0.269,
       0.005
     ],
-    "class": "Neutron star (d)"
+    "class": "Neutron star (d)",
+    "Simbad": null
   },
   {
     "System Name": "J2244-2236",
@@ -508,7 +580,8 @@
       0.337,
       0.0011
     ],
-    "class": "Neutron star (d)"
+    "class": "Neutron star (d)",
+    "Simbad": null
   },
   {
     "System Name": "J0824+5254",
@@ -572,7 +645,8 @@
       0.268,
       0.011
     ],
-    "class": "Neutron star (d)"
+    "class": "Neutron star (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 3184973512776788352",
@@ -635,7 +709,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 827780115089819008",
@@ -698,7 +773,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 1356012606612285312",
@@ -761,7 +837,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 1479598198906350336",
@@ -824,7 +901,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Lamost J140757.38+390704.9",
@@ -887,7 +965,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 2130220598189285248",
@@ -950,7 +1029,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 4597300184386198912",
@@ -1013,7 +1093,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 1141991435610545792",
@@ -1076,7 +1157,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 2507419263368252928",
@@ -1139,7 +1221,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "Gaia DR3 6363206632725892096",
@@ -1202,7 +1285,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "SDSSJ141134.70+102839.7",
@@ -1265,7 +1349,8 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   },
   {
     "System Name": "SDSSJ172406.14+562003.0",
@@ -1328,6 +1413,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)"
+    "class": "White Dwarf (d)",
+    "Simbad": null
   }
 ]

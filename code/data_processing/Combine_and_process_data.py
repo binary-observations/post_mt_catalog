@@ -5,6 +5,19 @@ from io import StringIO
 import os, sys
 import argparse
 from urllib.parse import quote_plus
+import time
+from astroquery.simbad import Simbad
+from astropy.coordinates import SkyCoord
+import astropy.units as u
+
+# configure a small Simbad object to return main_id
+Simbad.TIMEOUT = 30
+custom_simbad = Simbad()
+custom_simbad.add_votable_fields('ids')
+
+# simple caches to avoid repeated queries
+_simbad_name_cache = {}
+_simbad_coord_cache = {}
 
 # Ensure project root is on sys.path so `import paths` finds the top-level paths.py
 from pathlib import Path
@@ -19,6 +32,7 @@ from paths import RESULT_TABLES, DATA_DIR
 parser = argparse.ArgumentParser(description="Combine post-mass-transfer system tables into a single JSON file.")
 parser.add_argument("input_h5_path", type=str, nargs='?', help="Path to the directory containing .h5 files.", default=str(RESULT_TABLES))
 parser.add_argument("output_json_path", type=str, nargs='?', help="Path to save the combined JSON output. (must include outp filename)",  default=str(DATA_DIR / "post_mt_systems.json"))
+parser.add_argument("--skip-duplicates", action='store_true', help="Skip duplicate-detection and resolution (non-interactive).")
 args = parser.parse_args()
 
 # Use parsed arguments
@@ -74,6 +88,48 @@ def make_simbad_url_from_coords(ra_deg, dec_deg, radius_arcsec=5):
         return None
     return f"https://simbad.cds.unistra.fr/simbad/sim-coo?Coord={quote_plus(coords)}&Radius={radius_arcsec}&Radius.unit=arcsec&output.format=ASCII"
 
+
+def query_simbad_name(name):
+    """Query SIMBAD for a name and return canonical main_id (or None)."""
+    if not name:
+        return None
+    if name in _simbad_name_cache:
+        return _simbad_name_cache[name]
+    try:
+        res = custom_simbad.query_object(name)
+        if res is None:
+            _simbad_name_cache[name] = None
+            return None
+        main_id = res['MAIN_ID'][0].decode('utf-8') if hasattr(res['MAIN_ID'][0], 'decode') else str(res['MAIN_ID'][0])
+        _simbad_name_cache[name] = main_id
+        return main_id
+    except Exception:
+        _simbad_name_cache[name] = None
+        return None
+
+
+def query_simbad_coords(ra_deg, dec_deg, radius_arcsec=5):
+    """Query SIMBAD by coordinates and return the nearest object's main_id (or None)."""
+    if ra_deg is None or dec_deg is None:
+        return None
+    key = f"{ra_deg:.6f}_{dec_deg:.6f}_{radius_arcsec}"
+    if key in _simbad_coord_cache:
+        return _simbad_coord_cache[key]
+    try:
+        coord = SkyCoord(ra=float(ra_deg)*u.deg, dec=float(dec_deg)*u.deg, frame='icrs')
+        # small delay to be polite to SIMBAD
+        time.sleep(0.1)
+        res = custom_simbad.query_region(coord, radius=radius_arcsec * u.arcsec)
+        if res is None or len(res) == 0:
+            _simbad_coord_cache[key] = None
+            return None
+        main_id = res['MAIN_ID'][0].decode('utf-8') if hasattr(res['MAIN_ID'][0], 'decode') else str(res['MAIN_ID'][0])
+        _simbad_coord_cache[key] = main_id
+        return main_id
+    except Exception:
+        _simbad_coord_cache[key] = None
+        return None
+
 # === COLLECT FILES ===
 list_of_tables = []
 for root, dirs, files in os.walk(input_h5_path):
@@ -114,11 +170,10 @@ for n, table_path in enumerate(list_of_tables):
                 except Exception:
                     entry['class'] = 'Unclassified'
 
-                # Add Simbad links (by name and by coordinates) to help quick lookup on SIMBAD
+                # Add a single 'Simbad' link only when both name- and coord-based URLs match.
                 try:
-                    # By name (if present)
                     sys_name = entry.get('System Name')
-                    entry['Simbad_ByName'] = make_simbad_url_from_name(sys_name) if sys_name else None
+                    name_url = make_simbad_url_from_name(sys_name) if sys_name else None
 
                     # By coordinates (extract central values from triplets if available)
                     ra_trip = entry.get('RA')
@@ -129,10 +184,18 @@ for n, table_path in enumerate(list_of_tables):
                         ra_val = ra_trip[1]
                     if isinstance(dec_trip, (list, tuple)) and len(dec_trip) >= 2:
                         dec_val = dec_trip[1]
-                    entry['Simbad_ByCoords'] = make_simbad_url_from_coords(ra_val, dec_val) if (ra_val is not None and dec_val is not None) else None
+                    coords_url = make_simbad_url_from_coords(ra_val, dec_val) if (ra_val is not None and dec_val is not None) else None
+
+                    # Query SIMBAD to get canonical main_id for both name and coords and compare
+                    name_main = query_simbad_name(sys_name) if name_url else None
+                    coords_main = query_simbad_coords(ra_val, dec_val) if coords_url else None
+                    if name_main and coords_main and name_main == coords_main:
+                        # Build canonical SIMBAD object page URL using main_id
+                        entry['Simbad'] = f"https://simbad.cds.unistra.fr/simbad/sim-id?Ident={quote_plus(name_main)}"
+                    else:
+                        entry['Simbad'] = None
                 except Exception:
-                    entry['Simbad_ByName'] = None
-                    entry['Simbad_ByCoords'] = None
+                    entry['Simbad'] = None
 
                 all_systems.append(entry)
 
@@ -141,56 +204,59 @@ for n, table_path in enumerate(list_of_tables):
         continue
 
 # === OPTIONAL: run duplicate-detection + resolution from check_duplicates.py
-try:
-    import importlib.util
-    cd_path = Path(proj_root) / 'code' / 'data_processing' / 'check_duplicates.py'
-    if cd_path.exists():
-        spec = importlib.util.spec_from_file_location('check_duplicates', str(cd_path))
-        cd = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(cd)
+if not args.skip_duplicates:
+    try:
+        import importlib.util
+        cd_path = Path(proj_root) / 'code' / 'data_processing' / 'check_duplicates.py'
+        if cd_path.exists():
+            spec = importlib.util.spec_from_file_location('check_duplicates', str(cd_path))
+            cd = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(cd)
 
-        # build names and coordinate lists compatible with check_duplicates functions
-        names = [entry.get('System Name', f'System_{i}') for i, entry in enumerate(all_systems)]
-        ra_vals = cd.extract_column(all_systems, 'RA')
-        dec_vals = cd.extract_column(all_systems, 'Dec')
+            # build names and coordinate lists compatible with check_duplicates functions
+            names = [entry.get('System Name', f'System_{i}') for i, entry in enumerate(all_systems)]
+            ra_vals = cd.extract_column(all_systems, 'RA')
+            dec_vals = cd.extract_column(all_systems, 'Dec')
 
-        coords = []
-        valid_names = []
-        for name, ra, dec in zip(names, ra_vals, dec_vals):
-            try:
-                if not (np.isnan(ra) or np.isnan(dec)):
-                    coords.append(cd.SkyCoord(ra=ra * cd.u.deg, dec=dec * cd.u.deg, frame='icrs'))
-                    valid_names.append(name)
-            except Exception:
-                continue
-
-        overlapping_pairs = []
-        if len(coords) > 1:
-            all_coords = cd.SkyCoord([c for c in coords])
-            sep_matrix = all_coords[:, None].separation(all_coords[None, :]).to(cd.u.arcsec).value
-            i_idx, j_idx = np.triu_indices_from(sep_matrix, k=1)
-            close_pairs = np.where(sep_matrix[i_idx, j_idx] < cd.threshold.to(cd.u.arcsec).value)[0]
-            for idx in close_pairs:
-                overlapping_pairs.append((i_idx[idx], j_idx[idx]))
-
-        if overlapping_pairs:
-            print(f"Found {len(overlapping_pairs)} overlapping coordinate pairs — resolving duplicates programmatically...")
-            try:
-                cleaned_catalog, duplicates = cd.resolve_duplicates(all_systems, overlapping_pairs, names, valid_names)
-                all_systems = cleaned_catalog
-                # optionally write duplicates file
+            coords = []
+            valid_names = []
+            for name, ra, dec in zip(names, ra_vals, dec_vals):
                 try:
-                    with (Path(output_json_path).parent / 'duplicates.json').open('w') as fdup:
-                        json.dump(duplicates, fdup, indent=2)
-                    print(f"Wrote {len(duplicates)} duplicates to {Path(output_json_path).parent / 'duplicates.json'}")
+                    if not (np.isnan(ra) or np.isnan(dec)):
+                        coords.append(cd.SkyCoord(ra=ra * cd.u.deg, dec=dec * cd.u.deg, frame='icrs'))
+                        valid_names.append(name)
                 except Exception:
-                    pass
-            except Exception as e:
-                print(f"Error while resolving duplicates: {e}")
-    else:
-        print('check_duplicates.py not found; skipping duplicate resolution')
-except Exception as e:
-    print(f"Failed to run duplicate-resolution: {e}")
+                    continue
+
+            overlapping_pairs = []
+            if len(coords) > 1:
+                all_coords = cd.SkyCoord([c for c in coords])
+                sep_matrix = all_coords[:, None].separation(all_coords[None, :]).to(cd.u.arcsec).value
+                i_idx, j_idx = np.triu_indices_from(sep_matrix, k=1)
+                close_pairs = np.where(sep_matrix[i_idx, j_idx] < cd.threshold.to(cd.u.arcsec).value)[0]
+                for idx in close_pairs:
+                    overlapping_pairs.append((i_idx[idx], j_idx[idx]))
+
+            if overlapping_pairs:
+                print(f"Found {len(overlapping_pairs)} overlapping coordinate pairs — resolving duplicates programmatically...")
+                try:
+                    cleaned_catalog, duplicates = cd.resolve_duplicates(all_systems, overlapping_pairs, names, valid_names)
+                    all_systems = cleaned_catalog
+                    # optionally write duplicates file
+                    try:
+                        with (Path(output_json_path).parent / 'duplicates.json').open('w') as fdup:
+                            json.dump(duplicates, fdup, indent=2)
+                        print(f"Wrote {len(duplicates)} duplicates to {Path(output_json_path).parent / 'duplicates.json'}")
+                    except Exception:
+                        pass
+                except Exception as e:
+                    print(f"Error while resolving duplicates: {e}")
+        else:
+            print('check_duplicates.py not found; skipping duplicate resolution')
+    except Exception as e:
+        print(f"Failed to run duplicate-resolution: {e}")
+else:
+    print('Skipping duplicate-detection and resolution (--skip-duplicates set)')
 
 
 # === OUTPUT ===

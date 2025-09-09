@@ -262,20 +262,12 @@
                 // fallback to default formatting
                 td.textContent = formatCell(val);
               }
-            } else if(typeof k === 'string' && /^simbad_byname$/i.test(k.trim())){
+            } else if(typeof k === 'string' && /^simbad$/i.test(k.trim())){
               if(val){
                 const a = document.createElement('a');
                 a.href = String(val);
                 a.target = '_blank'; a.rel = 'noopener noreferrer';
-                a.textContent = 'SIMBAD (name)';
-                td.appendChild(a);
-              }
-            } else if(typeof k === 'string' && /^simbad_bycoords$/i.test(k.trim())){
-              if(val){
-                const a = document.createElement('a');
-                a.href = String(val);
-                a.target = '_blank'; a.rel = 'noopener noreferrer';
-                a.textContent = 'SIMBAD (coords)';
+                a.textContent = 'SIMBAD';
                 td.appendChild(a);
               }
             } else {
