@@ -13,6 +13,7 @@ if str(proj_root) not in sys.path:
 from paths import MAIN_CATALOG, DOCS_DIR, PLOTS_DIR
 file_path = MAIN_CATALOG
 
+
 def read_json_file(file_path):
     try:
         with open(file_path, "r") as f:
@@ -21,6 +22,7 @@ def read_json_file(file_path):
     except Exception as e:
         print(f"Error reading file: {e}")
         return None
+
 
 def extract_central_value(entry, key):
     # Expects [err-, value, err+], returns value or np.nan
@@ -32,23 +34,66 @@ def extract_central_value(entry, key):
     else:
         return np.nan
 
+
+def extract_error_minus(entry, key):
+    # Returns the lower error (err-) from [err-, value, err+] or np.nan
+    val = entry.get(key, None)
+    if isinstance(val, list) and len(val) == 3:
+        try:
+            return float(val[0])
+        except Exception:
+            return np.nan
+    return np.nan
+
+
+def extract_error_plus(entry, key):
+    # Returns the upper error (err+) from [err-, value, err+] or np.nan
+    val = entry.get(key, None)
+    if isinstance(val, list) and len(val) == 3:
+        try:
+            return float(val[2])
+        except Exception:
+            return np.nan
+    return np.nan
+
+
 def extract_column(data, key):
     return [extract_central_value(entry, key) for entry in data]
 
+
+def extract_error_columns(data, key):
+    """Return two lists: error_minus, error_plus for the given key across data."""
+    errs_lo = [extract_error_minus(entry, key) for entry in data]
+    errs_hi = [extract_error_plus(entry, key) for entry in data]
+    return errs_lo, errs_hi
+
+
+# Read data
 data = read_json_file(str(file_path))
 if data is None:
     print("No data loaded. Exiting.")
     exit(1)
 
-# Extract columns for plotting
-periods = extract_column(data, "Period")
-eccentricities = extract_column(data, "Eccentricity")
-M2s = extract_column(data, "M2")
-M1s = extract_column(data, "M1")
-names = [entry.get('System Name', '') for entry in data]
-types1 = [entry.get('Type1', '') for entry in data]
-types2 = [entry.get('Type2', '') for entry in data]
-classes = [entry.get('class', 'Unclassified') for entry in data]
+# Build a single DataFrame with central values and errors
+df = pd.DataFrame({
+    'Period': extract_column(data, 'Period'),
+    'Period_err_minus': extract_error_columns(data, 'Period')[0],
+    'Period_err_plus': extract_error_columns(data, 'Period')[1],
+    'Eccentricity': extract_column(data, 'Eccentricity'),
+    'Ecc_err_minus': extract_error_columns(data, 'Eccentricity')[0],
+    'Ecc_err_plus': extract_error_columns(data, 'Eccentricity')[1],
+    'M1': extract_column(data, 'M1'),
+    'M1_err_minus': extract_error_columns(data, 'M1')[0],
+    'M1_err_plus': extract_error_columns(data, 'M1')[1],
+    'M2': extract_column(data, 'M2'),
+    'M2_err_minus': extract_error_columns(data, 'M2')[0],
+    'M2_err_plus': extract_error_columns(data, 'M2')[1],
+    'System Name': [entry.get('System Name', '') for entry in data],
+    'Type1': [entry.get('Type1', '') for entry in data],
+    'Type2': [entry.get('Type2', '') for entry in data],
+    'class': [entry.get('class', 'Unclassified') for entry in data],
+    'Simbad': [entry.get('Simbad', None) for entry in data]
+})
 
 # Hand-picked colors for each class (hex strings). Adjust as you like.
 COLORMAP = {
@@ -64,150 +109,102 @@ COLORMAP = {
     'Unclassified': '#cbd24f'
 }
 
-# Marker symbols to cycle through for classes. See Plotly marker symbol reference for names.
 SYMBOLS = [
     'circle', 'diamond', 'square', 'x', 'triangle-up', 'cross', 'star', 'hourglass', 'pentagon'
 ]
-# Build a symbol map aligned with COLORMAP keys (cycles if needed)
 SYMBOLMAP = {k: SYMBOLS[i % len(SYMBOLS)] for i, k in enumerate(COLORMAP.keys())}
 
-# Build DataFrames using the raw Period values and filter non-positive values
-plot1_df = pd.DataFrame({
-    'Period': periods,
-    'Eccentricity': eccentricities,
-    'System Name': names,
-    'Type1': types1,
-    'Type2': types2,
-    'class': classes
-}).dropna(subset=['Period', 'Eccentricity'])
-# Keep only positive Periods because we'll plot on a log x-axis
-plot1_df = plot1_df[pd.to_numeric(plot1_df['Period'], errors='coerce') > 0]
 
-plot2_df = pd.DataFrame({
-    'Period': periods,
-    'M2': M2s,
-    'System Name': names,
-    'Type1': types1,
-    'Type2': types2,
-    'class': classes
-}).dropna(subset=['Period', 'M2'])
-plot2_df = plot2_df[pd.to_numeric(plot2_df['Period'], errors='coerce') > 0]
+# plotting function
+def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=None, y_title=None):
+    sub = df.dropna(subset=[x, y]).copy()
+    # ensure positive if log
+    if x_log:
+        sub = sub[pd.to_numeric(sub[x], errors='coerce') > 0]
+    if y_log:
+        sub = sub[pd.to_numeric(sub[y], errors='coerce') > 0]
 
-# --- Third plot: donor mass (M2) vs accretor mass (M1)
-plot3_df = pd.DataFrame({
-    'M1': M1s,
-    'M2': M2s,
-    'System Name': names,
-    'Type1': types1,
-    'Type2': types2,
-    'class': classes
-}).dropna(subset=['M1', 'M2'])
-
-
-# Create and save plotly interactive plots
-
-
-######### Period vs Eccentricity
-fig1 = px.scatter(
-    plot1_df,
-    x='Period',
-    y='Eccentricity',
-    color='class',
-    color_discrete_map=COLORMAP,
-    symbol='class',
-    symbol_map=SYMBOLMAP,
-    hover_name='System Name',
-    hover_data=['Type1', 'Type2'],
-    title='Period vs Eccentricity',
-    template='plotly_white'
-)
-fig1.update_traces(marker=dict(size=7, opacity=0.8))
-fig1.update_layout(
-    legend_title_text='Class',
-    legend=dict(
-        itemclick='toggle',           # click toggles visibility
-        itemdoubleclick='toggleothers' # double-click isolates
+    fig = px.scatter(
+        sub,
+        x=x,
+        y=y,
+        color='class',
+        color_discrete_map=COLORMAP,
+        symbol='class',
+        symbol_map=SYMBOLMAP,
+        hover_name='System Name',
+        hover_data=['Type1', 'Type2'],
+        template='plotly_white'
     )
-)
-fig1.update_xaxes(type='log', title_text='$P\;\mathrm{(days)}$',title_font=dict(size=20))
-fig1.update_yaxes(title_text='$\mathrm{Eccentricity}$', title_font=dict(size=20))
-out1 = DOCS_DIR / 'interactive_period_vs_eccentricity.html'
-fig1.write_html(str(out1), include_plotlyjs='cdn', include_mathjax='cdn')
-# Also export PDF to PLOTS_DIR (requires kaleido)
-try:
-    PLOTS_DIR.mkdir(parents=True, exist_ok=True)
-    out1_pdf = PLOTS_DIR / 'interactive_period_vs_eccentricity.pdf'
-    fig1.write_image(str(out1_pdf))
-    print(f'Wrote PDF: {out1_pdf}')
-except Exception as e:
-    print('Could not write PDF for fig1 :', e)
+    fig.update_traces(marker=dict(size=7, opacity=0.8))
 
+    # attach error bars if columns available
+    ex = f"{x}_err_plus"
+    exm = f"{x}_err_minus"
+    ey = f"{y}_err_plus"
+    eym = f"{y}_err_minus"
+    if ex in sub.columns and exm in sub.columns:
+        fig.update_traces(error_x=dict(type='data', array=sub[ex].tolist(), arrayminus=sub[exm].tolist()))
+    if ey in sub.columns and eym in sub.columns:
+        fig.update_traces(error_y=dict(type='data', array=sub[ey].tolist(), arrayminus=sub[eym].tolist()))
 
-
-######### Period vs donor mass (m2)
-fig2 = px.scatter(
-    plot2_df,
-    x='Period',
-    y='M2',
-    color='class',
-    color_discrete_map=COLORMAP,
-    symbol='class',
-    symbol_map=SYMBOLMAP,
-    hover_name='System Name',
-    hover_data=['Type1', 'Type2'],
-    title='Period vs donor mass',
-    template='plotly_white'
-)
-fig2.update_traces(marker=dict(size=7, opacity=0.8))
-fig2.update_layout(
-    legend_title_text='Class',
-    legend=dict(
-        itemclick='toggle',           # click toggles visibility
-        itemdoubleclick='toggleothers' # double-click isolates
+    fig.update_layout(
+        legend_title_text='Class',
+        legend=dict(itemclick='toggle', itemdoubleclick='toggleothers'),
+        legend_title=dict(font=dict(size=15)),
+        legend_font=dict(size=14)
     )
-)
-fig2.update_xaxes(type='log', title_text='$P\;\mathrm{(days)}$', title_font=dict(size=20))
-fig2.update_yaxes(type='log', title_text='$\mathrm{Donor \ mass, \,} M_2\; (M_\odot)$', title_font=dict(size=20) )
-out2 = DOCS_DIR / 'interactive_period_vs_m2.html'
-fig2.write_html(str(out2), include_plotlyjs='cdn', include_mathjax='cdn')
-try:
-    out2_pdf = PLOTS_DIR / 'interactive_period_vs_m2.pdf'
-    fig2.write_image(str(out2_pdf))
-    print(f'Wrote PDF: {out2_pdf}')
-except Exception as e:
-    print('Could not write PDF for fig2 :', e)
+    tick_size = 15
+    label_size = 30
+    if x_log:
+        fig.update_xaxes(type='log', title_text=x_title, tickfont=dict(size=tick_size), title_font=dict(size=label_size))
+    else:
+        fig.update_xaxes(title_text=x_title, tickfont=dict(size=tick_size), title_font=dict(size=label_size))
+    if y_log:
+        fig.update_yaxes(type='log', title_text=y_title, tickfont=dict(size=tick_size), title_font=dict(size=label_size))
+    else:
+        fig.update_yaxes(title_text=y_title, tickfont=dict(size=tick_size), title_font=dict(size=label_size))
+
+    out_html = Path(out_html)
+    out_pdf = Path(out_pdf)
+    out_html.parent.mkdir(parents=True, exist_ok=True)
+    out_pdf.parent.mkdir(parents=True, exist_ok=True)
+
+    fig.write_html(str(out_html), include_plotlyjs='cdn', include_mathjax='cdn')
+    try:
+        fig.write_image(str(out_pdf))
+        print(f'Wrote PDF: {out_pdf}')
+    except Exception as e:
+        print(f'Could not write PDF for {out_pdf}:', e)
 
 
+# Create the three plots via the helper
+make_scatter(
+    df,
+    x='Period', y='Eccentricity',
+    out_html=DOCS_DIR / 'interactive_period_vs_eccentricity.html',
+    out_pdf=PLOTS_DIR / 'interactive_period_vs_eccentricity.pdf',
+    x_log=True, y_log=False,
+    x_title='$P \, \mathrm{(days)}$', 
+    y_title='$\mathrm{Eccentricity}$',
+)
 
-######### Donor vs accretor mass
-fig3 = px.scatter(
-    plot3_df,
-    x='M1',
-    y='M2',
-    color='class',
-    color_discrete_map=COLORMAP,
-    symbol='class',
-    symbol_map=SYMBOLMAP,
-    hover_name='System Name',
-    hover_data=['Type1', 'Type2'],
-    title='Donor mass (M2) vs Accretor mass (M1)',
-    template='plotly_white'
+make_scatter(
+    df,
+    x='Period', y='M2',
+    out_html=DOCS_DIR / 'interactive_period_vs_m2.html',
+    out_pdf=PLOTS_DIR / 'interactive_period_vs_m2.pdf',
+    x_log=True, y_log=True,
+    x_title='$P\,\mathrm{(days)}$', 
+    y_title='$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
 )
-fig3.update_traces(marker=dict(size=7, opacity=0.8))
-fig3.update_layout(
-    legend_title_text='Class',
-    legend=dict(
-        itemclick='toggle',
-        itemdoubleclick='toggleothers'
-    )
+
+make_scatter(
+    df,
+    x='M1', y='M2',
+    out_html=DOCS_DIR / 'interactive_m2_vs_m1.html',
+    out_pdf=PLOTS_DIR / 'interactive_m2_vs_m1.pdf',
+    x_log=True, y_log=True,
+    x_title='$M_{\mathrm{accretor}} \mathrm{(M_{\odot})}$', 
+    y_title='$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
 )
-fig3.update_xaxes(type='log',title_text='$\mathrm{Accretor \ mass, \,} M_1\; (M_\odot)$', title_font=dict(size=18))
-fig3.update_yaxes(type='log',title_text='$\mathrm{Donor \ mass, \,} M_2\; (M_\odot)$', title_font=dict(size=18))
-out3 = DOCS_DIR / 'interactive_m2_vs_m1.html'
-fig3.write_html(str(out3), include_plotlyjs='cdn', include_mathjax='cdn')
-try:
-    out3_pdf = PLOTS_DIR / 'interactive_m2_vs_m1.pdf'
-    fig3.write_image(str(out3_pdf))
-    print(f'Wrote PDF: {out3_pdf}')
-except Exception as e:
-    print('Could not write PDF for fig3 :', e)

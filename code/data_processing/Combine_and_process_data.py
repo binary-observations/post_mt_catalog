@@ -4,7 +4,7 @@ import json
 from io import StringIO
 import os, sys
 import argparse
-from urllib.parse import quote_plus
+from urllib.parse import quote
 import time
 from astroquery.simbad import Simbad
 from astropy.coordinates import SkyCoord
@@ -74,19 +74,14 @@ def class_from_table_path(table_path):
     return 'Unclassified'
 
 
-def make_simbad_url_from_name(name:str):
-    """Return a Simbad object URL for a given identifier/name."""
-    if not name: return None
-    return f"https://simbad.cds.unistra.fr/simbad/sim-id?Ident={quote_plus(name)}&output.format=ASCII"
-
-
 def make_simbad_url_from_coords(ra_deg, dec_deg, radius_arcsec=5):
     """Return a Simbad coordinate-search URL using decimal degrees and radius in arcsec."""
     try:
+        # use a space between RA and Dec and percent-encode with quote
         coords = f"{float(ra_deg)} {float(dec_deg)}"
     except Exception:
         return None
-    return f"https://simbad.cds.unistra.fr/simbad/sim-coo?Coord={quote_plus(coords)}&Radius={radius_arcsec}&Radius.unit=arcsec&output.format=ASCII"
+    return f"https://simbad.cds.unistra.fr/simbad/sim-coo?Coord={quote(coords)}&Radius={radius_arcsec}&Radius.unit=arcsec&output.format=ASCII"
 
 
 def query_simbad_name(name):
@@ -170,11 +165,8 @@ for n, table_path in enumerate(list_of_tables):
                 except Exception:
                     entry['class'] = 'Unclassified'
 
-                # Add a single 'Simbad' link only when both name- and coord-based URLs match.
+                # Add a 'Simbad' coord-based URL.
                 try:
-                    sys_name = entry.get('System Name')
-                    name_url = make_simbad_url_from_name(sys_name) if sys_name else None
-
                     # By coordinates (extract central values from triplets if available)
                     ra_trip = entry.get('RA')
                     dec_trip = entry.get('Dec')
@@ -186,11 +178,11 @@ for n, table_path in enumerate(list_of_tables):
                         dec_val = dec_trip[1]
                     coords_url = make_simbad_url_from_coords(ra_val, dec_val) if (ra_val is not None and dec_val is not None) else None
 
-                    # For now, use a simple coordinate-based SIMBAD URL when coordinates exist.
+                    # use a simple coordinate-based SIMBAD URL when coordinates exist.
                     if ra_val is not None and dec_val is not None:
-                        # Use SIMBAD coordinate search URL template
-                        coords = f"{float(ra_val)}+{float(dec_val)}"
-                        entry['Simbad'] = f"https://simbad.cds.unistra.fr/simbad/sim-coo?Coord={quote_plus(coords)}&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+                        # Use SIMBAD coordinate search URL template. Put a space between RA and Dec
+                        coords = f"{float(ra_val)} {float(dec_val)}"
+                        entry['Simbad'] = f"https://simbad.cds.unistra.fr/simbad/sim-coo?Coord={quote(coords)}&Radius=5&Radius.unit=arcsec&output.format=ASCII"
                     else:
                         entry['Simbad'] = None
                 except Exception:
