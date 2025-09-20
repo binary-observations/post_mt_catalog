@@ -91,6 +91,14 @@
           <option>100</option>
         </select>
       </label>
+       <div class="form-group">
+         <label for="filter-type1">Type1:</label>
+         <input type="text" id="filter-type1" placeholder="Type1 filter" style="flex:1; min-width:180px; padding:0.4rem;">
+       </div>
+       <div class="form-group">
+         <label for="filter-type2">Type2:</label>
+         <input type="text" id="filter-type2" placeholder="Type2 filter" style="flex:1; min-width:180px; padding:0.4rem;">
+       </div>
       <div id="pagination" style="margin-left:auto; display:flex; gap:0.5rem; align-items:center;"></div>
     </div>
 
@@ -131,6 +139,8 @@
         thead: document.querySelector('#data-table thead'),
         tbody: document.querySelector('#data-table tbody'),
         pagination: document.getElementById('pagination'),
+  type1: document.getElementById('filter-type1'),
+  type2: document.getElementById('filter-type2'),
         status: document.getElementById('data-status')
       };
 
@@ -214,13 +224,51 @@
         });
         els.thead.appendChild(tr);
 
-        // filter by search
-        const q = (els.search.value || '').trim().toLowerCase();
-        if(q){
-          filtered = records.filter(r=> JSON.stringify(r).toLowerCase().includes(q));
-        } else {
-          filtered = records.slice();
+        // Build filters: parse inline key=value tokens from global search, and
+        // also use the explicit Type1/Type2 inputs.
+        let qraw = (els.search.value || '').trim();
+        let q = qraw.toLowerCase();
+
+        // parse key=value tokens (supports double or single quoted values)
+        const kvRegex = /(\b\w+)\s*=\s*(?:"([^"]+)"|'([^']+)'|([^\s]+))/g;
+        let match;
+        const kvFilters = {};
+        while((match = kvRegex.exec(qraw)) !== null){
+          const key = match[1].toLowerCase();
+          const val = (match[2] || match[3] || match[4] || '').toLowerCase();
+          if(val) kvFilters[key] = val;
         }
+  // remove the matched tokens from the free-text query
+  // Reset lastIndex because kvRegex was used with exec() in a loop.
+  kvRegex.lastIndex = 0;
+  q = qraw.replace(kvRegex, '').trim().toLowerCase();
+
+        // explicit inputs override/add to kvFilters
+  const t1 = (els.type1 && els.type1.value || '').trim().toLowerCase();
+  const t2 = (els.type2 && els.type2.value || '').trim().toLowerCase();
+        if(t1) kvFilters['type1'] = t1;
+        if(t2) kvFilters['type2'] = t2;
+
+        filtered = records.filter(r=>{
+          // free-text search (if present)
+          if(q){
+            if(!JSON.stringify(r).toLowerCase().includes(q)) return false;
+          }
+          // key/value filters
+          for(const [key, val] of Object.entries(kvFilters)){
+            // find the record key case-insensitively
+            const recordKey = Object.keys(r).find(k=>k.toLowerCase()===key);
+            if(!recordKey) return false;
+            const rv = r[recordKey];
+            let s = '';
+            if(rv === null || rv === undefined) s = '';
+            else if(Array.isArray(rv)) s = JSON.stringify(rv).toLowerCase();
+            else if(typeof rv === 'object') s = JSON.stringify(rv).toLowerCase();
+            else s = String(rv).toLowerCase();
+            if(!s.includes(val)) return false;
+          }
+          return true;
+        });
 
         const total = filtered.length;
         const totalPages = Math.max(1, Math.ceil(total / pageSize));
@@ -303,8 +351,10 @@
 
       // wire events
   els.loadRemote.addEventListener('click', async ()=>{ await fetchRemote(); });
-      els.pageSizeSelect.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
-      els.search.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
+  els.pageSizeSelect.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
+  els.search.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
+  if(els.type1) els.type1.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
+  if(els.type2) els.type2.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
 
       // auto-load remote on page open (can be removed if you prefer click)
       fetchRemote();

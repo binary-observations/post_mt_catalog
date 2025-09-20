@@ -98,7 +98,8 @@ df = pd.DataFrame({
 # Hand-picked colors for each class (hex strings). Adjust as you like.
 COLORMAP = {
     'Algols': '#6d2c14',            # maroon
-    'Hot subdwarfs (d)': '#ea4d4d', # coral/red
+    'Hot subdwarfs (d)': '#af52a6', # UV purple
+    'Post AGB stars (d)': '#ea4d4d', # coral/red 
     'Black Holes (d)': '#565656',   # orange
     'Blue Straggler Stars': '#f4d25a',
     'contact binaries': '#f49856',  # light olive
@@ -189,7 +190,7 @@ def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=
     out_html.parent.mkdir(parents=True, exist_ok=True)
     out_pdf.parent.mkdir(parents=True, exist_ok=True)
 
-    fig.update_layout(width=export_width, height=export_height, font=dict(size=14))
+    fig.update_layout(font=dict(size=14))
 
     # Write the interactive HTML with the legend intact
     fig.write_html(str(out_html), include_plotlyjs='cdn', include_mathjax='cdn')

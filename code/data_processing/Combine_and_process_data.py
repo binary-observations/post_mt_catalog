@@ -50,13 +50,14 @@ def class_from_table_path(table_path):
 
     mapping = {
         'algols.h5': 'Algols',
-        'be_sdob_table.h5': 'Hot subdwarfs (d)',
-        'bh_table.h5': 'Black Holes (d)',
-        'bss_data.h5': 'Blue Straggler Stars',
         'contact1.h5': 'contact binaries',
+        'be_sdob_table.h5': 'Hot subdwarfs (d)',
+        'stripped_star_table.h5': 'Stripped stars (d)',
+        'post_agb_stars.h5': 'Post AGB stars (d)',
+        'bss_data.h5': 'Blue Straggler Stars',
         'ns_table.h5': 'Neutron star (d)',
         'young_psr_table.h5': 'Neutron star (d)',
-        'stripped_star_table.h5': 'Stripped stars (d)'
+        'bh_table.h5': 'Black Holes (d)',
     }
 
     # WDMS subdirectory -> White Dwarf (d)
@@ -72,7 +73,6 @@ def class_from_table_path(table_path):
         return 'Wolf-Rayet (d)'
 
     return 'Unclassified'
-
 
 def make_simbad_url_from_coords(ra_deg, dec_deg, radius_arcsec=5):
     """Return a Simbad coordinate-search URL using decimal degrees and radius in arcsec."""
@@ -137,7 +137,6 @@ all_systems = []
 
 for n, table_path in enumerate(list_of_tables):
     print(f"Processing table {n+1}/{len(list_of_tables)}: {table_path}")
-
     try:
         with h5py.File(table_path, "r") as f:
             metadata_json = f["metadata_json"][()].decode("utf-8")

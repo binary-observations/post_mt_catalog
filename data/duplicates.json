@@ -61,7 +61,7 @@
       NaN
     ],
     "class": "Stripped stars (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=274.28139%2B-56.02335&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=274.28139%20-56.02335&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J0553-1349",
@@ -126,7 +126,7 @@
       0.0006
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=88.4715%2B-13.83202&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=88.4715%20-13.83202&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J2057-4742",
@@ -191,7 +191,7 @@
       0.0014
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=314.4933%2B-47.70061&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=314.4933%20-47.70061&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J1553-6846",
@@ -256,7 +256,7 @@
       0.009
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=238.39374%2B-68.77867&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=238.39374%20-68.77867&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J2102+3703",
@@ -321,7 +321,7 @@
       0.011
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=315.61966%2B37.0637&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=315.61966%2037.0637&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J0003-5604",
@@ -386,7 +386,7 @@
       0.02
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=0.85767%2B-56.07555&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=0.85767%20-56.07555&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J1733+5808",
@@ -451,7 +451,7 @@
       0.0007
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=263.39531%2B58.14627&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=263.39531%2058.14627&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J2145+2837",
@@ -516,7 +516,7 @@
       0.005
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=326.35323%2B28.62378&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=326.35323%2028.62378&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J2244-2236",
@@ -581,7 +581,7 @@
       0.0011
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=341.20236%2B-22.60209&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=341.20236%20-22.60209&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "J0824+5254",
@@ -646,7 +646,7 @@
       0.011
     ],
     "class": "Neutron star (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=126.15392%2B52.90759&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=126.15392%2052.90759&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 3184973512776788352",
@@ -710,7 +710,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=70.8058%2B-9.61837&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=70.8058%20-9.61837&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 827780115089819008",
@@ -774,7 +774,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=147.52926%2B51.48152&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=147.52926%2051.48152&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 1356012606612285312",
@@ -838,7 +838,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=250.30311%2B40.47373&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=250.30311%2040.47373&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 1479598198906350336",
@@ -902,7 +902,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=217.15099%2B33.97195&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=217.15099%2033.97195&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Lamost J140757.38+390704.9",
@@ -966,7 +966,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=211.98878%2B39.11804&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=211.98878%2039.11804&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 2130220598189285248",
@@ -1030,7 +1030,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=287.64674%2B45.24253&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=287.64674%2045.24253&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 4597300184386198912",
@@ -1094,7 +1094,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=266.43821%2B30.13102&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=266.43821%2030.13102&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 1141991435610545792",
@@ -1158,7 +1158,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=108.80452%2B79.76424&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=108.80452%2079.76424&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 2507419263368252928",
@@ -1222,7 +1222,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=29.84844%2B-0.76303&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=29.84844%20-0.76303&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 6363206632725892096",
@@ -1286,7 +1286,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=308.94013%2B-76.89188&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=308.94013%20-76.89188&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "SDSSJ141134.70+102839.7",
@@ -1350,7 +1350,7 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=212.89458%2B10.47769&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=212.89458%2010.47769&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "SDSSJ172406.14+562003.0",
@@ -1414,6 +1414,6 @@
       NaN
     ],
     "class": "White Dwarf (d)",
-    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=261.02558%2B56.33417&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=261.02558%2056.33417&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   }
 ]
