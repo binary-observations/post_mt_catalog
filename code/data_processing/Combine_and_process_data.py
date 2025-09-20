@@ -186,12 +186,11 @@ for n, table_path in enumerate(list_of_tables):
                         dec_val = dec_trip[1]
                     coords_url = make_simbad_url_from_coords(ra_val, dec_val) if (ra_val is not None and dec_val is not None) else None
 
-                    # Query SIMBAD to get canonical main_id for both name and coords and compare
-                    name_main = query_simbad_name(sys_name) if name_url else None
-                    coords_main = query_simbad_coords(ra_val, dec_val) if coords_url else None
-                    if name_main and coords_main and name_main == coords_main:
-                        # Build canonical SIMBAD object page URL using main_id
-                        entry['Simbad'] = f"https://simbad.cds.unistra.fr/simbad/sim-id?Ident={quote_plus(name_main)}"
+                    # For now, use a simple coordinate-based SIMBAD URL when coordinates exist.
+                    if ra_val is not None and dec_val is not None:
+                        # Use SIMBAD coordinate search URL template
+                        coords = f"{float(ra_val)}+{float(dec_val)}"
+                        entry['Simbad'] = f"https://simbad.cds.unistra.fr/simbad/sim-coo?Coord={quote_plus(coords)}&Radius=5&Radius.unit=arcsec&output.format=ASCII"
                     else:
                         entry['Simbad'] = None
                 except Exception:
