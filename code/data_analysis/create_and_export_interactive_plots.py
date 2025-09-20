@@ -116,7 +116,26 @@ SYMBOLMAP = {k: SYMBOLS[i % len(SYMBOLS)] for i, k in enumerate(COLORMAP.keys())
 
 
 # plotting function
-def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=None, y_title=None):
+def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=None, y_title=None,
+ export_legend_to_pdf=True, export_width = 700, export_height = 450, export_scale = 2):
+    """_summary_
+
+    Args:
+        df (_type_): _description_
+        x (_type_): _description_
+        y (_type_): _description_
+        out_html (_type_): _description_
+        out_pdf (_type_): _description_
+        x_log (bool, optional): _description_. Defaults to False.
+        y_log (bool, optional): _description_. Defaults to False.
+        x_title (_type_, optional): _description_. Defaults to None.
+        y_title (_type_, optional): _description_. Defaults to None.
+        # export parameters
+        export_legend_to_pdf (bool, optional): _description_. Defaults to True.
+        export_width (int, optional): _description_. Defaults to 700.
+        export_height (int, optional): _description_. Defaults to 450.
+        export_scale (int, optional): _description_. Defaults to 2. Higher scale -> higher resolution (useful if rasterized).
+    """
     sub = df.dropna(subset=[x, y]).copy()
     # ensure positive if log
     if x_log:
@@ -155,7 +174,7 @@ def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=
         legend_font=dict(size=14)
     )
     tick_size = 15
-    label_size = 30
+    label_size = 50
     if x_log:
         fig.update_xaxes(type='log', title_text=x_title, tickfont=dict(size=tick_size), title_font=dict(size=label_size))
     else:
@@ -170,15 +189,36 @@ def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=
     out_html.parent.mkdir(parents=True, exist_ok=True)
     out_pdf.parent.mkdir(parents=True, exist_ok=True)
 
+    fig.update_layout(width=export_width, height=export_height, font=dict(size=14))
+
+    # Write the interactive HTML with the legend intact
     fig.write_html(str(out_html), include_plotlyjs='cdn', include_mathjax='cdn')
+
+    # For static exports (PDF/PNG) we may want to hide the legend
+    # Temporarily store the current legend visibility, disable it, export,
+    # and then restore the original state.
     try:
-        fig.write_image(str(out_pdf))
-        print(f'Wrote PDF: {out_pdf}')
+        orig_showlegend = True
+        if hasattr(fig.layout, 'showlegend') and fig.layout.showlegend is not None:
+            orig_showlegend = bool(fig.layout.showlegend)
+        fig.update_layout(showlegend=export_legend_to_pdf)
+
+        # Pass width/height/scale to write_image to control PDF resolution.
+        fig.write_image(str(out_pdf), width=export_width, height=export_height, scale=export_scale)
+        print(f'Wrote PDF: {out_pdf} (w={export_width}, h={export_height}, scale={export_scale})')
     except Exception as e:
         print(f'Could not write PDF for {out_pdf}:', e)
+    finally:
+        # restore legend visibility for any further interactive use
+        try:
+            fig.update_layout(showlegend=orig_showlegend)
+        except Exception:
+            pass
 
 
 # Create the three plots via the helper
+
+## Perios vs eccentricity 
 make_scatter(
     df,
     x='Period', y='Eccentricity',
@@ -187,8 +227,13 @@ make_scatter(
     x_log=True, y_log=False,
     x_title='$P \, \mathrm{(days)}$', 
     y_title='$\mathrm{Eccentricity}$',
+    export_legend_to_pdf=False, 
+    export_height=400,
+    export_width=500,
+    export_scale=3
 )
 
+## Perios vs donor mass 
 make_scatter(
     df,
     x='Period', y='M2',
@@ -197,8 +242,13 @@ make_scatter(
     x_log=True, y_log=True,
     x_title='$P\,\mathrm{(days)}$', 
     y_title='$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
+    export_legend_to_pdf=False,
+    export_height=400,
+    export_width=500,
+    export_scale=2
 )
 
+## donor (2) vs accretor (1) mass
 make_scatter(
     df,
     x='M1', y='M2',
@@ -207,4 +257,8 @@ make_scatter(
     x_log=True, y_log=True,
     x_title='$M_{\mathrm{accretor}} \mathrm{(M_{\odot})}$', 
     y_title='$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
+    export_legend_to_pdf=True,
+    export_height=400,
+    export_width=650,
+    export_scale=2
 )
