@@ -98,15 +98,16 @@ df = pd.DataFrame({
 # Hand-picked colors for each class (hex strings). Adjust as you like.
 COLORMAP = {
     'Algols': '#6d2c14',            # maroon
-    'Hot subdwarfs (d)': '#af52a6', # UV purple
-    'Post AGB stars (d)': '#ea4d4d', # coral/red 
-    'Black Holes (d)': '#565656',   # orange
+    'Hot subdwarfs': '#6d4aa0', # UV purple #6d4aa0
+    'Post AGB stars': '#ea4d4d', # coral/red 
+    'Black Holes': '#565656',   # orange
     'Blue Straggler Stars': '#f4d25a',
     'contact binaries': '#f49856',  # light olive
-    'Neutron star (d)': '#9bd24e',   # lime green
-    'Stripped stars (d)': '#408c63', # muted green
-    'Wolf-Rayet (d)': '#52b4e5',     # blue 
-    'White Dwarf (d)': '#e6cfd9',    # purple  #6d4aa0
+    'Neutron star': '#9bd24e',   # lime green
+    'Stripped stars': '#408c63', # muted green
+    'Wolf-Rayet': '#52b4e5',     # blue 
+    'Barium stars': '#af52a6',    # purple  
+    'White Dwarf': '#e6cfd9',    # purple 
     'Unclassified': '#cbd24f'
 }
 
@@ -114,7 +115,6 @@ SYMBOLS = [
     'circle', 'diamond', 'square', 'x', 'triangle-up', 'cross', 'star', 'hourglass', 'pentagon'
 ]
 SYMBOLMAP = {k: SYMBOLS[i % len(SYMBOLS)] for i, k in enumerate(COLORMAP.keys())}
-
 
 # plotting function
 def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=None, y_title=None,

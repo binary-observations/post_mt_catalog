@@ -64,7 +64,7 @@ def class_from_table_path(table_path):
 
     # WDMS subdirectory -> White Dwarf (d)
     if 'wdms' in full:
-        return 'White Dwarf (d)'
+        return 'White Dwarf'
 
     # Exact filename mapping
     if name in mapping:
@@ -72,7 +72,7 @@ def class_from_table_path(table_path):
 
     # Any table name containing 'wr' -> Wolf-Rayet
     if 'wr' in name:
-        return 'Wolf-Rayet (d)'
+        return 'Wolf-Rayet'
 
     return 'Unclassified'
 
