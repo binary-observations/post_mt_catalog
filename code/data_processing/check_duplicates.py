@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 # === USER INPUT Constants ===
 threshold = 0.1 * u.arcsec
 
+# will overwrite the user input and  always merge duplicates
+always_merge_duplicates = True
 
 ################################################################################
 # === Helper Functions ===
@@ -249,8 +251,13 @@ if overlapping_pairs:
         print(f"  M1: {m1_1} vs {m1_2} (diff: {percent_diff(m1_1, m1_2)})")
         print(f"  M2: {m2_1} vs {m2_2} (diff: {percent_diff(m2_1, m2_2)})")
         
+        # overwrite the question
+        if always_merge_duplicates:
+            user_input = "y"
         # Ask user to confirm duplicate pair, and merge if so
-        user_input = input("Merge these as duplicates? (y/n): ").strip().lower()
+        else:
+            user_input = input("Merge these as duplicates? (y/n): ").strip().lower()
+            
         if user_input == "y":
             keep, drop = resolve_duplicate_pair(entry1, entry2)
             cleaned_catalog[idx1] = keep

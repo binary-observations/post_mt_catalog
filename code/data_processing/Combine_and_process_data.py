@@ -51,13 +51,15 @@ def class_from_table_path(table_path):
     mapping = {
         'algols.h5': 'Algols',
         'contact1.h5': 'contact binaries',
-        'be_sdob_table.h5': 'Hot subdwarfs (d)',
-        'stripped_star_table.h5': 'Stripped stars (d)',
-        'post_agb_stars.h5': 'Post AGB stars (d)',
+        'be_sdob_table.h5': 'Hot subdwarfs ',
+        'stripped_star_table.h5': 'Stripped stars',
+        'barium_stars_jorissen2019.h5': 'Barium stars',
+        'barium_stars_escorza2019.h5': 'Barium stars',
+        'post_agb_stars.h5': 'Post AGB stars',
         'bss_data.h5': 'Blue Straggler Stars',
-        'ns_table.h5': 'Neutron star (d)',
-        'young_psr_table.h5': 'Neutron star (d)',
-        'bh_table.h5': 'Black Holes (d)',
+        'ns_table.h5': 'Neutron star',
+        'young_psr_table.h5': 'Neutron star',
+        'bh_table.h5': 'Black Holes',
     }
 
     # WDMS subdirectory -> White Dwarf (d)
