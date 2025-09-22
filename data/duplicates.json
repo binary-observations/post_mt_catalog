@@ -1,5 +1,1413 @@
 [
   {
+    "System Name": "HD15306",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      36.96336,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -0.7895,
+      NaN
+    ],
+    "Period": [
+      48.0,
+      8383.0,
+      48.0
+    ],
+    "Eccentricity": [
+      0.03,
+      0.2,
+      0.03
+    ],
+    "M1": [
+      0.1,
+      1.3,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.005,
+      0.04,
+      0.005
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=36.96336%20-0.7895&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD22589",
+    "Type1": "gBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      54.4802,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -6.97453,
+      NaN
+    ],
+    "Period": [
+      33.0,
+      5573.0,
+      33.0
+    ],
+    "Eccentricity": [
+      0.016,
+      0.232,
+      0.016
+    ],
+    "M1": [
+      0.1,
+      1.3,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.00018,
+      0.00367,
+      0.00018
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=54.4802%20-6.97453&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD24864",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      58.60554,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -54.53366,
+      NaN
+    ],
+    "Period": [
+      3.0,
+      430.0,
+      3.0
+    ],
+    "Eccentricity": [
+      0.05,
+      0.0,
+      0.05
+    ],
+    "M1": [
+      0.06,
+      1.38,
+      0.06
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.005,
+      0.019,
+      0.005
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=58.60554%20-54.53366&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD34654",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      80.91612,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      64.12475,
+      NaN
+    ],
+    "Period": [
+      0.6,
+      975.6,
+      0.6
+    ],
+    "Eccentricity": [
+      0.007,
+      0.11,
+      0.007
+    ],
+    "M1": [
+      0.05,
+      1.19,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0011,
+      0.0699,
+      0.0011
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=80.91612%2064.12475&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD50264",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      102.8021,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -29.57564,
+      NaN
+    ],
+    "Period": [
+      1.2,
+      909.9,
+      1.2
+    ],
+    "Eccentricity": [
+      0.03,
+      0.091,
+      0.03
+    ],
+    "M1": [
+      0.1,
+      0.9,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.003,
+      0.08,
+      0.003
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=102.8021%20-29.57564&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD76225",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      133.50358,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -26.91566,
+      NaN
+    ],
+    "Period": [
+      2.0,
+      2410.0,
+      2.0
+    ],
+    "Eccentricity": [
+      0.005,
+      0.098,
+      0.005
+    ],
+    "M1": [
+      0.06,
+      1.21,
+      0.06
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.001,
+      0.0561,
+      0.001
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=133.50358%20-26.91566&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD87080",
+    "Type1": "sgCH",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      150.50358,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -33.68514,
+      NaN
+    ],
+    "Period": [
+      1.9,
+      274.3,
+      1.9
+    ],
+    "Eccentricity": [
+      0.007,
+      0.161,
+      0.007
+    ],
+    "M1": [
+      0.2,
+      1.6,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0008,
+      0.0492,
+      0.0008
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=150.50358%20-33.68514&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD89948",
+    "Type1": "sgCH",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      155.59108,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -29.55599,
+      NaN
+    ],
+    "Period": [
+      3.0,
+      673.0,
+      3.0
+    ],
+    "Eccentricity": [
+      0.03,
+      0.12,
+      0.03
+    ],
+    "M1": [
+      0.08,
+      0.95,
+      0.08
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.005,
+      0.065,
+      0.005
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=155.59108%20-29.55599&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD95241",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      165.08618,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      42.9117,
+      NaN
+    ],
+    "Period": [
+      56.0,
+      5244.0,
+      56.0
+    ],
+    "Eccentricity": [
+      0.02,
+      0.82,
+      0.02
+    ],
+    "M1": [
+      0.1,
+      1.3,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0013,
+      0.0091,
+      0.0013
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=165.08618%2042.9117&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD106191",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      183.29742,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -15.23231,
+      NaN
+    ],
+    "Period": [
+      13.0,
+      1314.0,
+      13.0
+    ],
+    "Eccentricity": [
+      0.1,
+      0.15,
+      0.1
+    ],
+    "M1": [
+      0.05,
+      0.95,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.008,
+      0.048,
+      0.008
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=183.29742%20-15.23231&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD107574",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      185.46609,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -18.40007,
+      NaN
+    ],
+    "Period": [
+      2.0,
+      1384.0,
+      2.0
+    ],
+    "Eccentricity": [
+      0.004,
+      0.084,
+      0.004
+    ],
+    "M1": [
+      0.05,
+      1.11,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      2e-05,
+      0.00159,
+      2e-05
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=185.46609%20-18.40007&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD120620",
+    "Type1": "gBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      207.67357,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -4.26802,
+      NaN
+    ],
+    "Period": [
+      1.0,
+      217.2,
+      1.0
+    ],
+    "Eccentricity": [
+      0.05,
+      0.0,
+      0.05
+    ],
+    "M1": [
+      0.2,
+      1.2,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.002,
+      0.062,
+      0.002
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=207.67357%20-4.26802&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD123585",
+    "Type1": "sgCH",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      212.39915,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -44.36699,
+      NaN
+    ],
+    "Period": [
+      1.5,
+      459.4,
+      1.5
+    ],
+    "Eccentricity": [
+      0.05,
+      0.0,
+      0.05
+    ],
+    "M1": [
+      0.1,
+      1.0,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.004,
+      0.077,
+      0.004
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=212.39915%20-44.36699&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD127392",
+    "Type1": "sgCH",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      217.97295,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -31.20055,
+      NaN
+    ],
+    "Period": [
+      2.0,
+      1508.0,
+      2.0
+    ],
+    "Eccentricity": [
+      0.01,
+      0.093,
+      0.01
+    ],
+    "M1": [
+      0.3,
+      0.8,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.003,
+      0.087,
+      0.003
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=217.97295%20-31.20055&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD141804",
+    "Type1": "sgCH",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      238.37182,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -54.15847,
+      NaN
+    ],
+    "Period": [
+      95.0,
+      2652.0,
+      95.0
+    ],
+    "Eccentricity": [
+      0.05,
+      0.0,
+      0.05
+    ],
+    "M1": [
+      0.2,
+      0.9,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.007,
+      0.068,
+      0.007
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=238.37182%20-54.15847&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD147609",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      245.46663,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      27.37424,
+      NaN
+    ],
+    "Period": [
+      1.5,
+      1146.2,
+      1.5
+    ],
+    "Eccentricity": [
+      0.005,
+      0.058,
+      0.005
+    ],
+    "M1": [
+      0.1,
+      1.4,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      5e-05,
+      0.0031,
+      5e-05
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=245.46663%2027.37424&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD150862",
+    "Type1": "sgCH",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      251.1837,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -25.21649,
+      NaN
+    ],
+    "Period": [
+      4.0,
+      291.0,
+      4.0
+    ],
+    "Eccentricity": [
+      0.09,
+      0.28,
+      0.09
+    ],
+    "M1": [
+      0.05,
+      1.04,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.003,
+      0.045,
+      0.003
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=251.1837%20-25.21649&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD182274",
+    "Type1": "sgCH",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      290.80224,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      19.37536,
+      NaN
+    ],
+    "Period": [
+      54.0,
+      8231.0,
+      54.0
+    ],
+    "Eccentricity": [
+      0.05,
+      0.0,
+      0.05
+    ],
+    "M1": [
+      0.05,
+      1.09,
+      0.05
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.005,
+      0.0227,
+      0.005
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=290.80224%2019.37536&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD207585",
+    "Type1": "sgCH",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      327.64464,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -24.18658,
+      NaN
+    ],
+    "Period": [
+      2.0,
+      672.0,
+      2.0
+    ],
+    "Eccentricity": [
+      0.05,
+      0.0,
+      0.05
+    ],
+    "M1": [
+      0.15,
+      0.96,
+      0.15
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.007,
+      0.078,
+      0.007
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=327.64464%20-24.18658&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD216219",
+    "Type1": "gBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      342.7173,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      18.00214,
+      NaN
+    ],
+    "Period": [
+      122.0,
+      4117.0,
+      122.0
+    ],
+    "Eccentricity": [
+      0.05,
+      0.0,
+      0.05
+    ],
+    "M1": [
+      0.1,
+      1.45,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0013,
+      0.0113,
+      0.0013
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=342.7173%2018.00214&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD221531",
+    "Type1": "dBa",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "",
+    "RA": [
+      NaN,
+      353.24591,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -11.98763,
+      NaN
+    ],
+    "Period": [
+      3.0,
+      1399.0,
+      3.0
+    ],
+    "Eccentricity": [
+      0.007,
+      0.163,
+      0.007
+    ],
+    "M1": [
+      0.1,
+      1.2,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      0.0007,
+      0.0372,
+      0.0007
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=353.24591%20-11.98763&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "HD 114520 b",
+    "Type1": "SB2",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.128E"
+    ],
+    "Notes": "Type(col): SB2",
+    "RA": [
+      3e-05,
+      197.71812,
+      3e-05
+    ],
+    "Dec": [
+      2e-05,
+      21.23375,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M1": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=197.71812%2021.23375&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
     "System Name": "HR 6819",
     "Type1": "B2-3Ve",
     "Type2": "SS",
@@ -647,6 +2055,3692 @@
     ],
     "class": "Neutron star",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=126.15392%2052.90759&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "DM \u221264d4333",
+    "Type1": "Ba",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "For details on the WD mass estimate, see reference.",
+    "RA": [
+      NaN,
+      349.12972,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -63.45127,
+      NaN
+    ],
+    "Period": [
+      NaN,
+      386.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.03,
+      NaN
+    ],
+    "M1": [
+      -0.1,
+      1.4,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.61,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.068,
+      NaN
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=349.12972%20-63.45127&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "DM \u221242d2048",
+    "Type1": "Ba",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "For details on the WD mass estimate, see reference.",
+    "RA": [
+      NaN,
+      84.50133,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -42.32646,
+      NaN
+    ],
+    "Period": [
+      NaN,
+      3260.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.08,
+      NaN
+    ],
+    "M1": [
+      -0.5,
+      1.9,
+      0.7
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.74,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.065,
+      NaN
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=84.50133%20-42.32646&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "DM \u221214d2678",
+    "Type1": "Ba",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "For details on the WD mass estimate, see reference.",
+    "RA": [
+      NaN,
+      132.98151,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -14.65261,
+      NaN
+    ],
+    "Period": [
+      NaN,
+      3470.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.22,
+      NaN
+    ],
+    "M1": [
+      -0.2,
+      3.0,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.8,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.023,
+      NaN
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=132.98151%20-14.65261&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "DM \u221201d3022",
+    "Type1": "Ba",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "For details on the WD mass estimate, see reference.",
+    "RA": [
+      NaN,
+      226.86194,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      -2.30538,
+      NaN
+    ],
+    "Period": [
+      NaN,
+      3253.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.28,
+      NaN
+    ],
+    "M1": [
+      -0.1,
+      1.6,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.55,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.016,
+      NaN
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=226.86194%20-2.30538&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 5424"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.43; [hs/ls]=0.57; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      13.93304,
+      2e-05
+    ],
+    "Dec": [
+      1e-05,
+      -27.89368,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1881.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.23,
+      NaN
+    ],
+    "M1": [
+      0.3,
+      1.3,
+      0.4
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.59,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.45385,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.005,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=13.93304%20-27.89368&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 16458"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.64; [hs/ls]=0.19; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      0.00011,
+      41.94886,
+      0.00011
+    ],
+    "Dec": [
+      2e-05,
+      81.44847,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      2018.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.1,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      1.9,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.72,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.37895,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.041,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=41.94886%2081.44847&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 18182"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.17; [hs/ls]=-0.05; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      0.0,
+      43.79622,
+      0.0
+    ],
+    "Dec": [
+      0.0,
+      -4.31663,
+      0.0
+    ],
+    "Period": [
+      NaN,
+      8059.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.31,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      1.8,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.59,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.32778,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.0002,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=43.79622%20-4.31663&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 20394"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.27; [hs/ls]=0.42; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      49.22325,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      2.33935,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      2226.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.2,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      2.0,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.76,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.38,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.002,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=49.22325%202.33935&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 24035"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.23; [hs/ls]=0.87; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      7e-05,
+      55.92747,
+      7e-05
+    ],
+    "Dec": [
+      2e-05,
+      -72.60911,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      377.8,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.3,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      1.3,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.57,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.43846,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.047,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=55.92747%20-72.60911&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 27271"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.07; [hs/ls]=-0.13; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      64.64093,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      2.47053,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      1693.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.22,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      2.9,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.79,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.27241,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.024,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=64.64093%202.47053&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 31487"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.04; [hs/ls]=0.32; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      3e-05,
+      74.76553,
+      3e-05
+    ],
+    "Dec": [
+      1e-05,
+      51.94223,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1066.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.05,
+      NaN
+    ],
+    "M1": [
+      0.3,
+      3.4,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      1.03,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.30294,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.038,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=74.76553%2051.94223&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 40430"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.34; [hs/ls]=0.23; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      89.585,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      -10.87476,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      5609.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.22,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      2.3,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.68,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.29565,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.0025,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=89.585%20-10.87476&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 43389"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.35; [hs/ls]=0.76; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      93.94612,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      -2.38562,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1689.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.08,
+      NaN
+    ],
+    "M1": [
+      0.3,
+      1.8,
+      0.4
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.72,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.4,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.043,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=93.94612%20-2.38562&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 44896"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.25; [hs/ls]=-0.09; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      95.72404,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      -33.6146,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      629.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.02,
+      NaN
+    ],
+    "M1": [
+      1.0,
+      3.0,
+      1.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.96,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.32,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.048,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=95.72404%20-33.6146&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 46407"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.35; [hs/ls]=0.31; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      4e-05,
+      98.19531,
+      4e-05
+    ],
+    "Dec": [
+      5e-05,
+      -11.16639,
+      5e-05
+    ],
+    "Period": [
+      NaN,
+      457.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.013,
+      NaN
+    ],
+    "M1": [
+      0.7,
+      2.1,
+      0.6
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.78,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.37143,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.035,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=98.19531%20-11.16639&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 49641"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.30; [hs/ls]=0.74; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      102.3727,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      3.69171,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1785.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.07,
+      NaN
+    ],
+    "M1": [
+      0.8,
+      2.7,
+      1.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.91,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.33704,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.003,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=102.3727%203.69171&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 49841"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=0.20; [hs/ls]=-0.06; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      102.66238,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      5.66287,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      897.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.16,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      2.8,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.78,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.27857,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.032,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=102.66238%205.66287&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 50082"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.32; [hs/ls]=0.44; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      3e-05,
+      102.97483,
+      3e-05
+    ],
+    "Dec": [
+      2e-05,
+      6.6068,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      2896.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.19,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      1.6,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.67,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.41875,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.027,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=102.97483%206.6068&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 51959"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.21; [hs/ls]=-0.13; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      104.79207,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      -7.1089,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      9718.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.53,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      1.2,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.47,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.39167,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.0005,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=104.79207%20-7.1089&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 53199"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.20; [hs/ls]=0.31; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      106.20119,
+      1e-05
+    ],
+    "Dec": [
+      0.0,
+      13.23867,
+      0.0
+    ],
+    "Period": [
+      NaN,
+      8314.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.24,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      2.5,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.71,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.284,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.028,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=106.20119%2013.23867&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 58121"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.01; [hs/ls]=0.10; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      111.11849,
+      2e-05
+    ],
+    "Dec": [
+      1e-05,
+      6.15025,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1214.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.14,
+      NaN
+    ],
+    "M1": [
+      0.4,
+      2.6,
+      0.5
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.73,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.28077,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.015,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=111.11849%206.15025&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 58368"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=0.04; [hs/ls]=0.27; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      111.41237,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      7.56085,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      672.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.22,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      2.6,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.73,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.28077,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.021,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=111.41237%207.56085&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 59852"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.22; [hs/ls]=0.06; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      112.94398,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      -4.3598,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      3464.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.15,
+      NaN
+    ],
+    "M1": [
+      0.3,
+      2.5,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.71,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.284,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.0022,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=112.94398%20-4.3598&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 77247"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.13; [hs/ls]=-0.02; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      135.88447,
+      1e-05
+    ],
+    "Dec": [
+      0.0,
+      53.10828,
+      0.0
+    ],
+    "Period": [
+      NaN,
+      80.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.09,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      3.9,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.94,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.24103,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.005,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=135.88447%2053.10828&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 84678"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.13; [hs/ls]=0.63; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      4e-05,
+      145.46907,
+      4e-05
+    ],
+    "Dec": [
+      1e-05,
+      -75.66428,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1630.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.06,
+      NaN
+    ],
+    "M1": [
+      0.5,
+      2.3,
+      0.6
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.83,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.36087,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.062,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=145.46907%20-75.66428&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 88562"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.53; [hs/ls]=0.41; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      153.12476,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      -15.8898,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      1445.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.2,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      1.0,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.51,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.51,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.048,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=153.12476%20-15.8898&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 91208"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.16; [hs/ls]=0.05; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      157.88806,
+      2e-05
+    ],
+    "Dec": [
+      1e-05,
+      -17.07654,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1754.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.17,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      2.3,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.68,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.29565,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.022,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=157.88806%20-17.07654&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 92626"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.15; [hs/ls]=1.02; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      3e-05,
+      160.20822,
+      3e-05
+    ],
+    "Dec": [
+      2e-05,
+      -48.0251,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      918.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.0,
+      NaN
+    ],
+    "M1": [
+      0.6,
+      3.1,
+      0.4
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.98,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.31613,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.042,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=160.20822%20-48.0251&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 95193"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.04; [hs/ls]=-0.07; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      164.86157,
+      2e-05
+    ],
+    "Dec": [
+      1e-05,
+      -14.17159,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1653.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.13,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      2.7,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.76,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.28148,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.026,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=164.86157%20-14.17159&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 98839"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.05; [hs/ls]=0.19; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      170.70657,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      43.4827,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      16471.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.56,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      4.3,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      1.0,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.23256,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.056,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=170.70657%2043.4827&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 101013"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.40; [hs/ls]=0.10; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      3e-05,
+      174.47084,
+      3e-05
+    ],
+    "Dec": [
+      2e-05,
+      50.61819,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      1711.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.2,
+      NaN
+    ],
+    "M1": [
+      0.3,
+      1.7,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.68,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.4,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.037,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=174.47084%2050.61819&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 104979"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.26; [hs/ls]=0.31; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      4e-05,
+      181.30222,
+      4e-05
+    ],
+    "Dec": [
+      3e-05,
+      8.73302,
+      3e-05
+    ],
+    "Period": [
+      NaN,
+      19295.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.08,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      2.7,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.75,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.27778,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=181.30222%208.73302&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 107541"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.63; [hs/ls]=0.75; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      185.45032,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      -34.78004,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      3570.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.1,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      1.1,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.54,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.49091,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.029,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=185.45032%20-34.78004&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 119185"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.42; [hs/ls]=0.32; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      205.48963,
+      1e-05
+    ],
+    "Dec": [
+      0.0,
+      -13.02773,
+      0.0
+    ],
+    "Period": [
+      NaN,
+      22065.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.6,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      1.7,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.57,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.33529,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=205.48963%20-13.02773&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 121447"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.90; [hs/ls]=0.84; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      208.94569,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      -18.24902,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      185.7,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.015,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      1.6,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.6,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.375,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.025,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=208.94569%20-18.24902&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 123949"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.23; [hs/ls]=0.35; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      212.74713,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      -19.14395,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      8523.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.92,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      1.3,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.58,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.44615,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.046,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=212.74713%20-19.14395&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 134698"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.57; [hs/ls]=0.02; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      227.92376,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      -10.50766,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      10005.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.95,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      1.5,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.53,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.35333,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.054,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=227.92376%20-10.50766&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 139195"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.07; [hs/ls]=-0.17; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      234.12322,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      10.01015,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      5324.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.35,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      2.6,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.74,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.28462,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.026,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=234.12322%2010.01015&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 143899"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.29; [hs/ls]=0.19; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      240.93253,
+      2e-05
+    ],
+    "Dec": [
+      1e-05,
+      -19.5752,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1461.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.19,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      2.4,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.71,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.29583,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.017,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=240.93253%20-19.5752&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 154430"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.36; [hs/ls]=0.71; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      257.22614,
+      2e-05
+    ],
+    "Dec": [
+      1e-05,
+      -59.28785,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      1668.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.11,
+      NaN
+    ],
+    "M1": [
+      0.7,
+      2.3,
+      1.4
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.81,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.35217,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.034,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=257.22614%20-59.28785&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 178717"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.52; [hs/ls]=0.18; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      287.34171,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      10.24118,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      2866.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.43,
+      NaN
+    ],
+    "M1": [
+      0.7,
+      1.6,
+      0.9
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.66,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.4125,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.006,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=287.34171%2010.24118&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 180622"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=0.03; [hs/ls]=-0.13; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      289.29595,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      0.49737,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      4049.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.06,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      1.8,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.59,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.32778,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.07,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=289.29595%200.49737&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 183915"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m->s; [Fe/H]=-0.59; [hs/ls]=0.91; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      292.85627,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      11.62795,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      4382.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.27,
+      NaN
+    ],
+    "M1": [
+      0.6,
+      1.8,
+      1.0
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.6,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.33333,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      7e-05,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=292.85627%2011.62795&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 196673"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=0.12; [hs/ls]=0.23; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      0.00016,
+      309.43468,
+      0.00016
+    ],
+    "Dec": [
+      0.00012,
+      33.36649,
+      0.00012
+    ],
+    "Period": [
+      NaN,
+      7780.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.59,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      5.0,
+      0.0
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      1.1,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.22,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.02,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=309.43468%2033.36649&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 199939"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.22; [hs/ls]=0.41; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      314.68123,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      44.41458,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      584.9,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.28,
+      NaN
+    ],
+    "M1": [
+      0.4,
+      2.8,
+      0.4
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.93,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.33214,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.025,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=314.68123%2044.41458&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 200063"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.34; [hs/ls]=0.38; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      315.26685,
+      1e-05
+    ],
+    "Dec": [
+      0.0,
+      1.03492,
+      0.0
+    ],
+    "Period": [
+      NaN,
+      1735.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.07,
+      NaN
+    ],
+    "M1": [
+      0.9,
+      2.0,
+      1.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.64,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.32,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.058,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=315.26685%201.03492&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 201657"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.34; [hs/ls]=0.82; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      317.63972,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      16.97957,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      1710.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.17,
+      NaN
+    ],
+    "M1": [
+      0.4,
+      1.8,
+      0.5
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.7,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.38889,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.004,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=317.63972%2016.97957&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 201824"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.40; [hs/ls]=0.64; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      318.07326,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      -8.3569,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      2837.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.34,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      1.7,
+      0.4
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.68,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.4,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.04,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=318.07326%20-8.3569&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 202109"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.03; [hs/ls]=-0.10; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      3e-05,
+      318.23411,
+      3e-05
+    ],
+    "Dec": [
+      2e-05,
+      30.2269,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      6489.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.22,
+      NaN
+    ],
+    "M1": [
+      0.4,
+      3.4,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.87,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.25588,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.023,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=318.23411%2030.2269&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 204075"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.09; [hs/ls]=-0.43; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      7e-05,
+      321.66679,
+      7e-05
+    ],
+    "Dec": [
+      5e-05,
+      -22.41132,
+      5e-05
+    ],
+    "Period": [
+      NaN,
+      2378.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.28,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      4.5,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      1.03,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.22889,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.004,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=321.66679%20-22.41132&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 205011"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.26; [hs/ls]=-0.02; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      1e-05,
+      322.95894,
+      1e-05
+    ],
+    "Dec": [
+      1e-05,
+      23.84516,
+      1e-05
+    ],
+    "Period": [
+      NaN,
+      2837.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.24,
+      NaN
+    ],
+    "M1": [
+      0.3,
+      1.8,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.6,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.33333,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.034,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=322.95894%2023.84516&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 210946"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.29; [hs/ls]=0.07; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      2e-05,
+      333.45897,
+      2e-05
+    ],
+    "Dec": [
+      2e-05,
+      1.60893,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      1529.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.13,
+      NaN
+    ],
+    "M1": [
+      0.4,
+      1.8,
+      0.5
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.59,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.32778,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.041,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=333.45897%201.60893&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 211594"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: s; [Fe/H]=-0.29; [hs/ls]=0.75; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      4e-05,
+      334.56227,
+      4e-05
+    ],
+    "Dec": [
+      4e-05,
+      -5.84163,
+      4e-05
+    ],
+    "Period": [
+      NaN,
+      1019.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.06,
+      NaN
+    ],
+    "M1": [
+      0.2,
+      2.0,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.76,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.38,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.014,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=334.56227%20-5.84163&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 218356"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.06; [hs/ls]=0.35; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      3e-05,
+      346.77809,
+      3e-05
+    ],
+    "Dec": [
+      2e-05,
+      25.46827,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      111.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.0,
+      NaN
+    ],
+    "M1": [
+      1.1,
+      4.3,
+      0.2
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      1.0,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.23256,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      4e-05,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=346.77809%2025.46827&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": [
+      "HD 223617"
+    ],
+    "Type1": "barium star",
+    "Type2": "white dwarf",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "Ba class: m; [Fe/H]=-0.20; [hs/ls]=0.14; Type mapping: M1=Ba (accretor), M2=WD (previous donor)",
+    "RA": [
+      4e-05,
+      357.77832,
+      4e-05
+    ],
+    "Dec": [
+      2e-05,
+      2.23785,
+      2e-05
+    ],
+    "Period": [
+      NaN,
+      1294.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.06,
+      NaN
+    ],
+    "M1": [
+      0.1,
+      1.4,
+      0.1
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.51,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      0.36429,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.0064,
+      NaN
+    ],
+    "class": "Barium stars",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=357.77832%202.23785&Radius=5&Radius.unit=arcsec&output.format=ASCII"
+  },
+  {
+    "System Name": "NGC2420-173",
+    "Type1": "Ba",
+    "Type2": "WD",
+    "Detection Method": [
+      "RV"
+    ],
+    "Reference": [
+      "2019A&A...626A.127J"
+    ],
+    "Notes": "For details on the WD mass estimate, see reference.",
+    "RA": [
+      NaN,
+      114.61236,
+      NaN
+    ],
+    "Dec": [
+      NaN,
+      21.55869,
+      NaN
+    ],
+    "Period": [
+      NaN,
+      1479.0,
+      NaN
+    ],
+    "Eccentricity": [
+      NaN,
+      0.43,
+      NaN
+    ],
+    "M1": [
+      -0.4,
+      3.0,
+      0.3
+    ],
+    "M1_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "M2": [
+      NaN,
+      0.8,
+      NaN
+    ],
+    "M2_sin3i": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "q": [
+      NaN,
+      NaN,
+      NaN
+    ],
+    "Mass Function": [
+      NaN,
+      0.008,
+      NaN
+    ],
+    "class": "White Dwarf",
+    "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=114.61236%2021.55869&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
     "System Name": "Gaia DR3 3184973512776788352",

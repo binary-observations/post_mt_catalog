@@ -1,6 +1,7 @@
 import pandas as pd
 import h5py
 import json
+import math
 from io import StringIO
 import os, sys
 import argparse
@@ -51,7 +52,7 @@ def class_from_table_path(table_path):
     mapping = {
         'algols.h5': 'Algols',
         'contact1.h5': 'contact binaries',
-        'be_sdob_table.h5': 'Hot subdwarfs ',
+        'be_sdob_table.h5': 'Hot subdwarfs',
         'stripped_star_table.h5': 'Stripped stars',
         'barium_stars_jorissen2019.h5': 'Barium stars',
         'barium_stars_escorza2019.h5': 'Barium stars',
@@ -250,26 +251,81 @@ if not args.skip_duplicates:
 else:
     print('Skipping duplicate-detection and resolution (--skip-duplicates set)')
 
+# === Sanitize data ===
+# Ensure all NaNs are converted to None for JSON serialization
+def sanitize_json(data):
+    """
+    Recursively sanitize JSON-like data:
+      - Replace NaN/Infinity with None
+      - Trim whitespace in strings
+      - Normalize 'Detection Method' and 'Reference' to lists
+    """
+    if isinstance(data, float):
+        if math.isnan(data) or math.isinf(data):
+            return None
+        return data
+    elif isinstance(data, str):
+        return data.strip()
+    elif isinstance(data, list):
+        return [sanitize_json(x) for x in data]
+    elif isinstance(data, dict):
+        out = {}
+        for k, v in data.items():
+            # normalize Detection Method
+            if k == "Detection Method":
+                if isinstance(v, str):
+                    v = [v.strip()]
+                elif isinstance(v, list):
+                    v = [sanitize_json(x) for x in v]
+            # normalize Reference
+            if k == "Reference":
+                if isinstance(v, str):
+                    v = [v.strip()]
+                elif isinstance(v, list):
+                    v = [sanitize_json(x) for x in v]
+            out[k] = sanitize_json(v)
+        return out
+    else:
+        return data
+
+
+# Sanitize everything first
+all_systems_clean = [sanitize_json(system) for system in all_systems]
 
 # === OUTPUT ===
 # Dump with indent but ensure compact lists by avoiding advanced encoders
 with open(output_json_path, "w") as f_out:
-    for system in all_systems:
-        # Use json.dumps to serialize each system with compact lists
-        json_str = json.dumps(system, separators=(",", ": "), ensure_ascii=False, allow_nan=True)
-        f_out.write(json_str + ",\n")  # comma + newline per entry
-
-# Write full file with proper wrapping
-with open(output_json_path, "w") as f_out:
     f_out.write("[\n")
-    for i, system in enumerate(all_systems):
-        json_str = json.dumps(system, separators=(",", ": "), ensure_ascii=False, allow_nan=True)
+    for i, system in enumerate(all_systems_clean):  # <-- use cleaned version here
+        json_str = json.dumps(system, separators=(",", ": "), ensure_ascii=False)
         f_out.write("  " + json_str)
-        if i < len(all_systems) - 1:
+        if i < len(all_systems_clean) - 1:
             f_out.write(",\n")
         else:
             f_out.write("\n")
     f_out.write("]\n")
+
+
+
+# # === OUTPUT ===
+# # Dump with indent but ensure compact lists by avoiding advanced encoders
+# with open(output_json_path, "w") as f_out:
+#     for system in all_systems:
+#         # Use json.dumps to serialize each system with compact lists
+#         json_str = json.dumps(system, separators=(",", ": "), ensure_ascii=False, allow_nan=True)
+#         f_out.write(json_str + ",\n")  # comma + newline per entry
+
+# # Write full file with proper wrapping
+# with open(output_json_path, "w") as f_out:
+#     f_out.write("[\n")
+#     for i, system in enumerate(all_systems):
+#         json_str = json.dumps(system, separators=(",", ": "), ensure_ascii=False, allow_nan=True)
+#         f_out.write("  " + json_str)
+#         if i < len(all_systems) - 1:
+#             f_out.write(",\n")
+#         else:
+#             f_out.write("\n")
+#     f_out.write("]\n")
 
 
 
