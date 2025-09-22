@@ -60,7 +60,7 @@
       0.04,
       0.005
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=36.96336%20-0.7895&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -124,7 +124,7 @@
       0.00367,
       0.00018
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=54.4802%20-6.97453&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -188,7 +188,7 @@
       0.019,
       0.005
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=58.60554%20-54.53366&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -252,7 +252,7 @@
       0.0699,
       0.0011
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=80.91612%2064.12475&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -316,7 +316,7 @@
       0.08,
       0.003
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=102.8021%20-29.57564&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -380,7 +380,7 @@
       0.0561,
       0.001
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=133.50358%20-26.91566&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -444,7 +444,7 @@
       0.0492,
       0.0008
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=150.50358%20-33.68514&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -508,7 +508,7 @@
       0.065,
       0.005
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=155.59108%20-29.55599&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -572,7 +572,7 @@
       0.0091,
       0.0013
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=165.08618%2042.9117&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -636,7 +636,7 @@
       0.048,
       0.008
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=183.29742%20-15.23231&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -700,7 +700,7 @@
       0.00159,
       2e-05
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=185.46609%20-18.40007&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -764,7 +764,7 @@
       0.062,
       0.002
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=207.67357%20-4.26802&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -828,7 +828,7 @@
       0.077,
       0.004
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=212.39915%20-44.36699&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -892,7 +892,7 @@
       0.087,
       0.003
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=217.97295%20-31.20055&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -956,7 +956,7 @@
       0.068,
       0.007
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=238.37182%20-54.15847&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -1020,7 +1020,7 @@
       0.0031,
       5e-05
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=245.46663%2027.37424&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -1084,7 +1084,7 @@
       0.045,
       0.003
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=251.1837%20-25.21649&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -1148,7 +1148,7 @@
       0.0227,
       0.005
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=290.80224%2019.37536&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -1212,7 +1212,7 @@
       0.078,
       0.007
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=327.64464%20-24.18658&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -1276,7 +1276,7 @@
       0.0113,
       0.0013
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=342.7173%2018.00214&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -1340,7 +1340,7 @@
       0.0372,
       0.0007
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=353.24591%20-11.98763&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -2117,7 +2117,7 @@
       0.068,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=349.12972%20-63.45127&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -2181,7 +2181,7 @@
       0.065,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=84.50133%20-42.32646&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -2245,7 +2245,7 @@
       0.023,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=132.98151%20-14.65261&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -2309,7 +2309,7 @@
       0.016,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=226.86194%20-2.30538&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -5739,7 +5739,7 @@
       0.008,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=114.61236%2021.55869&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -5803,7 +5803,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=70.8058%20-9.61837&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -5867,7 +5867,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=147.52926%2051.48152&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -5931,7 +5931,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=250.30311%2040.47373&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -5995,7 +5995,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=217.15099%2033.97195&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -6059,7 +6059,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=211.98878%2039.11804&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -6123,7 +6123,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=287.64674%2045.24253&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -6187,7 +6187,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=266.43821%2030.13102&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -6251,7 +6251,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=108.80452%2079.76424&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -6315,7 +6315,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=29.84844%20-0.76303&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -6379,7 +6379,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=308.94013%20-76.89188&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -6443,7 +6443,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=212.89458%2010.47769&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   },
   {
@@ -6507,7 +6507,7 @@
       NaN,
       NaN
     ],
-    "class": "White Dwarf (d)",
+    "class": "White Dwarf",
     "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=261.02558%2056.33417&Radius=5&Radius.unit=arcsec&output.format=ASCII"
   }
 ]
