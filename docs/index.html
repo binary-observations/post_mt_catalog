@@ -145,24 +145,34 @@
 
       function setStatus(msg){ els.status.textContent = msg; }
 
+      // Replace common Python/NumPy tokens that are invalid in strict JSON
+      function sanitizeJSONText(text){
+        return text
+          .replace(/np\.nan/gi, 'null')
+          .replace(/\bNaN\b/gi, 'null')
+          .replace(/\bnan\b/gi, 'null')
+          .replace(/\b-?Infinity\b/g, 'null')
+          .replace(/\b-?Inf\b/gi, 'null')
+          .replace(/\bNone\b/g, 'null');
+      }
+
       async function fetchRemote(){
         setStatus('Fetching JSON from GitHub...');
         try{
-          const res = await fetch(RAW_URL);
+          // Bust caches to ensure latest file is fetched
+          const url = RAW_URL + (RAW_URL.includes('?') ? '&' : '?') + 'ts=' + Date.now();
+          const res = await fetch(url, { cache: 'no-store' });
           if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
           const text = await res.text();
+          // attempt strict parse first, then sanitize and retry
           try {
             rawData = JSON.parse(text);
           } catch(parseErr){
-            // try to clean a few common non-JSON tokens (np.nan, NaN, nan) then parse
-            const cleaned = text
-              .replace(/np\.nan/gi, 'null')
-              .replace(/\bNaN\b/g, 'null')
-              .replace(/\bnan\b/g, 'null');
+            const cleaned = sanitizeJSONText(text);
             try {
               rawData = JSON.parse(cleaned);
             } catch(finalErr){
-              throw new Error('unable to parse JSON (contains non-standard tokens like NaN)');
+              throw new Error('unable to parse JSON (contains non-standard tokens like NaN/Infinity/None)');
             }
           }
           normalizeData();
