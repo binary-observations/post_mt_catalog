@@ -1,0 +1,166 @@
+{
+  "description": "Schema for the post-mass-transfer binary catalog",
+
+  "fields": {
+    "System Name": {
+      "type": "string | list[string]",
+      "description": "Primary identifier(s) for the system"
+    },
+
+    "RA": {
+      "type": "triplet [err-, value, err+]",
+      "units": "deg",
+      "description": "Right ascension (ICRS)"
+    },
+
+    "Dec": {
+      "type": "triplet [err-, value, err+]",
+      "units": "deg",
+      "description": "Declination (ICRS)"
+    },
+
+    "Period": {
+      "type": "triplet [err-, value, err+]",
+      "units": "days",
+      "description": "Orbital period"
+    },
+
+    "Eccentricity": {
+      "type": "triplet [err-, value, err+]",
+      "description": "Orbital eccentricity"
+    },
+
+    "M1": {
+      "type": "triplet [err-, value, err+]",
+      "units": "Msun",
+      "description": "Mass of primary component"
+    },
+
+    "M2": {
+      "type": "triplet [err-, value, err+]",
+      "units": "Msun",
+      "description": "Mass of secondary component"
+    },
+
+    "Mass Function": {
+      "type": "triplet [err-, value, err+]",
+      "units": "Msun",
+      "description": "Spectroscopic mass function"
+    },
+
+    "evol_type_1": {
+      "type": "string | null",
+      "description": "Evolutionary state of component 1 (Table 1)",
+      "allowed_values": [
+        "MS",
+        "HG",
+        "RGB",
+        "AGB",
+        "He-star",
+        "White Dwarf",
+        "Neutron Star",
+        "Black Hole"
+      ]
+    },
+
+    "evol_type_2": {
+      "type": "string | null",
+      "description": "Evolutionary state of component 2 (Table 1)",
+      "allowed_values": [
+        "MS",
+        "HG",
+        "RGB",
+        "AGB",
+        "He-star",
+        "White Dwarf",
+        "Neutron Star",
+        "Black Hole"
+      ]
+    },
+
+    "obs_type_1": {
+      "type": "string | null",
+      "description": "Phenomenological / observational classification of component 1. Free-form string. May include observational classes (e.g. 'Algol', 'EL CVn', 'Be star') or full spectral types in MK notation (e.g. 'B2-3Ve', 'O6 V', 'K3 III', 'WN4').",
+      "recommended_values": [
+        "Be star",
+        "Hot subdwarf",
+        "Wolf-Rayet",
+        "Blue straggler",
+        "sgCH",
+        "sBa"
+      ],
+      "examples": [
+        "B2-3Ve",
+        "O6 V",
+        "WN4",
+        "sdB",
+        "K3 III"
+      ]
+    }
+
+    "obs_type_2": {
+      "type": "string | null",
+      "description": "Phenomenological / observational classification of component 2. Free-form string. May include observational classes (e.g. 'Algol', 'EL CVn', 'Be star') or full spectral types in MK notation (e.g. 'B2-3Ve', 'O6 V', 'K3 III', 'WN4').",
+      "recommended_values": [
+        "Be star",
+        "Hot subdwarf",
+        "Wolf-Rayet",
+        "Blue straggler",
+        "sgCH",
+        "sBa"
+      ],
+      "examples": [
+        "B2-3Ve",
+        "O6 V",
+        "WN4",
+        "sdB",
+        "K3 III"
+      ]
+    }
+
+
+    "system_class": {
+      "type": "string",
+      "description": "System-level observational class (Table 2)",
+      "allowed_values": [
+        "Algol",
+        "Ellipsoidal variable",
+        "Contact binary",
+        "Hot subdwarf",
+        "Stripped star",
+        "WR binary",
+        "EL CVn",
+        "Chemically Peculiar",
+        "Blue straggler Star",
+        "post-AGB binary",
+        "Symbiotic binary",
+        "Cataclysmic variable",
+        "Radio Pulsar",
+        "Spectroscopic binary",
+        "Gaia compact object",
+        "X-ray binary"
+      ]
+    },
+
+    "Detection Method": {
+      "type": "list[string]",
+      "description": "Detection or characterisation techniques",
+      "examples": ["RV", "EB", "SB1", "SB2", "Astrometry", "X-ray"]
+    },
+
+    "Reference": {
+      "type": "list[string]",
+      "description": "ADS bibcodes"
+    },
+
+    "Notes": {
+      "type": "string | null",
+      "description": "Free-form provenance or clarifying notes"
+    },
+
+    "Simbad": {
+      "type": "string | null",
+      "description": "SIMBAD coordinate-based lookup URL"
+    }
+  }
+}
