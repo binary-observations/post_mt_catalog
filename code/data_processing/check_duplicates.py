@@ -329,13 +329,15 @@ if overlapping_pairs:
 
 
 # === STEP 4: Optional plot the systems on the sky ===
-p = Path('data') / 'post_mt_systems.json'
-print(f"Reading catalog: {p.resolve()}")
+p = MAIN_CATALOG  # already imported from paths
+print(f"Reading catalog: {Path(p).resolve()}")
 data = read_json_file(p)
 
-plot_catalog_on_sky(catalog=data, save_path=Path('plots') / 'sky_locations.pdf', annotate=False)
-print(f"Saved plot to {Path('plots') / 'sky_locations.pdf'}")
-
+plot_catalog_on_sky(
+    catalog=data,
+    save_path=PLOTS_DIR / "sky_locations.pdf",
+    annotate=False
+)
 
 
 ################################################################################
