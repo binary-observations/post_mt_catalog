@@ -26,12 +26,12 @@ proj_root = Path('/Users/liekevanson/Documents/Projects/post_mt_review').resolve
 if str(proj_root) not in sys.path:
     sys.path.insert(0, str(proj_root))
 
-from paths import RESULT_TABLES, DATA_DIR
+from paths import RESULT_TABLES, RAW_JSON_DIR, LEGACY_H5_DIR, DATA_DIR
 
 # === CONFIGURATION ===
 # Set up argument parser
 parser = argparse.ArgumentParser(description="Combine post-mass-transfer system tables into a single JSON file.")
-parser.add_argument("input_h5_path", type=str, nargs='?', help="Path to the directory containing .h5 files.", default=str(RESULT_TABLES))
+parser.add_argument("input_h5_path", type=str, nargs='?', help="Path to the directory containing .h5 files.", default=str(LEGACY_H5_DIR))
 parser.add_argument("output_json_path", type=str, nargs='?', help="Path to save the combined JSON output. (must include outp filename)",  default=str(DATA_DIR / "post_mt_systems.json"))
 parser.add_argument("--skip-duplicates", action='store_true', help="Skip duplicate-detection and resolution (non-interactive).")
 args = parser.parse_args()
@@ -42,7 +42,7 @@ output_json_path = args.output_json_path
 
 triplet_cols = ["RA", "Dec", "Period", "Eccentricity", "M1", "M1_sin3i", "M2", "M2_sin3i", "q", "Mass Function"]
 
-
+# Clasesify object based on table origin filename / path
 def class_from_table_path(table_path):
     """Determine object class based on the table file path or name."""
     p = Path(table_path)
@@ -128,12 +128,18 @@ def query_simbad_coords(ra_deg, dec_deg, radius_arcsec=5):
         _simbad_coord_cache[key] = None
         return None
 
-# === COLLECT FILES ===
+# === COLLECT Legacy H5 FILES ===
 list_of_tables = []
 for root, dirs, files in os.walk(input_h5_path):
     for file in files:
         if file.endswith(".h5") or file.endswith(".hdf5"):
             list_of_tables.append(os.path.join(root, file))
+
+print(f"Scanning for .h5 under: {input_h5_path}")
+print(f"Found {len(list_of_tables)} HDF5 tables")
+for p in list_of_tables:
+    print(" -", p)
+
 
 # === PROCESSING ===
 all_systems = []

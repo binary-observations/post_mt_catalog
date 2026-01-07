@@ -14,6 +14,8 @@ PLOTS_DIR = PROJECT_ROOT / "plots"
 
 # result tables (h5 files etc.)
 RESULT_TABLES = DATA_DIR / "result_tables"
+LEGACY_H5_DIR = RESULT_TABLES / "legacy_h5"
+RAW_JSON_DIR  = RESULT_TABLES / "raw_json"
 
 # Example: frequently used files
 MAIN_CATALOG = DATA_DIR / "post_mt_systems.json"

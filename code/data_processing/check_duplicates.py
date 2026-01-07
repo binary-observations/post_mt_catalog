@@ -160,22 +160,69 @@ def resolve_duplicates(data, overlapping_pairs, names, valid_names):
 
 
 def resolve_duplicate_pair(entry1, entry2):
-    def mass_precision(entry):
+
+    def to_float_or_nan(x):
+        try:
+            if x is None:
+                return np.nan
+            return float(x)
+        except Exception:
+            return np.nan
+
+    def m1_err(entry):
         m1 = entry.get("M1", [np.nan, np.nan, np.nan])
-        m2 = entry.get("M2", [np.nan, np.nan, np.nan])
-        m1_err = m1[2] if isinstance(m1, list) and len(m1) == 3 else np.nan
-        m2_err = m2[2] if isinstance(m2, list) and len(m2) == 3 else np.nan
-        return np.nansum([m1_err, m2_err])
-    if mass_precision(entry1) <= mass_precision(entry2):
+        if isinstance(m1, (list, tuple)) and len(m1) == 3:
+            return to_float_or_nan(m1[2])
+        return np.nan
+
+    def has_err(x):
+        return np.isfinite(to_float_or_nan(x))
+
+    def has_period(entry):
+        P = entry.get("Period", [None, None, None])
+        if isinstance(P, (list, tuple)) and len(P) >= 2:
+            return P[1] is not None
+        return False
+
+    # ------------------------------------------------------------
+    # 0) Prefer entry with a Period value
+    # ------------------------------------------------------------
+    if has_period(entry1) and not has_period(entry2):
         keep, drop = entry1, entry2
-    else:
+    elif has_period(entry2) and not has_period(entry1):
         keep, drop = entry2, entry1
+    else:
+        # --------------------------------------------------------
+        # 1) Prefer entry with M1 uncertainty present
+        # --------------------------------------------------------
+        e1 = m1_err(entry1)
+        e2 = m1_err(entry2)
+
+        if has_err(e1) and not has_err(e2):
+            keep, drop = entry1, entry2
+        elif has_err(e2) and not has_err(e1):
+            keep, drop = entry2, entry1
+        else:
+            # ----------------------------------------------------
+            # 2) Prefer smaller M1 uncertainty
+            # ----------------------------------------------------
+            if to_float_or_nan(e1) <= to_float_or_nan(e2):
+                keep, drop = entry1, entry2
+            else:
+                keep, drop = entry2, entry1
+
+    # ------------------------------------------------------------
+    # Merge system names (unchanged)
+    # ------------------------------------------------------------
     merged_names = list({
-        *(keep["System Name"] if isinstance(keep["System Name"], list) else [keep["System Name"]]),
-        *(drop["System Name"] if isinstance(drop["System Name"], list) else [drop["System Name"]])
+        *(keep["System Name"] if isinstance(keep.get("System Name"), list) else [keep.get("System Name")]),
+        *(drop["System Name"] if isinstance(drop.get("System Name"), list) else [drop.get("System Name")])
     })
-    keep["System Name"] = merged_names
+    merged_names = [n for n in merged_names if isinstance(n, str) and n.strip()]
+    keep["System Name"] = merged_names if merged_names else keep.get("System Name")
+
     return keep, drop
+
 
 ################################################################################
 # === Main ===
@@ -234,23 +281,27 @@ if overlapping_pairs:
         entry1, entry2 = cleaned_catalog[idx1], cleaned_catalog[idx2]
         period1, period2 = extract_central_value(entry1, "Period"), extract_central_value(entry2, "Period")
         m1_1, m1_2 = extract_central_value(entry1, "M1"), extract_central_value(entry2, "M1")
-        m2_1, m2_2 = extract_central_value(entry1, "M2"), extract_central_value(entry2, "M2")
+        # m2_1, m2_2 = extract_central_value(entry1, "M2"), extract_central_value(entry2, "M2")
 
         def percent_diff(a, b):
-            if np.isnan(a) or np.isnan(b):
-                return 'NaN'
-            if a == b == 0:
-                return '0%'
             try:
+                if a is None or b is None:
+                    return "NaN"
+                a = float(a)
+                b = float(b)
+                if not np.isfinite(a) or not np.isfinite(b):
+                    return "NaN"
+                if a == b == 0:
+                    return "0%"
                 return f"{100 * abs(a - b) / np.mean([abs(a), abs(b)]):.2f}%"
-            except ZeroDivisionError:
-                return 'inf%'
+            except Exception:
+                return "NaN"
 
         print(f"\n {pair_num} out of {len(overlapping_pairs)} {name1} vs {name2}:")
         print(f"  Period: {period1} vs {period2} (diff: {percent_diff(period1, period2)})")
         print(f"  M1: {m1_1} vs {m1_2} (diff: {percent_diff(m1_1, m1_2)})")
-        print(f"  M2: {m2_1} vs {m2_2} (diff: {percent_diff(m2_1, m2_2)})")
-        
+        # Note we don't check for M2, because some entries have M1 + a mass function instead of M2 values
+
         # overwrite the question
         if always_merge_duplicates:
             user_input = "y"
