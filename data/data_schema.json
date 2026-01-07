@@ -96,7 +96,7 @@
         "sdB",
         "K3 III"
       ]
-    }
+    },
 
     "obs_type_2": {
       "type": "string | null",
@@ -116,7 +116,7 @@
         "sdB",
         "K3 III"
       ]
-    }
+    },
 
 
     "system_class": {
@@ -131,7 +131,7 @@
         "WR binary",
         "EL CVn",
         "Chemically Peculiar",
-        "Blue straggler Star",
+        "Blue straggler binary",
         "post-AGB binary",
         "Symbiotic binary",
         "Cataclysmic variable",
