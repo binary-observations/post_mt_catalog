@@ -30,7 +30,7 @@ except ImportError:
     print("Warning: astropy not available; will use name-based deduplication only")
 
 HDF5_DIR = LEGACY_H5_DIR
-OUTPUT_JSON = DATA_DIR / "Combined_binary_catalog.json"
+OUTPUT_JSON = DATA_DIR / "post_mt_systems.json"
 
 # Import schema upgrader
 import importlib.util
