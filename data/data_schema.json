@@ -57,9 +57,9 @@
         "RGB",
         "AGB",
         "He-star",
-        "White Dwarf",
-        "Neutron Star",
-        "Black Hole"
+        "WD",
+        "NS",
+        "BH"
       ]
     },
 
@@ -72,9 +72,9 @@
         "RGB",
         "AGB",
         "He-star",
-        "White Dwarf",
-        "Neutron Star",
-        "Black Hole"
+        "WD",
+        "NS",
+        "BH"
       ]
     },
 
@@ -135,8 +135,9 @@
         "post-AGB binary",
         "Symbiotic binary",
         "Cataclysmic variable",
-        "Radio Pulsar",
-        "Spectroscopic binary",
+        "Pulsar Binary",
+        "Spectroscopic binary with dormant CO",
+        "WD + MS",
         "Gaia compact object",
         "X-ray binary"
       ]
