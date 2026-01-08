@@ -57,3 +57,6 @@ typing_extensions==4.15.0
 tzdata==2025.2
 wcwidth==0.2.13
 zipp==3.23.0
+
+# HTTP client for SIMBAD ASCII queries
+requests==2.32.3
