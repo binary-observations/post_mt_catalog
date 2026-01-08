@@ -8,6 +8,9 @@ from typing import Any
 from io import StringIO
 import pandas as pd
 from urllib.parse import quote
+import time
+import re
+import requests
 
 import sys
 from pathlib import Path
@@ -264,6 +267,138 @@ def merge_duplicates(systems: list[dict]) -> list[dict]:
 
 
 # -------------------------------------------------
+# SIMBAD spectral enrichment (lightweight ASCII endpoints)
+# -------------------------------------------------
+
+def _parse_simbad_ascii_for_sptype(text: str) -> str | None:
+    """Extract a spectral type string from SIMBAD ASCII output."""
+    if not text:
+        return None
+    for key in ("SPTYPE", "SP_TYPE", "Spectral type:"):
+        for line in text.splitlines():
+            if key in line:
+                val = line.split(key, 1)[-1]
+                val = val.split("=", 1)[-1] if "=" in val else val
+                val = val.split(":", 1)[-1] if ":" in val else val
+                v = val.strip()
+                if v:
+                    return v
+    return None
+
+
+def query_simbad_sptype_by_name(name: str) -> str | None:
+    """Query SIMBAD by object name and parse spectral type from ASCII output."""
+    if not name:
+        return None
+    try:
+        url = (
+            "https://simbad.cds.unistra.fr/simbad/sim-id?Ident="
+            + quote(name)
+            + "&output.format=ASCII"
+        )
+        resp = requests.get(url, timeout=15)
+        if resp.ok:
+            return _parse_simbad_ascii_for_sptype(resp.text)
+    except Exception:
+        return None
+    return None
+
+
+def query_simbad_sptype_by_coords(ra_deg: float | None, dec_deg: float | None, radius_arcsec: int = 5) -> str | None:
+    """Query SIMBAD by coordinates and parse spectral type from ASCII output."""
+    if ra_deg is None or dec_deg is None:
+        return None
+    try:
+        coords = f"{float(ra_deg)} {float(dec_deg)}"
+        url = (
+            "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord="
+            + quote(coords)
+            + f"&Radius={radius_arcsec}&Radius.unit=arcsec&output.format=ASCII"
+        )
+        resp = requests.get(url, timeout=15)
+        if resp.ok:
+            return _parse_simbad_ascii_for_sptype(resp.text)
+    except Exception:
+        return None
+    return None
+
+
+_SPECTRAL_TOKEN_RE = re.compile(r"\b([OBAFGKM][0-9](?:\.[0-9])?(?:[-–][0-9](?:\.[0-9])?)?(?:[IV]{1,3}|V)?e?)\b", re.IGNORECASE)
+
+
+def parse_spectral_components(sptype: str) -> list[str]:
+    """Split a spectral type into up to two component-like tokens.
+    Handles separators '+', '/', and whitespace; normalizes repeated colons.
+    """
+    if not sptype:
+        return []
+    s = sptype.replace(":", " ").replace("::", " ")
+    parts = re.split(r"[+/]", s)
+    tokens: list[str] = []
+    for part in parts:
+        # find the best spectral token within this part
+        m = _SPECTRAL_TOKEN_RE.search(part.strip())
+        if m:
+            tokens.append(m.group(1))
+    # limit to two
+    return tokens[:2]
+
+
+def _set_if_missing(entry: dict, key: str, value: str | None) -> bool:
+    """Set entry[key] to value only if it is missing/empty; return True if set."""
+    if value is None or value == "":
+        return False
+    cur = entry.get(key)
+    if cur in (None, "", []):
+        entry[key] = value
+        return True
+    return False
+
+
+def enrich_obs_types_from_simbad(systems: list[dict], max_queries: int = 20) -> int:
+    """Fill missing obs_type_1/obs_type_2 using SIMBAD spectral types.
+    Only sets fields when currently missing; assigns up to two components.
+    Returns number of entries updated.
+    """
+    updated = 0
+    queries_done = 0
+    for entry in systems:
+        if queries_done >= max_queries:
+            break
+        o1_missing = entry.get("obs_type_1") in (None, "", [])
+        o2_missing = entry.get("obs_type_2") in (None, "", [])
+        if not (o1_missing or o2_missing):
+            continue
+        name = entry.get("System Name") or ""
+        sptype = None
+        # Try by name first
+        if name:
+            sptype = query_simbad_sptype_by_name(name)
+        # Fallback to coordinates
+        if not sptype:
+            ra_val = extract_central_value(entry, "RA")
+            dec_val = extract_central_value(entry, "Dec")
+            sptype = query_simbad_sptype_by_coords(ra_val, dec_val)
+        if not sptype:
+            continue
+        tokens = parse_spectral_components(sptype)
+        changed = False
+        if tokens:
+            # Assign first token to obs_type_1 if missing
+            if o1_missing and len(tokens) >= 1:
+                changed |= _set_if_missing(entry, "obs_type_1", tokens[0])
+            # Assign second token to obs_type_2 if missing and available
+            if o2_missing and len(tokens) >= 2:
+                changed |= _set_if_missing(entry, "obs_type_2", tokens[1])
+            # If only one token returned and obs_type_2 still missing, leave it
+        if changed:
+            updated += 1
+        queries_done += 1
+        time.sleep(0.2)  # gentle rate limit
+    return updated
+
+
+# -------------------------------------------------
 # Ingestion
 # -------------------------------------------------
 
@@ -365,7 +500,33 @@ print(f"Total systems after JSON ingestion: {len(all_systems)}")
 all_systems = merge_duplicates(all_systems)
 print(f"Total systems after deduplication: {len(all_systems)}")
 
+# Optional: lightweight SIMBAD enrichment for missing obs_type_* (limited batch)
+try:
+    updated_count = enrich_obs_types_from_simbad(all_systems, max_queries=20)
+    print(f"SIMBAD enrichment updated {updated_count} entries (limited run).")
+except Exception as e:
+    print(f"SIMBAD enrichment skipped due to error: {e}")
+
 # -------------------------------------------------
+# Final sanitization & output
+# -------------------------------------------------
+
+# Add SIMBAD links before sanitization/output
+add_simbad_links(all_systems)
+
+all_systems = sanitize(all_systems)
+
+with open(OUTPUT_JSON, "w") as f:
+    f.write("[\n")
+    for i, system in enumerate(all_systems):
+        f.write(json.dumps(system, separators=(",", ":")))
+        if i < len(all_systems) - 1:
+            f.write(",\n")
+        else:
+            f.write("\n")
+    f.write("]\n")
+
+print(f"Wrote {len(all_systems)} systems to {OUTPUT_JSON}")
 # Final sanitization & output
 # -------------------------------------------------
 

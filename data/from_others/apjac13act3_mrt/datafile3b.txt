@@ -1,0 +1,105 @@
+Title: A Catalog of Potential Post Common Envelope Binaries 
+Authors: Kruckow M.U., Neunteufel P.G., Di Stefano R., Gao Y., Kobayashi C. 
+Table: Related systems
+================================================================================
+Byte-by-byte Description of file: datafile3b.txt
+--------------------------------------------------------------------------------
+   Bytes Format Units   Label      Explanations
+--------------------------------------------------------------------------------
+   1- 29 A29    ---     Name       Source name(s), slash delimited
+  31- 46 F16.12 d       P          Orbital period
+  48- 57 F10.8  solMass M1         ? Primary stellar mass (1)
+  59- 65 F7.4   solMass M2         ? Secondary stellar mass
+  67- 69 A3     ---     Type1      Primary type (1,2)
+  71- 78 A8     ---     Type2      Secondary type(s), slash delimited (2)
+  80- 89 F10.8  solMass b_M1       ? Lower boundary in M1 (1)
+  91- 97 F7.5   solMass B_M1       ? Upper boundary in M1 (1)
+  99-105 F7.4   solMass b_M2       ? Lower boundary in M2
+ 107-114 F8.5   solMass B_M2       ? Upper boundary in M2
+ 116-123 F8.5   ---     q          ? Mass ratio; M1/M2
+ 125-132 F8.5   ---     b_q        ? Lower boundary in q
+ 134-141 F8.5   ---     B_q        ? Upper boundary in q
+ 143-151 F9.5   solRad  a          ? Semi-major axis
+ 153-161 F9.5   solRad  b_a        ? Lower boundary in a
+ 163-171 F9.5   solRad  B_a        ? Upper boundary in a
+ 173-184 F12.10 ---     e          ? Eccentricity 
+ 186-196 F11.9  ---     b_e        ? Lower boundary in e
+ 198-208 F11.9  ---     B_e        ? Lower boundary in e
+ 210-215 F6.3   deg     i          ? Inclination 
+ 217-222 F6.3   deg     b_i        ? Lower boundary in i
+ 224-229 F6.3   deg     B_i        ? Upper boundary in i
+ 231-238 F8.6   solRad  R1         ? Primary radius (1)
+ 240-247 F8.6   solRad  b_R1       ? Lower boundary in R1 (1)
+ 249-256 F8.6   solRad  B_R1       ? Upper boundary in R1 (1)
+ 258-266 F9.7   solRad  R2         ? Secondary radius 
+ 268-276 F9.7   solRad  b_R2       ? Lower boundary in R2
+ 278-286 F9.7   solRad  B_R2       ? Upper boundary in R2
+ 288-293 I6     K       T1         ? Primary effective temperature (1)
+ 295-300 I6     K       b_T1       ? Lower boundary in T1 (1)
+ 302-310 F9.2   K       B_T1       ? Upper boundary in T1 (1)
+ 312-319 F8.1   K       T2         ? Secondary effective temperature
+ 321-328 F8.1   K       b_T2       ? Lower boundary in T2
+ 330-337 F8.1   K       B_T2       ? Upper boundary in T2
+ 339-349 F11.5  solLum  L1         ? Primary luminosity (1)
+ 351-360 F10.5  solLum  b_L1       ? Lower boundary in L1 (1)
+ 362-372 F11.5  solLum  B_L1       ? Upper boundary in L1 (1)
+ 374-384 F11.5  solLum  L2         ? Secondary luminosity
+ 386-394 F9.5   solLum  b_L2       ? Lower boundary in L2
+ 396-404 F9.5   solLum  B_L2       ? Upper boundary in L2
+ 406-411 F6.4   [cm/s2] log(g1)    ? Primary log surface gravity (1)
+ 413-418 F6.4   [cm/s2] b_log(g1)  ? Lower boundary in log(g1) (1)
+ 420-425 F6.4   [cm/s2] B_log(g1)  ? Upper boundary in log(g1) (1)
+ 427-433 F7.5   [cm/s2] log(g2)    ? Secondary log surface gravity
+ 435-441 F7.5   [cm/s2] b_log(g2)  ? Lower boundary in log(g2)
+ 443-449 F7.5   [cm/s2] B_log(g2)  ? Upper boundary in log(g2)
+ 451-459 E9.3   yr      Age        ? Estimated cooling age
+ 461-469 E9.3   yr      b_Age      ? Lower boundary in Age
+ 471-479 E9.3   yr      B_Age      ? Upper boundary in Age
+ 481-487 A7     ---     Flag       System flag(s), slash delimited (3)
+ 489-505 F17.13 deg     S-RAdeg    ? Simbad Right Ascension (J2000)
+ 507-523 F17.13 deg     S-DEdeg    ? Simbad Declination (J2000)
+ 525-543 I19    ---     Gaia       ? Gaia EDR3 identifier
+ 545-562 F18.14 deg     G-RAdeg    ? Gaia EDR3 Right Ascension (J2015.5)
+ 564-582 F19.15 deg     G-DEdeg    ? Gaia EDR3 Declination (J2015.5)
+ 584-592 F9.4   kpc     D          ? Gaia EDR3 distance
+ 594-600 F7.4   kpc     b_D        ? Lower boundary in D
+ 602-609 F8.4   kpc     B_D        ? Upper boundary in D
+ 611-647 A37    ---     Cite       Citation code(s), comma delimited (4)
+ 649-773 A125   ---     Ref        Reference(s), semi colon delimited 
+ 775-875 A101   ---     Note       Additional notes 
+--------------------------------------------------------------------------------
+Note (1): The term "Primary" refers to the donor of the most recent
+          common envelope.
+Note (2):
+     WD = white dwarf,
+    sdB = sub dwarf B star,
+    sdO = sub dwarf O star,
+     MS = main sequence star,
+     NS = neutron star,
+     BH = black hole,
+     BD = brown dwarf,
+     BS = blue straggler,
+     otherwise spectral type.
+Note (3):
+    MT = mass transfer,
+    CV = cataclysmic variable,
+     S = statistically inferred mass (most likely inclination),
+   SWD = assumed WD mass,
+  SsdB = assumed sdB mass,
+    Sq = assumed mass ratio,
+   SM2 = assumed companion mass,
+   TRI = triple.
+Note (4): See file: refs.txt
+--------------------------------------------------------------------------------
+FYCMa                          37.257          1.3        12.6    sdO Be       1.1        1.5     10.     13.       0.113                     112.      105.0     115.                                           70.    66.    90.    0.63     0.5      0.9      5.3       4.1       7.6        45000  40000  50000.    27500.   24500.   30500.   1995.                             15849.                          4.3    3.7    4.9    4.0                                                           111.747844486399  -23.0860233156136 5618635367207942400 111.7478121912     -23.0860068936         0.5528  0.5338   0.5733 pgg+08,ppg+13                         Peters et al. (2008); Peters et al. (2013)                                                                                    Be-star                                                                                              
+59Cyg                          28.1871         0.8         7.9    sdO Be       0.62       0.91     6.3     9.4      0.097    0.089    0.105              73.3               0.1410000000 0.133000000 0.149000000                               0.34     0.43               5.5       7.0        52100  47300  56900.    21800.   21100.   22500.   1000.                              7943.                          5.0    4.0    6.0    3.78    3.69    3.87                                          314.956465162933   47.5209385840058 2163949388695291136 314.95652722896     47.52095244138        0.6734  0.5396   0.8952 ppg+13                                Peters et al. (2013)                                                                                                          uncertain parallax; Be-star                                                                          
+PhiPer                        126.7            1.3        10.0    sdO Be                                                                                                                                                                                                                        50119                   25119.                    12589.                             19953.                                                                                                              25.9151580038     50.6887313422     405987526029851264  25.91533157511     50.68866947907        0.1844  0.1780   0.1914 ppg+13                                Peters et al. (2013)                                                                                                          uncertain parallax; Be-star                                                                          
+V228                            1.15068618     0.200       1.512  BS           0.193      0.207    1.490   1.534    0.1321   0.1279   0.1363    5.529     5.505     5.553                                        77.02  76.96  77.08  1.238    1.225    1.251    1.357     1.338     1.376       5814   5741   5887.     8075.    7944.    8206.      1.57       1.48        1.66        7.02      6.52      7.52                                                                               MT        6.53692         -72.11711         4689629611756844672   6.53700295672    -72.11708714471        4.5147  3.9761   5.2219 ktr+07                                Kaluzny et al. (2007)                                                                                                         Blue straggler                                                                                       
+NGC6397-V32                     9.8783         0.230       0.790      MS       0.227      0.233    0.781   0.799    0.30                                                    0.3200000000 0.309000000 0.331000000 85.44                0.236                      1.569                           3874                    6490.                                                                                                                                                                          265.168           -53.69036         5921745262406760960 265.16805814829    -53.69045721032        2.4085  2.1358   2.7609 ktr+08                                Kaluzny et al. (2008)                                                                                                         unknown primary type                                                                                 
+???                             0.06944        0.54        0.82   sdB                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             unk+inprep                            Neunteufel (in prep.)                                                                                                         unknown original reference                                                                           
+J2216+4646                      0.171802       0.54        0.45   WD                                                1.20                                                                                                                                                                                                                                                                                                                                                                        CV      334.209715028241   46.7781617065087 1963247113132725120 334.209650767778    46.7781271999325      0.3942  0.3911   0.3973 ss21                                  Sparks & Sion (2021)                                                                                                          M1=q*M2; unknown original reference                                                                  
+OYAra                           0.155390       0.83        0.34   WD                                                2.44                                                                                                                                                                                                                                                                                                                                                                        CV      250.210217        -52.429997        5931112341266390912 250.210204756967   -52.4300072276419      3.5137  2.4582   6.1576 ss21                                  Sparks & Sion (2021)                                                                                                          M1=q*M2; unknown original reference: no mass or mass ratio in Fuentes-Morales et al. (2020)          
+PSRJ1640+2224                 174.460597       0.6         4.4    WD  NS       0.4        1.0      2.4     7.3                                                              0.0007972500 0.000797230 0.000797270 60.    54.    66.                                                                                                                                                                                                                                                                      250.06975963       22.40248369      1299312578674491136 250.065839924081    22.4111548683366      5.1813  1.3441          fpe+16                                Fonseca et al. (2016)                                                                                                         period > 100 days                                                                                    
+TCrB                          227.5687         1.37        1.12   WD  M4       1.24       1.50     0.89    1.35     1.22     1.09     1.39                                                                       67.                                                                                                                                                                                                                                                                            CV      239.875674786044   25.9201688847526 1220110705972528512 239.875653902314    25.9202237879432      0.9017  0.8799   0.9246 szt+04                                Stanishev et al. (2004)                                                                                                       uncertain parallax; period > 100 days                                                                
+NGC5189                         4.04           0.596              WO1 WD                           0.5                                                                                                                                                                                         165000 157000 183000.                                                                                                                                                                                    203.386991299221  -65.974177488954  5863702868275424384 203.386852752588   -65.9741927614764      1.4329  1.3961   1.4717 kbm14,mmm15                           Keller et al. (2014); Manick et al. (2015)                                                                                    Wolf-Rayet star                                                                                      
+SDSS095042.31+011506.56         0.082          0.57               WD  BD       0.54       0.60                                                                                                                                        0.00142  0.00137  0.00148                                 21785  21420  22150.                                                                                                 7.89   7.83   7.95                                                                 147.675505275257    1.2573233476926 3846637856361994496 147.675326250871     1.25726766153551     0.3414  0.3215   0.3640 ggs+11,hcw+20                         Girven et al. (2011); Hogg et al. (2020)                                                                                      no BD mass                                                                                           

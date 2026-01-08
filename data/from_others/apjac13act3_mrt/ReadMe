@@ -1,0 +1,24 @@
+================================================================================
+Title: A Catalog of Potential Post Common Envelope Binaries 
+Authors: Kruckow M.U., Neunteufel P.G., Di Stefano R., Gao Y., Kobayashi C. 
+================================================================================
+Description of contents: Three ascii tables asssociated with Table 3. The first
+ is the catalog, datafile3a.txt. It contains 848 entries in the post
+ common envelope binary catalog. The second file, datafile3b.txt, has the same
+ format as the primary catalog but has the 12 sources that were removed from 
+ the catalog. These systems which should not be used by the readers as they
+ failed the criteria to become part of the catalog. They are provided for 
+ completeness. The final file, refs.txt contains the bibcodes for all the 
+ citation codes given in the other files.
+
+System requirements: None. 
+
+Additional comments: Note that the primary catalog has 839 sources. A few 
+ systems have several reported values which are inconsistent. These systems 
+ have two entries, where the second one is marked by a "#" at the beginning 
+ of the line and in the flag column. See last paragraph of section 2.4.2 for
+ more details.
+
+ Note that the term primary refers to the donor of the most recent common
+ envelope phase.
+================================================================================
