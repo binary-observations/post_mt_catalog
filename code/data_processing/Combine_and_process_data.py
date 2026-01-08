@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 from io import StringIO
 import pandas as pd
+from urllib.parse import quote
 
 import sys
 from pathlib import Path
@@ -121,6 +122,29 @@ def extract_central_value(entry: dict, key: str) -> float | None:
         return val
     else:
         return None
+
+
+def make_simbad_url_from_coords(ra_deg: float | None, dec_deg: float | None, radius_arcsec: int = 5) -> str | None:
+    """Return a SIMBAD coordinate-search URL using decimal degrees and arcsec radius."""
+    try:
+        if ra_deg is None or dec_deg is None:
+            return None
+        coords = f"{float(ra_deg)} {float(dec_deg)}"
+        return (
+            "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord="
+            + quote(coords)
+            + f"&Radius={radius_arcsec}&Radius.unit=arcsec&output.format=ASCII"
+        )
+    except Exception:
+        return None
+
+
+def add_simbad_links(systems: list[dict]) -> None:
+    """Populate 'Simbad' field for entries that have central RA/Dec values."""
+    for entry in systems:
+        ra_val = extract_central_value(entry, "RA")
+        dec_val = extract_central_value(entry, "Dec")
+        entry["Simbad"] = make_simbad_url_from_coords(ra_val, dec_val) if (ra_val is not None and dec_val is not None) else None
 
 
 def normalize_system_name(name: str | None) -> str:
@@ -344,6 +368,9 @@ print(f"Total systems after deduplication: {len(all_systems)}")
 # -------------------------------------------------
 # Final sanitization & output
 # -------------------------------------------------
+
+# Add SIMBAD links before sanitization/output
+add_simbad_links(all_systems)
 
 all_systems = sanitize(all_systems)
 
