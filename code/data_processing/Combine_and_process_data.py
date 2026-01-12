@@ -87,8 +87,6 @@ def map_system_class(old_class: str | None, system_name: str | None):
         return "post-AGB binary"
     if "barium" in c or "ch" in c:
         return "Chemically Peculiar"
-    if "neutron" in c or "pulsar" in c:
-        return "Radio Pulsar"
     if "white dwarf" in c:
         return "Gaia WD + MS" if name.startswith("Gaia DR3") else "WD + non-degenerate"
 

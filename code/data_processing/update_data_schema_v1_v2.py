@@ -198,6 +198,16 @@ def upgrade_entry_schema(entry: dict):
         if not entry.get("system_class"):
             entry["system_class"] = "Spectroscopic binary with dormant CO"
     
+    # ---- Pulsar binaries: check BEFORE NS table default ----
+    # This must come before NS table logic to override the default classification
+    notes = entry.get("Notes") or ""
+    from_young_psr = isinstance(src, str) and src.strip().lower() == "young_psr_table.h5"
+    has_pulsar_in_notes = isinstance(notes, str) and "Pulsar" in notes
+    
+    if from_young_psr or has_pulsar_in_notes:
+        if not entry.get("system_class"):
+            entry["system_class"] = "pulsar binary"
+    
     # NS table entries: default system class to Spectroscopic binary with dormant CO if not set
     if isinstance(src, str) and "ns_table.h5" in src:
         if not entry.get("system_class"):
@@ -276,9 +286,21 @@ def upgrade_entry_schema(entry: dict):
             dm = entry.get("Detection Method") or []
             evol2 = entry.get("evol_type_2")
             obs2 = entry.get("obs_type_2")
+            notes = entry.get("Notes") or ""
+            src = entry.get("source_file") or ""
+            
+            # Check if from young_psr_table.h5
+            from_young_psr = isinstance(src, str) and src.strip().lower() == "young_psr_table.h5"
+            
+            # Check if Notes contains "Pulsar"
+            has_pulsar_in_notes = isinstance(notes, str) and "Pulsar" in notes
+            
+            # Check if system is pulsar-like based on name or detection method
             has_ns = (isinstance(obs2, str) and obs2.strip().upper() == "NS") or (evol2 == "NS")
             is_pulsar_like = (isinstance(name, str) and name.upper().startswith("PSR")) or (isinstance(dm, list) and "Other" in dm)
-            if has_ns and is_pulsar_like:
+            
+            # Set system_class to "pulsar binary" if any condition is met
+            if from_young_psr or has_pulsar_in_notes or (has_ns and is_pulsar_like):
                 sc = "pulsar binary"
 
         # Heuristic: Gaia compact-object for specific reference
