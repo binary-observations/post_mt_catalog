@@ -116,21 +116,6 @@ def upgrade_entry_schema(entry: dict):
     if isinstance(ot2, str) and ot2.strip().upper() == "RG":
         entry["evol_type_2"] = "RGB"
 
-    # ---- sgCH and dBa observational types mapping ----
-    # sgCH → RGB (giant CH star), dBa → MS (dwarf barium star)
-    if isinstance(ot1, str):
-        t = ot1.strip().lower()
-        if t == "sgch":
-            entry["evol_type_1"] = "RGB"
-        if t == "dba":
-            entry["evol_type_1"] = "MS"
-    if isinstance(ot2, str):
-        t = ot2.strip().lower()
-        if t == "sgch":
-            entry["evol_type_2"] = "RGB"
-        if t == "dba":
-            entry["evol_type_2"] = "MS"
-
     # ---- Barium stars: ensure proper classification ----
     if isinstance(ot1, str) and ot1.strip().lower() == "barium star":
         # Evolutionary type for the visible (barium) star
@@ -144,6 +129,22 @@ def upgrade_entry_schema(entry: dict):
         entry["evol_type_1"] = "RGB"
         if not entry.get("system_class"):
             entry["system_class"] = "Chemically Peculiar"
+
+    # ---- sgCH and dBa observational types mapping ----
+    # sgCH → MS (subgiant branch CH star), dBa → MS (dwarf barium star)
+    # Applied AFTER general barium star rules to ensure dwarf/subgiant classifications take precedence
+    if isinstance(ot1, str):
+        t = ot1.strip().lower()
+        if t == "sgch":
+            entry["evol_type_1"] = "MS"
+        if t == "dba":
+            entry["evol_type_1"] = "MS"
+    if isinstance(ot2, str):
+        t = ot2.strip().lower()
+        if t == "sgch":
+            entry["evol_type_2"] = "MS"
+        if t == "dba":
+            entry["evol_type_2"] = "MS"
 
     # All WDMS catalog entries: default to WD + MS systems
     if isinstance(src, str) and "WDMS/" in src:
