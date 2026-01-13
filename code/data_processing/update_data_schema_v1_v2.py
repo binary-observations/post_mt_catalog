@@ -208,6 +208,17 @@ def upgrade_entry_schema(entry: dict):
         if not entry.get("system_class"):
             entry["system_class"] = "pulsar binary"
     
+    # Gaia compact object for specific NS table reference (OJAp 7E..58E)
+    # Apply before NS table default to ensure correct classification
+    refs = entry.get("Reference")
+    has_gaia_ojap_58e = False
+    if isinstance(refs, str): # The Gaia NS paper El Badry 2024
+        has_gaia_ojap_58e = "2024OJAp....7E..58E" in refs
+    elif isinstance(refs, list):
+        has_gaia_ojap_58e = any(isinstance(r, str) and "2024OJAp....7E..58E" in r for r in refs)
+    if isinstance(src, str) and "ns_table.h5" in src and has_gaia_ojap_58e:
+        entry["system_class"] = "Gaia compact object"
+    
     # NS table entries: default system class to Spectroscopic binary with dormant CO if not set
     if isinstance(src, str) and "ns_table.h5" in src:
         if not entry.get("system_class"):
