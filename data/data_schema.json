@@ -136,9 +136,11 @@
         "Symbiotic binary",
         "Cataclysmic variable",
         "Pulsar Binary",
-        "Spectroscopic binary with dormant CO",
-        "WD + MS",
-        "Gaia compact object",
+        "Astrometric WD + MS",
+        "Spectroscopic WD + MS",
+        "Self-lensing WD + MS",
+        "Spectroscopic compact object",
+        "Astrometric compact object",
         "X-ray binary"
       ]
     },

@@ -146,7 +146,21 @@ def upgrade_entry_schema(entry: dict):
         if t == "dba":
             entry["evol_type_2"] = "MS"
 
-    # All WDMS catalog entries: default to WD + MS systems
+    # Astrometric WD + MS systems (Shahaf 2024 astrometric orbits)
+    if isinstance(src, str) and "WDMS/Shahaf2024.h5" in src:
+        entry["system_class"] = "Astrometric WD + MS"
+    
+    # Spectroscopic WD + MS systems (specific catalogs)
+    spectroscopic_wdms = {
+        'WDMS/RebassaMansergas2012.h5',
+        'WDMS/Zorotovic2010.h5',
+        'WDMS/WD_Binary_Pathways_VI.h5',
+        'WDMS/WD_Binary_Pathways_X.h5'
+    }
+    if isinstance(src, str) and src.strip() in spectroscopic_wdms:
+        entry["system_class"] = "Spectroscopic WD + MS"
+    
+    # All other WDMS catalog entries: default to WD + MS systems
     if isinstance(src, str) and "WDMS/" in src:
         if not entry.get("system_class"):
             entry["system_class"] = "WD + MS"
@@ -183,20 +197,20 @@ def upgrade_entry_schema(entry: dict):
     # Gaia BH binaries: set system class and handle RG → RGB conversion
     name = (entry.get("System Name") or "").strip()
     if "Gaia BH" in name:
-        entry["system_class"] = "Gaia compact object"
+        entry["system_class"] = "Astrometric compact object"
         # If obs_type_1 is RG (Red Giant), map to RGB
         if isinstance(ot1, str) and ot1.strip().upper() == "RG":
             entry["evol_type_1"] = "RGB"
     
-    # Gaia NS binaries: set system class to Gaia compact object
+    # Gaia NS binaries: set system class to Astrometric compact object
     if "Gaia NS" in name:
         if not entry.get("system_class"):
-            entry["system_class"] = "Gaia compact object"
+            entry["system_class"] = "Astrometric compact object"
     
-    # BH table entries (non-Gaia): set system class to Spectroscopic binary with dormant CO
+    # BH table entries (non-Gaia): set system class to Spectroscopic compact object
     if isinstance(src, str) and "bh_table.h5" in src and "Gaia" not in name:
         if not entry.get("system_class"):
-            entry["system_class"] = "Spectroscopic binary with dormant CO"
+            entry["system_class"] = "Spectroscopic compact object"
     
     # ---- Pulsar binaries: check BEFORE NS table default ----
     # This must come before NS table logic to override the default classification
@@ -219,10 +233,10 @@ def upgrade_entry_schema(entry: dict):
     if isinstance(src, str) and "ns_table.h5" in src and has_gaia_ojap_58e:
         entry["system_class"] = "Gaia compact object"
     
-    # NS table entries: default system class to Spectroscopic binary with dormant CO if not set
+    # NS table entries: default system class to Spectroscopic compact object if not set
     if isinstance(src, str) and "ns_table.h5" in src:
         if not entry.get("system_class"):
-            entry["system_class"] = "Spectroscopic binary with dormant CO"
+            entry["system_class"] = "Spectroscopic compact object"
 
     # ---- Spectroscopic classes → MS (for null evol_type) ----
     # Detect spectral types including combined tokens like "A5+F3p", "B7V+A5V", "O/Be".
@@ -314,7 +328,7 @@ def upgrade_entry_schema(entry: dict):
             if from_young_psr or has_pulsar_in_notes or (has_ns and is_pulsar_like):
                 sc = "pulsar binary"
 
-        # Heuristic: Gaia compact-object for specific reference
+        # Heuristic: Astrometric compact-object for specific reference
         if sc is None:
             refs = entry.get("Reference")
             target_ref = "2024OJAp....7E..58E"
@@ -324,7 +338,7 @@ def upgrade_entry_schema(entry: dict):
             elif isinstance(refs, list):
                 has_target_ref = any(isinstance(r, str) and r == target_ref for r in refs)
             if has_target_ref:
-                sc = "Gaia compact-object"
+                sc = "Astrometric compact object"
         entry["system_class"] = sc
         
     return entry
