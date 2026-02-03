@@ -98,6 +98,8 @@ SYMBOLS = [
 ]
 SYMBOLMAP = {k: SYMBOLS[i % len(SYMBOLS)] for i, k in enumerate(COLORMAP.keys())}
 
+# ...existing code...
+
 # plotting function
 def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=None, y_title=None,
  export_legend_to_pdf=True, export_width = 700, export_height = 450, export_scale = 2):
@@ -140,15 +142,43 @@ def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=
     )
     fig.update_traces(marker=dict(size=7, opacity=0.8))
 
-    # attach error bars if columns available
+    # Attach error bars PER TRACE
     ex = f"{x}_err_plus"
     exm = f"{x}_err_minus"
     ey = f"{y}_err_plus"
     eym = f"{y}_err_minus"
-    if ex in sub.columns and exm in sub.columns:
-        fig.update_traces(error_x=dict(type='data', array=sub[ex].tolist(), arrayminus=sub[exm].tolist()))
-    if ey in sub.columns and eym in sub.columns:
-        fig.update_traces(error_y=dict(type='data', array=sub[ey].tolist(), arrayminus=sub[eym].tolist()))
+    
+    has_x_err = ex in sub.columns and exm in sub.columns
+    has_y_err = ey in sub.columns and eym in sub.columns
+    
+    if has_x_err or has_y_err:
+        # Get unique system classes in the order they appear in the figure
+        unique_classes = sub['system_class'].unique()
+        
+        for i, trace in enumerate(fig.data):
+            # Get the system class for this trace
+            system_class = unique_classes[i] if i < len(unique_classes) else None
+            
+            # Filter dataframe for this system class
+            class_data = sub[sub['system_class'] == system_class]
+            
+            # Update this trace with its specific error bars
+            update_dict = {}
+            if has_x_err:
+                update_dict['error_x'] = dict(
+                    type='data',
+                    array=class_data[ex].tolist(),
+                    arrayminus=class_data[exm].tolist()
+                )
+            if has_y_err:
+                update_dict['error_y'] = dict(
+                    type='data',
+                    array=class_data[ey].tolist(),
+                    arrayminus=class_data[eym].tolist()
+                )
+            
+            if update_dict:
+                fig.update_traces(update_dict, selector=dict(name=trace.name))
 
     fig.update_layout(
         legend_title_text='System Class',

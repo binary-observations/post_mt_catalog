@@ -353,48 +353,6 @@ def _set_if_missing(entry: dict, key: str, value: str | None) -> bool:
     return False
 
 
-def enrich_obs_types_from_simbad(systems: list[dict], max_queries: int = 20) -> int:
-    """Fill missing obs_type_1/obs_type_2 using SIMBAD spectral types.
-    Only sets fields when currently missing; assigns up to two components.
-    Returns number of entries updated.
-    """
-    updated = 0
-    queries_done = 0
-    for entry in systems:
-        if queries_done >= max_queries:
-            break
-        o1_missing = entry.get("obs_type_1") in (None, "", [])
-        o2_missing = entry.get("obs_type_2") in (None, "", [])
-        if not (o1_missing or o2_missing):
-            continue
-        name = entry.get("System Name") or ""
-        sptype = None
-        # Try by name first
-        if name:
-            sptype = query_simbad_sptype_by_name(name)
-        # Fallback to coordinates
-        if not sptype:
-            ra_val = extract_central_value(entry, "RA")
-            dec_val = extract_central_value(entry, "Dec")
-            sptype = query_simbad_sptype_by_coords(ra_val, dec_val)
-        if not sptype:
-            continue
-        tokens = parse_spectral_components(sptype)
-        changed = False
-        if tokens:
-            # Assign first token to obs_type_1 if missing
-            if o1_missing and len(tokens) >= 1:
-                changed |= _set_if_missing(entry, "obs_type_1", tokens[0])
-            # Assign second token to obs_type_2 if missing and available
-            if o2_missing and len(tokens) >= 2:
-                changed |= _set_if_missing(entry, "obs_type_2", tokens[1])
-            # If only one token returned and obs_type_2 still missing, leave it
-        if changed:
-            updated += 1
-        queries_done += 1
-        time.sleep(0.2)  # gentle rate limit
-    return updated
-
 
 # -------------------------------------------------
 # Ingestion
@@ -498,17 +456,10 @@ print(f"Total systems after JSON ingestion: {len(all_systems)}")
 all_systems = merge_duplicates(all_systems)
 print(f"Total systems after deduplication: {len(all_systems)}")
 
-# Optional: lightweight SIMBAD enrichment for missing obs_type_* (limited batch)
-try:
-    updated_count = enrich_obs_types_from_simbad(all_systems, max_queries=20)
-    print(f"SIMBAD enrichment updated {updated_count} entries (limited run).")
-except Exception as e:
-    print(f"SIMBAD enrichment skipped due to error: {e}")
 
 # -------------------------------------------------
 # Final sanitization & output
 # -------------------------------------------------
-
 # Add SIMBAD links before sanitization/output
 add_simbad_links(all_systems)
 
