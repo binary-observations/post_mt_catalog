@@ -24,48 +24,22 @@ def read_json_file(file_path):
         return None
 
 
-def extract_central_value(entry, key):
-    # Expects [err-, value, err+], returns value or np.nan
-    val = entry.get(key, [np.nan, np.nan, np.nan])
-    if isinstance(val, list) and len(val) == 3:
-        return val[1]
-    elif isinstance(val, (int, float)):
-        return val
-    else:
-        return np.nan
-
-
-def extract_error_minus(entry, key):
-    # Returns the lower error (err-) from [err-, value, err+] or np.nan
-    val = entry.get(key, None)
-    if isinstance(val, list) and len(val) == 3:
-        try:
-            return float(val[0])
-        except Exception:
-            return np.nan
-    return np.nan
-
-
-def extract_error_plus(entry, key):
-    # Returns the upper error (err+) from [err-, value, err+] or np.nan
-    val = entry.get(key, None)
-    if isinstance(val, list) and len(val) == 3:
-        try:
-            return float(val[2])
-        except Exception:
-            return np.nan
-    return np.nan
-
-
-def extract_column(data, key):
-    return [extract_central_value(entry, key) for entry in data]
-
-
-def extract_error_columns(data, key):
-    """Return two lists: error_minus, error_plus for the given key across data."""
-    errs_lo = [extract_error_minus(entry, key) for entry in data]
-    errs_hi = [extract_error_plus(entry, key) for entry in data]
-    return errs_lo, errs_hi
+def extract_triplet_array(data, key):
+    """Return an (N,3) float array for the given triplet key, robust to None/NaN."""
+    rows = []
+    for entry in data:
+        val = entry.get(key, None)
+        if isinstance(val, (list, tuple, np.ndarray)) and len(val) == 3:
+            try:
+                rows.append([float(val[0]), float(val[1]), float(val[2])])
+            except Exception:
+                rows.append([np.nan, np.nan, np.nan])
+        elif isinstance(val, (int, float)):
+            # Scalar provided → treat as central value with unknown errors
+            rows.append([np.nan, float(val), np.nan])
+        else:
+            rows.append([np.nan, np.nan, np.nan])
+    return np.array(rows, dtype=float)
 
 
 # Read data
@@ -74,24 +48,32 @@ if data is None:
     print("No data loaded. Exiting.")
     exit(1)
 
+# Extract triplet columns once for efficiency/consistency
+period_arr = extract_triplet_array(data, 'Period')
+ecc_arr = extract_triplet_array(data, 'Eccentricity')
+m1_arr = extract_triplet_array(data, 'M1')
+m2_arr = extract_triplet_array(data, 'M2')
+
 # Build a single DataFrame with central values and errors
 df = pd.DataFrame({
-    'Period': extract_column(data, 'Period'),
-    'Period_err_minus': extract_error_columns(data, 'Period')[0],
-    'Period_err_plus': extract_error_columns(data, 'Period')[1],
-    'Eccentricity': extract_column(data, 'Eccentricity'),
-    'Ecc_err_minus': extract_error_columns(data, 'Eccentricity')[0],
-    'Ecc_err_plus': extract_error_columns(data, 'Eccentricity')[1],
-    'M1': extract_column(data, 'M1'),
-    'M1_err_minus': extract_error_columns(data, 'M1')[0],
-    'M1_err_plus': extract_error_columns(data, 'M1')[1],
-    'M2': extract_column(data, 'M2'),
-    'M2_err_minus': extract_error_columns(data, 'M2')[0],
-    'M2_err_plus': extract_error_columns(data, 'M2')[1],
+    'Period': period_arr[:, 1],
+    'Period_err_minus': period_arr[:, 0],
+    'Period_err_plus': period_arr[:, 2],
+    'Eccentricity': ecc_arr[:, 1],
+    'Ecc_err_minus': ecc_arr[:, 0],
+    'Ecc_err_plus': ecc_arr[:, 2],
+    'M1': m1_arr[:, 1],
+    'M1_err_minus': m1_arr[:, 0],
+    'M1_err_plus': m1_arr[:, 2],
+    'M2': m2_arr[:, 1],
+    'M2_err_minus': m2_arr[:, 0],
+    'M2_err_plus': m2_arr[:, 2],
     'System Name': [entry.get('System Name', '') for entry in data],
-    'Type1': [entry.get('Type1', '') for entry in data],
-    'Type2': [entry.get('Type2', '') for entry in data],
-    'class': [entry.get('class', 'Unclassified') for entry in data],
+    'obs_type_1': [entry.get('obs_type_1', '') for entry in data],
+    'obs_type_2': [entry.get('obs_type_2', '') for entry in data],
+    'evol_type_1': [entry.get('evol_type_1', '') for entry in data],
+    'evol_type_2': [entry.get('evol_type_2', '') for entry in data],
+    'system_class': [entry.get('system_class', 'None') for entry in data],
     'Simbad': [entry.get('Simbad', None) for entry in data]
 })
 
@@ -148,12 +130,12 @@ def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=
         sub,
         x=x,
         y=y,
-        color='class',
+        color='system_class',
         color_discrete_map=COLORMAP,
-        symbol='class',
+        symbol='system_class',
         symbol_map=SYMBOLMAP,
         hover_name='System Name',
-        hover_data=['Type1', 'Type2'],
+        hover_data=['obs_type_1', 'obs_type_2', 'evol_type_1','evol_type_2'],
         template='plotly_white'
     )
     fig.update_traces(marker=dict(size=7, opacity=0.8))
@@ -169,7 +151,7 @@ def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=
         fig.update_traces(error_y=dict(type='data', array=sub[ey].tolist(), arrayminus=sub[eym].tolist()))
 
     fig.update_layout(
-        legend_title_text='Class',
+        legend_title_text='System Class',
         legend=dict(itemclick='toggle', itemdoubleclick='toggleothers'),
         legend_title=dict(font=dict(size=15)),
         legend_font=dict(size=14)
@@ -219,7 +201,7 @@ def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=
 
 # Create the three plots via the helper
 
-## Perios vs eccentricity 
+## Period vs eccentricity 
 make_scatter(
     df,
     x='Period', y='Eccentricity',
@@ -234,7 +216,7 @@ make_scatter(
     export_scale=3
 )
 
-## Perios vs donor mass 
+## Period vs donor mass 
 make_scatter(
     df,
     x='Period', y='M2',
