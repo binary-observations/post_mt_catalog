@@ -231,7 +231,7 @@ def upgrade_entry_schema(entry: dict):
     elif isinstance(refs, list):
         has_gaia_ojap_58e = any(isinstance(r, str) and "2024OJAp....7E..58E" in r for r in refs)
     if isinstance(src, str) and "ns_table.h5" in src and has_gaia_ojap_58e:
-        entry["system_class"] = "Gaia compact object"
+        entry["system_class"] = "Astrometric compact object"
     
     # NS table entries: default system class to Spectroscopic compact object if not set
     if isinstance(src, str) and "ns_table.h5" in src:

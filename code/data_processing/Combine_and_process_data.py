@@ -432,7 +432,7 @@ if wdms_dir.exists():
 
 print(f"Ingested {len(all_systems)} systems from HDF5 tables.")
 
-# ---- RAW JSON tables (e.g. Malkov 2020) ----
+# ---- RAW JSON tables ----
 raw_json_files = sorted(RAW_JSON_DIR.glob("*.json"))
 print(f"Found {len(raw_json_files)} raw JSON tables.")
 
@@ -444,7 +444,7 @@ for jp in raw_json_files:
         continue
     for entry in data:
         # Apply schema upgrade to JSON entries too
-        entry = upgrade_entry_schema(entry)
+        # entry = upgrade_entry_schema(entry)
         all_systems.append(entry)
 
 print(f"Total systems after JSON ingestion: {len(all_systems)}")
