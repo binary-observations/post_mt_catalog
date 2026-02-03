@@ -104,7 +104,6 @@ SYMBOLMAP = {k: SYMBOLS[i % len(SYMBOLS)] for i, k in enumerate(COLORMAP.keys())
 def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=None, y_title=None,
  export_legend_to_pdf=True, export_width = 700, export_height = 450, export_scale = 2):
     """_summary_
-
     Args:
         df (_type_): _description_
         x (_type_): _description_
@@ -127,6 +126,12 @@ def make_scatter(df, x, y, out_html, out_pdf, x_log=False, y_log=False, x_title=
         sub = sub[pd.to_numeric(sub[x], errors='coerce') > 0]
     if y_log:
         sub = sub[pd.to_numeric(sub[y], errors='coerce') > 0]
+
+    # Replace Nones with 'Unknown' for hover info
+    sub['obs_type_1'] = sub['obs_type_1'].fillna('Unknown')
+    sub['obs_type_2'] = sub['obs_type_2'].fillna('Unknown')
+    sub['evol_type_1'] = sub['evol_type_1'].fillna('Unknown')
+    sub['evol_type_2'] = sub['evol_type_2'].fillna('Unknown')
 
     fig = px.scatter(
         sub,
@@ -241,8 +246,8 @@ make_scatter(
     x_title='$P \, \mathrm{(days)}$', 
     y_title='$\mathrm{Eccentricity}$',
     export_legend_to_pdf=False, 
-    export_height=400,
-    export_width=500,
+    export_height=600,
+    export_width=900,
     export_scale=3
 )
 
@@ -256,8 +261,8 @@ make_scatter(
     x_title='$P\,\mathrm{(days)}$', 
     y_title='$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
     export_legend_to_pdf=False,
-    export_height=400,
-    export_width=500,
+    export_height=500,
+    export_width=800,
     export_scale=2
 )
 
@@ -271,7 +276,7 @@ make_scatter(
     x_title='$M_{\mathrm{accretor}} \mathrm{(M_{\odot})}$', 
     y_title='$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
     export_legend_to_pdf=True,
-    export_height=400,
-    export_width=650,
+    export_height=500,
+    export_width=800,
     export_scale=2
 )

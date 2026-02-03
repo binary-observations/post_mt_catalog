@@ -452,11 +452,9 @@ print(f"Total systems after JSON ingestion: {len(all_systems)}")
 # -------------------------------------------------
 # Deduplication
 # -------------------------------------------------
-
 all_systems = merge_duplicates(all_systems)
 print(f"Total systems after deduplication: {len(all_systems)}")
 
-
 # -------------------------------------------------
 # Final sanitization & output
 # -------------------------------------------------
@@ -476,22 +474,4 @@ with open(OUTPUT_JSON, "w") as f:
     f.write("]\n")
 
 print(f"Wrote {len(all_systems)} systems to {OUTPUT_JSON}")
-# Final sanitization & output
-# -------------------------------------------------
 
-# Add SIMBAD links before sanitization/output
-add_simbad_links(all_systems)
-
-all_systems = sanitize(all_systems)
-
-with open(OUTPUT_JSON, "w") as f:
-    f.write("[\n")
-    for i, system in enumerate(all_systems):
-        f.write(json.dumps(system, separators=(",", ":")))
-        if i < len(all_systems) - 1:
-            f.write(",\n")
-        else:
-            f.write("\n")
-    f.write("]\n")
-
-print(f"Wrote {len(all_systems)} systems to {OUTPUT_JSON}")
