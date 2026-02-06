@@ -48,6 +48,20 @@
       "description": "Spectroscopic mass function"
     },
 
+    "M1_sin3i": {
+      "type": "triplet [err-, value, err+]",
+      "units": "Msun",
+      "description": "M1 sini "
+    },
+
+
+    "M2_sin3i": {
+      "type": "triplet [err-, value, err+]",
+      "units": "Msun",
+      "description": "M2 sini"
+    },
+
+  
     "evol_type_1": {
       "type": "string | null",
       "description": "Evolutionary state of component 1 (Table 1)",
