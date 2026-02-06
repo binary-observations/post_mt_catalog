@@ -9,6 +9,7 @@ PROJECT_ROOT = Path(os.path.dirname(os.path.abspath(__file__)))
 CODE_DIR = PROJECT_ROOT / "code"
 DATA_DIR = PROJECT_ROOT / "data"
 WRITING_DIR = PROJECT_ROOT / "writing"
+LATEX_PLOT_DIR = WRITING_DIR / "figures"
 DOCS_DIR = PROJECT_ROOT / "docs"
 PLOTS_DIR = PROJECT_ROOT / "plots"
 

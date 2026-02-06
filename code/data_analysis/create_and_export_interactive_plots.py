@@ -11,7 +11,7 @@ proj_root = Path('/Users/liekevanson/Documents/Projects/post_mt_review').resolve
 if str(proj_root) not in sys.path:
     sys.path.insert(0, str(proj_root))
 
-from paths import MAIN_CATALOG, DOCS_DIR, PLOTS_DIR
+from paths import MAIN_CATALOG, DOCS_DIR, PLOTS_DIR, LATEX_PLOT_DIR
 file_path = MAIN_CATALOG
 
 
@@ -203,8 +203,8 @@ def make_scatter(df, x, y, out_pdf, out_html=None, x_log=False, y_log=False, x_t
     fig.update_layout(
         legend_title_text='System Class',
         legend=dict(itemclick='toggle', itemdoubleclick='toggleothers'),
-        legend_title=dict(font=dict(size=15)),
-        legend_font=dict(size=14)
+        legend_title=dict(font=dict(size=20)),
+        legend_font=dict(size=18)
     )
     fig.update_traces(marker=dict(size=8))
 
@@ -257,7 +257,7 @@ make_scatter(
     df,
     x='Period', y='Eccentricity',
     out_html=DOCS_DIR / 'interactive_period_vs_eccentricity.html',
-    out_pdf=PLOTS_DIR / 'interactive_period_vs_eccentricity.pdf',
+    out_pdf=LATEX_PLOT_DIR / 'interactive_period_vs_eccentricity.pdf',
     x_log=True, y_log=False,
     x_title='P (days)', #'$P \, \mathrm{(days)}$', 
     y_title= 'Eccentricity', #'$\mathrm{Eccentricity}$',
@@ -273,13 +273,13 @@ make_scatter(
     df,
     x='Period', y='M2',
     out_html=DOCS_DIR / 'interactive_period_vs_m2.html',
-    out_pdf=PLOTS_DIR / 'interactive_period_vs_m2.pdf',
+    out_pdf=LATEX_PLOT_DIR / 'interactive_period_vs_m2.pdf',
     x_log=True, y_log=True,
     x_title='P (days)', #'$P \, \mathrm{(days)}$', 
     y_title='donor mass (Msun)', #'$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
-    export_legend_to_pdf=False,
+    export_legend_to_pdf=True,
     export_height=500,
-    export_width=550,
+    export_width=900,
     export_scale=2,
     label_size = 23,
 )
@@ -289,13 +289,13 @@ make_scatter(
     df,
     x='M1', y='M2',
     out_html=DOCS_DIR / 'interactive_m2_vs_m1.html',
-    out_pdf=PLOTS_DIR / 'interactive_m2_vs_m1.pdf',
+    out_pdf=LATEX_PLOT_DIR / 'interactive_m2_vs_m1.pdf',
     x_log=True, y_log=True,
     x_title= 'accretor mass (Msun)' , #'$M_{\mathrm{accretor}} \mathrm{(M_{\odot})}$', 
     y_title= 'donor mass (Msun)' , # '$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
-    export_legend_to_pdf=False,
+    export_legend_to_pdf=True,
     export_height=550,
-    export_width=550,
+    export_width=900,
     export_scale=2,
     label_size = 23,
     xlim=(-0.5, 1.9), ylim=(-0.5, 1.9)
