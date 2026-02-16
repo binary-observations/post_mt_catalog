@@ -35,12 +35,14 @@ def get_session() -> requests.Session:
 
 def fetch_library_bibcodes(s: requests.Session, lib_id: str) -> list[str]:
     # Ask for a huge number of rows to avoid pagination.
-    r = s.get(f"{API}/biblib/libraries/{lib_id}", params={"rows": 20_000_000})
+    url = f"{API}/biblib/libraries/{lib_id}"
+    r = s.get(url, params={"rows": 20_000_000})
     if r.status_code == 404:
         fail(f"Library {lib_id} not found or not public.")
     r.raise_for_status()
     j = r.json()
     return j.get("documents", [])
+
 
 def export_bibtex(s: requests.Session, bibcodes: list[str]) -> str:
     # sort="no sort" preserves the input order returned by biblib.
