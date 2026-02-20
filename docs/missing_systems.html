@@ -120,7 +120,7 @@
   </header>
 
   <section>
-    <h2>Step 1 — Check if system already exists</h2>
+    <h2>Step 1 — Check if system already exists in the catalog</h2>
     <p>Please provide a system name/ID and sky position. We check if there is a match on either the:</p>
     <ul>
       <li> Name/ID </li>
@@ -191,7 +191,29 @@
           </div>
           <div class="form-group">
             <label for="formSystemClass">system_class (optional)</label>
-            <input id="formSystemClass" type="text" placeholder="e.g. EL CVn">
+            <select id="formSystemClass">
+              <option value="">-- Select system class --</option>
+              <option value="Contact binary">Contact binary</option>
+              <option value="Algol">Algol</option>
+
+              <option value="Hot subdwarf">Hot subdwarf</option>
+              <option value="Stripped star">Stripped star</option>
+              <option value="WR binary">WR binary</option>
+
+              <option value="post AGB">post AGB</option>
+              <option value="EL CVn">EL CVn</option>
+
+              <option value="Blue straggler binary">Blue straggler binary</option>
+              <option value="Chemically Peculiar">Chemically Peculiar</option>
+              <option value="Astrometric WD + MS">Astrometric WD + MS</option>
+              <option value="Spectroscopic WD + MS">Spectroscopic WD + MS</option>
+              <option value="Self-lensing WD + MS">Self-lensing WD + MS</option>
+
+              <option value="pulsar binary">pulsar binary</option>
+              <option value="Spectroscopic compact object">Spectroscopic compact object</option>
+              <option value="Astrometric compact object">Astrometric compact object</option>
+              <option value="high-mass XRB">high-mass XRB</option>
+            </select>
           </div>
         </div>
 
@@ -209,11 +231,31 @@
         <div class="grid">
           <div class="form-group">
             <label for="formEvolType1">evol_type_1 (optional)</label>
-            <input id="formEvolType1" type="text" placeholder="e.g. MS">
+            <select id="formEvolType1">
+              <option value="">-- Select evolutionary type --</option>
+              <option value="MS">MS</option>
+              <option value="HG">HG</option>
+              <option value="RGB">RGB</option>
+              <option value="AGB">AGB</option>
+              <option value="He-star">He-star</option>
+              <option value="WD">WD</option>
+              <option value="NS">NS</option>
+              <option value="BH">BH</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="formEvolType2">evol_type_2 (optional)</label>
-            <input id="formEvolType2" type="text" placeholder="e.g. WD">
+            <select id="formEvolType2">
+              <option value="">-- Select evolutionary type --</option>
+              <option value="MS">MS</option>
+              <option value="HG">HG</option>
+              <option value="RGB">RGB</option>
+              <option value="AGB">AGB</option>
+              <option value="He-star">He-star</option>
+              <option value="WD">WD</option>
+              <option value="NS">NS</option>
+              <option value="BH">BH</option>
+            </select>
           </div>
         </div>
 
@@ -332,10 +374,12 @@
         const ra2 = ra2Deg * Math.PI / 180;
         const dec2 = dec2Deg * Math.PI / 180;
 
+        // great circle distance using haversine formula, 
         const sinDDec = Math.sin((dec2 - dec1) / 2);
         const sinDRa = Math.sin((ra2 - ra1) / 2);
         const a = sinDDec * sinDDec + Math.cos(dec1) * Math.cos(dec2) * sinDRa * sinDRa;
         const c = 2 * Math.asin(Math.min(1, Math.sqrt(Math.max(0, a))));
+        // multiplied by 206264.806 to convert radians to arcseconds
         return c * 206264.80624709636;
       }
 
@@ -372,11 +416,14 @@
         const merged = uniqueMatches(nameMatches.concat(positionMatches));
         const hasMatches = merged.length > 0;
 
+        // Count entries with position matches (including those that also matched by name)
+        const totalPositionMatches = merged.filter(m => m.sepArcsec !== null && m.sepArcsec !== undefined).length;
+
         let html = '';
 
         html += '<div><strong>Input ID:</strong> ' + escapeHtml(candidateId) + '</div>';
         html += '<div style="margin-top:0.35rem;"><strong>Name/ID matches:</strong> ' + nameMatches.length + '</div>';
-        html += '<div><strong>Position matches (&le; 0.1 arcsec):</strong> ' + positionMatches.length + '</div>';
+        html += '<div><strong>Position matches (&le; 0.1 arcsec):</strong> ' + totalPositionMatches + '</div>';
 
         if(hasMatches){
           html += '<p class="result-warn">Could this be your system? We found existing candidate(s) in the catalog.</p>';
@@ -396,7 +443,7 @@
           html += '<p class="result-none">This system does indeed appear to not be in the catalog.</p>';
         }
 
-        html += '<p>Still think your system is missing? Proceed to Step 2: </p>';
+        html += '<p>Still think your system is missing? Proceed to Step 2 </p>';
         searchResults.innerHTML = html;
         searchResults.classList.remove('hidden');
       }

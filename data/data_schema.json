@@ -137,25 +137,22 @@
       "type": "string",
       "description": "System-level observational class (Table 2)",
       "allowed_values": [
-        "Algol",
-        "Ellipsoidal variable",
         "Contact binary",
+        "Algol",
         "Hot subdwarf",
         "Stripped star",
         "WR binary",
+        "post AGB",
         "EL CVn",
-        "Chemically Peculiar",
         "Blue straggler binary",
-        "post-AGB binary",
-        "Symbiotic binary",
-        "Cataclysmic variable",
-        "Pulsar Binary",
+        "Chemically Peculiar",
         "Astrometric WD + MS",
         "Spectroscopic WD + MS",
         "Self-lensing WD + MS",
+        "pulsar binary",
         "Spectroscopic compact object",
         "Astrometric compact object",
-        "X-ray binary"
+        "high-mass XRB"
       ]
     },
 
