@@ -131,7 +131,7 @@
       <form id="searchForm">
         <div class="grid">
           <div class="form-group">
-            <label for="candidateId">System name or ID *</label>
+            <label for="candidateId">System name or ID*</label>
             <input id="candidateId" type="text" required placeholder="e.g. Gaia DR3 123...">
           </div>
           <div class="form-group">
@@ -184,37 +184,79 @@
           </div>
         </div>
 
-        <div class="grid">
-          <div class="form-group">
-            <label for="formReference">Reference (ADS bibcode(s), comma-separated) *</label>
-            <input id="formReference" type="text" required placeholder="e.g. 2025A&A...123A...1X">
+        <div class="form-group">
+          <label for="formReference">Reference (ADS bibcode(s), comma-separated) *</label>
+          <input id="formReference" type="text" required placeholder="e.g. 2025A&A...123A...1X">
+        </div>
+
+        <div class="form-group">
+          <label for="formReason">Why this is post-MT *</label>
+          <textarea id="formReason" required rows="4" placeholder="Short scientific motivation / evidence."></textarea>
+        </div>
+
+        <h3 style="margin-top:1.5rem; margin-bottom:0.5rem; font-size:1.1rem; color:#445;">System Parameters</h3>
+
+        <div class="form-group">
+          <label>Period [err-, value, err+] in days (optional)</label>
+          <div class="triplet">
+            <input id="formPeriodErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formPeriodValue" type="number" step="any" placeholder="value">
+            <input id="formPeriodErrPlus" type="number" step="any" placeholder="err+">
           </div>
-          <div class="form-group">
-            <label for="formSystemClass">system_class (optional)</label>
-            <select id="formSystemClass">
-              <option value="">-- Select system class --</option>
-              <option value="Contact binary">Contact binary</option>
-              <option value="Algol">Algol</option>
+        </div>
 
-              <option value="Hot subdwarf">Hot subdwarf</option>
-              <option value="Stripped star">Stripped star</option>
-              <option value="WR binary">WR binary</option>
-
-              <option value="post AGB">post AGB</option>
-              <option value="EL CVn">EL CVn</option>
-
-              <option value="Blue straggler binary">Blue straggler binary</option>
-              <option value="Chemically Peculiar">Chemically Peculiar</option>
-              <option value="Astrometric WD + MS">Astrometric WD + MS</option>
-              <option value="Spectroscopic WD + MS">Spectroscopic WD + MS</option>
-              <option value="Self-lensing WD + MS">Self-lensing WD + MS</option>
-
-              <option value="pulsar binary">pulsar binary</option>
-              <option value="Spectroscopic compact object">Spectroscopic compact object</option>
-              <option value="Astrometric compact object">Astrometric compact object</option>
-              <option value="high-mass XRB">high-mass XRB</option>
-            </select>
+        <div class="form-group">
+          <label>Eccentricity [err-, value, err+] (optional)</label>
+          <div class="triplet">
+            <input id="formEccentricityErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formEccentricityValue" type="number" step="any" placeholder="value">
+            <input id="formEccentricityErrPlus" type="number" step="any" placeholder="err+">
           </div>
+        </div>
+
+        <div class="form-group">
+          <label>M1 [err-, value, err+] in Msun (optional)</label>
+          <div class="triplet">
+            <input id="formM1ErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formM1Value" type="number" step="any" placeholder="value">
+            <input id="formM1ErrPlus" type="number" step="any" placeholder="err+">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>M2 [err-, value, err+] in Msun (optional)</label>
+          <div class="triplet">
+            <input id="formM2ErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formM2Value" type="number" step="any" placeholder="value">
+            <input id="formM2ErrPlus" type="number" step="any" placeholder="err+">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="formSystemClass">system_class (optional)</label>
+          <select id="formSystemClass">
+            <option value="">-- Select system class --</option>
+            <option value="Contact binary">Contact binary</option>
+            <option value="Algol">Algol</option>
+
+            <option value="Hot subdwarf">Hot subdwarf</option>
+            <option value="Stripped star">Stripped star</option>
+            <option value="WR binary">WR binary</option>
+
+            <option value="post AGB">post AGB</option>
+            <option value="EL CVn">EL CVn</option>
+
+            <option value="Blue straggler binary">Blue straggler binary</option>
+            <option value="Chemically Peculiar">Chemically Peculiar</option>
+            <option value="Astrometric WD + MS">Astrometric WD + MS</option>
+            <option value="Spectroscopic WD + MS">Spectroscopic WD + MS</option>
+            <option value="Self-lensing WD + MS">Self-lensing WD + MS</option>
+
+            <option value="pulsar binary">pulsar binary</option>
+            <option value="Spectroscopic compact object">Spectroscopic compact object</option>
+            <option value="Astrometric compact object">Astrometric compact object</option>
+            <option value="high-mass XRB">high-mass XRB</option>
+          </select>
         </div>
 
         <div class="grid">
@@ -264,14 +306,38 @@
           <input id="formDetectionMethod" type="text" placeholder="e.g. RV, SB1">
         </div>
 
+        <h3 style="margin-top:1.5rem; margin-bottom:0.5rem; font-size:1.1rem; color:#445;"></h3>
+
         <div class="form-group">
-          <label for="formReason">Why this is post-MT *</label>
-          <textarea id="formReason" required rows="4" placeholder="Short scientific motivation / evidence."></textarea>
+          <label>Mass Function [err-, value, err+] in Msun (optional)</label>
+          <div class="triplet">
+            <input id="formMassFunctionErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formMassFunctionValue" type="number" step="any" placeholder="value">
+            <input id="formMassFunctionErrPlus" type="number" step="any" placeholder="err+">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>M1_sin3i [err-, value, err+] in Msun (optional)</label>
+          <div class="triplet">
+            <input id="formM1Sin3iErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formM1Sin3iValue" type="number" step="any" placeholder="value">
+            <input id="formM1Sin3iErrPlus" type="number" step="any" placeholder="err+">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>M2_sin3i [err-, value, err+] in Msun (optional)</label>
+          <div class="triplet">
+            <input id="formM2Sin3iErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formM2Sin3iValue" type="number" step="any" placeholder="value">
+            <input id="formM2Sin3iErrPlus" type="number" step="any" placeholder="err+">
+          </div>
         </div>
 
         <div class="form-group">
           <label for="formAdditionalJson">Additional schema fields as JSON object (optional)</label>
-          <textarea id="formAdditionalJson" rows="5" placeholder='{"Period": [null, 12.5, null], "M1": [0.5, 5.0, 0.5]}'></textarea>
+          <textarea id="formAdditionalJson" rows="5" placeholder='{"Notes": "some interesting thing to note on this system", "M1_sin3i": [0.5, 5.0, 0.5]}'></textarea>
         </div>
 
         <button type="submit">Prepare GitHub PR submission</button>
@@ -284,15 +350,37 @@
   </section>
 
   <script>
+    // ============================================================================
+    // Missing Systems Submission Workflow
+    // ============================================================================
+    // This script implements a 2-step process:
+    //   Step 1: Check if a system already exists in the catalog (by name or position)
+    //   Step 2: Submit a proposal JSON file for a missing system via GitHub PR
+    // ============================================================================
+
     (function(){
+      // --------------------------------------------------------------------------
+      // Constants
+      // --------------------------------------------------------------------------
+      // URL to fetch the current catalog of post-MT systems from GitHub
       const RAW_URL = 'https://raw.githubusercontent.com/binary-observations/post_mt_catalog/master/data/post_mt_systems.json';
+      
+      // GitHub URL for creating a new file (opens GitHub's "new file" interface)
       const REPO_NEW_FILE_URL = 'https://github.com/binary-observations/post_mt_catalog/new/master';
+      
+      // Position match threshold: systems within 0.1 arcsec are considered potential duplicates
       const ARCSEC_THRESHOLD = 0.1;
 
-      let catalogRecords = [];
-      let catalogLoaded = false;
-      let latestProposalJson = '';
+      // --------------------------------------------------------------------------
+      // Global State
+      // --------------------------------------------------------------------------
+      let catalogRecords = [];        // Array of all catalog systems after loading
+      let catalogLoaded = false;      // Track whether catalog has been fetched
+      let latestProposalJson = '';    // Store the most recent generated proposal JSON
 
+      // --------------------------------------------------------------------------
+      // DOM Element References (Step 1: Search)
+      // --------------------------------------------------------------------------
       const searchForm = document.getElementById('searchForm');
       const searchStatus = document.getElementById('searchStatus');
       const searchResults = document.getElementById('searchResults');
@@ -300,11 +388,19 @@
       const continueToStep2 = document.getElementById('continueToStep2');
       const submitSection = document.getElementById('submitSection');
 
+      // --------------------------------------------------------------------------
+      // DOM Element References (Step 2: Proposal Submission)
+      // --------------------------------------------------------------------------
       const proposalForm = document.getElementById('proposalForm');
       const proposalStatus = document.getElementById('proposalStatus');
       const proposalPreview = document.getElementById('proposalPreview');
       const copyJsonBtn = document.getElementById('copyJsonBtn');
 
+      // --------------------------------------------------------------------------
+      // Utility: Sanitize JSON Text
+      // --------------------------------------------------------------------------
+      // Catalog may contain Python/numpy artifacts (np.nan, NaN, None, Inf)
+      // Replace these with proper JSON null values before parsing
       function sanitizeJSONText(text){
         return text
           .replace(/np\.nan/gi, 'null')
@@ -315,18 +411,30 @@
           .replace(/\bNone\b/g, 'null');
       }
 
+      // --------------------------------------------------------------------------
+      // Utility: Parse Catalog Data
+      // --------------------------------------------------------------------------
+      // Handle both array format [system1, system2, ...]
+      // and object format {"SystemName": {...}, "SystemName2": {...}}
       function parseCatalog(rawData){
         if(Array.isArray(rawData)) return rawData;
         if(rawData && typeof rawData === 'object'){
+          // Convert object entries to array, inject system name as a field
           return Object.entries(rawData).map(([k, v]) => ({ 'System Name': k, ...v }));
         }
         return [];
       }
 
+      // --------------------------------------------------------------------------
+      // Load Catalog from GitHub
+      // --------------------------------------------------------------------------
+      // Fetch the full catalog JSON from the GitHub repository
+      // Uses cache-busting timestamp to ensure fresh data
       async function loadCatalog(){
-        if(catalogLoaded) return;
+        if(catalogLoaded) return;  // Only load once per session
         searchStatus.textContent = 'Loading catalog from GitHub...';
         try {
+          // Add timestamp query param to bypass browser cache
           const url = RAW_URL + '?ts=' + Date.now();
           const res = await fetch(url, { cache: 'no-store' });
           if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
@@ -334,8 +442,10 @@
 
           let parsed;
           try {
+            // Try parsing directly first
             parsed = JSON.parse(txt);
           } catch(_) {
+            // If failed, sanitize Python/numpy artifacts and retry
             parsed = JSON.parse(sanitizeJSONText(txt));
           }
 
@@ -347,10 +457,20 @@
         }
       }
 
+      // --------------------------------------------------------------------------
+      // Utility: Normalize Tokens for Fuzzy Matching
+      // --------------------------------------------------------------------------
+      // Strip non-alphanumeric characters and convert to lowercase
+      // Used for flexible name matching (e.g., "HD 194335" matches "hd194335")
       function normalizeToken(value){
         return String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
       }
 
+      // --------------------------------------------------------------------------
+      // Utility: Extract Name Candidates from Record
+      // --------------------------------------------------------------------------
+      // System Name field can be a string or array of strings (aliases)
+      // Returns array of all valid name strings for matching
       function getNameCandidates(record){
         const raw = record['System Name'];
         if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
@@ -358,17 +478,27 @@
         return [];
       }
 
+      // --------------------------------------------------------------------------
+      // Utility: Convert to Number (null if invalid)
+      // --------------------------------------------------------------------------
       function toNumber(value){
         const n = Number(value);
         return Number.isFinite(n) ? n : null;
       }
 
+      // --------------------------------------------------------------------------
+      // Utility: Extract Central Value from Triplet
+      // Catalog stores measurements as [err-, value, err+]
       function getTripletCentralValue(value){
         if(Array.isArray(value) && value.length >= 2) return toNumber(value[1]);
         return toNumber(value);
       }
 
+      // --------------------------------------------------------------------------
+      // Calculate Angular Separation in Arcseconds
+      // Uses haversine formula for great-circle distance on a sphere
       function angularSeparationArcsec(ra1Deg, dec1Deg, ra2Deg, dec2Deg){
+        // Convert all coordinates to radians
         const ra1 = ra1Deg * Math.PI / 180;
         const dec1 = dec1Deg * Math.PI / 180;
         const ra2 = ra2Deg * Math.PI / 180;
@@ -383,6 +513,11 @@
         return c * 206264.80624709636;
       }
 
+      // --------------------------------------------------------------------------
+      // De-duplicate Match Results by Index
+      // --------------------------------------------------------------------------
+      // A system may match by both name AND position
+      // Use catalog index as unique key to avoid showing same system twice
       function uniqueMatches(items){
         const seen = new Set();
         const out = [];
@@ -396,6 +531,10 @@
         return out;
       }
 
+      // --------------------------------------------------------------------------
+      // Format Record Snippet for Display
+      // --------------------------------------------------------------------------
+      // Extract key fields from catalog record for showing match details
       function formatRecordSnippet(record){
         const snippet = {
           'System Name': record['System Name'] ?? null,
@@ -412,11 +551,16 @@
         return JSON.stringify(snippet, null, 2);
       }
 
+      // --------------------------------------------------------------------------
+      // Render Search Results
+      // --------------------------------------------------------------------------
+      // Display summary of matches and details for each candidate system found
       function renderSearchOutput(nameMatches, positionMatches, candidateId){
+        // Merge and de-duplicate: systems matching by name, position, or both
         const merged = uniqueMatches(nameMatches.concat(positionMatches));
         const hasMatches = merged.length > 0;
 
-        // Count entries with position matches (including those that also matched by name)
+        // Count how many have valid position separations (includes name+position matches)
         const totalPositionMatches = merged.filter(m => m.sepArcsec !== null && m.sepArcsec !== undefined).length;
 
         let html = '';
@@ -448,6 +592,10 @@
         searchResults.classList.remove('hidden');
       }
 
+      // --------------------------------------------------------------------------
+      // Escape HTML for Safe Display
+      // --------------------------------------------------------------------------
+      // Prevent XSS by escaping HTML special characters
       function escapeHtml(value){
         return String(value)
           .replace(/&/g, '&amp;')
@@ -457,6 +605,10 @@
           .replace(/'/g, '&#39;');
       }
 
+      // --------------------------------------------------------------------------
+      // Read Triplet from Form (Required Fields)
+      // --------------------------------------------------------------------------
+      // Catalog uses [err-, value, err+] format for measurements with uncertainties
       function readTriplet(errMinusId, valueId, errPlusId){
         const eMinus = toNumber(document.getElementById(errMinusId).value);
         const value = toNumber(document.getElementById(valueId).value);
@@ -464,11 +616,31 @@
         return [eMinus, value, ePlus];
       }
 
+      // --------------------------------------------------------------------------
+      // Read Optional Triplet from Form
+      // --------------------------------------------------------------------------
+      // Returns null if all values empty (field not provided), otherwise returns triplet
+      function readOptionalTriplet(errMinusId, valueId, errPlusId){
+        const eMinus = toNumber(document.getElementById(errMinusId).value);
+        const value = toNumber(document.getElementById(valueId).value);
+        const ePlus = toNumber(document.getElementById(errPlusId).value);
+        // Return null if all are null/empty, otherwise return the triplet
+        if(eMinus === null && value === null && ePlus === null) return null;
+        return [eMinus, value, ePlus];
+      }
+
+      // --------------------------------------------------------------------------
+      // Read Optional Text Field
+      // --------------------------------------------------------------------------
       function readOptionalText(id){
         const value = document.getElementById(id).value.trim();
         return value ? value : null;
       }
 
+      // --------------------------------------------------------------------------
+      // Read Optional List Field (comma/semicolon/newline separated)
+      // --------------------------------------------------------------------------
+      // Used for fields like Reference (ADS bibcodes) and Detection Method
       function readOptionalList(id){
         const value = document.getElementById(id).value.trim();
         if(!value) return null;
@@ -476,34 +648,55 @@
         return parts.length ? parts : null;
       }
 
+      // --------------------------------------------------------------------------
+      // Create URL-safe Slug from System Name
+      // --------------------------------------------------------------------------
+      // Used for generating filenames and branch names
       function makeSlug(value){
         return String(value || 'missing_system')
           .trim()
           .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '_')
-          .replace(/^_+|_+$/g, '')
+          .replace(/[^a-z0-9]+/g, '_')   // Replace non-alphanumeric with underscore
+          .replace(/^_+|_+$/g, '')       // Trim leading/trailing underscores
           .slice(0, 80) || 'missing_system';
       }
 
+      // ==========================================================================
+      // EVENT HANDLER: Step 1 - Catalog Search
+      // ==========================================================================
       searchForm.addEventListener('submit', async function(event){
         event.preventDefault();
-        await loadCatalog();
+        await loadCatalog();  // Ensure catalog is loaded before searching
         if(!catalogLoaded) return;
 
+        // Extract user input from Step 1 form
         const candidateId = document.getElementById('candidateId').value.trim();
         const candidateRA = toNumber(document.getElementById('candidateRA').value);
         const candidateDec = toNumber(document.getElementById('candidateDec').value);
 
+        // Validate required inputs
         if(!candidateId || candidateRA === null || candidateDec === null){
           searchStatus.textContent = 'Please provide system name/ID and numeric RA and Dec.';
           return;
         }
 
-        const candidateNorm = normalizeToken(candidateId);
-        const nameMatches = [];
-        const positionMatches = [];
+        // Require minimum 3 characters to avoid overly broad matches (e.g., "t" matches 400+ systems)
+        if(candidateId.length < 3){
+          searchStatus.textContent = 'Please provide a system name/ID with at least 3 characters.';
+          return;
+        }
 
+        // Normalize candidate ID for fuzzy matching
+        const candidateNorm = normalizeToken(candidateId);
+        const nameMatches = [];       // Systems matching by name/ID
+        const positionMatches = [];   // Systems matching by sky position
+
+        // --------------------------------------------------------------------------
+        // Search entire catalog for matches
+        // --------------------------------------------------------------------------
         catalogRecords.forEach((record, index) => {
+          // ---- Name Matching ----
+          // Check if any name/alias in the record matches the candidate
           const names = getNameCandidates(record);
           const matchedByName = names.some(name => {
             const norm = normalizeToken(name);
@@ -515,11 +708,13 @@
             nameMatches.push({
               index,
               record,
-              sepArcsec: null,
+              sepArcsec: null,  // Position not checked yet for name-only matches
               reasons: ['name/ID']
             });
           }
 
+          // ---- Position Matching ----
+          // Check if position matches within threshold (0.1 arcsec)
           const ra = getTripletCentralValue(record['RA']);
           const dec = getTripletCentralValue(record['Dec']);
           if(ra !== null && dec !== null){
@@ -535,8 +730,13 @@
           }
         });
 
+        // --------------------------------------------------------------------------
+        // Merge Matches (systems can match by both name AND position)
+        // --------------------------------------------------------------------------
         const byIndex = new Map();
+        // Add all name matches to map
         nameMatches.forEach(item => byIndex.set(item.index, item));
+        // Merge position matches: if already in map (name match), update reasons
         positionMatches.forEach(item => {
           if(byIndex.has(item.index)){
             const existing = byIndex.get(item.index);
@@ -548,11 +748,13 @@
         const mergedName = Array.from(byIndex.values());
         const mergedPositionOnly = positionMatches.filter(p => !byIndex.has(p.index));
 
+        // Display results to user
         renderSearchOutput(mergedName, mergedPositionOnly, candidateId);
 
         searchStatus.innerHTML = '<span class="result-ok">Catalog check complete.</span>';
-        continueWrap.classList.remove('hidden');
+        continueWrap.classList.remove('hidden');  // Show "Continue to Step 2" button
 
+        // Pre-fill Step 2 form with Step 1 values (if Step 2 form is empty)
         if(!document.getElementById('formSystemName').value.trim()){
           document.getElementById('formSystemName').value = candidateId;
         }
@@ -564,14 +766,21 @@
         }
       });
 
+      // ==========================================================================
+      // EVENT HANDLER: Continue to Step 2 Button
+      // ==========================================================================
       continueToStep2.addEventListener('click', function(){
-        submitSection.classList.remove('hidden');
+        submitSection.classList.remove('hidden');  // Reveal Step 2 proposal form
         submitSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
 
+      // ==========================================================================
+      // EVENT HANDLER: Step 2 - Proposal Form Submission
+      // ==========================================================================
       proposalForm.addEventListener('submit', function(event){
         event.preventDefault();
 
+        // Validate required fields
         const systemName = document.getElementById('formSystemName').value.trim();
         const reason = document.getElementById('formReason').value.trim();
 
@@ -580,14 +789,47 @@
           return;
         }
 
+        // --------------------------------------------------------------------------
+        // Build proposal JSON object following catalog schema
+        // --------------------------------------------------------------------------
         const proposal = {
           'System Name': systemName,
           'RA': readTriplet('formRAErrMinus', 'formRAValue', 'formRAErrPlus'),
           'Dec': readTriplet('formDecErrMinus', 'formDecValue', 'formDecErrPlus'),
           'Reference': readOptionalList('formReference'),
-          'Notes': reason
+          'Notes': reason  // Scientific justification for why this is post-MT
         };
 
+        // --------------------------------------------------------------------------
+        // Add optional orbital/mass parameters (triplet format)
+        // --------------------------------------------------------------------------
+        const period = readOptionalTriplet('formPeriodErrMinus', 'formPeriodValue', 'formPeriodErrPlus');
+        if(period) proposal['Period'] = period;
+
+        const eccentricity = readOptionalTriplet('formEccentricityErrMinus', 'formEccentricityValue', 'formEccentricityErrPlus');
+        if(eccentricity) proposal['Eccentricity'] = eccentricity;
+
+        const m1 = readOptionalTriplet('formM1ErrMinus', 'formM1Value', 'formM1ErrPlus');
+        if(m1) proposal['M1'] = m1;
+
+        const m2 = readOptionalTriplet('formM2ErrMinus', 'formM2Value', 'formM2ErrPlus');
+        if(m2) proposal['M2'] = m2;
+
+        // --------------------------------------------------------------------------
+        // Add additional optional mass fields
+        // --------------------------------------------------------------------------
+        const massFunction = readOptionalTriplet('formMassFunctionErrMinus', 'formMassFunctionValue', 'formMassFunctionErrPlus');
+        if(massFunction) proposal['Mass Function'] = massFunction;
+
+        const m1Sin3i = readOptionalTriplet('formM1Sin3iErrMinus', 'formM1Sin3iValue', 'formM1Sin3iErrPlus');
+        if(m1Sin3i) proposal['M1_sin3i'] = m1Sin3i;
+
+        const m2Sin3i = readOptionalTriplet('formM2Sin3iErrMinus', 'formM2Sin3iValue', 'formM2Sin3iErrPlus');
+        if(m2Sin3i) proposal['M2_sin3i'] = m2Sin3i;
+
+        // --------------------------------------------------------------------------
+        // Add optional classification fields
+        // --------------------------------------------------------------------------
         const detectionMethods = readOptionalList('formDetectionMethod');
         if(detectionMethods) proposal['Detection Method'] = detectionMethods;
 
@@ -604,12 +846,15 @@
         const evolType2 = readOptionalText('formEvolType2');
         if(evolType2) proposal['evol_type_2'] = evolType2;
 
+        // --------------------------------------------------------------------------
+        // Parse and merge additional JSON fields (if provided)
+        // --------------------------------------------------------------------------
         const additionalRaw = document.getElementById('formAdditionalJson').value.trim();
         if(additionalRaw){
           try {
             const additional = JSON.parse(additionalRaw);
             if(additional && typeof additional === 'object' && !Array.isArray(additional)){
-              Object.assign(proposal, additional);
+              Object.assign(proposal, additional);  // Merge additional fields into proposal
             } else {
               proposalStatus.textContent = 'Additional JSON must be an object, e.g. {"Period": [null, 12.5, null]}.';
               return;
@@ -620,29 +865,43 @@
           }
         }
 
+        // Final validation: require at least one reference
         if(!Array.isArray(proposal['Reference']) || proposal['Reference'].length === 0){
           proposalStatus.textContent = 'Please provide at least one reference.';
           return;
         }
 
+        // --------------------------------------------------------------------------
+        // Generate JSON and prepare GitHub submission
+        // --------------------------------------------------------------------------
         latestProposalJson = JSON.stringify(proposal, null, 2);
         proposalPreview.textContent = latestProposalJson;
-        proposalPreview.classList.remove('hidden');
+        proposalPreview.classList.remove('hidden');  // Show JSON preview to user
 
-        const date = new Date().toISOString().slice(0, 10);
-        const slug = makeSlug(systemName);
+        // Generate timestamped filename and suggested branch name
+        const date = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD
+        const slug = makeSlug(systemName);                   // URL-safe system name
         const filename = 'data/proposed_additions/' + date + '_' + slug + '.json';
+        const branchName = 'proposal-' + date + '-' + slug;  // e.g., proposal-2026-02-20-hd194335
 
+        // Build GitHub "new file" URL with pre-filled filename and content
         const newFileUrl = REPO_NEW_FILE_URL
           + '?filename=' + encodeURIComponent(filename)
           + '&value=' + encodeURIComponent(latestProposalJson);
 
+        // Show instructions for creating a new branch and PR
         proposalStatus.innerHTML =
-          '<span class="result-ok">Proposal JSON prepared.</span> Opening GitHub so you can commit this proposal file and open a pull request.';
+          '<span class="result-ok">Proposal JSON prepared.</span> Opening GitHub. ' +
+          '<strong>Important:</strong> At the bottom of the page, select <em>"Create a <u>new branch</u> for this commit and start a pull request"</em> ' +
+          'and use branch name: <code style="background:#f0f0f0;padding:2px 6px;border-radius:3px;">' + branchName + '</code>';
 
+        // Open GitHub in new tab
         window.open(newFileUrl, '_blank', 'noopener');
       });
 
+      // ==========================================================================
+      // EVENT HANDLER: Copy JSON to Clipboard Button
+      // ==========================================================================
       copyJsonBtn.addEventListener('click', async function(){
         if(!latestProposalJson){
           proposalStatus.textContent = 'Prepare the proposal first.';
@@ -652,10 +911,12 @@
           await navigator.clipboard.writeText(latestProposalJson);
           proposalStatus.textContent = 'Proposal JSON copied to clipboard.';
         } catch(_){
+          // Clipboard API may fail due to permissions or browser support
           proposalStatus.textContent = 'Could not access clipboard. Copy manually from the preview box.';
         }
       });
 
+      // Initialize: Load catalog on page load
       loadCatalog();
     })();
   </script>
