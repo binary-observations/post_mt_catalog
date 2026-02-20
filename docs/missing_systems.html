@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Suggest Missing System</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f0fbff; color: #222; }
+    header {
+      background: white;
+      color: #000;
+      padding: 0.1rem;
+      text-align: center;
+      border: 8px solid #388087;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    .header-inset-1 {
+      border: 8px solid #f0dea8;
+      padding: 0.5rem;
+      border-radius: 2px;
+      background: white;
+      box-sizing: border-box;
+    }
+    nav { margin: 1rem 0; }
+    nav a { color: #000000; margin: 0 1rem; text-decoration: none; font-weight: bold; }
+    nav a:hover { text-decoration: underline; }
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px #fbfbfa;
+      padding: 2rem;
+      outline: 6px solid #388087;
+    }
+    h2 { border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+    .card {
+      margin-top: 1rem;
+      padding: 1rem;
+      border-radius: 8px;
+      border: 1px solid #cfe8ee;
+      background: #f8fdff;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.6rem;
+    }
+    .form-group { margin-bottom: 0.9rem; }
+    .form-group label { display: block; margin-bottom: 0.35rem; font-weight: 600; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      box-sizing: border-box;
+      border: 1px solid #d3dbe0;
+      border-radius: 4px;
+      padding: 0.55rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: white;
+    }
+    .triplet {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(80px, 1fr));
+      gap: 0.5rem;
+    }
+    button {
+      background: #4a8998;
+      color: white;
+      padding: 0.65rem 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      margin-right: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    button:hover { background: #1a252f; }
+    button.secondary { background: #6b7280; }
+    button.secondary:hover { background: #374151; }
+    .status { margin-top: 0.5rem; color: #445; }
+    .result-ok { color: #0f766e; font-weight: 600; }
+    .result-warn { color: #b45309; font-weight: 600; }
+    .result-none { color: #166534; font-weight: 600; }
+    .match-card {
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 0.8rem;
+      margin: 0.7rem 0;
+      background: white;
+    }
+    pre {
+      background: #f4f4f4;
+      border-radius: 4px;
+      padding: 0.6rem;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0.4rem 0;
+    }
+    .hidden { display: none; }
+    @media (max-width: 700px) {
+      section { padding: 1rem; }
+      .triplet { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inset-1">
+      <h1>Suggest a Missing Post-MT System</h1>
+      <p>Two-step contribution flow for the catalog.</p>
+      <nav>
+        <a href="index.html#add_missing_systems">Back to catalog website</a>
+      </nav>
+    </div>
+  </header>
+
+  <section>
+    <h2>Step 1 — Check if system already exists</h2>
+    <p>Please provide a system name/ID and sky position. We check if there is a match on either the:</p>
+    <ul>
+      <li> Name/ID </li>
+      <li> Position within 0.1 arcsec</li>
+    </ul>
+
+    <div class="card">
+      <form id="searchForm">
+        <div class="grid">
+          <div class="form-group">
+            <label for="candidateId">System name or ID *</label>
+            <input id="candidateId" type="text" required placeholder="e.g. Gaia DR3 123...">
+          </div>
+          <div class="form-group">
+            <label for="candidateRA">RA (deg) *</label>
+            <input id="candidateRA" type="number" step="any" required placeholder="e.g. 150.025">
+          </div>
+          <div class="form-group">
+            <label for="candidateDec">Dec (deg) *</label>
+            <input id="candidateDec" type="number" step="any" required placeholder="e.g. -45.123">
+          </div>
+        </div>
+        <button type="submit">Run catalog check</button>
+      </form>
+      <div id="searchStatus" class="status"></div>
+    </div>
+
+    <div id="searchResults" class="card hidden"></div>
+
+    <div id="continueWrap" class="hidden" style="margin-top:1rem;">
+      <button id="continueToStep2">Continue to Step 2: Submit missing system</button>
+    </div>
+  </section>
+
+  <section id="submitSection" class="hidden">
+    <h2>Step 2 — Submit missing system proposal</h2>
+    <p>Required minimum fields: System Name, location (RA/Dec), reference, and explanation for why it is post-MT.</p>
+
+    <div class="card">
+      <form id="proposalForm">
+        <div class="form-group">
+          <label for="formSystemName">System Name *</label>
+          <input id="formSystemName" type="text" required>
+        </div>
+
+        <div class="form-group">
+          <label>RA [err-, value, err+] in deg *</label>
+          <div class="triplet">
+            <input id="formRAErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formRAValue" type="number" step="any" required placeholder="value">
+            <input id="formRAErrPlus" type="number" step="any" placeholder="err+">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Dec [err-, value, err+] in deg *</label>
+          <div class="triplet">
+            <input id="formDecErrMinus" type="number" step="any" placeholder="err-">
+            <input id="formDecValue" type="number" step="any" required placeholder="value">
+            <input id="formDecErrPlus" type="number" step="any" placeholder="err+">
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="form-group">
+            <label for="formReference">Reference (ADS bibcode(s), comma-separated) *</label>
+            <input id="formReference" type="text" required placeholder="e.g. 2025A&A...123A...1X">
+          </div>
+          <div class="form-group">
+            <label for="formSystemClass">system_class (optional)</label>
+            <input id="formSystemClass" type="text" placeholder="e.g. EL CVn">
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="form-group">
+            <label for="formObsType1">obs_type_1 (optional)</label>
+            <input id="formObsType1" type="text" placeholder="e.g. Be star">
+          </div>
+          <div class="form-group">
+            <label for="formObsType2">obs_type_2 (optional)</label>
+            <input id="formObsType2" type="text" placeholder="e.g. Hot subdwarf">
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="form-group">
+            <label for="formEvolType1">evol_type_1 (optional)</label>
+            <input id="formEvolType1" type="text" placeholder="e.g. MS">
+          </div>
+          <div class="form-group">
+            <label for="formEvolType2">evol_type_2 (optional)</label>
+            <input id="formEvolType2" type="text" placeholder="e.g. WD">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="formDetectionMethod">Detection Method (comma-separated, optional)</label>
+          <input id="formDetectionMethod" type="text" placeholder="e.g. RV, SB1">
+        </div>
+
+        <div class="form-group">
+          <label for="formReason">Why this is post-MT *</label>
+          <textarea id="formReason" required rows="4" placeholder="Short scientific motivation / evidence."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="formAdditionalJson">Additional schema fields as JSON object (optional)</label>
+          <textarea id="formAdditionalJson" rows="5" placeholder='{"Period": [null, 12.5, null], "M1": [0.5, 5.0, 0.5]}'></textarea>
+        </div>
+
+        <button type="submit">Prepare GitHub PR submission</button>
+        <button type="button" class="secondary" id="copyJsonBtn">Copy proposal JSON</button>
+      </form>
+
+      <div id="proposalStatus" class="status"></div>
+      <pre id="proposalPreview" class="hidden"></pre>
+    </div>
+  </section>
+
+  <script>
+    (function(){
+      const RAW_URL = 'https://raw.githubusercontent.com/binary-observations/post_mt_catalog/master/data/post_mt_systems.json';
+      const REPO_NEW_FILE_URL = 'https://github.com/binary-observations/post_mt_catalog/new/master';
+      const ARCSEC_THRESHOLD = 0.1;
+
+      let catalogRecords = [];
+      let catalogLoaded = false;
+      let latestProposalJson = '';
+
+      const searchForm = document.getElementById('searchForm');
+      const searchStatus = document.getElementById('searchStatus');
+      const searchResults = document.getElementById('searchResults');
+      const continueWrap = document.getElementById('continueWrap');
+      const continueToStep2 = document.getElementById('continueToStep2');
+      const submitSection = document.getElementById('submitSection');
+
+      const proposalForm = document.getElementById('proposalForm');
+      const proposalStatus = document.getElementById('proposalStatus');
+      const proposalPreview = document.getElementById('proposalPreview');
+      const copyJsonBtn = document.getElementById('copyJsonBtn');
+
+      function sanitizeJSONText(text){
+        return text
+          .replace(/np\.nan/gi, 'null')
+          .replace(/\bNaN\b/gi, 'null')
+          .replace(/\bnan\b/gi, 'null')
+          .replace(/\b-?Infinity\b/g, 'null')
+          .replace(/\b-?Inf\b/gi, 'null')
+          .replace(/\bNone\b/g, 'null');
+      }
+
+      function parseCatalog(rawData){
+        if(Array.isArray(rawData)) return rawData;
+        if(rawData && typeof rawData === 'object'){
+          return Object.entries(rawData).map(([k, v]) => ({ 'System Name': k, ...v }));
+        }
+        return [];
+      }
+
+      async function loadCatalog(){
+        if(catalogLoaded) return;
+        searchStatus.textContent = 'Loading catalog from GitHub...';
+        try {
+          const url = RAW_URL + '?ts=' + Date.now();
+          const res = await fetch(url, { cache: 'no-store' });
+          if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+          const txt = await res.text();
+
+          let parsed;
+          try {
+            parsed = JSON.parse(txt);
+          } catch(_) {
+            parsed = JSON.parse(sanitizeJSONText(txt));
+          }
+
+          catalogRecords = parseCatalog(parsed);
+          catalogLoaded = true;
+          searchStatus.textContent = 'Catalog loaded (' + catalogRecords.length + ' systems).';
+        } catch(err){
+          searchStatus.textContent = 'Failed to load catalog: ' + err.message;
+        }
+      }
+
+      function normalizeToken(value){
+        return String(value || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+      }
+
+      function getNameCandidates(record){
+        const raw = record['System Name'];
+        if(Array.isArray(raw)) return raw.filter(Boolean).map(String);
+        if(typeof raw === 'string' && raw.trim()) return [raw.trim()];
+        return [];
+      }
+
+      function toNumber(value){
+        const n = Number(value);
+        return Number.isFinite(n) ? n : null;
+      }
+
+      function getTripletCentralValue(value){
+        if(Array.isArray(value) && value.length >= 2) return toNumber(value[1]);
+        return toNumber(value);
+      }
+
+      function angularSeparationArcsec(ra1Deg, dec1Deg, ra2Deg, dec2Deg){
+        const ra1 = ra1Deg * Math.PI / 180;
+        const dec1 = dec1Deg * Math.PI / 180;
+        const ra2 = ra2Deg * Math.PI / 180;
+        const dec2 = dec2Deg * Math.PI / 180;
+
+        const sinDDec = Math.sin((dec2 - dec1) / 2);
+        const sinDRa = Math.sin((ra2 - ra1) / 2);
+        const a = sinDDec * sinDDec + Math.cos(dec1) * Math.cos(dec2) * sinDRa * sinDRa;
+        const c = 2 * Math.asin(Math.min(1, Math.sqrt(Math.max(0, a))));
+        return c * 206264.80624709636;
+      }
+
+      function uniqueMatches(items){
+        const seen = new Set();
+        const out = [];
+        items.forEach(entry => {
+          const key = entry.index;
+          if(!seen.has(key)){
+            seen.add(key);
+            out.push(entry);
+          }
+        });
+        return out;
+      }
+
+      function formatRecordSnippet(record){
+        const snippet = {
+          'System Name': record['System Name'] ?? null,
+          'RA': record['RA'] ?? null,
+          'Dec': record['Dec'] ?? null,
+          'Period': record['Period'] ?? null,
+          'Eccentricity': record['Eccentricity'] ?? null,
+          'M1': record['M1'] ?? null,
+          'M2': record['M2'] ?? null,
+          'system_class': record['system_class'] ?? null,
+          'Reference': record['Reference'] ?? null,
+          'Notes': record['Notes'] ?? null
+        };
+        return JSON.stringify(snippet, null, 2);
+      }
+
+      function renderSearchOutput(nameMatches, positionMatches, candidateId){
+        const merged = uniqueMatches(nameMatches.concat(positionMatches));
+        const hasMatches = merged.length > 0;
+
+        let html = '';
+
+        html += '<div><strong>Input ID:</strong> ' + escapeHtml(candidateId) + '</div>';
+        html += '<div style="margin-top:0.35rem;"><strong>Name/ID matches:</strong> ' + nameMatches.length + '</div>';
+        html += '<div><strong>Position matches (&le; 0.1 arcsec):</strong> ' + positionMatches.length + '</div>';
+
+        if(hasMatches){
+          html += '<p class="result-warn">Could this be your system? We found existing candidate(s) in the catalog.</p>';
+          merged.slice(0, 10).forEach(match => {
+            const sepText = match.sepArcsec === null ? 'n/a' : match.sepArcsec.toFixed(4) + ' arcsec';
+            html += '<div class="match-card">';
+            html += '<div><strong>Candidate:</strong> ' + escapeHtml(String(match.record['System Name'] || 'Unnamed system')) + '</div>';
+            html += '<div><strong>Reason(s):</strong> ' + escapeHtml(match.reasons.join(', ')) + '</div>';
+            html += '<div><strong>Separation:</strong> ' + escapeHtml(sepText) + '</div>';
+            html += '<pre>' + escapeHtml(formatRecordSnippet(match.record)) + '</pre>';
+            html += '</div>';
+          });
+          if(merged.length > 10){
+            html += '<p>Showing first 10 matches. Refine the ID or coordinates for a tighter check.</p>';
+          }
+        } else {
+          html += '<p class="result-none">This system does indeed appear to not be in the catalog.</p>';
+        }
+
+        html += '<p>Still think your system is missing? Proceed to Step 2: </p>';
+        searchResults.innerHTML = html;
+        searchResults.classList.remove('hidden');
+      }
+
+      function escapeHtml(value){
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function readTriplet(errMinusId, valueId, errPlusId){
+        const eMinus = toNumber(document.getElementById(errMinusId).value);
+        const value = toNumber(document.getElementById(valueId).value);
+        const ePlus = toNumber(document.getElementById(errPlusId).value);
+        return [eMinus, value, ePlus];
+      }
+
+      function readOptionalText(id){
+        const value = document.getElementById(id).value.trim();
+        return value ? value : null;
+      }
+
+      function readOptionalList(id){
+        const value = document.getElementById(id).value.trim();
+        if(!value) return null;
+        const parts = value.split(/[\n,;]+/).map(v => v.trim()).filter(Boolean);
+        return parts.length ? parts : null;
+      }
+
+      function makeSlug(value){
+        return String(value || 'missing_system')
+          .trim()
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '_')
+          .replace(/^_+|_+$/g, '')
+          .slice(0, 80) || 'missing_system';
+      }
+
+      searchForm.addEventListener('submit', async function(event){
+        event.preventDefault();
+        await loadCatalog();
+        if(!catalogLoaded) return;
+
+        const candidateId = document.getElementById('candidateId').value.trim();
+        const candidateRA = toNumber(document.getElementById('candidateRA').value);
+        const candidateDec = toNumber(document.getElementById('candidateDec').value);
+
+        if(!candidateId || candidateRA === null || candidateDec === null){
+          searchStatus.textContent = 'Please provide system name/ID and numeric RA and Dec.';
+          return;
+        }
+
+        const candidateNorm = normalizeToken(candidateId);
+        const nameMatches = [];
+        const positionMatches = [];
+
+        catalogRecords.forEach((record, index) => {
+          const names = getNameCandidates(record);
+          const matchedByName = names.some(name => {
+            const norm = normalizeToken(name);
+            if(!norm || !candidateNorm) return false;
+            return norm === candidateNorm || norm.includes(candidateNorm) || candidateNorm.includes(norm);
+          });
+
+          if(matchedByName){
+            nameMatches.push({
+              index,
+              record,
+              sepArcsec: null,
+              reasons: ['name/ID']
+            });
+          }
+
+          const ra = getTripletCentralValue(record['RA']);
+          const dec = getTripletCentralValue(record['Dec']);
+          if(ra !== null && dec !== null){
+            const sepArcsec = angularSeparationArcsec(candidateRA, candidateDec, ra, dec);
+            if(sepArcsec <= ARCSEC_THRESHOLD){
+              positionMatches.push({
+                index,
+                record,
+                sepArcsec,
+                reasons: ['sky position <= 0.1 arcsec']
+              });
+            }
+          }
+        });
+
+        const byIndex = new Map();
+        nameMatches.forEach(item => byIndex.set(item.index, item));
+        positionMatches.forEach(item => {
+          if(byIndex.has(item.index)){
+            const existing = byIndex.get(item.index);
+            existing.reasons = ['name/ID', 'sky position <= 0.1 arcsec'];
+            existing.sepArcsec = item.sepArcsec;
+          }
+        });
+
+        const mergedName = Array.from(byIndex.values());
+        const mergedPositionOnly = positionMatches.filter(p => !byIndex.has(p.index));
+
+        renderSearchOutput(mergedName, mergedPositionOnly, candidateId);
+
+        searchStatus.innerHTML = '<span class="result-ok">Catalog check complete.</span>';
+        continueWrap.classList.remove('hidden');
+
+        if(!document.getElementById('formSystemName').value.trim()){
+          document.getElementById('formSystemName').value = candidateId;
+        }
+        if(!document.getElementById('formRAValue').value.trim()){
+          document.getElementById('formRAValue').value = String(candidateRA);
+        }
+        if(!document.getElementById('formDecValue').value.trim()){
+          document.getElementById('formDecValue').value = String(candidateDec);
+        }
+      });
+
+      continueToStep2.addEventListener('click', function(){
+        submitSection.classList.remove('hidden');
+        submitSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      proposalForm.addEventListener('submit', function(event){
+        event.preventDefault();
+
+        const systemName = document.getElementById('formSystemName').value.trim();
+        const reason = document.getElementById('formReason').value.trim();
+
+        if(!systemName || !reason){
+          proposalStatus.textContent = 'Please complete all required fields.';
+          return;
+        }
+
+        const proposal = {
+          'System Name': systemName,
+          'RA': readTriplet('formRAErrMinus', 'formRAValue', 'formRAErrPlus'),
+          'Dec': readTriplet('formDecErrMinus', 'formDecValue', 'formDecErrPlus'),
+          'Reference': readOptionalList('formReference'),
+          'Notes': reason
+        };
+
+        const detectionMethods = readOptionalList('formDetectionMethod');
+        if(detectionMethods) proposal['Detection Method'] = detectionMethods;
+
+        const systemClass = readOptionalText('formSystemClass');
+        if(systemClass) proposal['system_class'] = systemClass;
+
+        const obsType1 = readOptionalText('formObsType1');
+        if(obsType1) proposal['obs_type_1'] = obsType1;
+        const obsType2 = readOptionalText('formObsType2');
+        if(obsType2) proposal['obs_type_2'] = obsType2;
+
+        const evolType1 = readOptionalText('formEvolType1');
+        if(evolType1) proposal['evol_type_1'] = evolType1;
+        const evolType2 = readOptionalText('formEvolType2');
+        if(evolType2) proposal['evol_type_2'] = evolType2;
+
+        const additionalRaw = document.getElementById('formAdditionalJson').value.trim();
+        if(additionalRaw){
+          try {
+            const additional = JSON.parse(additionalRaw);
+            if(additional && typeof additional === 'object' && !Array.isArray(additional)){
+              Object.assign(proposal, additional);
+            } else {
+              proposalStatus.textContent = 'Additional JSON must be an object, e.g. {"Period": [null, 12.5, null]}.';
+              return;
+            }
+          } catch(err){
+            proposalStatus.textContent = 'Invalid Additional JSON: ' + err.message;
+            return;
+          }
+        }
+
+        if(!Array.isArray(proposal['Reference']) || proposal['Reference'].length === 0){
+          proposalStatus.textContent = 'Please provide at least one reference.';
+          return;
+        }
+
+        latestProposalJson = JSON.stringify(proposal, null, 2);
+        proposalPreview.textContent = latestProposalJson;
+        proposalPreview.classList.remove('hidden');
+
+        const date = new Date().toISOString().slice(0, 10);
+        const slug = makeSlug(systemName);
+        const filename = 'data/proposed_additions/' + date + '_' + slug + '.json';
+
+        const newFileUrl = REPO_NEW_FILE_URL
+          + '?filename=' + encodeURIComponent(filename)
+          + '&value=' + encodeURIComponent(latestProposalJson);
+
+        proposalStatus.innerHTML =
+          '<span class="result-ok">Proposal JSON prepared.</span> Opening GitHub so you can commit this proposal file and open a pull request.';
+
+        window.open(newFileUrl, '_blank', 'noopener');
+      });
+
+      copyJsonBtn.addEventListener('click', async function(){
+        if(!latestProposalJson){
+          proposalStatus.textContent = 'Prepare the proposal first.';
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(latestProposalJson);
+          proposalStatus.textContent = 'Proposal JSON copied to clipboard.';
+        } catch(_){
+          proposalStatus.textContent = 'Could not access clipboard. Copy manually from the preview box.';
+        }
+      });
+
+      loadCatalog();
+    })();
+  </script>
+</body>
+</html>

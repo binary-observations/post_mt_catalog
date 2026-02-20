@@ -16,7 +16,7 @@
       box-sizing: border-box;
     }
     .header-inset-1 {
-      border: 8px solid #C2EDCE; /* middle blue  = 31bbc5cf yellow = eccd69 */
+      border: 8px solid #f0dea8; /* middle blue  = 31bbc5cf yellow = eccd69 */
       padding: 0.5rem 0.5rem 0.5rem 0.5rem;
       border-radius: 2px;
       background: white;
@@ -58,6 +58,7 @@
         <a href="#data">Data</a>
         <a href="#results">Results</a>
         <a href="#plots">Plots</a>
+        <a href="missing_systems.html">Suggest Missing System</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
@@ -67,6 +68,8 @@
   <section id="about"><div class="section-border-inner">
     <h2>About</h2>
     <p>This project aims to provide a comprehensive catalog and analysis of post-mass transfer binary systems, including their key properties and observational data. The data is structured for easy analysis and reproducibility, supporting the astrophysics community in understanding binary evolution.</p>
+
+    <p>Repository link: <a href="https://github.com/binary-observations/post_mt_catalog">binary-observations/post_mt_catalog</a></p>
   </div></section>
 
 
@@ -395,15 +398,26 @@
 </section>
 
 
-  <!-- ######################################################################################### -->
+<!-- ######################################################################################### -->
+<section id="add_missing_systems"><div class="section-border-inner">
+  <h2>Suggest missing systems</h2>
+  <p>Do you think a post-mass transfer system is missing from the catalog? Double check if your system already exists in the catalog (by name/ID and by position). If it is not in the catalog, please submit the missing-system proposal. 
+    Thanks for contributing!</p>
+    <p>
+      <a href="missing_systems.html" style="display:inline-block; background:#f2dc8d; color:rgb(61, 48, 39); text-decoration:none; padding:0.75rem 1rem; border-radius:4px; font-weight:bold;">Open missing-system workflow</a>
+    </p>
+    
+  </div></section>
+  
+
+<!-- ######################################################################################### -->
   <section id="paper"><div class="section-border-inner">
     <h2>Catalog description paper</h2>
     <!-- <p>The paper that describes this catalog can be found <a href="../writing/main.pdf">here</a>.</p> -->
-
+  
     <p>Processed tables and data products are available in the <code>result_tables/</code> directory. Each file contains results for different post-mass transfer systems. See the project repository for details.</p>
   </div></section>
-
-
+  
 <!-- ######################################################################################### -->
   <section id="plots"><div class="section-border-inner">
     <h2>Interactive Plots</h2>
@@ -425,188 +439,6 @@
 
 
 
-  <!-- ######################################################################################### -->
-  <section id="add_missing_systems"><div class="section-border-inner">
-
-    <h2>Add missing systems</h2>
-
-    <p>For questions or contributions, please open an issue or pull request on the <a href="https://github.com/LiekeVanSon/post_mt_catalog">GitHub repository</a>.</p>
-    
-    <div id="contribution-form">
-      <h3>Add New System</h3>
-      <form id="newSystemForm" onsubmit="submitNewSystem(event)">
-        <div class="form-group">
-          <label for="systemName">System Name:</label>
-          <input type="text" id="systemName" required>
-        </div>
-        
-        <div class="form-group">
-          <label>RA [err-, value, err+]:</label>
-          <input type="number" step="0.001" class="error-input" id="RA_err_minus" placeholder="err-">
-          <input type="number" step="0.001" class="value-input" id="RA_value" placeholder="value" required>
-          <input type="number" step="0.001" class="error-input" id="RA_err_plus" placeholder="err+">
-        </div>
-        
-        <div class="form-group">
-          <label>Dec [err-, value, err+]:</label>
-          <input type="number" step="0.001" class="error-input" id="Dec_err_minus" placeholder="err-">
-          <input type="number" step="0.001" class="value-input" id="Dec_value" placeholder="value" required>
-          <input type="number" step="0.001" class="error-input" id="Dec_err_plus" placeholder="err+">
-        </div>
-        
-        <div class="form-group">
-          <label>Period [err-, value, err+]:</label>
-          <input type="number" step="0.001" class="error-input" id="Period_err_minus" placeholder="err-">
-          <input type="number" step="0.001" class="value-input" id="Period_value" placeholder="value" required>
-          <input type="number" step="0.001" class="error-input" id="Period_err_plus" placeholder="err+">
-        </div>
-        
-        <div class="form-group">
-          <label>Eccentricity [err-, value, err+]:</label>
-          <input type="number" step="0.001" class="error-input" id="Eccentricity_err_minus" placeholder="err-">
-          <input type="number" step="0.001" class="value-input" id="Eccentricity_value" placeholder="value" required>
-          <input type="number" step="0.001" class="error-input" id="Eccentricity_err_plus" placeholder="err+">
-        </div>
-        
-        <div class="form-group">
-          <label>M1 [err-, value, err+]:</label>
-          <input type="number" step="0.001" class="error-input" id="M1_err_minus" placeholder="err-">
-          <input type="number" step="0.001" class="value-input" id="M1_value" placeholder="value" required>
-          <input type="number" step="0.001" class="error-input" id="M1_err_plus" placeholder="err+">
-        </div>
-        
-        <div class="form-group">
-          <label>M2 [err-, value, err+]:</label>
-          <input type="number" step="0.001" class="error-input" id="M2_err_minus" placeholder="err-">
-          <input type="number" step="0.001" class="value-input" id="M2_value" placeholder="value" required>
-          <input type="number" step="0.001" class="error-input" id="M2_err_plus" placeholder="err+">
-        </div>
-        
-        <div class="form-group">
-          <label for="type1">Type1:</label>
-          <input type="text" id="type1" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="type2">Type2:</label>
-          <input type="text" id="type2" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="detectionMethod">Detection Method:</label>
-          <input type="text" id="detectionMethod" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="reference">Reference:</label>
-          <input type="text" id="reference" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="notes">Notes:</label>
-          <textarea id="notes"></textarea>
-        </div>
-        
-        <button type="submit">Submit New System</button>
-      </form>
-    </div>
-
-    <style>
-      #contribution-form {
-        margin-top: 2rem;
-        padding: 1rem;
-        background: #f8f9fa;
-        border-radius: 8px;
-        outline: 2px solid #2B8180;
-      }
-      .form-group,
-      .form-group input,
-      .form-group textarea {
-        box-sizing: border-box;
-      }
-      .form-group {
-        margin-bottom: 1rem;
-        outline: 1px solid #bbb;
-        border-radius: 4px;
-        padding: 0.5rem;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 0.5rem;
-        font-weight: bold;
-      }
-      .form-group input, .form-group textarea {
-        width: 100%;
-        padding: 0.5rem;
-        margin-bottom: 0.5rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        outline: 1px solid #bbb;
-      }
-      .error-input {
-        width: 30% !important;
-        display: inline-block;
-        margin-right: 2%;
-      }
-      .value-input {
-        width: 34% !important;
-        display: inline-block;
-      }
-      button[type="submit"] {
-        background: #4a8998;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1rem;
-      }
-      button[type="submit"]:hover {
-        background: #1a252f;
-      }
-    </style>
-
-    <script>
-      function submitNewSystem(event) {
-        event.preventDefault();
-        
-        // Collect form data
-        const formData = {
-          "System Name": document.getElementById('systemName').value,
-          "RA": getTripletValues('RA'),
-          "Dec": getTripletValues('Dec'),
-          "Period": getTripletValues('Period'),
-          "Eccentricity": getTripletValues('Eccentricity'),
-          "M1": getTripletValues('M1'),
-          "M2": getTripletValues('M2'),
-          "Type1": document.getElementById('type1').value,
-          "Type2": document.getElementById('type2').value,
-          "Detection Method": document.getElementById('detectionMethod').value,
-          "Reference": document.getElementById('reference').value,
-          "Notes": document.getElementById('notes').value
-        };
-
-        // Format the JSON
-        const jsonString = JSON.stringify(formData, null, 2);
-        
-        // Create GitHub issue URL
-        const title = encodeURIComponent(`New System: ${formData["System Name"]}`);
-        const body = encodeURIComponent(`Please add the following system to the catalog:\n\n\`\`\`json\n${jsonString}\n\`\`\``);
-        const url = `https://github.com/LiekeVanSon/post_mt_catalog/issues/new?title=${title}&body=${body}`;
-        
-        // Open in new tab
-        window.open(url, '_blank');
-      }
-
-      function getTripletValues(fieldName) {
-        return [
-          parseFloat(document.getElementById(`${fieldName}_err_minus`).value) || null,
-          parseFloat(document.getElementById(`${fieldName}_value`).value) || null,
-          parseFloat(document.getElementById(`${fieldName}_err_plus`).value) || null
-        ];
-      }
-    </script>
-  </div></section>
 
   <footer>
     &copy; 2025 L. van Son &amp; Collaborators. Powered by GitHub Pages.
