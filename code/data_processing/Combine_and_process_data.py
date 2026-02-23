@@ -442,7 +442,7 @@ for jp in raw_json_files:
         data = json.load(f)
     if not isinstance(data, list):
         continue
-    # for entry in data:
+    for entry in data:
         # Apply schema upgrade to JSON entries too
         # entry = upgrade_entry_schema(entry)
         all_systems.append(entry)
