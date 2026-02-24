@@ -10,12 +10,12 @@ proj_root = Path('/Users/liekevanson/Documents/Projects/post_mt_review').resolve
 if str(proj_root) not in sys.path:
     sys.path.insert(0, str(proj_root))
 
-from paths import WRITING_DIR      # keep your way
+from paths import WRITING_DIR      
 
 import requests
 
 LIB_ID  = "Zm5P-O4cQPChveuI79eCzA"       # your public library ID
-OUTFILE = WRITING_DIR / "main.bib"      # write exactly here
+OUTFILE = WRITING_DIR / "main.bib"      # write output here
 API     = "https://api.adsabs.harvard.edu/v1"
 
 def fail(msg: str, code: int = 1) -> None:
@@ -61,7 +61,6 @@ def main():
     bib = export_bibtex(s, bibcodes)
     text = bib if bib.endswith("\n") else bib + "\n"
 
-    # Do not mkdir WRITING_DIR (per your request). Just write atomically.
     if OUTFILE.exists() and OUTFILE.read_text(encoding="utf-8") == text:
         print(f"[{datetime.now().isoformat(timespec='seconds')}] no changes in {OUTFILE}")
         return
