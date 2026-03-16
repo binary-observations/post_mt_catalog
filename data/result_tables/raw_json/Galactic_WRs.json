@@ -1,0 +1,1646 @@
+[
+{"System Name":
+      "WR 9",
+    "RA": [
+      2.722222222222222e-09,
+      116.4599965856,
+      2.722222222222222e-09
+    ],
+    "Dec": [
+      3.166666666666667e-09,
+      -34.33013896855,
+      3.166666666666667e-09
+    ],
+    "Period": [
+      null,
+      14.305,
+      null
+    ],
+    "Eccentricity": [
+      null,
+      0.0,
+      null
+    ],
+    "M1": [
+      null,
+      9.0,
+      null
+    ],
+    "M2": [
+      null,
+      32.0,
+      null
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      5.3,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      18.8,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC5",
+    "obs_type_2": "O7",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1995IAUS..163..223N", "2001NewAR..45..135V" 
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 11",
+    "RA": [
+      null,
+      122.3831255417,
+      null
+    ],
+    "Dec": [
+      null,
+      -47.3365863333,
+      null
+    ],
+    "Period": [
+      0.01,
+      78.53,
+      0.01
+    ],
+    "Eccentricity": [
+      0.003,
+      0.334,
+      0.003
+    ],
+    "M1": [
+      0.6,
+      9.0,
+      0.6
+    ],
+    "M2": [
+      1.1,
+      28.5,
+      1.1
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      0.6,
+      6.8,
+      0.6
+    ],
+    "M2_sin3i": [
+      1.1,
+      21.6,
+      1.1
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC8",
+    "obs_type_2": "O7.5III-V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2007MNRAS.377..415N"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 19",
+    "RA": [
+      3.166666666666667e-09,
+      154.52078559612,
+      3.166666666666667e-09
+    ],
+    "Dec": [
+      3.0833333333333336e-09,
+      -58.27395681163,
+      3.0833333333333336e-09
+    ],
+    "Period": [
+      37,
+      3689,
+      37
+    ],
+    "Eccentricity": [
+      0.04,
+      0.80,
+      0.04
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      20,
+      null
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      2,
+      11,
+      2
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC4pd",
+    "obs_type_2": "O9.5-9.7",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "CWB"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2009MNRAS.395.2221W"
+    ],
+    "Notes": "dust-producing CWB; orbit measured for O9 star only (Willams+09); minimum mass of WR obtained adopting 20Msun for secondary (Williams+09)"
+  },
+{"System Name":
+      "WR 21",
+    "RA": [
+      3.694444444444444e-09,
+      156.48542691051,
+      3.694444444444444e-09
+    ],
+    "Dec": [
+      3.4722222222222226e-09,
+      -57.81208867103,
+      3.4722222222222226e-09
+    ],
+    "Period": [
+      0.0001,
+      8.2546,
+      0.0001
+    ],
+    "Eccentricity": [
+      0.03,
+      0.04,
+      0.03
+    ],
+    "M1": [
+      null,
+      19.0,
+      null
+    ],
+    "M2": [
+      null,
+      37.0,
+      null
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      8.4,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      16.3,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN5",
+    "obs_type_2": "O4-6",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1999IAUS..193...26N", "2001NewAR..45..135V"
+    ],
+    "Notes": "errors not provided by Niemela+1999 or VdH21"
+  },
+{"System Name":
+      "WR 29",
+    "RA": [
+      5E-07,
+      10.391684,
+      5E-07
+    ],
+    "Dec": [
+      5E-07,
+      -61.120781,
+      5E-07
+    ],
+    "Period": [
+      0.00001,
+      3.16415,
+      0.00001
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      2.0,
+      14.0,
+      2.0
+    ],
+    "M2_sin3i": [
+      1.0,
+      16.0,
+      1.0
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN7h",
+    "obs_type_2": "O",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2009A&A...506.1269G"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 30",
+    "RA": [
+      null,
+      162.7749583333,
+      null
+    ],
+    "Dec": [
+      null,
+      -62.2837777778,
+      null
+    ],
+    "Period": [
+      null,
+      18.82,
+      null
+    ],
+    "Eccentricity": [
+      null,
+      null,
+      null
+    ],
+    "M1": [
+      null,
+      16.0,
+      null
+    ],
+    "M2": [
+      null,
+      34.0,
+      null
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      15.4,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      31.9,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC6",
+    "obs_type_2": "O6-8",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 30a",
+    "RA": [
+      2.3611111111111113e-09,
+      162.91210979146,
+      2.3611111111111113e-09
+    ],
+    "Dec": [
+      2.3611111111111113e-09,
+      -60.94303036898,
+      2.3611111111111113e-09
+    ],
+    "Period": [
+      null,
+      4.62,
+      null
+    ],
+    "Eccentricity": [
+      null,
+      0.15,
+      null
+    ],
+    "M1": [
+      0.2,
+      2.9,
+      0.2
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      null,
+      0.015,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WO4",
+    "obs_type_2": "O5-5.5",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1995IAUS..163..223N", "2001NewAR..45..135V"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 31",
+    "RA": [
+      5.111111111111111e-09,
+      165.07250890913,
+      5.111111111111111e-09
+    ],
+    "Dec": [
+      5.361111111111112e-09,
+      -51.49278228515,
+      5.361111111111112e-09
+    ],
+    "Period": [
+      0.000013,
+      4.830657,
+      0.000013
+    ],
+    "Eccentricity": [
+      null,
+      0.0,
+      null
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      0.18,
+      2.94,
+      0.18
+    ],
+    "M2_sin3i": [
+      0.37,
+      6.48,
+      0.37
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN4",
+    "obs_type_2": "O8V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2012MNRAS.424.1601F"
+    ],
+    "Notes": "Minimum masses computed using values from Fahed+2012"
+  },
+{"System Name":
+      "WR 35a",
+    "RA": [
+      null,
+      165.1014065372,
+      null
+    ],
+    "Dec": [
+      null,
+      -59.9932345406,
+      null
+    ],
+    "Period": [
+      0.009,
+      41.898,
+      0.009
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      2.4,
+      17.7,
+      2.4
+    ],
+    "M2_sin3i": [
+      3.9,
+      23.0,
+      3.9
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN6",
+    "obs_type_2": "O8.5V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2014A&A...562A..13G"
+    ],
+    "Notes": "Assuming a 5km/s error on K2, taking the solution for NIV 4058"
+  },
+{"System Name":
+      "WR 42",
+    "RA": [
+      null,
+      167.5169988125,
+      null
+    ],
+    "Dec": [
+      null,
+       -60.9791564657,
+      null
+    ],
+    "Period": [
+      0.003,
+      7.886,
+      0.003
+    ],
+    "Eccentricity": [
+      null,
+      0.0,
+      null
+    ],
+    "M1": [
+      null,
+      14.0,
+      null
+    ],
+    "M2": [
+      null,
+      23.0,
+      null
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      0.3,
+      3.6,
+      0.3
+    ],
+    "M2_sin3i": [
+      0.5,
+      6.1,
+      0.5
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC7",
+    "obs_type_2": "O7V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1981ApJ...244..528D", "2001NewAR..45..135V"
+    ],
+    "Notes": "aka HD 97152"
+  },
+{"System Name":
+      "WR 47",
+    "RA": [
+      null,
+      190.9624963372,
+      null
+    ],
+    "Dec": [
+      null,
+       -63.0874479137,
+      null
+    ],
+    "Period": [
+      0.0001,
+      6.2393,
+      0.0001
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      4.4,
+      41.8,
+      4.4
+    ],
+    "M2": [
+      4.2,
+      50.4,
+      4.2
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      2.6,
+      32.6,
+      2.6
+    ],
+    "M2_sin3i": [
+      1.9,
+      39.3,
+      1.9
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN6",
+    "obs_type_2": "O5V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1990ApJ...350..767M", "2001NewAR..45..135V"
+    ],
+    "Notes": "True masses for i=70deg from Moffat+1990 "
+  },
+  {"System Name":
+        "WR 48",
+    "RA": [
+        null,
+        197.0298048773,
+        null
+    ],
+    "Dec": [
+        null,
+        -65.3060220629,
+        null
+    ],
+    "Period": [
+        0.0025,
+        19.1375,
+        0.0025
+    ],
+    "Eccentricity": [
+        null,
+        0.0,
+        null
+    ],
+    "M1": [
+        null,
+        null,
+        null
+    ],
+    "M2": [
+        null,
+        null,
+        null
+    ],
+    "Mass Function": [
+        0.13,
+        0.54,
+        0.13
+    ],
+    "M1_sin3i": [
+        null,
+        null,
+        null
+    ],
+    "M2_sin3i": [
+        null,
+        null,
+        null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC5/6",
+    "obs_type_2": "O",
+    "system_class": "WR binary",
+    "Detection Method": [
+        "RV",
+        "SB2"
+    ],
+    "Reference": [
+        "2001NewAR..45..135V", "2002MNRAS.335.1069H", "2021MNRAS.506.4465L"
+    ],
+    "Notes": "Mass function computed from K1 (Hill+2002); masses or minimum masses never measured directly, aka Theuscae, (triple system)"
+    },  
+{"System Name":
+      "WR 62a",
+    "RA": [
+      1.8333333333333334e-09,
+      218.15708140359,
+      1.8333333333333334e-09
+    ],
+    "Dec": [
+      2.4444444444444446e-09,
+      -61.4983688998,
+      2.4444444444444446e-09
+    ],
+    "Period": [
+      0.0001,
+      9.1447,
+      0.0001
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      1.2,
+      15.1,
+      1.2
+    ],
+    "M1_sin3i": [
+      3.3,
+      21.5,
+      3.3
+    ],
+    "M2_sin3i": [
+      5.2,
+      38.7,
+      5.2
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN4-5o",
+    "obs_type_2": "O5.5-6",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2013A&A...552A..22C"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 68a",
+    "RA": [
+      4.277777777777778e-09,
+      230.81923691172,
+      4.277777777777778e-09
+    ],
+    "Dec": [
+      4.5e-09,
+      -57.73882961792,
+      4.5e-09
+    ],
+    "Period": [
+      0.0005,
+      5.2207,
+      0.0005
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      1.0,
+      13.9,
+      1.0
+    ],
+    "M1_sin3i": [
+      5,
+      15,
+      5
+    ],
+    "M2_sin3i": [
+      4,
+      30,
+      4
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN6o",
+    "obs_type_2": "O5.5-6",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2015A&A...581A..49C"
+    ],
+    "Notes": "Masses are lower limits in Table 1 (>15\u00b15, >30\u00b14)."
+  },
+{"System Name":
+      "WR 79", 
+    "RA": [
+      null,
+      253.5820797050,
+      null
+    ],
+    "Dec": [
+      null,
+      -41.8198699195,
+      null
+    ],
+    "Period": [
+      0.0005,
+      8.8908,
+      0.0005
+    ],
+    "Eccentricity": [
+      null,
+      null,
+      null
+    ],
+    "M1": [
+      1.8,
+      5.0,
+      1.8
+    ],
+    "M2": [
+      3.6,
+      13.9,
+      3.6
+    ],
+    "Mass Function": [
+      0.56,
+      2.64,
+      0.56
+    ],
+    "M1_sin3i": [
+      0.56,
+      1.75,
+      0.56
+    ],
+    "M2_sin3i": [
+      0.99,
+      4.87,
+      0.99
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC7",
+    "obs_type_2": "O5-8",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1974A&A....31..211S", "1996AJ....112.2227L", "2001NewAR..45..135V"
+    ],
+    "Notes": "True masses computed assuming i=44.8+-3deg from Lamontagne+1996. Masses not consistent with spectral types, aka HD 152270"
+  },
+{"System Name":
+      "WR 97",
+    "RA": [
+      null,
+      264.2234303110,
+      null
+    ],
+    "Dec": [
+      null,
+      -34.0435495624,
+      null
+    ],
+    "Period": [
+      0.002,
+      12.595,
+      0.002
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      0.1,
+      0.4,
+      0.1
+    ],
+    "M1_sin3i": [
+      0.5,
+      4.4,
+      0.5
+    ],
+    "M2_sin3i": [
+      1.0,
+      10.0,
+      1.0
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN5",
+    "obs_type_2": "O7",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1995IAUS..163..223N", "2001NewAR..45..135V"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 104",
+    "RA": [
+      null,
+      270.5171851669,
+      null
+    ],
+    "Dec": [
+      null,
+      -23.6283800770,
+      null
+    ],
+    "Period": [
+     0.14,
+      241.54,
+      0.14
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      0.73,
+      6.50,
+      0.73
+    ],
+    "M1_sin3i": [
+      0.68,
+      4.54,
+      0.68
+    ],
+    "M2_sin3i": [
+      1.15,
+      12.22,
+      1.15
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC9d",
+    "obs_type_2": "B0.5V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2024MNRAS.534.2184H"
+    ],
+    "Notes": "Companion minimum mass inconsistent with interpretation of pole-on binary (Hill+2024) "
+  },
+{"System Name":
+      "WR 113",
+    "RA": [
+      null,
+      274.7806788743,
+      null
+    ],
+    "Dec": [
+      null,
+      -11.6331013873,
+      null
+    ],
+    "Period": [
+      0.001,
+      29.700,
+      0.001
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      1.5,
+      20.3,
+      1.5
+    ],
+    "M2": [
+      2.1,
+      41.5,
+      2.1
+    ],
+    "Mass Function": [
+      0.28,
+      15.66,
+      0.28
+    ],
+    "M1_sin3i": [
+      1.0,
+      16.9,
+      1.0
+    ],
+    "M2_sin3i": [
+      0.95,
+      34.69,
+      0.95
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC8d",
+    "obs_type_2": "O8-9IV",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2012MNRAS.426.1720D"
+    ],
+    "Notes": "Combined solution from Niemela+, Lamontagne+1996, David-Uraz+2012"
+  },
+{"System Name":
+      "WR 125",
+    "RA": [
+      null,
+      292.0650593843,
+      null
+    ],
+    "Dec": [
+      null,
+      19.5559799148,
+      null
+    ],
+    "Period": [
+      18,
+      10272,
+      37
+    ],
+    "Eccentricity": [
+      0.12,
+      0.29,
+      0.12
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      15,
+      36,
+      15
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC7ed",
+    "obs_type_2": "O9III",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2024ApJ...969..140R"
+    ],
+    "Notes": "Very long period, probably not post-MT"
+  },
+{"System Name":
+      "WR 127",
+    "RA": [
+      null,
+      296.5664139918,
+      null
+    ],
+    "Dec": [
+      null,
+      28.2719658609,
+      null
+    ],
+    "Period": [
+      0.001,
+      9.555,
+      0.001
+    ],
+    "Eccentricity": [
+      null,
+      0.0,
+      null
+    ],
+    "M1": [
+      4.4,
+      21.2,
+      4.4
+    ],
+    "M2": [
+      5.8,
+      30.9,
+      4.8
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      1.4,
+      11.8, 
+      1.4
+    ],
+    "M2_sin3i": [
+      1.4,
+      17.2,
+      1.4
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN3",
+    "obs_type_2": "O9.5V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2024A&A...683L..17S"
+    ],
+    "Notes": "Using solution from Shaposhnikov+24 and inclination measured by Lamontagne+96"
+  },
+{"System Name":
+      "WR 133",
+    "RA": [
+      null,
+      301.4888518860,
+      null
+    ],
+    "Dec": [
+      null,
+      35.7883752102,
+      null
+    ],
+    "Period": [
+      0.036,
+      112.780,
+      0.036
+    ],
+    "Eccentricity": [
+      0.0050,
+    0.3558,
+      0.0050 
+    ],
+    "M1": [
+      1.3,
+       10.2 ,
+      1.3
+    ],
+    "M2": [
+      2.5,
+      22.5,
+      2.5
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN5",
+    "obs_type_2": "O9I",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2021ApJ...908L...3R"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 137",
+    "RA": [
+      3.5277777777777777e-09,
+      303.63236118995,
+      3.5277777777777777e-09
+    ],
+    "Dec": [
+      4.222222222222222e-09,
+      36.66099950284,
+      4.222222222222222e-09
+    ],
+    "Period": [
+      12,
+      4783,
+      12
+    ],
+    "Eccentricity": [
+      0.0023,
+      0.3162,
+      0.0023
+    ],
+    "M1": [
+      3.4,
+      9.5,
+      3.4
+    ],
+    "M2": [
+      1.9,
+      17.3,
+      1.9
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC7pd",
+    "obs_type_2": "O9",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2024ApJ...977...78R"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 139",
+    "RA": [
+      null,
+      304.8850954835,
+      null
+    ],
+    "Dec": [
+      null,
+      38.7316552877,
+      null
+    ],
+    "Period": [
+      0.00001,
+      4.21250,
+      0.00001
+    ],
+    "Eccentricity": [
+      null,
+      0.0,
+      null
+    ],
+    "M1": [
+      1.0,
+      10.7,
+      1.0
+    ],
+    "M2": [
+      0.5,
+      26.4,
+      0.5
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      0.9,
+      10.0,
+      0.9
+    ],
+    "M2_sin3i": [
+      0.3,
+      24.7,
+      0.3
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN5",
+    "obs_type_2": "O6III-V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2023MNRAS.526.4529S"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 140",
+    "RA": [
+      5.166666666666667e-09,
+      305.11656579529,
+      5.166666666666667e-09
+    ],
+    "Dec": [
+      5.888888888888889e-09,
+      43.85452412229,
+      5.888888888888889e-09
+    ],
+    "Period": [
+      0.29,
+      2895.00,
+      0.29
+    ],
+    "Eccentricity": [
+      0.0013,
+      0.8993,
+      0.0013
+    ],
+    "M1": [
+      0.45,
+      10.31,
+      0.45
+    ],
+    "M2": [
+      1.14,
+     29.27,
+      1.14
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WC7pd",
+    "obs_type_2": "O4-5",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "2001NewAR..45..135V", "2021MNRAS.504.5221T"
+    ],
+    "Notes": "Very long period, potentially not post MT"
+  },
+  {"System Name": "WR 145a",
+  "RA": [
+    null,
+    308.107417,
+    null
+  ],
+  "Dec": [
+    null,
+    40.957750,
+    null
+  ],
+  "Period": [
+    0.000001,
+    0.19969,
+    0.000001
+  ],
+  "Eccentricity": [
+    null,
+    0.0,
+    null
+  ],
+  "M1": [
+    null,
+    null,
+    null
+  ],
+  "M2": [
+    null,
+    null,
+    null
+  ],
+  "Mass Function": [
+    1.51,
+    1.13,
+    0.87
+  ],
+  "M1_sin3i": [
+    null,
+    null,
+    null
+  ],
+  "M2_sin3i": [
+    null,
+    null,
+    null
+  ],
+  "evol_type_1": "He-star",
+  "evol_type_2": "compact object",
+  "obs_type_1": "WN4-6",
+  "obs_type_2": "BH/NS",
+  "system_class": "WR X-ray binary",
+  "Detection Method": [
+    "X-ray",
+    "RV"
+  ],
+  "Reference": ["2017MNRAS.472.2181K"
+  ],
+  "Notes": "WR+BH X-ray binariy aka Cygnus"
+},  
+{"System Name":
+      "WR 151",
+    "RA": [
+      null,
+      334.6900239861,
+      null
+    ],
+    "Dec": [
+      null,
+      56.1260829665,
+      null
+    ],
+    "Period": [
+      null,
+      2.12687,
+      null
+    ],
+    "Eccentricity": [
+      null,
+      0,
+      null
+    ],
+    "M1": [
+      1.7,
+      20.4,
+      1.7
+    ],
+    "M2": [
+      2.4,
+      28.9,
+      2.4
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      1.4,
+      17.8,
+      1.4
+    ],
+    "M2_sin3i": [
+      1.9,
+      25.2,
+      1.9
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN4",
+    "obs_type_2": "O5V",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1993ApJ...405..312L", "2001NewAR..45..135V", "2006ApJ...640..995V"
+    ],
+    "Notes": null
+  },
+{"System Name":
+      "WR 155",
+    "RA": [
+      null,
+      339.2248117928,
+      null
+    ],
+    "Dec": [
+      null,
+      56.9058303306,
+      null
+    ],
+    "Period": [
+      null,
+      1.6412436,
+      null
+    ],
+    "Eccentricity": [
+      0.01,
+      0.01,
+      0.01
+    ],
+    "M1": [
+      0.9,
+      24.5,
+      0.9
+    ],
+    "M2": [
+      1.6,
+      27.6,
+      1.6
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      0.6,
+      14.3,
+      0.6
+    ],
+    "M2_sin3i": [
+      1.1,
+      24.5,
+      1.1
+    ],
+    "evol_type_1": "He-star",
+    "evol_type_2": "MS",
+    "obs_type_1": "WN6",
+    "obs_type_2": "O9II-Ib",
+    "system_class": "WR binary",
+    "Detection Method": [
+      "RV",
+      "SB2"
+    ],
+    "Reference": [
+      "1995ApJ...450..811M", "2001NewAR..45..135V"
+    ],
+    "Notes": null
+  }
+]

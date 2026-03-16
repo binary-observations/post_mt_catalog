@@ -35,6 +35,7 @@ except ImportError:
 
 HDF5_DIR = LEGACY_H5_DIR
 OUTPUT_JSON = DATA_DIR / "post_mt_systems.json"
+DUPLICATES_JSON = DATA_DIR / "duplicates.json"
 
 # Import schema upgrader
 import importlib.util
@@ -107,11 +108,17 @@ def infer_evolution_type(obs_type: str | None):
 # -------------------------------------------------
 # Duplicate handling
 # -------------------------------------------------
-def resolve_duplicate_pair(a: dict, b: dict) -> dict:
-    """Prefer entry with more populated fields."""
+def choose_preferred_entry(a: dict, b: dict) -> tuple[dict, dict]:
+    """Return (kept, dropped) preferring entry with more populated fields."""
     score_a = sum(v not in (None, "", []) for v in a.values())
     score_b = sum(v not in (None, "", []) for v in b.values())
-    return a if score_a >= score_b else b
+    return (a, b) if score_a >= score_b else (b, a)
+
+
+def resolve_duplicate_pair(a: dict, b: dict) -> dict:
+    """Backward-compatible wrapper returning only the preferred entry."""
+    kept, _ = choose_preferred_entry(a, b)
+    return kept
 
 
 def extract_central_value(entry: dict, key: str) -> float | None:
@@ -156,30 +163,34 @@ def normalize_system_name(name: str | None) -> str:
     return name.strip().replace(" ", "").lower()
 
 
-def merge_duplicates_by_name(systems: list[dict]) -> list[dict]:
-    """Merge by System Name only (with normalization for spacing/case)."""
+def merge_duplicates_by_name_with_dropped(systems: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Merge by System Name only (with normalization for spacing/case), tracking dropped duplicates."""
     merged = {}
-    name_map = {}  # Map normalized name → original name to keep
+    dropped: list[dict] = []
     
     for s in systems:
         key = s.get("System Name")
         if not key:
             continue
         normalized = normalize_system_name(key)
-        
-        # Store mapping from normalized to original name
-        if normalized not in name_map:
-            name_map[normalized] = key
-        
+
         if normalized in merged:
-            merged[normalized] = resolve_duplicate_pair(merged[normalized], s)
+            kept, drop = choose_preferred_entry(merged[normalized], s)
+            merged[normalized] = kept
+            dropped.append(drop)
         else:
             merged[normalized] = s
     
-    return list(merged.values())
+    return list(merged.values()), dropped
 
 
-def merge_duplicates_by_coords(systems: list[dict], threshold_arcsec: float = 0.1) -> list[dict]:
+def merge_duplicates_by_name(systems: list[dict]) -> list[dict]:
+    """Merge by System Name only (with normalization for spacing/case)."""
+    merged, _ = merge_duplicates_by_name_with_dropped(systems)
+    return merged
+
+
+def merge_duplicates_by_coords(systems: list[dict], threshold_arcsec: float = 0.1) -> tuple[list[dict], list[dict]]:
     """Merge duplicates using coordinate matching (RA/Dec) FIRST, then normalized names.
     
     Priority: coordinates > normalized names
@@ -187,7 +198,7 @@ def merge_duplicates_by_coords(systems: list[dict], threshold_arcsec: float = 0.
     """
     if not ASTROPY_AVAILABLE:
         print("Astropy unavailable; using name-based deduplication only")
-        return merge_duplicates_by_name(systems)
+        return merge_duplicates_by_name_with_dropped(systems)
     
     # Extract coordinates for all systems
     coords_list = []
@@ -211,6 +222,7 @@ def merge_duplicates_by_coords(systems: list[dict], threshold_arcsec: float = 0.
     merged = {}
     used = set()
     coord_duplicates_found = 0
+    coord_dropped: list[dict] = []
     
     if len(coords_list) >= 2:
         all_coords = SkyCoord(coords_list)
@@ -236,7 +248,9 @@ def merge_duplicates_by_coords(systems: list[dict], threshold_arcsec: float = 0.
                     primary_name = primary.get("System Name", "unknown")
                     print(f"  Found coordinate match: {primary_name} ({systems[primary_idx].get('source_file')}) ≈ {dup_name} ({dup_entry.get('source_file')}) @ {sep_matrix[i, j]:.4f} arcsec")
                     # Merge: keep entry with more populated fields
-                    merged[primary_idx] = resolve_duplicate_pair(merged[primary_idx], dup_entry)
+                    kept, drop = choose_preferred_entry(merged[primary_idx], dup_entry)
+                    merged[primary_idx] = kept
+                    coord_dropped.append(drop)
                     used.add(j)
                     coord_duplicates_found += 1
     
@@ -252,15 +266,16 @@ def merge_duplicates_by_coords(systems: list[dict], threshold_arcsec: float = 0.
     # Phase 2: Name-based deduplication (normalized) for remaining systems without coordinates
     # or for additional cleanup
     result_list = [merged[i] for i in sorted(merged.keys())]
-    name_merged = merge_duplicates_by_name(result_list)
+    name_merged, name_dropped = merge_duplicates_by_name_with_dropped(result_list)
     
     print(f"After name-based dedup: {len(name_merged)} systems")
     
-    return name_merged
+    dropped_all = coord_dropped + name_dropped
+    return name_merged, dropped_all
 
 
-def merge_duplicates(systems: list[dict]) -> list[dict]:
-    """Merge duplicates using both name and coordinate matching."""
+def merge_duplicates(systems: list[dict]) -> tuple[list[dict], list[dict]]:
+    """Merge duplicates using both name and coordinate matching, returning (kept, dropped)."""
     return merge_duplicates_by_coords(systems)
 
 
@@ -443,8 +458,6 @@ for jp in raw_json_files:
     if not isinstance(data, list):
         continue
     for entry in data:
-        # Apply schema upgrade to JSON entries too
-        # entry = upgrade_entry_schema(entry)
         all_systems.append(entry)
 
 print(f"Total systems after JSON ingestion: {len(all_systems)}")
@@ -452,16 +465,19 @@ print(f"Total systems after JSON ingestion: {len(all_systems)}")
 # -------------------------------------------------
 # Deduplication
 # -------------------------------------------------
-all_systems = merge_duplicates(all_systems)
+all_systems, dropped_duplicates = merge_duplicates(all_systems)
 print(f"Total systems after deduplication: {len(all_systems)}")
+print(f"Dropped duplicates: {len(dropped_duplicates)}")
 
 # -------------------------------------------------
 # Final sanitization & output
 # -------------------------------------------------
 # Add SIMBAD links before sanitization/output
 add_simbad_links(all_systems)
+add_simbad_links(dropped_duplicates)
 
 all_systems = sanitize(all_systems)
+dropped_duplicates = sanitize(dropped_duplicates)
 
 with open(OUTPUT_JSON, "w") as f:
     f.write("[\n")
@@ -474,4 +490,16 @@ with open(OUTPUT_JSON, "w") as f:
     f.write("]\n")
 
 print(f"Wrote {len(all_systems)} systems to {OUTPUT_JSON}")
+
+with open(DUPLICATES_JSON, "w") as f:
+    f.write("[\n")
+    for i, system in enumerate(dropped_duplicates):
+        f.write(json.dumps(system, separators=(",", ":")))
+        if i < len(dropped_duplicates) - 1:
+            f.write(",\n")
+        else:
+            f.write("\n")
+    f.write("]\n")
+
+print(f"Wrote {len(dropped_duplicates)} duplicates to {DUPLICATES_JSON}")
 
