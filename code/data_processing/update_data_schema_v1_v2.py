@@ -57,7 +57,7 @@ def map_system_class(entry: dict):
     if "wolf" in c or "rayet" in c:
         return "WR binary"
     if "hot subdwarf" in c or "subdwarf" in c:
-        return "Hot subdwarf"
+        return "low-M stripped star"
     if "post agb" in c:
         return "post-AGB binary"
     if "barium" in c:
@@ -173,7 +173,7 @@ def upgrade_entry_schema(entry: dict):
         entry["evol_type_2"] = "He-star"
         entry["evol_type_1"] = "MS"
         if not entry.get("system_class"):
-            entry["system_class"] = "Hot subdwarf"
+            entry["system_class"] = "low-M stripped star"
 
     # Wolf-Rayet binaries: WR companion implies He-star + MS primary
     if (isinstance(ot2, str) and "wr" in ot2.strip().lower()) or (isinstance(src, str) and ("WRs_LMC.h5" in src or "WRs_SMC.h5" in src)):
@@ -184,7 +184,7 @@ def upgrade_entry_schema(entry: dict):
     # Stripped star catalog entries: enforce He-star type and system class
     if isinstance(src, str) and "stripped_star_table.h5" in src:
         entry["evol_type_2"] = "He-star"
-        entry["system_class"] = "Stripped star"
+        entry["system_class"] = "intermediate-M stripped star"
 
     # Blue Straggler catalog entries: enforce system class
     if isinstance(src, str) and "BSS_data.h5" in src:

@@ -139,8 +139,8 @@
       "allowed_values": [
         "Contact binary",
         "Algol",
-        "Hot subdwarf",
-        "Stripped star",
+        "low-M stripped star",
+        "intermediate-M stripped star",
         "WR binary",
         "post AGB",
         "EL CVn",

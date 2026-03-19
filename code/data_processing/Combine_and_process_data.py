@@ -83,7 +83,7 @@ def map_system_class(old_class: str | None, system_name: str | None):
     if "wolf" in c or "rayet" in c:
         return "WR binary"
     if "hot subdwarf" in c or "subdwarf" in c:
-        return "Hot subdwarf"
+        return "low-M stripped star"
     if "post agb" in c:
         return "post-AGB binary"
     if "barium" in c or "ch" in c:
