@@ -35,10 +35,15 @@ def extract_triplet_array(data, key):
     for entry in data:
         val = entry.get(key, None)
         if isinstance(val, (list, tuple, np.ndarray)) and len(val) == 3:
-            try:
-                rows.append([float(val[0]), float(val[1]), float(val[2])])
-            except Exception:
-                rows.append([np.nan, np.nan, np.nan])
+            # Convert each element independently so missing error bounds do not
+            # erase a valid central value.
+            row = []
+            for item in val:
+                try:
+                    row.append(np.nan if item is None else float(item))
+                except (TypeError, ValueError):
+                    row.append(np.nan)
+            rows.append(row)
         elif isinstance(val, (int, float)):
             # Scalar provided → treat as central value with unknown errors
             rows.append([np.nan, float(val), np.nan])

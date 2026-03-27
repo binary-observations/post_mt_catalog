@@ -21,7 +21,7 @@ WD_cmap = mcolors.LinearSegmentedColormap.from_list('custom_gradient', ['#EE799A
 WDcolors = [mcolors.rgb2hex(WD_cmap(i)) for i in np.linspace(0, 1, 4)]
 
 stripped_star_cmap = mcolors.LinearSegmentedColormap.from_list('custom_gradient', ['#82c9ed', '#366de2', '#8497E5']) #BDDEF4 #1b478e
-strippedstar_colors = [mcolors.rgb2hex(stripped_star_cmap(i)) for i in np.linspace(0, 1, 4)]
+strippedstar_colors = [mcolors.rgb2hex(stripped_star_cmap(i)) for i in np.linspace(0, 1, 6)]
 
 compact_object_cmap = mcolors.LinearSegmentedColormap.from_list('custom_gradient', ['#bde256', '#0c9e27'])
 compact_obj_colors = [mcolors.rgb2hex(compact_object_cmap(i)) for i in np.linspace(0, 1, 4)]
@@ -30,17 +30,6 @@ compact_obj_colors = [mcolors.rgb2hex(compact_object_cmap(i)) for i in np.linspa
 # SYSTEM_CLASS_MAP: canonical nested category → system-class colour / symbol map
 # ---------------------------------------------------------------------------
 SYSTEM_CLASS_MAP = {
-    # Binaries containing white dwarfs
-    'WD binary':{
-    'Blue straggler binary': {'color': WDcolors[0], 'symbol': 'hourglass'}, # yellow
-    'Chemically Peculiar': {'color': WDcolors[1], 'symbol': 'square'}, # gray  
-    'Self-lensing WD + MS': {'color': WDcolors[2], 'symbol': 'diamond-open'},
-    'Spectroscopic WD + MS': {'color': WDcolors[2], 'symbol': 'cross-dot'},                  # light purple
-    'Astrometric WD + MS': {'color': WDcolors[3], 'symbol': 'circle'},                  # light purple
-    'WD + MS': {'color': WDcolors[3], 'symbol': 'pentagon'},                  # left over ones (come from Krukow paper 2021ApJ...920...86K)
-    },
-
-
     ## Binaries w. non-degenerate components ##
     # RLOF
     'Ongoing RLOF': {
@@ -53,21 +42,31 @@ SYSTEM_CLASS_MAP = {
     # Keep both old and new class labels to be robust across catalog versions.
     'Hot subdwarf binary': {'color': strippedstar_colors[0], 'symbol': 'pentagon-open'},             # UV purple
     'He giant': {'color': strippedstar_colors[0], 'symbol': 'cross'},           # coral/red
-    'Post-AGB binary': {'color': strippedstar_colors[1], 'symbol': 'o'},           # coral/red
+    'Post-AGB binary': {'color': strippedstar_colors[1], 'symbol': 'circle'},           # coral/red
     'EL CVn': {'color': strippedstar_colors[1], 'symbol': 'star'},         # orange
     },
 
     # Intermediate/high-M stripped
     'High-M stripped': {
-    'Intermediate-M stripped star': {'color': strippedstar_colors[2], 'symbol': 'x'},
-    'WR binary': {'color': strippedstar_colors[3], 'symbol': 'triangle-up'},
+    'Intermediate-M stripped star': {'color': strippedstar_colors[5], 'symbol': 'x'},
+    'WR binary': {'color': strippedstar_colors[5], 'symbol': 'triangle-up'},
+    },
+
+    # Binaries containing white dwarfs
+    'WD binary':{
+    'Blue straggler binary': {'color': WDcolors[0], 'symbol': 'hourglass'}, # yellow
+    'Chemically Peculiar': {'color': WDcolors[1], 'symbol': 'square'}, # gray  
+    'Self-lensing WD + MS': {'color': WDcolors[2], 'symbol': 'diamond-open'},
+    'Spectroscopic WD + MS': {'color': WDcolors[2], 'symbol': 'cross-dot'},                  # light purple
+    'Astrometric WD + MS': {'color': WDcolors[3], 'symbol': 'circle'},                  # light purple
+    'WD + MS': {'color': WDcolors[3], 'symbol': 'pentagon'},                  # left over ones (come from Krukow paper 2021ApJ...920...86K)
     },
 
     ## Binaries containing neutron stars or black holes ##
     'CO binary': {
     'pulsar binary': {'color': compact_obj_colors[0], 'symbol': 'diamond-tall'},           # lime green
     'high-mass XRB': {'color': compact_obj_colors[1], 'symbol': 'square'},
-    'Symbiotic XRB': {'color': compact_obj_colors[1], 'symbol': 'square-open'},
+    'Symbiotic XRB': {'color': compact_obj_colors[1], 'symbol': 'x'},
     # 'X-Ray binary': {'color': compact_obj_colors[1], 'symbol': 'square'},             # muted green
     'Spectroscopic compact object': {'color': compact_obj_colors[2], 'symbol': 'x'},  # yellow green
     'Astrometric compact object': {'color': compact_obj_colors[3], 'symbol': 'circle-open'},  # muted green
