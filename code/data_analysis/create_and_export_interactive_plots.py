@@ -2,7 +2,6 @@ import json
 import numpy as np
 import pandas as pd
 import plotly.express as px
-import matplotlib.colors as mcolors
 
 # Ensure project root is on sys.path so `import paths` finds the top-level paths.py
 import os, sys
@@ -12,6 +11,11 @@ if str(proj_root) not in sys.path:
     sys.path.insert(0, str(proj_root))
 
 from paths import MAIN_CATALOG, DOCS_DIR, PLOTS_DIR, LATEX_PLOT_DIR
+
+# System-class colours and symbols — imported from the shared module.
+# Edit code/data_analysis/Category_dict.py to change colours/symbols everywhere.
+from Category_dict import SYSTEM_CLASS_MAP, STYLE_MAP, COLORMAP, SYMBOLMAP
+
 file_path = MAIN_CATALOG
 
 
@@ -78,73 +82,6 @@ df = pd.DataFrame({
     'Simbad': [entry.get('Simbad', None) for entry in data]
 })
 
-# # Hand-picked colors and symbols for each class (hex strings). Adjust as you like.
-# # Combined color and symbol map for each system class
-# STYLE_MAP = {
-#     # Binaries w. non-degenerate components
-#     'Contact binary': {'color': '#f49856', 'symbol': 'circle'},           # orange
-#     'Algol': {'color': '#6d2c14', 'symbol': 'diamond'},                   # maroon
-#     'Hot subdwarf': {'color': '#37a8a8', 'symbol': 'square'},             # UV purple
-#     'Stripped star': {'color': '#3a8ea3', 'symbol': 'x'},  # muted green
-#     'WR binary': {'color': '#52b4e5', 'symbol': 'triangle-up'},       # blue
-#     'post AGB': {'color': '#ea4d4d', 'symbol': 'cross'},           # coral/red
-    
-#     # Binaries containing white dwarfs
-#     'EL CVn': {'color': '#8864ba', 'symbol': 'star'},         # orange
-#     'Blue straggler binary': {'color': '#6a65b2', 'symbol': 'hourglass'}, # yellow
-#     'Chemically peculiar star': {'color': '#af52a6', 'symbol': 'pentagon'}, # gray #FF6692 gumball
-#     'Astrometric WD + MS': {'color': '#e6cfd9', 'symbol': 'circle'},                  # light purple
-#     'Spectroscopic WD + MS': {'color': '#e6cfd9', 'symbol': 'cross-dot'},                  # light purple
-    
-#     # Binaries containing neutron stars or black holes
-#     'Pulsar binary': {'color': '#9bd24e', 'symbol': 'diamond'},           # lime green
-#     'X-ray binary': {'color': '#1abc9c', 'symbol': 'square'},             # muted green
-#     'Spectroscopic compact object': {'color': '#cbd24f', 'symbol': 'x'},  # yellow green
-#     'Astrometric compact object': {'color': '#408c63', 'symbol': 'triangle-up'}  # muted green
-# }
-
-# Hand-picked colors and symbols for each class (hex strings). Adjust as you like.
-# Create discrete color map between 
-WD_cmap = mcolors.LinearSegmentedColormap.from_list('custom_gradient', ['#e6cfd9', '#a5678e'])
-WDcolors = [mcolors.rgb2hex(WD_cmap(i)) for i in np.linspace(0, 1, 7)]
-
-stripped_star_cmap = mcolors.LinearSegmentedColormap.from_list('custom_gradient', ['#82c9ed', '#366de2']) #BDDEF4 #1b478e
-strippedstar_colors = [mcolors.rgb2hex(stripped_star_cmap(i)) for i in np.linspace(0, 1, 4)]
-
-compact_object_cmap = mcolors.LinearSegmentedColormap.from_list('custom_gradient', ['#bde256', '#0c9e27'])
-compact_obj_colors = [mcolors.rgb2hex(compact_object_cmap(i)) for i in np.linspace(0, 1, 4)]
-
-# Combined color and symbol map for each system class
-STYLE_MAP = {
-    # Binaries containing white dwarfs
-    'Astrometric WD + MS': {'color': WDcolors[0], 'symbol': 'circle'},                  # light purple
-    'Spectroscopic WD + MS': {'color': WDcolors[1], 'symbol': 'cross-dot'},                  # light purple
-    'WD + MS': {'color': WDcolors[2], 'symbol': 'pentagon'},                  # left over ones (come from Krukow paper 2021ApJ...920...86K)
-    'Blue straggler binary': {'color': WDcolors[3], 'symbol': 'hourglass'}, # yellow
-    'Chemically Peculiar': {'color': WDcolors[4], 'symbol': 'square'}, # gray  
-
-    # Binaries w. non-degenerate components
-    'Contact binary': {'color': '#eda45c', 'symbol': 'triangle-up'},           # orange
-    'Algol': {'color': '#d65906', 'symbol': 'diamond'},                   # maroon
-
-    'Hot subdwarf': {'color': strippedstar_colors[0], 'symbol': 'pentagon-open'},             # UV purple
-    'Stripped star': {'color': strippedstar_colors[1], 'symbol': 'x'},  # muted green
-    'WR binary': {'color': strippedstar_colors[2], 'symbol': 'triangle-up'},       # blue
-    
-    'EL CVn': {'color': '#FF6692', 'symbol': 'star'},         # orange
-    'post AGB': {'color': '#ea4d4d', 'symbol': 'cross'},           # coral/red
-    
-    # Binaries containing neutron stars or black holes
-    'pulsar binary': {'color': compact_obj_colors[0], 'symbol': 'diamond-tall'},           # lime green
-    'high-mass XRB': {'color': compact_obj_colors[1], 'symbol': 'square'},             # muted green
-    'Spectroscopic compact object': {'color': compact_obj_colors[2], 'symbol': 'x'},  # yellow green
-    'Astrometric compact object': {'color': compact_obj_colors[3], 'symbol': 'circle-open'},  # muted green
-}
-
-# Extract color and symbol maps for backward compatibility
-COLORMAP = {k: v['color'] for k, v in STYLE_MAP.items()}
-SYMBOLMAP = {k: v['symbol'] for k, v in STYLE_MAP.items()}
-
 def make_scatter(df, x, y, out_pdf, out_html=None, x_log=False, y_log=False, x_title=None, y_title=None,
                 export_legend_to_pdf=True, export_width=700, export_height=450, export_scale=2, 
                  tick_size = 15,label_size = 45,xlim=None, ylim=None):
@@ -207,7 +144,6 @@ def make_scatter(df, x, y, out_pdf, out_html=None, x_log=False, y_log=False, x_t
         legend_font=dict(size=18)
     )
     fig.update_traces(marker=dict(size=8))
-
 
     # Set the axis titles and their label sizes
     x_kwargs = dict(title_text=x_title, tickfont=dict(size=tick_size), title_font=dict(size=label_size))
