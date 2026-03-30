@@ -225,6 +225,23 @@ make_scatter(
     label_size = 23,
 )
 
+## Period vs donor mass 
+make_scatter(
+    df,
+    x='Period', y='M2',
+    out_html=DOCS_DIR / 'interactive_period_vs_m2.html',
+    out_pdf=LATEX_PLOT_DIR / 'interactive_period_vs_m2.pdf',
+    x_log=True, y_log=True,
+    x_title='P (days)', #'$P \, \mathrm{(days)}$', 
+    y_title='donor mass (Msun)', #'$M_{\mathrm{donor}} \mathrm{(M_{\odot})}$',
+    export_legend_to_pdf=True,
+    export_height=500,
+    export_width=900,
+    export_scale=2,
+    label_size = 23,
+)
+
+
 ## donor (2) vs accretor (1) mass
 make_scatter(
     df,
