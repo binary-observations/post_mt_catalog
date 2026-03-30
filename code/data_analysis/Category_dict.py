@@ -48,7 +48,7 @@ SYSTEM_CLASS_MAP = {
 
     # Intermediate/high-M stripped
     'High-M stripped': {
-    'Intermediate-M stripped star': {'color': strippedstar_colors[5], 'symbol': 'x'},
+    'Intermediate-M stripped star': {'color': strippedstar_colors[5], 'symbol': 'cross-thin-open'},
     'WR binary': {'color': strippedstar_colors[5], 'symbol': 'triangle-up'},
     },
 
@@ -67,8 +67,8 @@ SYSTEM_CLASS_MAP = {
     'pulsar binary': {'color': compact_obj_colors[0], 'symbol': 'diamond-tall'},           # lime green
     'high-mass XRB': {'color': compact_obj_colors[1], 'symbol': 'square'},
     'Symbiotic XRB': {'color': compact_obj_colors[1], 'symbol': 'triangle-down'},           # light green
-    'Spectroscopic compact object': {'color': compact_obj_colors[2], 'symbol': '+'},  # yellow green
-    'Astrometric compact object': {'color': compact_obj_colors[3], 'symbol': 'x'},  # muted green
+    'Spectroscopic compact object': {'color': compact_obj_colors[2], 'symbol': 'square-x'},  # yellow green
+    'Astrometric compact object': {'color': compact_obj_colors[3], 'symbol': 'cross-thin-open'},  # muted green
     },
 }
 

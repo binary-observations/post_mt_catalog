@@ -1,3 +1,5 @@
+IRAS    Name    RA DE   Cat H-Ks(e) W1-W3(e)    Teff    LIR Porb    ecc [Fe/H]  [Zn/Ti] TTurnOff    Ref
+-   -   hhm-Desmet- magnetarmag k%  D-  -   Sunsun  k-
 IRAS01427+4633  BD+46.442           01 45 47.03    +46 49 00.97   Cat. 1        0.46 0.07 2.83 0.05  6250   16  140.82 0.0  no  -0.7 -0.2       h
 IRAS04166+5719  TW Cam              04 20 48.1     +57 26 26.     Cat. 1        0.57 0.05 3.01 0.08  4800   46  662.2  0.25 yes -0.5  0.3  1100 a
 IRAS04440+2605  RV Tau              04 47 06.8     +26 10 44.     Cat. 1        0.61 0.03 3.67 0.09  4500   39 1198.0       yes -0.4  0.5  1100 a
