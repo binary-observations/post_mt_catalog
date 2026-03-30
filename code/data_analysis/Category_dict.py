@@ -66,9 +66,9 @@ SYSTEM_CLASS_MAP = {
     'CO binary': {
     'pulsar binary': {'color': compact_obj_colors[0], 'symbol': 'diamond-tall'},           # lime green
     'high-mass XRB': {'color': compact_obj_colors[1], 'symbol': 'square'},
-    'Symbiotic XRB': {'color': compact_obj_colors[1], 'symbol': 'x'},
-    'Spectroscopic compact object': {'color': compact_obj_colors[2], 'symbol': 'x'},  # yellow green
-    'Astrometric compact object': {'color': compact_obj_colors[3], 'symbol': 'circle-open'},  # muted green
+    'Symbiotic XRB': {'color': compact_obj_colors[1], 'symbol': 'triangle-down'},           # light green
+    'Spectroscopic compact object': {'color': compact_obj_colors[2], 'symbol': '+'},  # yellow green
+    'Astrometric compact object': {'color': compact_obj_colors[3], 'symbol': 'x'},  # muted green
     },
 }
 
