@@ -368,6 +368,27 @@ def _set_if_missing(entry: dict, key: str, value: str | None) -> bool:
     return False
 
 
+def remove_deprecated_fields(systems: list[dict]) -> None:
+    """Remove deprecated keys and migrate source_file info into Notes."""
+    for entry in systems:
+        source_file = entry.pop("source_file", None)
+
+        if source_file not in (None, ""):
+            source_note = f"source_file: {source_file}"
+            current_notes = entry.get("Notes")
+
+            if current_notes in (None, ""):
+                entry["Notes"] = source_note
+            else:
+                notes_text = str(current_notes)
+                if source_note not in notes_text:
+                    entry["Notes"] = f"{notes_text}; {source_note}"
+
+        entry.pop("Type1", None)
+        entry.pop("Type2", None)
+        entry.pop("q", None)
+
+
 
 # -------------------------------------------------
 # Ingestion
@@ -475,6 +496,10 @@ print(f"Dropped duplicates: {len(dropped_duplicates)}")
 # Add SIMBAD links before sanitization/output
 add_simbad_links(all_systems)
 add_simbad_links(dropped_duplicates)
+
+# Remove deprecated fields before sanitization/output.
+remove_deprecated_fields(all_systems)
+remove_deprecated_fields(dropped_duplicates)
 
 all_systems = sanitize(all_systems)
 dropped_duplicates = sanitize(dropped_duplicates)
