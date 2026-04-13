@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Post Mass Transfer Review</title>
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f0fbff; color: #222; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 0; background: #f8fdff; color: #222; }
     header {
-      background: white;
+      background: #ffffff;
       color: #000;
       padding: 0.1rem 0.1rem 0.1rem 0.1rem;
       text-align: center;
-      border: 8px solid #388087; /* 388087 outer orange  31bbc5cf */
+      border: 1px solid #388087; /* 388087 outer orange  31bbc5cf */
       border-radius: 5px;
       box-sizing: border-box;
     }
     .header-inset-1 {
-      border: 8px solid #f0dea8; /* middle blue  = 31bbc5cf yellow = eccd69 */
+      border: 3px solid #f0dea8; /* middle blue  = 31bbc5cf yellow = eccd69 */
       padding: 0.5rem 0.5rem 0.5rem 0.5rem;
       border-radius: 2px;
-      background: white;
+      background: #ffffff;
       box-sizing: border-box;
     }
     nav { margin: 1rem 0; }
@@ -28,11 +28,11 @@
     section {
       max-width: 800px;
       margin: 2rem auto;
-      background: #fff;
+      background: #ffffff;
       border-radius: 8px;
       box-shadow: 0 2px 8px #fbfbfa;
       padding: 2rem;
-      outline: 6px solid #388087;
+      outline: 1px solid #388087;
     }
     h2 { border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
     img.plot { max-width: 100%; display: block; margin: 1rem auto; border: 1px solid #ccc; border-radius: 4px; outline: 1px solid #bbb; }
@@ -46,6 +46,33 @@
       box-sizing: border-box;
       max-width: 100%;
     }
+    .resource-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 0.8rem;
+    }
+    .resource-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.45rem 0.7rem;
+      border-radius: 6px;
+      border: 1px solid #d8d8d8;
+      background: #ffffff;
+      color: #222;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .resource-button:hover {
+      background: #f7fbfd;
+      border-color: #388087;
+    }
+    .resource-button img {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -56,8 +83,8 @@
       <nav>
         <a href="#about">About</a>
         <a href="#data">Data</a>
-        <a href="#results">Results</a>
-        <a href="#plots">Plots</a>
+        <a href="#plots">Interactive Plots</a>
+        <a href="#paper">Catalog paper</a>
         <a href="missing_systems.html">Suggest Missing System</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -77,14 +104,18 @@
 <section id="data"><div class="section-border-inner">
   <h2>Data</h2>
 
-  <p>You can download the catalog in JSON format <a href="https://github.com/binary-observations/post_mt_catalog/blob/master/data/post_mt_systems.json">here</a>.</p>
+  <p>
+    Download the catalog in JSON format:
+    <a id="download-json" href="https://raw.githubusercontent.com/binary-observations/post_mt_catalog/master/data/post_mt_systems.json" style="display:inline-block; background:#f2dc8d; color:rgb(61, 48, 39); text-decoration:none; padding:0.5rem 0.8rem; border-radius:4px; font-weight:bold; margin-left:0.4rem;">Download JSON</a>
+    <a id="download-csv" href="#" style="display:inline-block; background:#f2dc8d; color:rgb(61, 48, 39); text-decoration:none; padding:0.5rem 0.8rem; border-radius:4px; font-weight:bold; margin-left:0.4rem;">Download CSV</a>
+  </p>
   
   <!-- ################################################# -->
    <!-- Showing the table as an interactive element -->
   <!-- ################################################# -->
   <div id="data-app">
     <div id="data-controls" style="margin:1rem 0; display:flex; flex-wrap:wrap; gap:0.5rem; align-items:center;">
-      <button id="load-remote">Load catalog from GitHub (fetch & render)</button>
+      <a id="load-remote" href="#">Load catalog from GitHub (fetch & render)</a>
       <input type="search" id="global-search" placeholder="Search table..." style="flex:1; min-width:180px; padding:0.4rem;">
       <label>Page size:
         <select id="page-size">
@@ -93,14 +124,59 @@
           <option>100</option>
         </select>
       </label>
-       <div class="form-group">
-         <label for="filter-type1">Type1:</label>
-         <input type="text" id="filter-type1" placeholder="Type1 filter" style="flex:1; min-width:180px; padding:0.4rem;">
-       </div>
-       <div class="form-group">
-         <label for="filter-type2">Type2:</label>
-         <input type="text" id="filter-type2" placeholder="Type2 filter" style="flex:1; min-width:180px; padding:0.4rem;">
-       </div>
+      <label>System class:
+        <select id="filter-system-class" style="min-width:220px; padding:0.4rem;">
+          <option value="">All</option>
+          <option>Contact binary</option>
+          <option>Algol</option>
+          <option>Hot subdwarf binary</option>
+          <option>He giant</option>
+          <option>Intermediate-M stripped star</option>
+          <option>WR binary</option>
+          <option>Post-AGB binary</option>
+          <option>EL CVn</option>
+          <option>Blue straggler binary</option>
+          <option>Chemically Peculiar</option>
+          <option>Astrometric WD + MS</option>
+          <option>Spectroscopic WD + MS</option>
+          <option>Self-lensing WD + MS</option>
+          <option>pulsar binary</option>
+          <option>Spectroscopic compact object</option>
+          <option>Astrometric compact object</option>
+          <option>Symbiotic XRB</option>
+          <option>high-mass XRB</option>
+        </select>
+      </label>
+      <label>evol_type_1:
+        <select id="filter-evol-type-1" style="min-width:130px; padding:0.4rem;">
+          <option value="">All</option>
+          <option>MS</option>
+          <option>HG</option>
+          <option>RGB</option>
+          <option>AGB</option>
+          <option>He-star</option>
+          <option>WD</option>
+          <option>NS</option>
+          <option>BH</option>
+        </select>
+      </label>
+      <label>evol_type_2:
+        <select id="filter-evol-type-2" style="min-width:130px; padding:0.4rem;">
+          <option value="">All</option>
+          <option>MS</option>
+          <option>HG</option>
+          <option>RGB</option>
+          <option>AGB</option>
+          <option>He-star</option>
+          <option>WD</option>
+          <option>NS</option>
+          <option>BH</option>
+        </select>
+      </label>
+      <label for="filter-obs-type-1">obs_type_1:</label>
+      <input type="text" id="filter-obs-type-1" placeholder="obs_type_1 contains..." style="flex:1; min-width:180px; padding:0.4rem;">
+      <label for="filter-obs-type-2">obs_type_2:</label>
+      <input type="text" id="filter-obs-type-2" placeholder="obs_type_2 contains..." style="flex:1; min-width:180px; padding:0.4rem;">
       <div id="pagination" style="margin-left:auto; display:flex; gap:0.5rem; align-items:center;"></div>
     </div>
 
@@ -112,6 +188,9 @@
     </div>
 
     <div id="data-status" style="margin-top:0.5rem; color:#666; font-size:0.95rem;"></div>
+    <div style="margin-top:0.8rem;">
+      <a id="download-selected" href="#" style="display:inline-block; background:#388087; color:rgb(255, 255, 255); text-decoration:none; padding:0.5rem 0.8rem; border-radius:4px; font-weight:bold;">Download Selected CSV</a>
+    </div>
   </div>
 
   <style>
@@ -121,6 +200,14 @@
     #data-table code { background:transparent; padding:0; }
     #data-controls button { background:#6493c5; color:white; border:none; padding:0.4rem 0.7rem; border-radius:4px; cursor:pointer; }
     #data-controls button:hover { background:#1a252f; }
+    #load-remote {
+      color: #388087;
+      font-weight: 600;
+      text-decoration: underline;
+    }
+    #load-remote:hover {
+      color: #1a252f;
+    }
   </style>
 
   <script>
@@ -134,19 +221,128 @@
 
       const els = {
         loadRemote: document.getElementById('load-remote'),
+        downloadJson: document.getElementById('download-json'),
+        downloadCsv: document.getElementById('download-csv'),
+        downloadSelected: document.getElementById('download-selected'),
         // local file input removed per user request
         search: document.getElementById('global-search'),
         pageSizeSelect: document.getElementById('page-size'),
         table: document.getElementById('data-table'),
         thead: document.querySelector('#data-table thead'),
         tbody: document.querySelector('#data-table tbody'),
-        pagination: document.getElementById('pagination'),
-  type1: document.getElementById('filter-type1'),
-  type2: document.getElementById('filter-type2'),
+          pagination: document.getElementById('pagination'),
+          systemClass: document.getElementById('filter-system-class'),
+          evolType1: document.getElementById('filter-evol-type-1'),
+          evolType2: document.getElementById('filter-evol-type-2'),
+          obsType1: document.getElementById('filter-obs-type-1'),
+          obsType2: document.getElementById('filter-obs-type-2'),
         status: document.getElementById('data-status')
       };
 
       function setStatus(msg){ els.status.textContent = msg; }
+
+      function parseCatalogJSON(text){
+        try {
+          return JSON.parse(text);
+        } catch (parseErr) {
+          const cleaned = sanitizeJSONText(text);
+          return JSON.parse(cleaned);
+        }
+      }
+
+      function recordsFromRawData(data){
+        if(Array.isArray(data)){
+          return data.map((r,i)=> ({_index:i, ...r}));
+        }
+        if(data && typeof data === 'object'){
+          return Object.entries(data).map(([k,v],i)=> ({_index:i, 'System Name': k, ...v}));
+        }
+        return [];
+      }
+
+      function escapeCSVValue(value){
+        if(value === null || value === undefined) return '';
+        let s = '';
+        if(Array.isArray(value) || typeof value === 'object') s = JSON.stringify(value);
+        else s = String(value);
+        if(/[",\n\r]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
+        return s;
+      }
+
+      function recordsToCSV(rows){
+        const keys = getAllKeys(rows);
+        const sortedKeys = keys.includes('System Name') ? ['System Name', ...keys.filter(k=>k!=='System Name')] : keys;
+        const header = sortedKeys.map(escapeCSVValue).join(',');
+        const body = rows.map(row => sortedKeys.map(k => escapeCSVValue(row[k])).join(','));
+        return [header, ...body].join('\n');
+      }
+
+      async function downloadCatalogJSON(event){
+        event.preventDefault();
+        const url = 'https://raw.githubusercontent.com/binary-observations/post_mt_catalog/master/data/post_mt_systems.json';
+        try{
+          const res = await fetch(url, { cache: 'no-store' });
+          if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+          const blob = await res.blob();
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = 'post_mt_systems.json';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(blobUrl);
+        }catch(err){
+          // Fallback: still open the raw file if a download cannot be triggered.
+          window.open(url, '_blank', 'noopener');
+        }
+      }
+
+      async function downloadCatalogCSV(event){
+        event.preventDefault();
+        const url = 'https://raw.githubusercontent.com/binary-observations/post_mt_catalog/master/data/post_mt_systems.json';
+        try{
+          const res = await fetch(url, { cache: 'no-store' });
+          if(!res.ok) throw new Error(res.status + ' ' + res.statusText);
+          const text = await res.text();
+          const data = parseCatalogJSON(text);
+          const rows = recordsFromRawData(data);
+          const csvText = recordsToCSV(rows);
+          const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8' });
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = 'post_mt_systems.csv';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(blobUrl);
+        }catch(err){
+          setStatus('Failed to prepare CSV download: ' + err.message);
+        }
+      }
+
+      async function downloadSelectedFilteredCSV(event){
+        event.preventDefault();
+        try{
+          if(!filtered || filtered.length === 0){
+            setStatus('No filtered rows to download. Adjust filters or load the catalog first.');
+            return;
+          }
+          const csvText = recordsToCSV(filtered);
+          const blob = new Blob([csvText], { type: 'text/csv;charset=utf-8' });
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = 'post_mt_systems_filtered.csv';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(blobUrl);
+        }catch(err){
+          setStatus('Failed to prepare filtered CSV download: ' + err.message);
+        }
+      }
 
       // Replace common Python/NumPy tokens that are invalid in strict JSON
       function sanitizeJSONText(text){
@@ -237,7 +433,7 @@
         els.thead.appendChild(tr);
 
         // Build filters: parse inline key=value tokens from global search, and
-        // also use the explicit Type1/Type2 inputs.
+        // also use explicit schema-field filter controls.
         let qraw = (els.search.value || '').trim();
         let q = qraw.toLowerCase();
 
@@ -255,11 +451,17 @@
   kvRegex.lastIndex = 0;
   q = qraw.replace(kvRegex, '').trim().toLowerCase();
 
-        // explicit inputs override/add to kvFilters
-  const t1 = (els.type1 && els.type1.value || '').trim().toLowerCase();
-  const t2 = (els.type2 && els.type2.value || '').trim().toLowerCase();
-        if(t1) kvFilters['type1'] = t1;
-        if(t2) kvFilters['type2'] = t2;
+          // explicit inputs override/add to kvFilters
+          const systemClass = (els.systemClass && els.systemClass.value || '').trim().toLowerCase();
+          const evolType1 = (els.evolType1 && els.evolType1.value || '').trim().toLowerCase();
+          const evolType2 = (els.evolType2 && els.evolType2.value || '').trim().toLowerCase();
+          const obsType1 = (els.obsType1 && els.obsType1.value || '').trim().toLowerCase();
+          const obsType2 = (els.obsType2 && els.obsType2.value || '').trim().toLowerCase();
+          if(systemClass) kvFilters['system_class'] = systemClass;
+          if(evolType1) kvFilters['evol_type_1'] = evolType1;
+          if(evolType2) kvFilters['evol_type_2'] = evolType2;
+          if(obsType1) kvFilters['obs_type_1'] = obsType1;
+          if(obsType2) kvFilters['obs_type_2'] = obsType2;
 
         filtered = records.filter(r=>{
           // free-text search (if present)
@@ -362,11 +564,17 @@
       }
 
       // wire events
-  els.loadRemote.addEventListener('click', async ()=>{ await fetchRemote(); });
-  els.pageSizeSelect.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
-  els.search.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
-  if(els.type1) els.type1.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
-  if(els.type2) els.type2.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
+      els.loadRemote.addEventListener('click', async (event)=>{ event.preventDefault(); await fetchRemote(); });
+      if(els.downloadJson) els.downloadJson.addEventListener('click', downloadCatalogJSON);
+      if(els.downloadCsv) els.downloadCsv.addEventListener('click', downloadCatalogCSV);
+      if(els.downloadSelected) els.downloadSelected.addEventListener('click', downloadSelectedFilteredCSV);
+      els.pageSizeSelect.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
+      els.search.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
+      if(els.systemClass) els.systemClass.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
+      if(els.evolType1) els.evolType1.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
+      if(els.evolType2) els.evolType2.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
+      if(els.obsType1) els.obsType1.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
+      if(els.obsType2) els.obsType2.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
 
       // auto-load remote on page open (can be removed if you prefer click)
       fetchRemote();
@@ -381,7 +589,7 @@
 
   <h3>Data Structure</h3>
   <p>All systems are stored in a json dictionary with at least the following columns (with key quantities as <code>[err-, value, err+]</code> triplets):</p>
-  <pre><code>System Name, RA, Dec, Period, Eccentricity, M1, M1_sin3i, M2, M2_sin3i, q, Mass Function, Type1, Type2, Detection Method, Reference, Notes</code></pre>
+  <pre><code>System Name, RA, Dec, Period, Eccentricity, M1, M1_sin3i, M2, M2_sin3i, q, Mass Function, obs_type_1, obs_type_2, evol_type_1, evol_type_2, system_class, Detection Method, Reference, Notes</code></pre>
   <p>Example entry:</p>
   <pre><code>{
 "System Name": "Example system",
@@ -392,32 +600,11 @@
 "M1": [0.5, 5.0, 0.5],
 ...
 }</code></pre>
-  <p>Missing values are represented as <code>np.nan</code>. Lower/upper limits are handled using the <code>M1_sin3i</code> and <code>M2_sin3i</code> columns.</p>
+  <p>Missing values are represented as <code>np.nan</code>. </p>
 
 
 </section>
 
-
-<!-- ######################################################################################### -->
-<section id="add_missing_systems"><div class="section-border-inner">
-  <h2>Suggest missing systems</h2>
-  <p>Do you think a post-mass transfer system is missing from the catalog? Double check if your system already exists in the catalog (by name/ID and by position). If it is not in the catalog, please submit the missing-system proposal. 
-    Thanks for contributing!</p>
-    <p>
-      <a href="missing_systems.html" style="display:inline-block; background:#f2dc8d; color:rgb(61, 48, 39); text-decoration:none; padding:0.75rem 1rem; border-radius:4px; font-weight:bold;">Open missing-system workflow</a>
-    </p>
-    
-  </div></section>
-  
-
-<!-- ######################################################################################### -->
-  <section id="paper"><div class="section-border-inner">
-    <h2>Catalog description paper</h2>
-    <!-- <p>The paper that describes this catalog can be found <a href="../writing/main.pdf">here</a>.</p> -->
-  
-    <p>Processed tables and data products are available in the <code>result_tables/</code> directory. Each file contains results for different post-mass transfer systems. See the project repository for details.</p>
-  </div></section>
-  
 <!-- ######################################################################################### -->
   <section id="plots"><div class="section-border-inner">
     <h2>Interactive Plots</h2>
@@ -437,6 +624,49 @@
 
   </div></section>
 
+
+<!-- ######################################################################################### -->
+  <section id="paper"><div class="section-border-inner">
+    <h2>Catalog description paper</h2>
+    <!-- <p>The paper that describes this catalog can be found <a href="../writing/main.pdf">here</a>.</p> -->
+  
+    <p>The current version of the paper describing the catalog data and results is available <a href="../writing/main.pdf">here</a>.</p>
+    <div class="resource-buttons">
+      <a class="resource-button" href="https://arxiv.org" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn.simpleicons.org/arxiv/222222" alt="ArXiv logo">
+        ArXiv
+      </a>
+      <a class="resource-button" href="https://ui.adsabs.harvard.edu" target="_blank" rel="noopener noreferrer">
+        <img src="https://ui.adsabs.harvard.edu/favicon.ico" alt="ADS logo">
+        ADS
+      </a>
+    </div>
+
+  </div></section>
+  
+
+<!-- ######################################################################################### -->
+<section id="add_missing_systems"><div class="section-border-inner">
+  <h2>Suggest missing systems</h2>
+  <p>Do you think a post-mass transfer system is missing from the catalog? Double check if your system already exists in the catalog (by name/ID and by position). If it is not in the catalog, please submit the missing-system proposal. 
+    Thanks for contributing!</p>
+    <p>
+      <a href="missing_systems.html" style="display:inline-block; background:#f2dc8d; color:rgb(61, 48, 39); text-decoration:none; padding:0.75rem 1rem; border-radius:4px; font-weight:bold;">Open missing-system workflow</a>
+    </p>
+    
+  </div></section>
+  
+
+
+
+<!-- ######################################################################################### -->
+<section id="contact"><div class="section-border-inner">
+  <h2>Contact</h2>
+  <p>
+    For questions, feedback, or collaboration ideas, please contact
+    <a href="mailto:lieke.vanson@ru.nl">lieke.vanson@ru.nl</a>.
+  </p>
+</div></section>
 
 
 
