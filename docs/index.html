@@ -190,6 +190,7 @@
     <div id="data-status" style="margin-top:0.5rem; color:#666; font-size:0.95rem;"></div>
     <div style="margin-top:0.8rem;">
       <a id="download-selected" href="#" style="display:inline-block; background:#388087; color:rgb(255, 255, 255); text-decoration:none; padding:0.5rem 0.8rem; border-radius:4px; font-weight:bold;">Download Selected CSV</a>
+      <a id="download-selected-json" href="#" style="display:inline-block; background:#388087; color:rgb(255, 255, 255); text-decoration:none; padding:0.5rem 0.8rem; border-radius:4px; font-weight:bold; margin-left:0.4rem;">Download Selected JSON</a>
     </div>
   </div>
 
@@ -224,6 +225,7 @@
         downloadJson: document.getElementById('download-json'),
         downloadCsv: document.getElementById('download-csv'),
         downloadSelected: document.getElementById('download-selected'),
+        downloadSelectedJson: document.getElementById('download-selected-json'),
         // local file input removed per user request
         search: document.getElementById('global-search'),
         pageSizeSelect: document.getElementById('page-size'),
@@ -341,6 +343,28 @@
           URL.revokeObjectURL(blobUrl);
         }catch(err){
           setStatus('Failed to prepare filtered CSV download: ' + err.message);
+        }
+      }
+
+      async function downloadSelectedFilteredJSON(event){
+        event.preventDefault();
+        try{
+          if(!filtered || filtered.length === 0){
+            setStatus('No filtered rows to download. Adjust filters or load the catalog first.');
+            return;
+          }
+          const jsonText = JSON.stringify(filtered, null, 2);
+          const blob = new Blob([jsonText], { type: 'application/json;charset=utf-8' });
+          const blobUrl = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = blobUrl;
+          a.download = 'post_mt_systems_filtered.json';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+          URL.revokeObjectURL(blobUrl);
+        }catch(err){
+          setStatus('Failed to prepare filtered JSON download: ' + err.message);
         }
       }
 
@@ -568,6 +592,7 @@
       if(els.downloadJson) els.downloadJson.addEventListener('click', downloadCatalogJSON);
       if(els.downloadCsv) els.downloadCsv.addEventListener('click', downloadCatalogCSV);
       if(els.downloadSelected) els.downloadSelected.addEventListener('click', downloadSelectedFilteredCSV);
+      if(els.downloadSelectedJson) els.downloadSelectedJson.addEventListener('click', downloadSelectedFilteredJSON);
       els.pageSizeSelect.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
       els.search.addEventListener('input', ()=>{ currentPage = 1; renderTable(); });
       if(els.systemClass) els.systemClass.addEventListener('change', ()=>{ currentPage = 1; renderTable(); });
