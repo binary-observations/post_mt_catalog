@@ -138,6 +138,7 @@
       "description": "System-level observational class (Table 2)",
       "allowed_values": [
         "Contact binary",
+        "WUMa binary",
         "Algol",
         "Hot subdwarf binary",
         "He giant",

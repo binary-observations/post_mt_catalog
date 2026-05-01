@@ -1,11 +1,17 @@
 """
-Category_dict.py — single source of truth for system-class colours and symbols.
+Category_dict.py — single source of truth for shared plot styling and categorization.
 
 Defines:
-    SYSTEM_CLASS_MAP  – nested dict {category: {system_class: {color, symbol}}}
-    STYLE_MAP         – flat dict   {system_class: {color, symbol}}  (derived)
-    COLORMAP          – flat dict   {system_class: color}            (for plotly)
-    SYMBOLMAP         – flat dict   {system_class: symbol}           (for plotly)
+    SYSTEM_CLASS_MAP       – nested dict {category: {system_class: {color, symbol}}}
+    STYLE_MAP              – flat dict   {system_class: {color, symbol}}  (derived)
+    COLORMAP               – flat dict   {system_class: color}            (for plotly)
+    SYMBOLMAP              – flat dict   {system_class: symbol}           (for plotly)
+    PLOTLY_TO_MPL_MARKER   – map from plotly-like symbol names to matplotlib markers
+    PAPER_PLOT_RCPARAMS    – common matplotlib rcParams for paper figures
+    LOW_MASS_CATEGORIES    – top-level categories grouped as low-mass donor systems
+    HIGH_MASS_CATEGORIES   – top-level categories grouped as high-mass donor systems
+    LOW_MASS_CMAP          – colormap for low-mass total-mass overlays
+    HIGH_MASS_CMAP         – colormap for high-mass total-mass overlays
 
 Import in notebooks / scripts with e.g.:
         from Category_dict import SYSTEM_CLASS_MAP, STYLE_MAP, COLORMAP, SYMBOLMAP
@@ -33,8 +39,9 @@ SYSTEM_CLASS_MAP = {
     ## Binaries w. non-degenerate components ##
     # RLOF
     'Ongoing RLOF': {
-    'Algol': {'color': '#eda45c', 'symbol': 'diamond'},                   # maroon
+    'WUMa binary': {'color': '#d65906', 'symbol': 'circle'},           # orange
     'Contact binary': {'color': '#d65906', 'symbol': 'triangle-up'},           # orange
+    'Algol': {'color': '#eda45c', 'symbol': 'diamond'},                   # maroon
     },
 
     # Low-M stripped
@@ -85,3 +92,54 @@ STYLE_MAP = {
 # COLORMAP / SYMBOLMAP: convenience dicts for plotly
 COLORMAP = {k: v['color']  for k, v in STYLE_MAP.items()}
 SYMBOLMAP = {k: v['symbol'] for k, v in STYLE_MAP.items()}
+
+# Shared marker translation for matplotlib-based static figures.
+PLOTLY_TO_MPL_MARKER = {
+    'circle': 'o',
+    'circle-open': 'o',
+    'square': 's',
+    'square-open': 's',
+    'diamond': 'D',
+    'diamond-open': 'D',
+    'diamond-tall': 'd',
+    'cross': '+',
+    'cross-dot': '+',
+    'plus': '+',
+    '+': '+',
+    'x': 'x',
+    'triangle-up': '^',
+    'triangle-up-open': '^',
+    'star': '*',
+    'pentagon': 'p',
+    'pentagon-open': 'p',
+    'hourglass': 'H',
+    'square-x': '+',
+    'cross-thin-open': 'x',
+}
+
+# Common matplotlib defaults used by the standalone paper-figure scripts.
+PAPER_PLOT_RCPARAMS = {
+    'font.family': 'serif',
+    'font.serif': ['DejaVu Serif', 'Computer Modern Roman'],
+    'mathtext.fontset': 'cm',
+    'font.size': 12,
+}
+
+# Shared category groupings used in higher-level summary plots.
+LOW_MASS_CATEGORIES = ['WD binary', 'Low-M stripped']
+HIGH_MASS_CATEGORIES = ['Ongoing RLOF', 'High-M stripped', 'CO binary']
+
+# Colormaps for total-mass overlays in the summary P-e figure.
+LOW_MASS_CMAP = mcolors.LinearSegmentedColormap.from_list(
+    'low_mass_gradient', ['#d9ecff', '#7db7ff', '#255c99']
+)
+HIGH_MASS_CMAP = mcolors.LinearSegmentedColormap.from_list(
+    'high_mass_gradient', ['#f9e5a9', '#fcd097', '#e37601']
+)
+
+
+def darken_color(color, factor=0.7):
+    """Darken a color by multiplying its RGB channels by a constant factor."""
+    rgb = mcolors.to_rgb(color)
+    darkened_rgb = tuple(channel * factor for channel in rgb)
+    return mcolors.to_hex(darkened_rgb)

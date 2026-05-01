@@ -26,3 +26,11 @@ DUMMY_CATALOG = DATA_DIR / "dummy.json"
 PERIOD_ECC_PLOT = DOCS_DIR / "interactive_period_vs_eccentricity.html"
 PERIOD_M2_PLOT = DOCS_DIR / "interactive_period_vs_m2.html"
 
+# Module paths
+DATA_ANALYSIS_DIR = CODE_DIR / "data_analysis"
+# Ensure data_analysis modules are importable
+import sys
+if str(DATA_ANALYSIS_DIR) not in sys.path:
+    sys.path.insert(0, str(DATA_ANALYSIS_DIR))
+
+CATEGORY_DICT_PATH = DATA_ANALYSIS_DIR / "Category_dict.py"
