@@ -159,7 +159,7 @@ def plot_p_e_by_system_class(catalog_df=None, save=True):
     # Set matplotlib style
     plt.rcParams.update(PAPER_PLOT_RCPARAMS)
 
-    fig, ax = plt.subplots(figsize=(12.5, 6.5))
+    fig, ax = plt.subplots(figsize=(12.5, 7))
 
     plot_df = catalog_df.copy()
 
