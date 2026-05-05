@@ -292,7 +292,7 @@ def upgrade_entry_schema(entry: dict):
         entry["obs_type_1"] = _strip_contact(entry.get("obs_type_1"))
         entry["obs_type_2"] = _strip_contact(entry.get("obs_type_2"))
         # Force system class
-        entry["system_class"] = "Contact binary"
+        entry["system_class"] = "Massive contact binary"
 
     # system class
     if entry["system_class"] is None:

@@ -40,7 +40,7 @@ SYSTEM_CLASS_MAP = {
     # RLOF
     'Ongoing RLOF': {
     'WUMa binary': {'color': '#d65906', 'symbol': 'circle'},           # orange
-    'Contact binary': {'color': '#d65906', 'symbol': 'triangle-up'},           # orange
+    'Massive contact binary': {'color': '#d65906', 'symbol': 'triangle-up'},           # orange
     'Algol': {'color': '#eda45c', 'symbol': 'diamond'},                   # maroon
     },
 
@@ -126,8 +126,15 @@ PAPER_PLOT_RCPARAMS = {
 }
 
 # Shared category groupings used in higher-level summary plots.
-LOW_MASS_CATEGORIES = ['WD binary', 'Low-M stripped']
-HIGH_MASS_CATEGORIES = ['Ongoing RLOF', 'High-M stripped', 'CO binary']
+LOW_MASS_CLASSES = ['WUMa binary', 'Hot subdwarf binary', 'He giant', 
+                    'Post-AGB binary','EL CVn','Blue straggler binary','Chemically Peculiar',
+                    'Self-lensing WD + MS','Spectroscopic WD + MS','Astrometric WD + MS','WD + MS']  #['WD binary', 'Low-M stripped']
+                    
+HIGH_MASS_CLASSES = ['Massive contact binary', 'Intermediate-M stripped star', 'WR binary',
+                    'pulsar binary','high-mass XRB',
+                    'Symbiotic XRB','Spectroscopic compact object',
+                    'Astrometric compact object']#['Ongoing RLOF', 'High-M stripped', 'CO binary']
+
 
 # Colormaps for total-mass overlays in the summary P-e figure.
 LOW_MASS_CMAP = mcolors.LinearSegmentedColormap.from_list(

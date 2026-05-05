@@ -137,7 +137,7 @@
       "type": "string",
       "description": "System-level observational class (Table 2)",
       "allowed_values": [
-        "Contact binary",
+        "Massive contact binary",
         "WUMa binary",
         "Algol",
         "Hot subdwarf binary",

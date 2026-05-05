@@ -132,9 +132,10 @@ def load_catalog(file_path):
 
 
 # ============================================================================
-# Figure Generation Functions
+# Figure Functions
 # ============================================================================
 
+################################################################
 def plot_p_e_by_system_class(catalog_df=None, save=True):
     """
     Create Period-Eccentricity diagram colored by system class.
@@ -198,8 +199,7 @@ def plot_p_e_by_system_class(catalog_df=None, save=True):
         sub = plot_df[plot_df['system_class'] == system_class]
         if sub.empty:
             continue
-        # Draw WD-containing systems behind the rest so sparse high-mass systems
-        # remain visible on top.
+        # Draw WD-containing systems behind the rest so sparse high-mass systems remain visible
         Zord = 3 if 'WD' not in system_class else 0
 
         color = COLORMAP.get(system_class, '#666666')
@@ -238,6 +238,8 @@ def plot_p_e_by_system_class(catalog_df=None, save=True):
 
     return fig, ax
 
+
+################################################################
 def plot_p_e_2massbins_median(catalog_df=None, save=True):
     """
     Create Period-Eccentricity diagram colored by total mass, with low/high mass bins.
@@ -439,6 +441,8 @@ def plot_p_e_2massbins_median(catalog_df=None, save=True):
     return fig, ax
 
 
+
+################################################################
 def plot_p_e_by_category_median(catalog_df=None, save=True):
     """
     Create Period-Eccentricity diagram per overarching category with median and
