@@ -15,7 +15,7 @@ if str(DATA_ANALYSIS_DIR) not in sys.path:
     sys.path.insert(0, str(DATA_ANALYSIS_DIR))
 
 # Reuse the most complete catalog loader so all figures work off the same dataframe.
-from P_e_Figures import load_catalog as load_pe_catalog, plot_p_e_by_system_class, plot_p_e_2massbins_median
+from P_e_Figures import load_catalog as load_pe_catalog, plot_p_e_by_system_class, plot_p_e_2massbins_median, plot_p_e_by_category_median
 from P_dist_Figure import load_catalog as load_period_catalog, plot_period_distribution_by_category
 from mass_ratio_Figure import load_catalog as load_mass_catalog, plot_m1_m2_log_by_category
 
@@ -35,6 +35,9 @@ if __name__ == "__main__":
 
     print("Generating P-e diagram with two mass bins...")
     plot_p_e_2massbins_median(pe_catalog_df, save=True)
+
+    print("Generating P-e diagram by category with medians...")
+    plot_p_e_by_category_median(pe_catalog_df, save=True)
 
     print("Generating period distribution by category...")
     plot_period_distribution_by_category(period_catalog_df, save=True)

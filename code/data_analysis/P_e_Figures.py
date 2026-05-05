@@ -4,15 +4,17 @@ P_e_Figures.py — Generate Period-Eccentricity diagrams for the post-main-seque
 Available figures:
     - plot_p_e_by_system_class(): General P-e diagram colored by system class
     - plot_p_e_2massbins_median(): P-e diagram colored by total mass, with low/high mass bins
+    - plot_p_e_by_category_median(): P-e diagram per overarching category with median/percentile tracks
 
 Usage:
-    python P_e_Figures.py                    # Generate both figures
+    python P_e_Figures.py                    # Generate all figures
     
 Or import and call directly:
-    from P_e_Figures import plot_p_e_by_system_class, plot_p_e_2massbins_median
+    from P_e_Figures import plot_p_e_by_system_class, plot_p_e_2massbins_median, plot_p_e_by_category_median
     catalog_df = load_catalog(MAIN_CATALOG)
     fig1, ax1 = plot_p_e_by_system_class(catalog_df, save=True)
     fig2, ax2 = plot_p_e_2massbins_median(catalog_df, save=True)
+    fig3, ax3 = plot_p_e_by_category_median(catalog_df, save=True)
 """
 
 import json
@@ -433,6 +435,123 @@ def plot_p_e_2massbins_median(catalog_df=None, save=True):
         plt.savefig(PLOTS_DIR / 'P_e_diagram_2massbins_median.pdf', bbox_inches='tight')
         print(f"Saved to {LATEX_PLOT_DIR / 'P_e_diagram_2massbins_median.pdf'}")
         print(f"Saved to {PLOTS_DIR / 'P_e_diagram_2massbins_median.pdf'}")
+
+    return fig, ax
+
+
+def plot_p_e_by_category_median(catalog_df=None, save=True):
+    """
+    Create Period-Eccentricity diagram per overarching category with median and
+    5–95 percentile tracks overlaid.
+
+    Categories plotted: WD binary, Ongoing RLOF, Low-M stripped stars,
+    High-M stripped stars, CO binary.
+
+    Parameters:
+    -----------
+    catalog_df : pd.DataFrame, optional
+        Catalog DataFrame. If None, loads from MAIN_CATALOG.
+    save : bool, default=True
+        Whether to save the figure to LATEX_PLOT_DIR and PLOTS_DIR.
+
+    Returns:
+    --------
+    fig, ax : matplotlib Figure and Axes objects
+    """
+
+    if catalog_df is None:
+        catalog_df = load_catalog(MAIN_CATALOG)
+        if catalog_df is None:
+            return None, None
+
+    plt.rcParams.update(PAPER_PLOT_RCPARAMS)
+
+    fig, ax = plt.subplots(figsize=(9, 7))
+
+    plot_df = catalog_df.copy()
+    plot_df['log_Period'] = np.log10(plot_df['Period'])
+
+    # Propagate errors for logP: d(log P) = 1/ln(10) * dP / P
+    plot_df['period_err_minus_log'] = plot_df['Period_err_minus'] / (plot_df['Period'] * np.log(10))
+    plot_df['period_err_plus_log'] = plot_df['Period_err_plus'] / (plot_df['Period'] * np.log(10))
+
+    # Keep eccentricity errors physical
+    mask_min = plot_df['Eccentricity'] - plot_df['Eccentricity_err_minus'] < 0
+    plot_df.loc[mask_min, 'Eccentricity_err_minus'] = plot_df.loc[mask_min, 'Eccentricity']
+    mask_plus = plot_df['Eccentricity'] + plot_df['Eccentricity_err_plus'] > 1
+    plot_df.loc[mask_plus, 'Eccentricity_err_plus'] = 1 - plot_df.loc[mask_plus, 'Eccentricity']
+
+    plot_df['period_err_minus_log'] = plot_df['period_err_minus_log'].fillna(0)
+    plot_df['period_err_plus_log'] = plot_df['period_err_plus_log'].fillna(0)
+    plot_df['Eccentricity_err_minus'] = plot_df['Eccentricity_err_minus'].fillna(0)
+    plot_df['Eccentricity_err_plus'] = plot_df['Eccentricity_err_plus'].fillna(0)
+
+    # Map display category names to one or more source categories in SYSTEM_CLASS_MAP
+    plot_category_map = {
+        'WD binary': ['WD binary'],
+        'Ongoing RLOF': ['Ongoing RLOF'],
+        'Low-M stripped stars': ['Low-M stripped'],
+        'High-M stripped stars': ['High-M stripped'],
+        'CO binary': ['CO binary'],
+    }
+
+    P_bins = np.linspace(-1, 4, 7)
+    x_stats = P_bins[:-1] + 0.5 * np.diff(P_bins)
+
+    for category, source_categories in plot_category_map.items():
+        zorder = 1
+
+        system_classes_in_category = []
+        for src_category in source_categories:
+            system_classes_in_category.extend(list(SYSTEM_CLASS_MAP[src_category].keys()))
+
+        if source_categories[0] == 'Ongoing RLOF':
+            zorder += 1
+
+        subset = plot_df[plot_df['system_class'].isin(system_classes_in_category)].copy()
+
+        # Use first color of the first source category as the representative color
+        first_source = source_categories[0]
+        first_system_color = list(SYSTEM_CLASS_MAP[first_source].values())[0]['color']
+        if category == 'WD binary':
+            first_system_color = list(SYSTEM_CLASS_MAP['WD binary'].values())[-1]['color']
+
+        ax.errorbar(
+            subset['log_Period'], subset['Eccentricity'],
+            xerr=[subset['period_err_minus_log'], subset['period_err_plus_log']],
+            yerr=[subset['Eccentricity_err_minus'].fillna(0), subset['Eccentricity_err_plus'].fillna(0)],
+            fmt='o', c=first_system_color, alpha=0.6, zorder=1,
+            label=f"{category} ({subset.shape[0]})"
+        )
+
+        subset['P_bin'] = pd.cut(subset['log_Period'], bins=P_bins)
+        stats = subset.groupby('P_bin', observed=False)['Eccentricity'].quantile([0.05, 0.5, 0.95]).unstack()
+        stats.columns = ['p05', 'median', 'p95']
+
+        ax.plot(x_stats, stats['median'].values,
+                lw=3, c=darken_color(first_system_color, factor=0.8), zorder=2 + zorder)
+        ax.fill_between(x_stats, stats['p05'].values, stats['p95'].values,
+                        color=darken_color(first_system_color, factor=0.8), alpha=0.1,
+                        step='mid', zorder=-1)
+
+    xticks = [0.01, 0.1, 1, 10, 100, 1000, 10000]
+    xtick_labels = ['0.01', '0.1', '1', '10', '100', '1000', '$10^4$']
+    ax.set_xticks(np.log10(xticks))
+    ax.set_xticklabels(xtick_labels, fontsize=20)
+
+    ax.set_xlim(-2, 4.5)
+    ax.set_ylim(-0.05, 1)
+    ax.tick_params(axis='both', labelsize=20)
+    ax.set_xlabel('$\mathrm{Orbital\,Period \ (days)}$', fontsize=25)
+    ax.set_ylabel('$\mathrm{Eccentricity}$', fontsize=25)
+    ax.legend(loc='upper left', fontsize=18, framealpha=0.5)
+    plt.tight_layout()
+
+    if save:
+        plt.savefig(LATEX_PLOT_DIR / 'P_e_by_category_median.pdf')
+        plt.savefig(PLOTS_DIR / 'P_e_by_category_median.pdf')
+        print(f"Saved to {LATEX_PLOT_DIR / 'P_e_by_category_median.pdf'}")
+        print(f"Saved to {PLOTS_DIR / 'P_e_by_category_median.pdf'}")
 
     return fig, ax
 
