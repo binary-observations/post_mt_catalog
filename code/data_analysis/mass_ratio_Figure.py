@@ -21,6 +21,7 @@ import matplotlib.colors as mcolors
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
+from scipy.stats import gaussian_kde
 
 
 # Ensure project root is importable regardless of the working directory.
@@ -127,7 +128,57 @@ def plot_m1_m2_log_by_category(catalog_df=None, save=True):
 	class_handles = []
 	fit_handles = []
 
+	def draw_combined_kde(group_classes, legend_label, levels=None, color=None, zorder=0, lin_levels=False):
+		"""Draw a grouped 2D KDE in log(M1)-log(M2) space for related subclasses."""
+		sub = plot_df[plot_df["system_class"].isin(group_classes)].copy()
+		if len(sub) < 2:
+			print(f"Not enough data points for KDE of {legend_label} (only {len(sub)}). Skipping KDE.")
+			return
+
+		kde_input = np.vstack([sub["log_M1"], sub["log_M2"]])
+		scipystats_kde = gaussian_kde(kde_input)
+		x_grid = np.linspace(-2, 1.9, 100)
+		y_grid = np.linspace(-2, 1.9, 100)
+		X, Y = np.meshgrid(x_grid, y_grid)
+		Z = scipystats_kde([X.ravel(), Y.ravel()]).reshape(X.shape)
+
+		base_rgb = mcolors.to_rgb(color)
+		alpha_ramp = [(*base_rgb, a) for a in np.linspace(0.0, 0.85, 256)]
+		group_cmap = mcolors.LinearSegmentedColormap.from_list(
+			f"{legend_label}_combined_cmap",
+			alpha_ramp,
+		)
+
+		if levels is None:
+			z_low = np.percentile(Z, 80)
+			z_high = np.max(Z)
+			if lin_levels:
+				levels = np.linspace(z_low, z_high, 5)
+			else:
+				z_low = max(z_low, 1e-10)
+				levels = np.logspace(np.log10(z_low), np.log10(z_high), 5)
+
+		ax.contourf(X, Y, Z, levels=levels, cmap=group_cmap, zorder=zorder, extend="max")
+		contour_set = ax.contour(X, Y, Z, levels=levels, colors=color, linewidths=1.2, alpha=0.9, zorder=zorder + 1)
+		ax.clabel(contour_set, fmt="%.2f", fontsize=9, inline=True)
+
+		class_handles.append(ax.scatter([], [], c=color, marker="s", label=f"{legend_label} ({len(sub)})"))
+
+	# Compile all WD+MS-like classes into one KDE (matches both "WD + MS" and "WD+MS").
+	wd_ms_classes = [cls for cls in STYLE_MAP.keys() if "WD + MS" in cls]
+	print(f"WD+MS classes included in KDE: {wd_ms_classes}")
+	draw_combined_kde(wd_ms_classes, "WD + MS", color="#EE799A", levels=[0.01, 0.1, 1, 10], zorder=1)
+
+	# Compile all WUMa-like classes into one KDE.
+	wuma_classes = [cls for cls in STYLE_MAP.keys() if "WUMa" in cls]
+	draw_combined_kde(wuma_classes, "WUMa", color="#e2be61", levels=[0.02, 0.2, 2, 20], zorder=0, lin_levels=True)
+
+	kde_classes = set(wd_ms_classes + wuma_classes)
+
 	for system_class in STYLE_MAP.keys():
+		if system_class in kde_classes:
+			continue
+
 		sub = plot_df[plot_df["system_class"] == system_class].copy()
 		if sub.empty:
 			continue
@@ -156,6 +207,9 @@ def plot_m1_m2_log_by_category(catalog_df=None, save=True):
 
 	# Overlay one median track per top-level category to summarize the point cloud.
 	for category, systems in SYSTEM_CLASS_MAP.items():
+		if "wd" in category.lower() or "CO binary" in category:
+			continue
+
 		system_classes_in_category = list(systems.keys())
 		subset = plot_df[plot_df["system_class"].isin(system_classes_in_category)].copy()
 		fit_df = subset.dropna(subset=["log_M1", "log_M2"])
@@ -252,7 +306,7 @@ def plot_m1_m2_log_by_category(catalog_df=None, save=True):
 		handles=class_handles,
 		fontsize=14,
 		ncols=1,
-		bbox_to_anchor=(0.9, 0.9),
+		bbox_to_anchor=(0.9, 0.8),
 		loc="upper left",
 		bbox_transform=fig.transFigure,
 		framealpha=0.0,

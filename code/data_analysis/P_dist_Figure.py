@@ -98,9 +98,6 @@ def plot_period_distribution_by_category(catalog_df=None, save=True):
 
 	plt.rcParams.update(PAPER_PLOT_RCPARAMS)
 
-	bins = np.linspace(-2, 4, 25)
-	bin_width = bins[1] - bins[0]
-
 	fig, ax = plt.subplots(figsize=(10, 9))
 
 	for category, systems in SYSTEM_CLASS_MAP.items():
@@ -111,6 +108,11 @@ def plot_period_distribution_by_category(catalog_df=None, save=True):
 		if len(log_periods) <= 1:
 			continue
 
+		N_bins = max(len(log_periods) // 100, 30)  # Aim for ~100 systems per bin
+		# Define histogram bins
+		bins = np.linspace(-2, 4, N_bins)
+		bin_width = bins[1] - bins[0]
+		
 		counts, bin_edges = np.histogram(log_periods, bins=bins)
 		if counts.sum() == 0:
 			continue
@@ -119,28 +121,16 @@ def plot_period_distribution_by_category(catalog_df=None, save=True):
 		first_system_color = list(systems.values())[0]["color"]
 		bin_centers = (bin_edges[:-1] + bin_edges[1:]) / 2
 
-		ax.bar(
-			bin_centers,
-			counts_normalized,
-			width=bin_width,
-			alpha=0.3,
-			color=first_system_color,
-			edgecolor="none",
-		)
+		# Plot the histogram as a bar plot with the same color as the KDE
+		ax.bar(bin_centers,counts_normalized,width=bin_width,alpha=0.3,color=first_system_color,edgecolor="none",)
 
+		# Plot the KDE curve, scaled to match the histogram normalization
 		kde = gaussian_kde(log_periods, bw_method=0.2)
 		x_range = np.linspace(log_periods.min(), log_periods.max(), 200)
 		kde_values = kde(x_range)
 		kde_normalized = kde_values * bin_width
-
-		ax.plot(
-			x_range,
-			kde_normalized,
-			color=first_system_color,
-			linewidth=2.5,
-			label=f"{category} (n={len(log_periods)})",
-			alpha=0.9,
-		)
+		#
+		ax.plot(x_range,kde_normalized,color=first_system_color,linewidth=2.5,label=f"{category} (n={len(log_periods)})",alpha=0.9,)
 
 	xticks = [0.01, 0.1, 1, 10, 100, 1000, 10000]
 	xtick_labels = ["0.01", "0.1", "1", "10", "100", "1000", "$10^4$"]
@@ -151,7 +141,7 @@ def plot_period_distribution_by_category(catalog_df=None, save=True):
 	ax.tick_params(axis="both", labelsize=20)
 	ax.set_xlabel("$\\mathrm{Orbital\\,Period \\ (days)}$", fontsize=28)
 	ax.set_ylabel("$\\mathrm{Normalized \\ Frequency}$", fontsize=28)
-	ax.legend(loc="upper left", fontsize=18)
+	ax.legend(loc="upper right", fontsize=18)
 	plt.tight_layout()
 
 	if save:
