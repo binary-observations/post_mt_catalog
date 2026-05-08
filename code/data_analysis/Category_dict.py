@@ -8,8 +8,8 @@ Defines:
     SYMBOLMAP              – flat dict   {system_class: symbol}           (for plotly)
     PLOTLY_TO_MPL_MARKER   – map from plotly-like symbol names to matplotlib markers
     PAPER_PLOT_RCPARAMS    – common matplotlib rcParams for paper figures
-    LOW_MASS_CATEGORIES    – top-level categories grouped as low-mass donor systems
-    HIGH_MASS_CATEGORIES   – top-level categories grouped as high-mass donor systems
+    LOW_MASS_CLASSES       – system_class labels grouped as low-mass donor systems
+    HIGH_MASS_CLASSES      – system_class labels grouped as high-mass donor systems
     LOW_MASS_CMAP          – colormap for low-mass total-mass overlays
     HIGH_MASS_CMAP         – colormap for high-mass total-mass overlays
 
@@ -39,7 +39,7 @@ SYSTEM_CLASS_MAP = {
     ## Binaries w. non-degenerate components ##
     # RLOF
     'Ongoing RLOF': {
-    'WUMa binary': {'color': '#d65906', 'symbol': 'circle'},           # orange
+    'WUMa binary': {'color': '#e2c885', 'symbol': 'circle'},           # orange
     'Massive contact binary': {'color': '#d65906', 'symbol': 'triangle-up'},           # orange
     'Algol': {'color': '#eda45c', 'symbol': 'diamond'},                   # maroon
     },
@@ -125,14 +125,14 @@ PAPER_PLOT_RCPARAMS = {
     'font.size': 12,
 }
 
-# Shared category groupings used in higher-level summary plots.
-LOW_MASS_CLASSES = ['WUMa binary', 'Hot subdwarf binary', 'He giant', 
+
+# Shared system_class groupings used in higher-level summary plots.
+LOW_MASS_CLASSES = ['WUMa binary', 'Algol (low-mass donor)','Hot subdwarf binary', 'He giant', 
                     'Post-AGB binary','EL CVn','Blue straggler binary','Chemically Peculiar',
                     'Self-lensing WD + MS','Spectroscopic WD + MS','Astrometric WD + MS','WD + MS']  #['WD binary', 'Low-M stripped']
                     
-HIGH_MASS_CLASSES = ['Massive contact binary', 'Intermediate-M stripped star', 'WR binary',
-                    'pulsar binary','high-mass XRB',
-                    'Symbiotic XRB','Spectroscopic compact object',
+HIGH_MASS_CLASSES = ['Massive contact binary','Algol (high-mass donor)', 'Intermediate-M stripped star', 'WR binary',
+                    'pulsar binary','high-mass XRB','Symbiotic XRB','Spectroscopic compact object',
                     'Astrometric compact object']#['Ongoing RLOF', 'High-M stripped', 'CO binary']
 
 

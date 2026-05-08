@@ -8,13 +8,7 @@ Available figures:
 
 Usage:
     python P_e_Figures.py                    # Generate all figures
-    
-Or import and call directly:
-    from P_e_Figures import plot_p_e_by_system_class, plot_p_e_2massbins_median, plot_p_e_by_category_median
-    catalog_df = load_catalog(MAIN_CATALOG)
-    fig1, ax1 = plot_p_e_by_system_class(catalog_df, save=True)
-    fig2, ax2 = plot_p_e_2massbins_median(catalog_df, save=True)
-    fig3, ax3 = plot_p_e_by_category_median(catalog_df, save=True)
+
 """
 
 import json
@@ -51,8 +45,8 @@ COLORMAP = category_dict.COLORMAP
 SYMBOLMAP = category_dict.SYMBOLMAP
 PLOTLY_TO_MPL_MARKER = category_dict.PLOTLY_TO_MPL_MARKER
 PAPER_PLOT_RCPARAMS = category_dict.PAPER_PLOT_RCPARAMS
-LOW_MASS_CATEGORIES = category_dict.LOW_MASS_CATEGORIES
-HIGH_MASS_CATEGORIES = category_dict.HIGH_MASS_CATEGORIES
+LOW_MASS_CLASSES = category_dict.LOW_MASS_CLASSES
+HIGH_MASS_CLASSES = category_dict.HIGH_MASS_CLASSES
 LOW_MASS_CMAP = category_dict.LOW_MASS_CMAP
 HIGH_MASS_CMAP = category_dict.HIGH_MASS_CMAP
 darken_color = category_dict.darken_color
@@ -127,6 +121,8 @@ def load_catalog(file_path):
         'system_class': [entry.get('system_class', 'None') for entry in data],
         'evol_type_1': [entry.get('evol_type_1', '') for entry in data],
         'evol_type_2': [entry.get('evol_type_2', '') for entry in data],
+        'obs_type_1': [entry.get('obs_type_1', '') for entry in data],
+        'obs_type_2': [entry.get('obs_type_2', '') for entry in data],
     })
     return catalog_df
 
@@ -289,25 +285,28 @@ def plot_p_e_2massbins_median(catalog_df=None, save=True):
     plot_df['Eccentricity_err_minus'] = plot_df['Eccentricity_err_minus'].fillna(0)
     plot_df['Eccentricity_err_plus'] = plot_df['Eccentricity_err_plus'].fillna(0)
 
-    # Use the top-level science categories as a proxy for low- vs high-mass donor populations.
-    low_mass_classes = set()
-    for cat in LOW_MASS_CATEGORIES:
-        if cat in SYSTEM_CLASS_MAP:
-            low_mass_classes |= set(SYSTEM_CLASS_MAP[cat].keys())
 
-    high_mass_classes = set()
-    for cat in HIGH_MASS_CATEGORIES:
-        if cat in SYSTEM_CLASS_MAP:
-            high_mass_classes |= set(SYSTEM_CLASS_MAP[cat].keys())
+    # Define low/high mass bins from system categories
+    # ------------------------------------------------------------------
+    # The Algols class contains a mix of low/high mass donors, so we split it based on obs_type_1 and 2
+    # Set the system_class of plot_df, based on High mass if O or B in obs_type_1 or obs_type_2,
+    high_M_mask = (plot_df['obs_type_1'].str.contains('O|B', case=False, na=False) |plot_df['obs_type_2'].str.contains('O|B', case=False, na=False))
+    plot_df.loc[(plot_df['system_class'] == 'Algol') & high_M_mask, 'system_class'] = 'Algol (high-mass donor)'
+    # Else its a low-mass Algol
+    plot_df.loc[(plot_df['system_class'] == 'Algol') & ~high_M_mask, 'system_class'] = 'Algol (low-mass donor)'
+    
+    # use the class list from Category_dict 
+    low_mass_classes = set(LOW_MASS_CLASSES)
+    high_mass_classes = set(HIGH_MASS_CLASSES)
 
-    # Assign mass bins
+    # Keep only rows that can be placed on the P-e plane.
     plot_df = plot_df.dropna(subset=['log_Period', 'Eccentricity']).copy()
-    plot_df['mass_bin'] = np.where(
-        plot_df['system_class'].isin(low_mass_classes),
-        'Low-mass systems',
-        np.where(plot_df['system_class'].isin(high_mass_classes), 'High-mass systems', 'Unclassified')
-    )
+    # Classify each system using the explicit system_class membership lists.
+    plot_df['mass_bin'] = np.where(plot_df['system_class'].isin(low_mass_classes),'Low-mass systems',
+        np.where(plot_df['system_class'].isin(high_mass_classes), 'High-mass systems', 'Unclassified'))
+    # Exclude classes that are outside the low/high donor grouping.
     plot_df = plot_df[plot_df['mass_bin'] != 'Unclassified'].copy()
+
 
     # Build separate colormaps
     low_mass_cmap = LOW_MASS_CMAP
@@ -417,9 +416,9 @@ def plot_p_e_2massbins_median(catalog_df=None, save=True):
     from matplotlib.lines import Line2D
     legend_handles = [
         Line2D([0], [0], marker='o', linestyle='None', color='#4c78a8', markersize=6,
-               label=f"Low-M donor ({N_in_class[0]}): \nWD binary, \nLow-M stripped\n"),
+               label=f"Low-M donor ({N_in_class[0]})"),
         Line2D([0], [0], marker='o', linestyle='None', color='#e37601', markersize=6,
-               label=f"High-M donor ({N_in_class[1]}): \nOngoing RLOF, \nHigh-M stripped, \nCO binary"),
+               label=f"High-M donor ({N_in_class[1]})"),
     ]
     legend = ax.legend(handles=legend_handles, fontsize=16, loc='upper left', 
                       bbox_to_anchor=(0.0, 1), framealpha=0.1)
@@ -574,7 +573,7 @@ if __name__ == '__main__':
         print("\nGenerating P-e diagram by system class...")
         fig1, ax1 = plot_p_e_by_system_class(catalog_df, save=True)
         
-        print("\nGenerating P-e diagram with 2 mass bins and medians...")
+        print("\nGenerating P-e diagram divided between low and high mass donors with their medians...")
         fig2, ax2 = plot_p_e_2massbins_median(catalog_df, save=True)
         
         print("\nGenerating P-e diagram by category with medians...")

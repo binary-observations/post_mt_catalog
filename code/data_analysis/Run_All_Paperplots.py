@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 import matplotlib.pyplot as plt
 
-
 # Make the project root importable when this file is run directly.
 proj_root = Path(__file__).parent.parent.parent.resolve()
 if str(proj_root) not in sys.path:
