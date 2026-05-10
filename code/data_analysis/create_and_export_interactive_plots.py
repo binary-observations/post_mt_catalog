@@ -2,6 +2,7 @@ import json
 import numpy as np
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 
 # Ensure project root is on sys.path so `import paths` finds the top-level paths.py
 import os, sys
@@ -87,6 +88,18 @@ df = pd.DataFrame({
     'Simbad': [entry.get('Simbad', None) for entry in data]
 })
 
+
+def max_eccentricity(period_days):
+    """ 
+    Approximate max eccentricity following eq.3 from Moe & di Stefano 2017.
+    e_max(P) = 1 - (P / 2 days)^(-2/3), valid for P > 2 days.
+    """
+    period_days = np.asarray(period_days, dtype=float)
+    emax = np.full_like(period_days, np.nan, dtype=float)
+    valid = period_days > 2.0
+    emax[valid] = 1.0 - (period_days[valid] / 2.0) ** (-2.0 / 3.0)
+    return np.clip(emax, 0.0, 1.0)
+
 def make_scatter(df, x, y, out_pdf, out_html=None, x_log=False, y_log=False, x_title=None, y_title=None,
                 export_legend_to_pdf=True, export_width=700, export_height=450, export_scale=2, 
                  tick_size = 15,label_size = 45,xlim=None, ylim=None):
@@ -140,10 +153,24 @@ def make_scatter(df, x, y, out_pdf, out_html=None, x_log=False, y_log=False, x_t
         category_orders={'system_class': list(STYLE_MAP.keys())}  # set order of things in legend
     )
 
+    # Add max eccentricity curve for Period vs Eccentricity plot
+    # -------------------- 
+    if x == 'Period' and y == 'Eccentricity':
+        period_vals = np.logspace(np.log10(2.01), 4.5, 500)
+        emax_vals = max_eccentricity(period_vals)
+        fig.add_trace(
+            go.Scatter(x=period_vals, y=emax_vals,
+                       mode='lines',
+                       name=r'$e_{\mathrm{max}}$ (Moe & di Stefano 2017)',
+                       line=dict(color='grey', width=2.2, dash='dash'),
+                       hovertemplate='<b>Max Eccentricity Envelope</b><br>Period: %{x:.2f} days<br>e_max: %{y:.3f}<extra></extra>',
+                       showlegend=True)
+        )
+
     # Plot values
     # -------------------- 
     fig.update_layout(
-        legend_title_text='System Class',
+        legend_title_text='',
         legend=dict(itemclick='toggle', itemdoubleclick='toggleothers'),
         legend_title=dict(font=dict(size=20)),
         legend_font=dict(size=18)

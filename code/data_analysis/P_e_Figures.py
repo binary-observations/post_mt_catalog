@@ -127,6 +127,18 @@ def load_catalog(file_path):
     return catalog_df
 
 
+def max_eccentricity(period_days):
+    """
+    Approximate max eccentricity following eq.3 from Moe & di Stefano 2017.
+    e_max(P) = 1 - (P / 2 days)^(-2/3), valid for P > 2 days.
+    """
+    period_days = np.asarray(period_days, dtype=float)
+    emax = np.full_like(period_days, np.nan, dtype=float)
+    valid = period_days > 2.0
+    emax[valid] = 1.0 - (period_days[valid] / 2.0) ** (-2.0 / 3.0)
+    return np.clip(emax, 0.0, 1.0)
+
+
 # ============================================================================
 # Figure Functions
 # ============================================================================
@@ -213,6 +225,12 @@ def plot_p_e_by_system_class(catalog_df=None, save=True):
             label=f"{system_class} ({len(sub)})"
         )
 
+    # Add maximum-eccentricity envelope from Moe & di Stefano (2017), valid for P > 2 days.
+    period_vals = np.logspace(np.log10(2.01), 4.5, 500)
+    ax.plot(np.log10(period_vals),max_eccentricity(period_vals), color='grey',linestyle='--',linewidth=2.2,alpha=0.9)
+    ax.text(0.43, 0.95, r'$e(a_{\rm{per}} = 2d)$', fontsize = 18, rotation = 45, 
+            transform=ax.transAxes, verticalalignment='top', horizontalalignment='left', color='grey')
+            
     # Write x ticks not in log space but in days
     xticks = [0.01, 0.1, 1, 10, 100, 1000, 10000]
     xtick_labels = ['0.01', '0.1', '1', '10', '100', '1000', '$10^4$']
