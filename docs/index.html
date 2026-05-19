@@ -220,6 +220,8 @@
       let filtered = [];
       let pageSize = 50;
       let currentPage = 1;
+      let sortKey = null;
+      let sortDirection = 'asc';
 
       const els = {
         loadRemote: document.getElementById('load-remote'),
@@ -442,6 +444,53 @@
         return String(value);
       }
 
+      function getSortableValue(row, key){
+        const value = row ? row[key] : null;
+        if(value === null || value === undefined) return null;
+
+        // Prefer the central value for [err-, value, err+] triplets.
+        if(Array.isArray(value)){
+          if(value.length === 3 && typeof value[1] === 'number' && Number.isFinite(value[1])) return value[1];
+          const firstNumeric = value.find(v => typeof v === 'number' && Number.isFinite(v));
+          if(firstNumeric !== undefined) return firstNumeric;
+          return JSON.stringify(value).toLowerCase();
+        }
+
+        if(typeof value === 'number') return Number.isFinite(value) ? value : null;
+        if(typeof value === 'string'){
+          const trimmed = value.trim();
+          const asNumber = Number(trimmed);
+          if(trimmed !== '' && Number.isFinite(asNumber) && /^[-+]?\d*\.?\d+(e[-+]?\d+)?$/i.test(trimmed)){
+            return asNumber;
+          }
+          return trimmed.toLowerCase();
+        }
+
+        if(typeof value === 'boolean') return value ? 1 : 0;
+        return JSON.stringify(value).toLowerCase();
+      }
+
+      function compareRows(a, b, key, direction){
+        const av = getSortableValue(a, key);
+        const bv = getSortableValue(b, key);
+
+        // Keep empty values at the end for readability.
+        if(av === null && bv === null) return 0;
+        if(av === null) return 1;
+        if(bv === null) return -1;
+
+        let cmp = 0;
+        if(typeof av === 'number' && typeof bv === 'number') cmp = av - bv;
+        else cmp = String(av).localeCompare(String(bv), undefined, { numeric: true, sensitivity: 'base' });
+
+        if(cmp === 0){
+          const ai = typeof a._index === 'number' ? a._index : 0;
+          const bi = typeof b._index === 'number' ? b._index : 0;
+          cmp = ai - bi;
+        }
+        return direction === 'desc' ? -cmp : cmp;
+      }
+
       function renderTable(){
         pageSize = parseInt(els.pageSizeSelect.value,10) || 50;
         // build header from keys in filtered (or records)
@@ -453,7 +502,23 @@
         els.thead.innerHTML = '';
         const tr = document.createElement('tr');
         sortedKeys.forEach(k=>{
-          const th = document.createElement('th'); th.textContent = k; tr.appendChild(th);
+          const th = document.createElement('th');
+          const isSorted = sortKey === k;
+          const indicator = isSorted ? (sortDirection === 'asc' ? ' \u25b2' : ' \u25bc') : '';
+          th.textContent = k + indicator;
+          th.style.cursor = 'pointer';
+          th.title = 'Click to sort';
+          th.addEventListener('click', ()=>{
+            if(sortKey === k){
+              sortDirection = sortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+              sortKey = k;
+              sortDirection = 'asc';
+            }
+            currentPage = 1;
+            renderTable();
+          });
+          tr.appendChild(th);
         });
         els.thead.appendChild(tr);
 
@@ -509,11 +574,16 @@
           return true;
         });
 
-        const total = filtered.length;
+        const sortedFiltered = filtered.slice();
+        if(sortKey){
+          sortedFiltered.sort((a, b)=> compareRows(a, b, sortKey, sortDirection));
+        }
+
+        const total = sortedFiltered.length;
         const totalPages = Math.max(1, Math.ceil(total / pageSize));
         if(currentPage > totalPages) currentPage = totalPages;
         const start = (currentPage-1)*pageSize;
-        const pageItems = filtered.slice(start, start+pageSize);
+        const pageItems = sortedFiltered.slice(start, start+pageSize);
 
         // render tbody
         els.tbody.innerHTML = '';
