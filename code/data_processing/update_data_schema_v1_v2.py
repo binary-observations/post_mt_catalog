@@ -1,4 +1,12 @@
 import re
+import importlib.util
+from pathlib import Path
+
+_qf_path = Path(__file__).with_name("quality_flags.py")
+_qf_spec = importlib.util.spec_from_file_location("quality_flags", str(_qf_path))
+_qf_module = importlib.util.module_from_spec(_qf_spec)
+_qf_spec.loader.exec_module(_qf_module)
+apply_quality_flag_rules = _qf_module.apply_quality_flag_rules
 
 EVOL_ALLOWED = {"MS","HG","RGB","AGB","He-star","WD","NS","BH"}
 
@@ -78,6 +86,7 @@ def upgrade_entry_schema(entry: dict):
     entry.setdefault("obs_type_1", None)
     entry.setdefault("obs_type_2", None)
     entry.setdefault("system_class", None)
+    entry.setdefault("quality_flags", [])
 
     t1 = entry.get("Type1")
     t2 = entry.get("Type2")
@@ -340,5 +349,8 @@ def upgrade_entry_schema(entry: dict):
             if has_target_ref:
                 sc = "Astrometric compact object"
         entry["system_class"] = sc
+
+    # Assign quality flags after all schema/class transformations.
+    apply_quality_flag_rules(entry)
         
     return entry

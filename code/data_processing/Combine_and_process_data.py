@@ -479,7 +479,7 @@ for jp in raw_json_files:
     if not isinstance(data, list):
         continue
     for entry in data:
-        all_systems.append(entry)
+        all_systems.append(upgrade_entry_schema(entry))
 
 print(f"Total systems after JSON ingestion: {len(all_systems)}")
 
