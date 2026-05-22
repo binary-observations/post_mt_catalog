@@ -40,12 +40,16 @@ VALID_QUALITY_FLAGS = set(QUALITY_FLAG_DEFINITIONS.keys())
 
 # Rules applied to all entries from a specific source file in one go
 SOURCE_FILE_RULES_EXACT: dict[str, list[tuple[str, str]]] = {
-    # Example rule already aligned with current schema logic.
+    # Massive contact binaries: e=0 set in modelling (already annotated in Notes).
     "contact1.h5": [
-        (
-            "assumed_e",
-            "Contact systems are treated as circular by construction in source table.",
-        )
+        ("assumed_e","assumed e=0",)
+    ],
+    # Jorissen 2019 Ba stars: WD masses derived assuming common Q value
+    # (same mass ratio for all systems); propagates into both M1 and M2 and
+    # produces the two-line correlation noted by co-author.
+    "barium_stars_Jorissen2019.h5": [
+        ("assumed_M2","WD mass follows from assumed Q value (Jorissen+2019); see Escorza & De Rosa 2023 for independent masses",
+        ),
     ],
 }
 
@@ -58,13 +62,37 @@ SOURCE_FILE_RULES_CONTAINS: dict[str, list[tuple[str, str]]] = {
 # Rules applied to entries with a specific reference bibcode. Match exact string.
 # Match individual reference bibcodes.
 REFERENCE_RULES_EXACT: dict[str, list[tuple[str, str]]] = {
-    # "2024OJAp....7E..58E": [("min_M2", "Reported companion masses are lower limits")],
+    # WUMa catalog (Latkovic+2021): all 684 systems have e=0 baked in as a
+    # model assumption (contact binaries are circular by construction).
+    "2021ApJS..254...10L": [
+        ("assumed_e", "circular by construction (WUMaCat)")],
+
+    # Massive contact binaries from Vanbeveren+2025 not captured by contact1.h5
+    # source_file (5 systems): same circular-by-construction assumption.
+    "2025A&A...695A.223V": [
+        ("assumed_e", "circular by construction (contact binary)")],
+
+    # we have chosen to set all the algols from Malkov to e=0 to be consistent with the contact binaries, but this is not explicitly stated in Malkov's paper. 
+    "2020MNRAS.491.5489M": [
+        ("assumed_e", "source papers do not tabulate e, but implicitly assume circular orbits in _most_ though not all cases"),
+    ],
+
+    # caution about the minim masses from Garbutt+2024: Future TODO: disentangle measured vs min masses by cross-ref to their tables A1/A2 by Gaia solution type.
+    "2024MNRAS.529.4840G": [
+        ("min_M2","Conservative flag: appeox 70% of Garbutt+2024 systems are SB1 with M_WD = lower limit rest has measured masses.")],
+
+    # Vos+2019 sdB binaries: M2 derived from P-M_core relation, not dynamically measured.
+    "2019MNRAS.482.4592V": [
+    ("assumed_M2","sdB mass from P-M_core relation, not measured")],
+
 }
 
 # Rules applies to Systems with a specific Name prefix.
 SYSTEM_NAME_PREFIX_RULES: dict[str, list[tuple[str, str]]] = {
     # "Gaia DR3": [("assumed_q", "Example placeholder")],
 }
+
+
 
 
 def _ensure_quality_fields(entry: dict[str, Any]) -> None:
@@ -107,7 +135,7 @@ def add_quality_flag(entry: dict[str, Any], flag: str, note: str | None = None) 
         flags.append(flag)
 
     if note:
-        _append_to_notes(entry, f"quality_flag[{flag}]: {note}")
+        _append_to_notes(entry, f"{note}")
 
 
 def _iter_references(entry: dict[str, Any]) -> list[str]:

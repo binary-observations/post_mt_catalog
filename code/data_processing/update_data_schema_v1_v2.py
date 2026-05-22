@@ -80,6 +80,10 @@ def map_system_class(entry: dict):
 
 
 def upgrade_entry_schema(entry: dict):
+    # Remove deprecated field: Detection method for now 
+    # (it contains erroneous data, so we're just removing it for now)
+    entry.pop("Detection Method", None)
+
     # do not overwrite if already present
     entry.setdefault("evol_type_1", None)
     entry.setdefault("evol_type_2", None)
@@ -317,7 +321,6 @@ def upgrade_entry_schema(entry: dict):
         # Heuristic: Pulsar binaries
         if sc is None:
             name = (entry.get("System Name") or "").strip()
-            dm = entry.get("Detection Method") or []
             evol2 = entry.get("evol_type_2")
             obs2 = entry.get("obs_type_2")
             notes = entry.get("Notes") or ""
@@ -329,9 +332,9 @@ def upgrade_entry_schema(entry: dict):
             # Check if Notes contains "Pulsar"
             has_pulsar_in_notes = isinstance(notes, str) and "Pulsar" in notes
             
-            # Check if system is pulsar-like based on name or detection method
+            # Check if system is pulsar-like based on name
             has_ns = (isinstance(obs2, str) and obs2.strip().upper() == "NS") or (evol2 == "NS")
-            is_pulsar_like = (isinstance(name, str) and name.upper().startswith("PSR")) or (isinstance(dm, list) and "Other" in dm)
+            is_pulsar_like = isinstance(name, str) and name.upper().startswith("PSR")
             
             # Set system_class to "pulsar binary" if any condition is met
             if from_young_psr or has_pulsar_in_notes or (has_ns and is_pulsar_like):
