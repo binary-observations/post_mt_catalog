@@ -98,6 +98,7 @@ def load_catalog(file_path=MAIN_CATALOG):
 			"M2_err_minus": m2_arr[:, 0],
 			"M2_err_plus": m2_arr[:, 2],
 			"system_class": [entry.get("system_class", "None") for entry in data],
+			"quality_flags": [e.get("quality_flags", []) for e in data],  
 		}
 	)
 
@@ -188,22 +189,43 @@ def plot_m1_m2_log_by_category(catalog_df=None, save=True):
 		marker_mpl = PLOTLY_TO_MPL_MARKER.get(marker_plotly, "o")
 		zorder = 0 if system_class in SYSTEM_CLASS_MAP["WD binary"] else 2
 
-		class_plot = ax.errorbar(
-			sub["log_M1"],
-			sub["log_M2"],
-			xerr=[sub["M1_err_minus_log"], sub["M1_err_plus_log"]],
-			yerr=[sub["M2_err_minus_log"], sub["M2_err_plus_log"]],
-			fmt=marker_mpl,
-			ms=5,
-			c=color,
-			ecolor=color,
-			elinewidth=1,
-			capsize=0,
-			alpha=0.65,
-			zorder=zorder,
-			label=f"{system_class} ({len(sub)})",
-		)
-		class_handles.append(class_plot)
+		# Split sub into three buckets by quality_flag
+		def has(flags, target):
+			return any(target in f for f in flags) if isinstance(flags, list) else False
+		mask_min_m2 = sub["quality_flags"].apply(lambda f: has(f, "min_M2"))
+		mask_assumedm = sub["quality_flags"].apply(lambda f: has(f, "assumed_M2") or has(f, "assumed_M1") or has(f, "assumed_q"))
+		mask_clean = ~(mask_min_m2 | mask_assumedm)
+
+		# (mask, style overrides) tuples — order controls draw order within the class
+		buckets = [
+			(mask_clean,   {}),
+			(mask_assumedm, {"mfc": "none", "mec": color, "alpha": 0.75,}),
+			(mask_min_m2,  {"lolims": True,}),]
+
+		print(sum(mask_clean), sum(mask_assumedm), sum(mask_min_m2), f"for class {system_class}")
+
+		# Shared defaults
+		base_kwargs = dict(fmt=marker_mpl, ms=5, c=color, ecolor=color,elinewidth=1, capsize=0, alpha=0.65, zorder=zorder,)
+
+		for mask, overrides in buckets:
+			if not mask.any():
+				continue
+			s = sub.loc[mask]
+			# min_M2 uses a fixed-length yerr arrow; the others use the asymmetric log errors
+			if overrides.get("lolims"):
+				yerr = 10
+			else:
+				yerr = [s["M2_err_minus_log"], s["M2_err_plus_log"]]
+			ax.errorbar(
+				s["log_M1"], s["log_M2"],
+				xerr=[s["M1_err_minus_log"], s["M1_err_plus_log"]],
+				yerr=yerr,
+				**{**base_kwargs, **overrides},)
+
+		# One legend handle per class (proxy, drawn off-plot)
+		class_handles.append(
+			ax.scatter([], [], c=color, marker=marker_mpl,
+					label=f"{system_class} ({len(sub)})"))
 
 	# Overlay one median track per top-level category to summarize the point cloud.
 	for category, systems in SYSTEM_CLASS_MAP.items():
@@ -236,43 +258,23 @@ def plot_m1_m2_log_by_category(catalog_df=None, save=True):
 
 	# Mark commonly used donor-mass regimes for compact remnants.
 	x, ymin, ymax = np.log10(15), np.log10(0.15), np.log10(0.55)
-	ax.errorbar(
-		x,
-		0.5 * (ymin + ymax),
-		yerr=[[0.5 * (ymin + ymax) - ymin], [ymax - 0.5 * (ymin + ymax)]],
-		fmt="none",
-		ecolor="grey",
-		elinewidth=1,
-		capsize=2,
-		capthick=2,
-	)
+	ax.errorbar(x,0.5 * (ymin + ymax),
+				yerr=[[0.5 * (ymin + ymax) - ymin], [ymax - 0.5 * (ymin + ymax)]],
+				fmt="none",ecolor="grey",elinewidth=1,capsize=2,capthick=2,)
 	ax.text(np.log10(17), np.log10(0.3), "$\\mathrm{He WD}$", color="grey", fontsize=14, ha="left", va="center", rotation=90)
 
 	x, ymin, ymax = np.log10(25), np.log10(0.5), np.log10(1.15)
-	ax.errorbar(
-		x,
-		0.5 * (ymin + ymax),
-		yerr=[[0.5 * (ymin + ymax) - ymin], [ymax - 0.5 * (ymin + ymax)]],
-		fmt="none",
-		ecolor="grey",
-		elinewidth=1,
-		capsize=2,
-		capthick=2,
-	)
+	ax.errorbar(x,0.5 * (ymin + ymax),
+				yerr=[[0.5 * (ymin + ymax) - ymin], [ymax - 0.5 * (ymin + ymax)]],
+				fmt="none",ecolor="grey",elinewidth=1,capsize=2,capthick=2,)
 	ax.text(np.log10(28), np.log10(0.7), "$\\mathrm{CO\\, WD}$", color="grey", fontsize=14, ha="left", va="center", rotation=90)
 
 	x, ymin, ymax = np.log10(55), np.log10(1.1), np.log10(2.5)
-	ax.errorbar(
-		x,
-		0.5 * (ymin + ymax),
-		yerr=[[0.5 * (ymin + ymax) - ymin], [ymax - 0.5 * (ymin + ymax)]],
-		fmt="none",
-		ecolor="grey",
-		elinewidth=1,
-		capsize=2,
-		capthick=2,
-	)
+	ax.errorbar(x,0.5 * (ymin + ymax),
+				yerr=[[0.5 * (ymin + ymax) - ymin], [ymax - 0.5 * (ymin + ymax)]],
+				fmt="none",ecolor="grey",elinewidth=1,capsize=2,capthick=2,)
 	ax.text(np.log10(60), np.log10(1.8), "$\\mathrm{NS}$", color="grey", fontsize=14, ha="left", va="center", rotation=90)
+
 
 	# Reference lines of constant q = M2 / M1 appear as parallel diagonals in log-log space.
 	x = 10 ** np.linspace(-2, 1.9, 150)
