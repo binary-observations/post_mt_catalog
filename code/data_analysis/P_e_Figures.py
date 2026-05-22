@@ -10,19 +10,14 @@ Usage:
     python P_e_Figures.py                    # Generate all figures
 
 """
-
 import json
 import numpy as np
 import pandas as pd
 import sys
 from pathlib import Path
-
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
-# ============================================================================
-# Setup: Add project root to path and import custom modules
-# ============================================================================
 proj_root = Path(__file__).parent.parent.parent.resolve()
 if str(proj_root) not in sys.path:
     sys.path.insert(0, str(proj_root))
@@ -37,7 +32,8 @@ import importlib
 import Category_dict as category_dict
 importlib.reload(category_dict)
 
-# Pull the shared plotting dictionaries into module scope so notebook and script
+# ============================================================================
+# Setup:  Pull the shared plotting dictionaries into module scope so notebook and script
 # figures stay visually synchronized.
 SYSTEM_CLASS_MAP = category_dict.SYSTEM_CLASS_MAP
 STYLE_MAP = category_dict.STYLE_MAP
@@ -123,6 +119,7 @@ def load_catalog(file_path):
         'evol_type_2': [entry.get('evol_type_2', '') for entry in data],
         'obs_type_1': [entry.get('obs_type_1', '') for entry in data],
         'obs_type_2': [entry.get('obs_type_2', '') for entry in data],
+        'quality_flags': [entry.get('quality_flags', []) for entry in data],
     })
     return catalog_df
 
@@ -138,6 +135,46 @@ def max_eccentricity(period_days):
     emax[valid] = 1.0 - (period_days[valid] / 2.0) ** (-2.0 / 3.0)
     return np.clip(emax, 0.0, 1.0)
 
+# for quality flag handling
+def has_flag(flags, target):
+    """True if flags list contains a string with the target substring."""
+    return any(target in f for f in flags) if isinstance(flags, list) else False
+
+def plot_with_quality_buckets(ax, sub, x_col, y_col, xerr_cols, yerr_cols,
+                               color, marker_mpl, ms=6, zorder=3, label=None):
+    """Plot a sub-DataFrame split into clean/assumed/min buckets with different styles.
+    
+    Returns a legend handle for this class (a proxy scatter).
+    """
+    mask_assumed_e = sub['quality_flags'].apply(lambda f: has_flag(f, 'assumed_e'))
+    mask_min_m2 = sub['quality_flags'].apply(lambda f: has_flag(f, 'min_M2'))
+    mask_clean = ~(mask_assumed_e | mask_min_m2)
+    
+    buckets = [
+        (mask_clean,      {}),
+        (mask_assumed_e,  {'mfc': 'none', 'mec': color, 'alpha': 0.4}),
+        # min_M2 doesn't apply on a P-e plot — keep here for symmetry with mass-ratio fig
+    ]
+    
+    base_kwargs = dict(
+        fmt=marker_mpl, ms=ms, c=color, ecolor=color,
+        elinewidth=1, capsize=0, alpha=0.8, zorder=zorder,
+    )
+    
+    for mask, overrides in buckets:
+        if not mask.any():
+            continue
+        s = sub.loc[mask]
+        ax.errorbar(
+            s[x_col], s[y_col],
+            xerr=[s[xerr_cols[0]], s[xerr_cols[1]]],
+            yerr=[s[yerr_cols[0]], s[yerr_cols[1]]],
+            **{**base_kwargs, **overrides},
+        )
+    
+    # Single legend proxy per class
+    return ax.scatter([], [], c=color, marker=marker_mpl, label=label)
+
 
 # ============================================================================
 # Figure Functions
@@ -147,29 +184,32 @@ def max_eccentricity(period_days):
 def plot_p_e_by_system_class(catalog_df=None, save=True):
     """
     Create Period-Eccentricity diagram colored by system class.
-    
+
+    Renders quality_flags visually:
+      - `assumed_e` systems: hollow markers, reduced alpha (value set by convention).
+      - `max_e` systems: downward arrow on the e axis (true e ≤ tabulated).
+      - `min_e` systems: upward arrow on the e axis (true e ≥ tabulated).
+      - other flags (min_M2, assumed_M2 etc.): do not affect this plot.
+
     Parameters:
     -----------
     catalog_df : pd.DataFrame, optional
         Catalog DataFrame. If None, loads from MAIN_CATALOG.
     save : bool, default=True
         Whether to save the figure to LATEX_PLOT_DIR and PLOTS_DIR.
-    
+
     Returns:
     --------
     fig, ax : matplotlib Figure and Axes objects
     """
-    
+
     if catalog_df is None:
         catalog_df = load_catalog(MAIN_CATALOG)
         if catalog_df is None:
             return None, None
-    
-    # Set matplotlib style
+
     plt.rcParams.update(PAPER_PLOT_RCPARAMS)
-
     fig, ax = plt.subplots(figsize=(12.5, 7))
-
     plot_df = catalog_df.copy()
 
     # Keep only rows with valid central values; log-x also requires Period > 0.
@@ -195,12 +235,14 @@ def plot_p_e_by_system_class(catalog_df=None, save=True):
     # Keep error bars physical: no negative period, and eccentricity bounded [0,1].
     mask_pmin = plot_df['Period'] - plot_df['Period_err_minus'] < 0
     plot_df.loc[mask_pmin, 'Period_err_minus'] = plot_df.loc[mask_pmin, 'Period']
-
     mask_emin = plot_df['Eccentricity'] - plot_df['Eccentricity_err_minus'] < 0
     plot_df.loc[mask_emin, 'Eccentricity_err_minus'] = plot_df.loc[mask_emin, 'Eccentricity']
-
     mask_eplus = plot_df['Eccentricity'] + plot_df['Eccentricity_err_plus'] > 1
     plot_df.loc[mask_eplus, 'Eccentricity_err_plus'] = 1 - plot_df.loc[mask_eplus, 'Eccentricity']
+
+    # Helper: check whether a flag list contains any flag matching a substring
+    def has_flag(flags, target):
+        return any(target in f for f in flags) if isinstance(flags, list) else False
 
     # Plot each system class separately so style/legend are per class.
     for system_class in STYLE_MAP.keys():
@@ -213,35 +255,66 @@ def plot_p_e_by_system_class(catalog_df=None, save=True):
         color = COLORMAP.get(system_class, '#666666')
         marker_plotly = SYMBOLMAP.get(system_class, 'circle')
         marker_mpl = PLOTLY_TO_MPL_MARKER.get(marker_plotly, 'o')
+        ms = 7 if marker_mpl in ['+', 'x'] else 6
+        base_alpha = 0.9 if marker_mpl in ['+', 'x'] else 0.8
 
-        ax.errorbar(np.log10(sub['Period']), sub['Eccentricity'],
-            xerr=[sub['period_err_minus_log'], sub['period_err_plus_log']],
-            yerr=[sub['Eccentricity_err_minus'], sub['Eccentricity_err_plus']],
-            fmt=marker_mpl, ms=7 if marker_mpl in ['+', 'x'] else 6,
-            color=color, ecolor=color,
-            elinewidth=1, capsize=0,
-            alpha=0.9 if marker_mpl in ['+', 'x'] else 0.8,
-            linestyle='none', zorder=Zord,
-            label=f"{system_class} ({len(sub)})"
+        # Split by quality flags
+        mask_assumed_e = sub['quality_flags'].apply(lambda f: has_flag(f, 'assumed_e'))
+        mask_max_e = sub['quality_flags'].apply(lambda f: has_flag(f, 'max_e'))
+        mask_min_e = sub['quality_flags'].apply(lambda f: has_flag(f, 'min_e'))
+        # Clean = no e-affecting flag (other flags like min_M2 don't change this figure)
+        mask_clean = ~(mask_assumed_e | mask_max_e | mask_min_e)
+
+        base_kwargs = dict(
+            fmt=marker_mpl, ms=ms, color=color, ecolor=color,
+            elinewidth=1, capsize=0, linestyle='none', zorder=Zord,
         )
+
+        # Bucket configuration: (mask, style overrides, yerr override or None for asymmetric default)
+        buckets = [
+            (mask_clean,      {'alpha': base_alpha},                                    None),
+            (mask_assumed_e,  {'alpha': 0.55, 'mfc': 'none', 'mec': color},             None),
+            (mask_max_e,      {'alpha': base_alpha, 'uplims': True},                    0.1),
+            (mask_min_e,      {'alpha': base_alpha, 'lolims': True},                    0.1),
+        ]
+
+        for mask, overrides, yerr_override in buckets:
+            if not mask.any():
+                continue
+            s = sub.loc[mask]
+            yerr = (
+                yerr_override if yerr_override is not None
+                else [s['Eccentricity_err_minus'], s['Eccentricity_err_plus']]
+            )
+            ax.errorbar(
+                np.log10(s['Period']), s['Eccentricity'],
+                xerr=[s['period_err_minus_log'], s['period_err_plus_log']],
+                yerr=yerr,
+                **{**base_kwargs, **overrides},
+            )
+
+        # One legend handle per class (proxy scatter, drawn off-plot)
+        ax.scatter([], [], c=color, marker=marker_mpl,
+                   label=f"{system_class} ({len(sub)})")
 
     # Add maximum-eccentricity envelope from Moe & di Stefano (2017), valid for P > 2 days.
     period_vals = np.logspace(np.log10(2.01), 4.5, 500)
-    ax.plot(np.log10(period_vals),max_eccentricity(period_vals), color='grey',linestyle='--',linewidth=2.2,alpha=0.9)
-    ax.text(0.43, 0.95, r'$e(a_{\rm{per}} = 2d)$', fontsize = 18, rotation = 45, 
-            transform=ax.transAxes, verticalalignment='top', horizontalalignment='left', color='grey')
-            
+    ax.plot(np.log10(period_vals), max_eccentricity(period_vals),
+            color='grey', linestyle='--', linewidth=2.2, alpha=0.9)
+    ax.text(0.43, 0.95, r'$e(a_{\rm{per}} = 2d)$', fontsize=18, rotation=45,
+            transform=ax.transAxes, verticalalignment='top',
+            horizontalalignment='left', color='grey')
+
     # Write x ticks not in log space but in days
     xticks = [0.01, 0.1, 1, 10, 100, 1000, 10000]
     xtick_labels = ['0.01', '0.1', '1', '10', '100', '1000', '$10^4$']
     plt.xticks(np.log10(xticks), xtick_labels, fontsize=20)
-
     ax.set_xlim(-2, 4.5)
     ax.set_ylim(-0.05, 1)
     ax.tick_params(axis='both', labelsize=16)
-    ax.set_xlabel('$\mathrm{Orbital\,Period\,(days)}$', fontsize=24)
-    ax.set_ylabel('$\mathrm{Eccentricity}$', fontsize=24)
-    ax.legend(bbox_to_anchor=(1, 1.05), loc='upper left', fontsize=15, framealpha=0., ncol=1)
+    ax.set_xlabel('$\\mathrm{Orbital\\,Period\\,(days)}$', fontsize=24)
+    ax.set_ylabel('$\\mathrm{Eccentricity}$', fontsize=24)
+    ax.legend(bbox_to_anchor=(1, 1.0), loc='upper left', fontsize=15, framealpha=0., ncol=1)
     plt.tight_layout()
 
     if save:
@@ -249,9 +322,7 @@ def plot_p_e_by_system_class(catalog_df=None, save=True):
         plt.savefig(PLOTS_DIR / 'P_e_by_system_class.pdf')
         print(f"Saved to {LATEX_PLOT_DIR / 'P_e_by_system_class.pdf'}")
         print(f"Saved to {PLOTS_DIR / 'P_e_by_system_class.pdf'}")
-
     return fig, ax
-
 
 ################################################################
 def plot_p_e_2massbins_median(catalog_df=None, save=True):
@@ -398,12 +469,15 @@ def plot_p_e_2massbins_median(catalog_df=None, save=True):
 
     for mass_bin, style in median_styles.items():
         subset = plot_df[plot_df['mass_bin'] == mass_bin].copy()
+        # Exclude assumed-e systems from the median: their value is set by convention, not measurement
+        median_subset = subset[~subset['quality_flags'].apply(lambda f: has_flag(f, 'assumed_e'))].copy()
+        median_subset['P_bin'] = pd.cut(median_subset['log_Period'], bins=P_bins)
         subset['P_bin'] = pd.cut(subset['log_Period'], bins=P_bins)
         
         counts_by_bin = subset['P_bin'].value_counts(sort=False, dropna=False)
         N_in_class.append(sum(counts_by_bin))
 
-        stats = subset.groupby('P_bin', observed=False)['Eccentricity'].quantile([0.05, 0.5, 0.95]).unstack()
+        stats = median_subset.groupby('P_bin', observed=False)['Eccentricity'].quantile([0.05, 0.5, 0.95]).unstack()
         stats.columns = ['p05', 'median', 'p95']
 
         ax.plot(x_stats, stats['median'].values, lw=2.5, c=style['color'], label=style['label'], zorder=4)
@@ -530,6 +604,8 @@ def plot_p_e_by_category_median(catalog_df=None, save=True):
             zorder += 1
 
         subset = plot_df[plot_df['system_class'].isin(system_classes_in_category)].copy()
+        # Exclude assumed-e systems from the median: their value is set by convention, not measurement
+        median_subset = subset[~subset['quality_flags'].apply(lambda f: has_flag(f, 'assumed_e'))].copy()
 
         # Use first color of the first source category as the representative color
         first_source = source_categories[0]
@@ -546,7 +622,8 @@ def plot_p_e_by_category_median(catalog_df=None, save=True):
         )
 
         subset['P_bin'] = pd.cut(subset['log_Period'], bins=P_bins)
-        stats = subset.groupby('P_bin', observed=False)['Eccentricity'].quantile([0.05, 0.5, 0.95]).unstack()
+        median_subset['P_bin'] = pd.cut(median_subset['log_Period'], bins=P_bins)
+        stats = median_subset.groupby('P_bin', observed=False)['Eccentricity'].quantile([0.05, 0.5, 0.95]).unstack()
         stats.columns = ['p05', 'median', 'p95']
 
         ax.plot(x_stats, stats['median'].values,
