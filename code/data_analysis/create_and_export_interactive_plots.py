@@ -85,6 +85,7 @@ df = pd.DataFrame({
     'evol_type_1': [entry.get('evol_type_1', '') for entry in data],
     'evol_type_2': [entry.get('evol_type_2', '') for entry in data],
     'system_class': [entry.get('system_class', 'None') for entry in data],
+    'quality_flags': [entry.get('quality_flags', 'None') for entry in data],
     'Simbad': [entry.get('Simbad', None) for entry in data]
 })
 
@@ -147,7 +148,8 @@ def make_scatter(df, x, y, out_pdf, out_html=None, x_log=False, y_log=False, x_t
         hover_data=[
             'obs_type_1', 'obs_type_2', 'evol_type_1', 'evol_type_2',
             f'{x}_err_plus', f'{x}_err_minus', 
-            f'{y}_err_plus', f'{y}_err_minus'
+            f'{y}_err_plus', f'{y}_err_minus',
+            'quality_flags'
         ],
         template='plotly_white',
         category_orders={'system_class': list(STYLE_MAP.keys())}  # set order of things in legend

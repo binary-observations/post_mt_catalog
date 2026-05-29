@@ -48,10 +48,21 @@ SOURCE_FILE_RULES_EXACT: dict[str, list[tuple[str, str]]] = {
     # (same mass ratio for all systems); propagates into both M1 and M2 and
     # produces the two-line correlation noted by co-author.
     "barium_stars_Jorissen2019.h5": [
-        ("assumed_M2","WD mass follows from assumed Q value (Jorissen+2019); see Escorza & De Rosa 2023 for independent masses",
-        ),
-    ],
+        ("assumed_M2","WD mass follows from assumed Q value (Jorissen+2019); see Escorza & De Rosa 2023 for independent masses",),],
 }
+
+# Match when Notes contains all required tokens for a rule.
+# Key format: ("token1", "token2", ...)
+NOTES_RULES_CONTAINS_ALL: dict[tuple[str, ...], list[tuple[str, str]]] = {
+    # Add token groups as needed, e.g.:
+    # ("Flags:", "SsdB"): [("assumed_M2", "Assumed sdB mass")],
+    # From the flags of Kruckow et al. 2021 (Table 1)
+    ("Flags:", "SsdB"): [("assumed_M2", "Assumed sdB mass")],  # Can only be the donor (M2)
+    ("Flags:", "SWD"): [("assumed_M2", "Assumed WD mass")],    # Can only be the donor (M2)
+    ("Flags:", "SM2"): [("assumed_M1", "Assumed companion mass")],  # companion is the accretor M1 for us
+    ("Flags:", "Sq"): [("assumed_q", "Assumed mass ratio")],
+}
+
 
 # Match when a source_file string contains a token.
 SOURCE_FILE_RULES_CONTAINS: dict[str, list[tuple[str, str]]] = {
@@ -160,6 +171,14 @@ def apply_quality_flag_rules(entry: dict[str, Any]) -> dict[str, Any]:
 
         for token, rules in SOURCE_FILE_RULES_CONTAINS.items():
             if token in src_stripped:
+                for flag, note in rules:
+                    add_quality_flag(entry, flag, note)
+
+    notes = entry.get("Notes")
+    if isinstance(notes, str):
+        notes_stripped = notes.strip()
+        for tokens, rules in NOTES_RULES_CONTAINS_ALL.items():
+            if all(token in notes_stripped for token in tokens):
                 for flag, note in rules:
                     add_quality_flag(entry, flag, note)
 
