@@ -73,6 +73,16 @@
       height: 18px;
       display: block;
     }
+    .repo-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .repo-link img {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -96,7 +106,7 @@
     <h2>About</h2>
     <p>This project aims to provide a comprehensive catalog and analysis of post-mass transfer binary systems, including their key properties and observational data. The data is structured for easy analysis and reproducibility, to support the quest for understanding binary interactions and transfer.</p>
 
-    <p>Repository link: <a href="https://github.com/binary-observations/post_mt_catalog">binary-observations/post_mt_catalog</a></p>
+    <p>Git repository link: <a class="repo-link" href="https://github.com/binary-observations/post_mt_catalog" target="_blank" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/github/222222" alt="GitHub logo">binary-observations/post_mt_catalog</a></p>
   </div></section>
 
 
@@ -678,28 +688,42 @@
   </script>
 
 
-  <!-- ################################################# -->
-   <!-- More info on the data structure -->
+<!-- ################################################# -->
+  <!-- More info on the data structure -->
   <!-- ################################################# -->  <br>
   <hr>
 
   <h3>Data Structure</h3>
-  <p>All systems are stored in a json dictionary with at least the following columns (with key quantities as <code>[err-, value, err+]</code> triplets):</p>
-  <pre><code>System Name, RA, Dec, Period, Eccentricity, M1, M1_sin3i, M2, M2_sin3i, q, Mass Function, obs_type_1, obs_type_2, evol_type_1, evol_type_2, system_class, Detection Method, Reference, Notes</code></pre>
+  <p>The main catalog is a JSON array of system entries. Each entry is an object containing the following fields, with numerical quantities stored as <code>[err-, value, err+]</code> triplets:</p>
+  <pre><code>System Name, RA, Dec, Period, Eccentricity, M1, M1_sin3i, M2, M2_sin3i, Mass Function, evol_type_1, evol_type_2, obs_type_1, obs_type_2, system_class, quality_flags, Reference, Simbad, Notes</code></pre>
   <p>Example entry:</p>
   <pre><code>{
-"System Name": "Example system",
-"RA": [0.005, 150.025, 0.005],
-"Dec": [0.004, -45.123, 0.004],
-"Period": [0.2, 12.5, 0.3],
-"Eccentricity": [0.02, 0.30, 0.03],
-"M1": [0.5, 5.0, 0.5],
-...
+  "System Name": "HD 49641",
+  "RA": [1e-05, 102.3727, 1e-05],
+  "Dec": [1e-05, 3.69171, 1e-05],
+  "Period": [null, 1785.0, null],
+  "Eccentricity": [null, 0.07, null],
+  "M1": [0.8, 2.7, 1.2],
+  "M1_sin3i": [null, null, null],
+  "M2": [null, 0.91, null],
+  "M2_sin3i": [null, null, null],
+  "Mass Function": [null, 0.003, null],
+  "evol_type_1": "RGB",
+  "evol_type_2": "WD",
+  "obs_type_1": "barium star",
+  "obs_type_2": "white dwarf",
+  "system_class": "Chemically Peculiar",
+  "quality_flags": ["assumed_M2"],
+  "Reference": ["2019A&A...626A.127J"],
+  "Simbad": "https://simbad.cds.unistra.fr/simbad/sim-coo?Coord=102.3727%203.69171&...",
+  "Notes": "Ba class: s; WD mass follows from assumed Q value; ..."
 }</code></pre>
-  <p>Missing values are represented as <code>np.nan</code>. </p>
+  <p>Missing values are represented as <code>null</code> in JSON. The <code>quality_flags</code> and <code>Reference</code> fields are arrays (sometimes empty); the remaining categorical fields (<code>evol_type_*</code>, <code>obs_type_*</code>, <code>system_class</code>) are plain strings or <code>null</code>.</p>
 
 
 </section>
+
+
 
 <!-- ######################################################################################### -->
   <section id="plots"><div class="section-border-inner">

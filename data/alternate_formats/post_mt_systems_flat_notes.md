@@ -15,13 +15,36 @@
 
 ## Column Definitions
 - Dec: Declination in degrees. (unit: deg)
+- Dec_errm: Lower uncertainty for Dec.
+- Dec_errp: Upper uncertainty for Dec.
+- Eccentricity: Orbital eccentricity.
+- Eccentricity_errm: Lower uncertainty for Eccentricity.
+- Eccentricity_errp: Upper uncertainty for Eccentricity.
 - M1: Presumed accretor mass in solar masses. (unit: solMass)
+- M1_errm: Lower uncertainty for M1.
+- M1_errp: Upper uncertainty for M1.
 - M1_sin3i: Projected accretor mass term M1*sin(i)^3. (unit: solMass)
+- M1_sin3i_errm: Lower uncertainty for M1_sin3i.
+- M1_sin3i_errp: Upper uncertainty for M1_sin3i.
 - M2: Presumed donor mass in solar masses. (unit: solMass)
+- M2_errm: Lower uncertainty for M2.
+- M2_errp: Upper uncertainty for M2.
 - M2_sin3i: Projected donor mass term M2*sin(i)^3. (unit: solMass)
+- M2_sin3i_errm: Lower uncertainty for M2_sin3i.
+- M2_sin3i_errp: Upper uncertainty for M2_sin3i.
+- Mass Function: Binary mass function as reported or derived in the source.
+- Mass Function_errm: Lower uncertainty for Mass Function.
+- Mass Function_errp: Upper uncertainty for Mass Function.
+- Notes: Free-text notes, provenance remarks, and caveats for the entry.
 - Period: Orbital period in days. (unit: d)
+- Period_errm: Lower uncertainty for Period.
+- Period_errp: Upper uncertainty for Period.
 - RA: Right ascension in degrees. (unit: deg)
+- RA_errm: Lower uncertainty for RA.
+- RA_errp: Upper uncertainty for RA.
 - Reference: ADS bibcode reference for the measurement.
+- Simbad: SIMBAD coordinate-query URL for the source position.
+- System Name: Primary system identifier used in the catalog.
 - evol_type_1: Assumed evolutionary stage of the accretor.
 - evol_type_2: Assumed evolutionary stage of the donor.
 - obs_type_1: Observed classification of the accretor (for example spectral type).

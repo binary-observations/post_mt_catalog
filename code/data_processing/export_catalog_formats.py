@@ -40,20 +40,25 @@ from paths import DATA_DIR, MAIN_CATALOG
 
 # Data notes used for table metadata and sidecar documentation.
 COLUMN_DESCRIPTIONS: dict[str, str] = {
+    "System Name": "Primary system identifier used in the catalog.",
     "RA": "Right ascension in degrees.",
     "Dec": "Declination in degrees.",
     "Reference": "ADS bibcode reference for the measurement.",
+    "Notes": "Free-text notes, provenance remarks, and caveats for the entry.",
     "Period": "Orbital period in days.",
+    "Eccentricity": "Orbital eccentricity.",
     "M1": "Presumed accretor mass in solar masses.",
     "M2": "Presumed donor mass in solar masses.",
     "M1_sin3i": "Projected accretor mass term M1*sin(i)^3.",
     "M2_sin3i": "Projected donor mass term M2*sin(i)^3.",
+    "Mass Function": "Binary mass function as reported or derived in the source.",
     "evol_type_1": "Assumed evolutionary stage of the accretor.",
     "evol_type_2": "Assumed evolutionary stage of the donor.",
     "obs_type_1": "Observed classification of the accretor (for example spectral type).",
     "obs_type_2": "Observed classification of the donor (for example spectral type).",
     "system_class": "Class of binary system.",
     "quality_flags": "Flags marking assumed values and/or minimum/maximum constraints.",
+    "Simbad": "SIMBAD coordinate-query URL for the source position.",
 }
 
 
@@ -152,7 +157,8 @@ def expand_triplets(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
 
 def _apply_table_metadata(table: Table) -> None:
     """Attach column units/descriptions and global notes to Astropy table metadata."""
-    for col_name, desc in COLUMN_DESCRIPTIONS.items():
+    descriptions = _build_column_descriptions(table.colnames)
+    for col_name, desc in descriptions.items():
         if col_name in table.colnames:
             table[col_name].description = desc
 
@@ -161,6 +167,25 @@ def _apply_table_metadata(table: Table) -> None:
             table[col_name].unit = unit
 
     table.meta["comments"] = GLOBAL_NOTES
+
+
+def _default_column_description(col_name: str) -> str:
+    """Return a generic description for columns not explicitly documented."""
+    if col_name.endswith("_errm"):
+        base = col_name[:-5]
+        return f"Lower uncertainty for {base}."
+    if col_name.endswith("_errp"):
+        base = col_name[:-5]
+        return f"Upper uncertainty for {base}."
+    return f"Catalog field: {col_name}."
+
+
+def _build_column_descriptions(columns: list[str] | Any) -> dict[str, str]:
+    """Build descriptions for all columns, using defaults when needed."""
+    out: dict[str, str] = {}
+    for col in columns:
+        out[col] = COLUMN_DESCRIPTIONS.get(col, _default_column_description(col))
+    return out
 
 
 def _write_notes_file(output_dir: Path, stem: str) -> Path:
@@ -173,11 +198,18 @@ def _write_notes_file(output_dir: Path, stem: str) -> Path:
     ]
     lines.extend([f"- {note}" for note in GLOBAL_NOTES])
     lines.extend(["", "## Column Definitions"])
-    for key in sorted(COLUMN_DESCRIPTIONS.keys()):
+    sample_csv = output_dir / f"{stem}.csv"
+    if sample_csv.exists():
+        columns = list(pd.read_csv(sample_csv, nrows=0).columns)
+    else:
+        columns = sorted(COLUMN_DESCRIPTIONS.keys())
+
+    all_descriptions = _build_column_descriptions(columns)
+    for key in sorted(all_descriptions.keys()):
         unit_suffix = ""
         if key in COLUMN_UNITS:
             unit_suffix = f" (unit: {COLUMN_UNITS[key]})"
-        lines.append(f"- {key}: {COLUMN_DESCRIPTIONS[key]}{unit_suffix}")
+        lines.append(f"- {key}: {all_descriptions[key]}{unit_suffix}")
 
     notes_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
     return notes_path

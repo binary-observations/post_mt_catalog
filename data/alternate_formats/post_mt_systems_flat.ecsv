@@ -1,43 +1,43 @@
 # %ECSV 1.0
 # ---
 # datatype:
-# - {name: System Name, datatype: string}
+# - {name: System Name, datatype: string, description: Primary system identifier used in the catalog.}
 # - {name: Reference, datatype: string, description: ADS bibcode reference for the measurement.}
-# - {name: Notes, datatype: string}
-# - {name: RA_errm, datatype: float64}
+# - {name: Notes, datatype: string, description: 'Free-text notes, provenance remarks, and caveats for the entry.'}
+# - {name: RA_errm, datatype: float64, description: Lower uncertainty for RA.}
 # - {name: RA, unit: deg, datatype: float64, description: Right ascension in degrees.}
-# - {name: RA_errp, datatype: float64}
-# - {name: Dec_errm, datatype: float64}
+# - {name: RA_errp, datatype: float64, description: Upper uncertainty for RA.}
+# - {name: Dec_errm, datatype: float64, description: Lower uncertainty for Dec.}
 # - {name: Dec, unit: deg, datatype: float64, description: Declination in degrees.}
-# - {name: Dec_errp, datatype: float64}
-# - {name: Period_errm, datatype: float64}
+# - {name: Dec_errp, datatype: float64, description: Upper uncertainty for Dec.}
+# - {name: Period_errm, datatype: float64, description: Lower uncertainty for Period.}
 # - {name: Period, unit: d, datatype: float64, description: Orbital period in days.}
-# - {name: Period_errp, datatype: float64}
-# - {name: Eccentricity_errm, datatype: float64}
-# - {name: Eccentricity, datatype: float64}
-# - {name: Eccentricity_errp, datatype: float64}
-# - {name: M1_errm, datatype: float64}
+# - {name: Period_errp, datatype: float64, description: Upper uncertainty for Period.}
+# - {name: Eccentricity_errm, datatype: float64, description: Lower uncertainty for Eccentricity.}
+# - {name: Eccentricity, datatype: float64, description: Orbital eccentricity.}
+# - {name: Eccentricity_errp, datatype: float64, description: Upper uncertainty for Eccentricity.}
+# - {name: M1_errm, datatype: float64, description: Lower uncertainty for M1.}
 # - {name: M1, unit: solMass, datatype: float64, description: Presumed accretor mass in solar masses.}
-# - {name: M1_errp, datatype: float64}
-# - {name: M1_sin3i_errm, datatype: float64}
+# - {name: M1_errp, datatype: float64, description: Upper uncertainty for M1.}
+# - {name: M1_sin3i_errm, datatype: float64, description: Lower uncertainty for M1_sin3i.}
 # - {name: M1_sin3i, unit: solMass, datatype: float64, description: Projected accretor mass term M1*sin(i)^3.}
-# - {name: M1_sin3i_errp, datatype: float64}
-# - {name: M2_errm, datatype: float64}
+# - {name: M1_sin3i_errp, datatype: float64, description: Upper uncertainty for M1_sin3i.}
+# - {name: M2_errm, datatype: float64, description: Lower uncertainty for M2.}
 # - {name: M2, unit: solMass, datatype: float64, description: Presumed donor mass in solar masses.}
-# - {name: M2_errp, datatype: float64}
-# - {name: M2_sin3i_errm, datatype: float64}
+# - {name: M2_errp, datatype: float64, description: Upper uncertainty for M2.}
+# - {name: M2_sin3i_errm, datatype: float64, description: Lower uncertainty for M2_sin3i.}
 # - {name: M2_sin3i, unit: solMass, datatype: float64, description: Projected donor mass term M2*sin(i)^3.}
-# - {name: M2_sin3i_errp, datatype: float64}
-# - {name: Mass Function_errm, datatype: float64}
-# - {name: Mass Function, datatype: float64}
-# - {name: Mass Function_errp, datatype: float64}
+# - {name: M2_sin3i_errp, datatype: float64, description: Upper uncertainty for M2_sin3i.}
+# - {name: Mass Function_errm, datatype: float64, description: Lower uncertainty for Mass Function.}
+# - {name: Mass Function, datatype: float64, description: Binary mass function as reported or derived in the source.}
+# - {name: Mass Function_errp, datatype: float64, description: Upper uncertainty for Mass Function.}
 # - {name: evol_type_1, datatype: string, description: Assumed evolutionary stage of the accretor.}
 # - {name: evol_type_2, datatype: string, description: Assumed evolutionary stage of the donor.}
 # - {name: obs_type_1, datatype: string, description: Observed classification of the accretor (for example spectral type).}
 # - {name: obs_type_2, datatype: string, description: Observed classification of the donor (for example spectral type).}
 # - {name: system_class, datatype: string, description: Class of binary system.}
 # - {name: quality_flags, datatype: string, description: Flags marking assumed values and/or minimum/maximum constraints.}
-# - {name: Simbad, datatype: string}
+# - {name: Simbad, datatype: string, description: SIMBAD coordinate-query URL for the source position.}
 # meta: !!omap
 # - comments: [RA and Dec are in degrees., Reference values are ADS bibcodes., Period is in days., M1 is the presumed accretor mass in
 #       solar masses., M2 is the presumed donor mass in solar masses., M1_sin3i is the projected mass term of the accretor (M1*sin(i)^3).,
