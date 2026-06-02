@@ -83,6 +83,36 @@
       height: 16px;
       display: block;
     }
+    .bibtex-actions {
+      display: flex;
+      justify-content: flex-start;
+      margin: 0.4rem 0 0.2rem;
+    }
+    .copy-bibtex-btn {
+      display: inline-block;
+      background: #c9dee7;
+      color: rgb(61, 48, 39);
+      text-decoration: none;
+      padding: 0.45rem 0.7rem;
+      border-radius: 4px;
+      font-weight: bold;
+      border: 1px solid #000000;
+      cursor: pointer;
+    }
+    .copy-bibtex-btn:hover {
+      background: #ecd27a;
+    }
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
   </style>
 </head>
 <body>
@@ -106,8 +136,103 @@
     <h2>About</h2>
     <p>This project aims to provide a comprehensive catalog and analysis of post-mass transfer binary systems, including their key properties and observational data. The data is structured for easy analysis and reproducibility, to support the quest for understanding binary interactions and transfer.</p>
 
+    <p>
+      If you use this catalog in your research, please cite the <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260531290V/abstract">accompanying paper.</a>
+    </p>
+
+    <div class="bibtex-actions">
+      <button id="copy-bibtex" class="copy-bibtex-btn" type="button">Copy BibTeX paper</button>
+    </div>
+    <pre id="bibtex-citation-source" class="visually-hidden">@ARTICLE{2026arXiv260531290V,
+       author = {{van Son}, Lieke A.~C. and {Yamaguchi}, Natsuko and {Nagarajan}, Pranav and {Shenar}, Tomer and {Sen}, Koushik and {Laroche}, Alexander and {Leiner}, Emily M. and {Sana}, Hugues and {Pols}, Onno R.},
+        title = "{Ongoing and Post-Mass-Transfer Binaries: A Living Catalog and Unified Review of Binary Mass Transfer Products}",
+      journal = {arXiv e-prints},
+     keywords = {Solar and Stellar Astrophysics, High Energy Astrophysical Phenomena},
+         year = 2026,
+        month = may,
+          eid = {arXiv:2605.31290},
+        pages = {arXiv:2605.31290},
+archivePrefix = {arXiv},
+       eprint = {2605.31290},
+ primaryClass = {astro-ph.SR},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2026arXiv260531290V},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}</pre>
+
+    <p>
+      As well as the Zenodo entry for the catalog data:
+      <a href="https://doi.org/10.5281/zenodo.20441988" target="_blank" rel="noopener noreferrer">10.5281/zenodo.20441988</a>.
+    </p>
+    <div class="bibtex-actions">
+      <button id="copy-bibtex-zenodo" class="copy-bibtex-btn" type="button">Copy BibTeX Zenodo</button>
+    </div>
+    <pre id="bibtex-citation-zenodo-source" class="visually-hidden">@dataset{vanson_2026_postmt_zenodo,
+  author       = {van Son, Lieke A. C. and Yamaguchi, Natsuko and Nagarajan, Pranav and Shenar, Tomer and Sen, Koushik and Laroche, Alexander and Leiner,Emily M. and Sana, Hugues and Pols, Onno R.},
+  title        = {Ongoing and Post-Mass-Transfer Binaries: A Living Catalog and Unified Review of Binary Mass Transfer Products},
+  year         = 2026,
+  month        = May,
+  publisher    = {Zenodo},
+  version      = {1.0},
+  doi          = {10.5281/zenodo.20441988},
+  url          = {https://doi.org/10.5281/zenodo.20441988}
+}</pre>
+
+
     <p>Git repository link: <a class="repo-link" href="https://github.com/binary-observations/post_mt_catalog" target="_blank" rel="noopener noreferrer"><img src="https://cdn.simpleicons.org/github/222222" alt="GitHub logo">binary-observations/post_mt_catalog</a></p>
+
   </div></section>
+
+  <script>
+    (function(){
+      function getCopyText(defaultText){
+        const selection = window.getSelection();
+        if(!selection || selection.rangeCount === 0) return defaultText;
+
+        const selectedText = selection.toString().trim();
+        if(selectedText) return selectedText;
+
+        return defaultText;
+      }
+
+      function setupCopyButton(buttonId, sourceId){
+        const copyBtn = document.getElementById(buttonId);
+        const bibtexBlock = document.getElementById(sourceId);
+        if(!copyBtn || !bibtexBlock) return;
+
+        const defaultBibtex = bibtexBlock.textContent.trim();
+
+        async function copyBibtex(){
+          const textToCopy = getCopyText(defaultBibtex);
+          const originalLabel = copyBtn.textContent;
+
+          try{
+            await navigator.clipboard.writeText(textToCopy);
+            copyBtn.textContent = 'Copied';
+          }catch(err){
+            const ta = document.createElement('textarea');
+            ta.value = textToCopy;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'absolute';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand('copy');
+            ta.remove();
+            copyBtn.textContent = 'Copied';
+          }
+
+          window.setTimeout(function(){
+            copyBtn.textContent = originalLabel;
+          }, 1300);
+        }
+
+        copyBtn.addEventListener('click', copyBibtex);
+      }
+
+      setupCopyButton('copy-bibtex', 'bibtex-citation-source');
+      setupCopyButton('copy-bibtex-zenodo', 'bibtex-citation-zenodo-source');
+    })();
+  </script>
 
 
 <!-- ######################################################################################### -->
