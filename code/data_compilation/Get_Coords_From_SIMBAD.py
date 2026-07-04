@@ -11,6 +11,9 @@ import math
 import argparse
 from astroquery.simbad import Simbad
 import astropy.units as u
+import numpy.ma as ma
+import warnings
+
 
 def get_coords(names):
     custom = Simbad()
@@ -43,6 +46,23 @@ def get_coords(names):
     col_angle = colmap['coo_err_angle']
     mainid    = colmap.get('main_id')
 
+
+    def _angle_unit(col, default):
+            unit = tbl[col].unit
+            if unit is None:
+                warnings.warn(f"SIMBAD column {col!r} has no unit; assuming {default}")
+                return default
+            try:
+                unit.to(u.deg)                      # confirm it's an angular unit
+            except u.UnitConversionError:
+                raise RuntimeError(f"SIMBAD column {col!r} has non-angular unit {unit}")
+            return u.Unit(unit)
+
+    err_unit_maj = _angle_unit(col_maj,   u.mas)
+    err_unit_min = _angle_unit(col_min,   u.mas)
+    ang_unit     = _angle_unit(col_angle, u.deg)
+
+
     out = []
     for i, row in enumerate(tbl):
         name = row[mainid].decode('utf-8') if mainid and isinstance(row[mainid], bytes) else row[mainid] if mainid else names[i]
@@ -50,14 +70,18 @@ def get_coords(names):
         ra_deg  = row[col_ra]  * u.deg
         dec_deg = row[col_dec] * u.deg
 
-        a      = (row[col_maj] * u.arcsec).to(u.deg).value
-        b      = (row[col_min] * u.arcsec).to(u.deg).value
-        pa_rad = (row[col_angle] * u.deg).to(u.rad).value
-        dec_rad = dec_deg.to(u.rad).value
+        maj, mn, ang = row[col_maj], row[col_min], row[col_angle]
+        if maj is ma.masked or mn is ma.masked:
+            sigma_ra = sigma_dec = float('nan')          # no error ellipse in SIMBAD
+        else:
+            a      = (maj * err_unit_maj).to(u.deg).value
+            b      = (mn  * err_unit_min).to(u.deg).value
+            pa_rad = (ang * ang_unit).to(u.rad).value if ang is not ma.masked else 0.0
+            dec_rad = dec_deg.to(u.rad).value
 
-        sigma_dec  = math.hypot(a * math.cos(pa_rad), b * math.sin(pa_rad))
-        sigma_east = math.hypot(a * math.sin(pa_rad), b * math.cos(pa_rad))
-        sigma_ra   = sigma_east / math.cos(dec_rad)
+            sigma_dec  = math.hypot(a * math.cos(pa_rad), b * math.sin(pa_rad))
+            sigma_east = math.hypot(a * math.sin(pa_rad), b * math.cos(pa_rad))
+            sigma_ra   = sigma_east / math.cos(dec_rad)
 
         out.append({
             'name':     name,
