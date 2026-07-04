@@ -1,0 +1,92 @@
+# Converts "system-proposal" issues into pull requests.
+#
+# Anyone with a GitHub account can propose systems by opening an issue (via the
+# website or the issue template) — no fork needed. This workflow extracts the
+# JSON from the issue body, validates it (.github/scripts/issue_to_proposal.py),
+# writes it to data/proposed_additions/, and opens a PR that closes the issue.
+# On validation failure it comments on the issue instead; editing the issue
+# reruns the workflow.
+#
+# Requires (repo Settings -> Actions -> General -> Workflow permissions):
+#   "Allow GitHub Actions to create and approve pull requests" enabled.
+name: Proposal issue to PR
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  proposal-to-pr:
+    if: contains(github.event.issue.labels.*.name, 'system-proposal')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Extract and validate proposal JSON
+        id: extract
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: python3 .github/scripts/issue_to_proposal.py
+
+      - name: Report validation errors on the issue
+        if: steps.extract.outputs.valid != 'true'
+        uses: actions/github-script@v7
+        env:
+          VALIDATION_ERROR: ${{ steps.extract.outputs.error }}
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: [
+                'Thanks for the submission! The proposal JSON did not pass validation:',
+                '',
+                '```',
+                process.env.VALIDATION_ERROR || 'unknown error',
+                '```',
+                '',
+                'Please **edit this issue** to fix the JSON — the check reruns automatically on every edit.',
+                'Field definitions: [data_schema.json](https://github.com/' +
+                  context.repo.owner + '/' + context.repo.repo + '/blob/master/data/data_schema.json).'
+              ].join('\n')
+            });
+
+      - name: Create or update pull request
+        if: steps.extract.outputs.valid == 'true'
+        id: cpr
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: proposal/issue-${{ github.event.issue.number }}
+          add-paths: data/proposed_additions/
+          commit-message: "Add proposed system(s) from issue #${{ github.event.issue.number }}"
+          title: "System proposal from issue #${{ github.event.issue.number }}"
+          body: |
+            Automated pull request created from issue #${{ github.event.issue.number }}.
+
+            Systems proposed: ${{ steps.extract.outputs.count }}
+            File: `${{ steps.extract.outputs.filename }}`
+
+            Closes #${{ github.event.issue.number }}
+
+      - name: Post PR link on the issue
+        if: steps.extract.outputs.valid == 'true' && steps.cpr.outputs.pull-request-number
+        uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.cpr.outputs.pull-request-number }}
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: 'Validation passed — your proposal is now pull request #' + process.env.PR_NUMBER +
+                    '. It awaits maintainer review; no further action is needed. Thank you for contributing!'
+            });

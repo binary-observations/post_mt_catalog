@@ -154,9 +154,33 @@
         "pulsar binary",
         "Spectroscopic compact object",
         "Astrometric compact object",
-        "Symbiotic XRB",
-        "high-mass XRB",
-      ]
+        "high-mass XRB"
+        
+      ],
+      "notes": "Systems that do not fit any class may propose a new one; see the missing-system submission workflow."
+    },
+
+    "quality_flags": {
+      "type": "list[string]",
+      "description": "Flags for parameters that are assumed, inferred, or otherwise not directly (dynamically) measured. Empty list if all listed parameters are direct measurements.",
+      "allowed_values": [
+        "assumed_e",
+        "assumed_M1",
+        "assumed_M2",
+        "assumed_q",
+        "min_M2",
+        "indirect_M1",
+        "indirect_M2"
+      ],
+      "value_descriptions": {
+        "assumed_e": "Eccentricity fixed a priori (e.g. e=0 by construction in the light-curve modelling)",
+        "assumed_M1": "M1 adopted or assumed rather than measured",
+        "assumed_M2": "M2 adopted or assumed rather than measured",
+        "assumed_q": "Mass ratio adopted or assumed rather than measured",
+        "min_M2": "M2 is a lower limit (e.g. from the mass function assuming i=90 deg)",
+        "indirect_M1": "M1 not from orbital dynamics (e.g. photometric, SED, or evolutionary-model estimate; specify the method in Notes)",
+        "indirect_M2": "M2 not from orbital dynamics (e.g. photometric, SED, or evolutionary-model estimate; specify the method in Notes)"
+      }
     },
 
     "Detection Method": {

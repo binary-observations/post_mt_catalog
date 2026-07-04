@@ -102,6 +102,29 @@
       margin: 0.4rem 0;
     }
     .hidden { display: none; }
+    .help-text {
+      font-size: 0.85rem;
+      color: #556;
+      margin: 0.25rem 0 0.5rem;
+      font-weight: 400;
+    }
+    .help-text code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; }
+    .flag-list label { display: block; font-weight: 400; margin: 0.2rem 0; font-size: 0.9rem; }
+    .flag-list input[type="checkbox"] { width: auto; margin-right: 0.4rem; }
+    .flag-list code { background: #f0f0f0; padding: 1px 4px; border-radius: 3px; }
+    .notice {
+      margin-top: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 6px;
+      border: 1px solid #e8d998;
+      background: #fffbe8;
+      font-size: 0.92rem;
+    }
+    .notice ol { margin: 0.4rem 0 0.2rem; padding-left: 1.3rem; }
+    details.help-details { margin-top: 0.5rem; }
+    details.help-details summary { cursor: pointer; font-weight: 600; color: #388087; }
+    details.help-details ul { margin: 0.5rem 0; padding-left: 1.2rem; }
+    details.help-details li { margin: 0.25rem 0; font-size: 0.88rem; }
     @media (max-width: 700px) {
       section { padding: 1rem; }
       .triplet { grid-template-columns: 1fr; }
@@ -112,9 +135,10 @@
   <header>
     <div class="header-inset-1">
       <h1>Suggest a Missing Post-MT System</h1>
-      <p>Two-step contribution flow for the catalog.</p>
+      <p>Two-step contribution flow for the catalog — or jump to the <a href="#batchSection">batch workflow</a> to add several systems at once.</p>
       <nav>
         <a href="index.html#add_missing_systems">Back to catalog website</a>
+        <a href="#batchSection">Batch submission</a>
       </nav>
     </div>
   </header>
@@ -136,11 +160,11 @@
           </div>
           <div class="form-group">
             <label for="candidateRA">RA (deg) *</label>
-            <input id="candidateRA" type="number" step="any" required placeholder="e.g. 150.025">
+            <input id="candidateRA" type="text" inputmode="decimal" autocomplete="off" required placeholder="e.g. 150.025">
           </div>
           <div class="form-group">
             <label for="candidateDec">Dec (deg) *</label>
-            <input id="candidateDec" type="number" step="any" required placeholder="e.g. -45.123">
+            <input id="candidateDec" type="text" inputmode="decimal" autocomplete="off" required placeholder="e.g. -45.123">
           </div>
         </div>
         <button type="submit">Run catalog check</button>
@@ -169,18 +193,18 @@
         <div class="form-group">
           <label>RA [err-, value, err+] in deg *</label>
           <div class="triplet">
-            <input id="formRAErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formRAValue" type="number" step="any" required placeholder="value">
-            <input id="formRAErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formRAErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formRAValue" type="text" inputmode="decimal" autocomplete="off" required placeholder="value">
+            <input id="formRAErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
         <div class="form-group">
           <label>Dec [err-, value, err+] in deg *</label>
           <div class="triplet">
-            <input id="formDecErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formDecValue" type="number" step="any" required placeholder="value">
-            <input id="formDecErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formDecErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formDecValue" type="text" inputmode="decimal" autocomplete="off" required placeholder="value">
+            <input id="formDecErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
@@ -199,36 +223,36 @@
         <div class="form-group">
           <label>Period [err-, value, err+] in days (optional)</label>
           <div class="triplet">
-            <input id="formPeriodErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formPeriodValue" type="number" step="any" placeholder="value">
-            <input id="formPeriodErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formPeriodErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formPeriodValue" type="text" inputmode="decimal" autocomplete="off" placeholder="value">
+            <input id="formPeriodErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
         <div class="form-group">
           <label>Eccentricity [err-, value, err+] (optional)</label>
           <div class="triplet">
-            <input id="formEccentricityErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formEccentricityValue" type="number" step="any" placeholder="value">
-            <input id="formEccentricityErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formEccentricityErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formEccentricityValue" type="text" inputmode="decimal" autocomplete="off" placeholder="value">
+            <input id="formEccentricityErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
         <div class="form-group">
           <label>M1 [err-, value, err+] in Msun (optional)</label>
           <div class="triplet">
-            <input id="formM1ErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formM1Value" type="number" step="any" placeholder="value">
-            <input id="formM1ErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formM1ErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formM1Value" type="text" inputmode="decimal" autocomplete="off" placeholder="value">
+            <input id="formM1ErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
         <div class="form-group">
           <label>M2 [err-, value, err+] in Msun (optional)</label>
           <div class="triplet">
-            <input id="formM2ErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formM2Value" type="number" step="any" placeholder="value">
-            <input id="formM2ErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formM2ErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formM2Value" type="text" inputmode="decimal" autocomplete="off" placeholder="value">
+            <input id="formM2ErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
@@ -258,7 +282,41 @@
             <option value="Spectroscopic compact object">Spectroscopic compact object</option>
             <option value="Astrometric compact object">Astrometric compact object</option>
             <option value="high-mass XRB">high-mass XRB</option>
+
+            <option value="__other__">Other / propose a new class</option>
           </select>
+          <input id="formSystemClassOther" type="text" class="hidden" autocomplete="off"
+                 style="margin-top:0.5rem;" placeholder="Name / short description of the proposed class">
+          <p class="help-text">
+            Select the single class that best matches how the system is identified in the literature.
+            If several apply, pick the primary identification and mention the alternatives in the
+            "Why this is post-MT" field. If nothing fits, choose "Other / propose a new class" —
+            new classes are welcome. Full definitions are given in the
+            <a href="https://ui.adsabs.harvard.edu/abs/2026arXiv260531290V/abstract" target="_blank" rel="noopener">accompanying paper</a>.
+          </p>
+          <details class="help-details">
+            <summary>What do these classes mean?</summary>
+            <ul>
+              <li><strong>WUMa binary</strong> — low-mass contact binary.</li>
+              <li><strong>Massive contact binary</strong> — high-mass (OB) contact binary.</li>
+              <li><strong>Algol</strong> — semi-detached binary (with mass-ratio reversal), Roche-lobe-filling donor.</li>
+              <li><strong>Hot subdwarf binary</strong> — core/shell He-burning low-mass stripped star (sdB/sdO) with a companion.</li>
+              <li><strong>He giant</strong> — giant-like low-mass stripped helium star with a companion.</li>
+              <li><strong>Intermediate-M stripped star</strong> — stripped star of roughly 1.5 to 8 Msun.</li>
+              <li><strong>WR binary</strong> — Wolf-Rayet star with a (massive O-type) companion.</li>
+              <li><strong>Post-AGB binary</strong> — donor recently left the AGB/RGB and is contracting towards a WD; recently terminated mass transfer.</li>
+              <li><strong>EL CVn</strong> — bloated pre-He-WD stripped star with (an early-type A/F MS) companion.</li>
+              <li><strong>Blue straggler binary</strong> — rejuvenated mass gainer (blue/yellow straggler), typically with a WD companion.</li>
+              <li><strong>Chemically Peculiar</strong> — barium / CEMP / Li-enhanced star polluted by a former AGB donor that is now a WD.</li>
+              <li><strong>Astrometric WD + MS</strong> — WD companion to MS star inferred from an astrometric orbit (e.g. Gaia).</li>
+              <li><strong>Spectroscopic WD + MS</strong> — WD companion to MS star found via radial velocities / spectroscopy.</li>
+              <li><strong>Self-lensing WD + MS</strong> — WD companion to MS star revealed by self-lensing brightening pulses.</li>
+              <li><strong>pulsar binary</strong> — radio pulsar with a non-degenerate companion.</li>
+              <li><strong>Spectroscopic compact object</strong> — detached NS/BH candidate found via radial velocities.</li>
+              <li><strong>Astrometric compact object</strong> — NS/BH candidate from astrometric (Gaia) orbits.</li>
+              <li><strong>high-mass XRB</strong> — accreting NS/BH with a massive donor star.</li>
+            </ul>
+          </details>
         </div>
 
         <div class="grid">
@@ -313,41 +371,146 @@
         <div class="form-group">
           <label>Mass Function [err-, value, err+] in Msun (optional)</label>
           <div class="triplet">
-            <input id="formMassFunctionErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formMassFunctionValue" type="number" step="any" placeholder="value">
-            <input id="formMassFunctionErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formMassFunctionErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formMassFunctionValue" type="text" inputmode="decimal" autocomplete="off" placeholder="value">
+            <input id="formMassFunctionErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
         <div class="form-group">
           <label>M1_sin3i [err-, value, err+] in Msun (optional)</label>
           <div class="triplet">
-            <input id="formM1Sin3iErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formM1Sin3iValue" type="number" step="any" placeholder="value">
-            <input id="formM1Sin3iErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formM1Sin3iErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formM1Sin3iValue" type="text" inputmode="decimal" autocomplete="off" placeholder="value">
+            <input id="formM1Sin3iErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
         <div class="form-group">
           <label>M2_sin3i [err-, value, err+] in Msun (optional)</label>
           <div class="triplet">
-            <input id="formM2Sin3iErrMinus" type="number" step="any" placeholder="err-">
-            <input id="formM2Sin3iValue" type="number" step="any" placeholder="value">
-            <input id="formM2Sin3iErrPlus" type="number" step="any" placeholder="err+">
+            <input id="formM2Sin3iErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
+            <input id="formM2Sin3iValue" type="text" inputmode="decimal" autocomplete="off" placeholder="value">
+            <input id="formM2Sin3iErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
           </div>
         </div>
 
         <div class="form-group">
-          <label for="formAdditionalJson">Additional schema fields as JSON object (optional)</label>
-          <textarea id="formAdditionalJson" rows="5" placeholder='{"Notes": "some interesting thing to note on this system", "M1_sin3i": [0.5, 5.0, 0.5]}'></textarea>
+          <label>Quality flags (optional)</label>
+          <p class="help-text">
+            Flag any parameter above that is <em>assumed, inferred, or not a direct dynamical
+            measurement</em>. Indirect (e.g. photometric or model-based) mass estimates are welcome
+            in the M1/M2 fields — just flag them here so the catalog stays homogeneous.
+          </p>
+          <div id="qualityFlagBoxes" class="flag-list">
+            <label><input type="checkbox" value="assumed_e"> <code>assumed_e</code> — eccentricity fixed a priori (e.g. e = 0 by construction in the modelling)</label>
+            <label><input type="checkbox" value="assumed_M1"> <code>assumed_M1</code> — M1 adopted or assumed rather than measured</label>
+            <label><input type="checkbox" value="assumed_M2"> <code>assumed_M2</code> — M2 adopted or assumed rather than measured</label>
+            <label><input type="checkbox" value="assumed_q"> <code>assumed_q</code> — mass ratio adopted or assumed rather than measured</label>
+            <label><input type="checkbox" value="min_M2"> <code>min_M2</code> — M2 is a lower limit (e.g. from the mass function)</label>
+            <label><input type="checkbox" value="indirect_M1"> <code>indirect_M1</code> — M1 not from orbital dynamics (photometric / SED / model-based; specify the method in Notes)</label>
+            <label><input type="checkbox" value="indirect_M2"> <code>indirect_M2</code> — M2 not from orbital dynamics (photometric / SED / model-based; specify the method in Notes)</label>
+          </div>
+          <input id="formQualityFlagsExtra" type="text" autocomplete="off" style="margin-top:0.4rem;"
+                 placeholder="Other flags, comma-separated (e.g. assumed_inclination)">
         </div>
 
-        <button type="submit">Prepare GitHub PR submission</button>
+        <div class="form-group">
+          <label for="formAdditionalJson">Additional schema fields as JSON object (optional)</label>
+          <p class="help-text">
+            Keys and units must follow the
+            <a href="https://github.com/binary-observations/post_mt_catalog/blob/master/data/data_schema.json" target="_blank" rel="noopener">data schema format</a>:
+            measurements are <code>[err-, value, err+]</code> triplets — masses in Msun, periods in
+            days, positions in deg — written as plain numbers with "." as decimal separator.
+            No unit strings (write <code>[null, 0.22, null]</code>, not <code>"0.22 Msun"</code>).
+          </p>
+          <textarea id="formAdditionalJson" rows="5" placeholder='{"Notes": "some interesting thing to note on this system", "Simbad": "https://simbad.cds.unistra.fr/..."}'></textarea>
+        </div>
+
+        <div class="notice">
+          <strong>How submission works:</strong> the button below opens a pre-filled GitHub issue
+          in a new tab — you only need to be <em>signed in to GitHub</em> (no fork, no git
+          knowledge). Check the form and press <em>Submit new issue</em>. Our automation then
+          validates the JSON and converts it into a pull request, and posts the link back on your
+          issue. The pull request awaits review by the maintainers — no further action is needed
+          from your side.
+        </div>
+
+        <button type="submit">Submit via GitHub issue</button>
         <button type="button" class="secondary" id="copyJsonBtn">Copy proposal JSON</button>
       </form>
 
       <div id="proposalStatus" class="status"></div>
       <pre id="proposalPreview" class="hidden"></pre>
+    </div>
+  </section>
+
+  <section id="batchSection">
+    <h2>Batch submission — multiple systems at once</h2>
+    <p>
+      Prefer to add several systems in one go? Prepare a single JSON file (an array of system
+      objects following the
+      <a href="https://github.com/binary-observations/post_mt_catalog/blob/master/data/data_schema.json" target="_blank" rel="noopener">data schema</a>)
+      and submit it as one pull request. The validator below checks every entry and runs the
+      duplicate check against the catalog for you.
+    </p>
+
+    <div class="card">
+      <h3 style="margin-top:0;">1. Get the template</h3>
+      <p class="help-text">
+        The template is a JSON array: the first entry is a fully filled example
+        (<strong>delete it before submitting</strong>), the second is an empty skeleton —
+        copy it once per system. All measurements are <code>[err-, value, err+]</code> triplets
+        (masses in Msun, periods in days, positions in deg); use <code>null</code> for anything unknown.
+      </p>
+      <button type="button" id="downloadTemplateBtn">Download template JSON</button>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0;">2. Validate your file</h3>
+      <div class="form-group">
+        <label for="batchFile">Upload your JSON file</label>
+        <input id="batchFile" type="file" accept=".json,application/json">
+      </div>
+      <div class="form-group">
+        <label for="batchJson">… or paste the JSON array here</label>
+        <textarea id="batchJson" rows="10" placeholder='[ { "System Name": "...", "RA": [null, 150.025, null], ... }, { ... } ]'></textarea>
+      </div>
+      <button type="button" id="validateBatchBtn">Validate batch</button>
+      <div id="batchStatus" class="status"></div>
+      <div id="batchResults" class="hidden" style="margin-top:0.8rem;"></div>
+    </div>
+
+    <div class="card hidden" id="batchSubmitCard">
+      <h3 style="margin-top:0;">3. Submit</h3>
+      <p class="help-text">
+        Submitting opens a pre-filled GitHub issue in a new tab (sign-in required — no fork, no
+        git knowledge). Press <em>Submit new issue</em> there; our automation validates the batch
+        and opens a single pull request for all systems, linked back on your issue.
+      </p>
+      <button type="button" id="batchPrepareBtn">Submit batch via GitHub issue</button>
+      <button type="button" class="secondary" id="batchCopyBtn">Copy batch JSON</button>
+      <div id="batchSubmitStatus" class="status"></div>
+    </div>
+
+    <div class="card">
+      <details class="help-details">
+        <summary>Prefer to do it fully programmatically?</summary>
+        <p class="help-text">
+          You can skip this website entirely: fork the repository, add your JSON file to
+          <code>data/proposed_additions/</code>, and open a pull request:
+        </p>
+        <pre># one-time: fork and clone (or use the GitHub web UI)
+gh repo fork binary-observations/post_mt_catalog --clone
+cd post_mt_catalog
+
+git checkout -b proposal-YYYY-MM-DD-my-systems
+cp /path/to/my_systems.json data/proposed_additions/YYYY-MM-DD_my_systems.json
+git add data/proposed_additions/
+git commit -m "Propose missing post-MT systems"
+git push origin HEAD
+# then open a pull request on GitHub</pre>
+      </details>
     </div>
   </section>
 
@@ -367,8 +530,8 @@
       // URL to fetch the current catalog of post-MT systems from GitHub
       const RAW_URL = 'https://raw.githubusercontent.com/binary-observations/post_mt_catalog/master/data/post_mt_systems.json';
       
-      // GitHub URL for creating a new file (opens GitHub's "new file" interface)
-      const REPO_NEW_FILE_URL = 'https://github.com/binary-observations/post_mt_catalog/new/master';
+      // GitHub URL for opening a new system-proposal issue (pre-filled via query params)
+      const REPO_ISSUE_URL = 'https://github.com/binary-observations/post_mt_catalog/issues/new';
       
       // Position match threshold: systems within 0.1 arcsec are considered potential duplicates
       const ARCSEC_THRESHOLD = 0.1;
@@ -481,10 +644,14 @@
       }
 
       // --------------------------------------------------------------------------
-      // Utility: Convert to Number (null if invalid)
+      // Utility: Convert to Number (null if empty or invalid)
       // --------------------------------------------------------------------------
+      // Empty fields must map to null, NOT 0 (Number('') === 0 in JavaScript!).
+      // Accepts "," as decimal separator (European locales) by normalizing to ".".
       function toNumber(value){
-        const n = Number(value);
+        const str = String(value ?? '').trim().replace(/,/g, '.');
+        if(str === '') return null;
+        const n = Number(str);
         return Number.isFinite(n) ? n : null;
       }
 
@@ -651,16 +818,80 @@
       }
 
       // --------------------------------------------------------------------------
-      // Create URL-safe Slug from System Name
+      // Open a Pre-Filled System-Proposal Issue on GitHub
       // --------------------------------------------------------------------------
-      // Used for generating filenames and branch names
-      function makeSlug(value){
-        return String(value || 'missing_system')
-          .trim()
-          .toLowerCase()
-          .replace(/[^a-z0-9]+/g, '_')   // Replace non-alphanumeric with underscore
-          .replace(/^_+|_+$/g, '')       // Trim leading/trailing underscores
-          .slice(0, 80) || 'missing_system';
+      // No fork or git knowledge needed: submitting the issue triggers a GitHub
+      // Action that validates the JSON, writes it to data/proposed_additions/,
+      // and opens a pull request, reporting back on the issue.
+      // Falls back to open-and-paste when the JSON is too large for URL pre-fill.
+      function openProposalIssue(title, jsonText, statusEl){
+        const baseUrl = REPO_ISSUE_URL + '?template=propose_system.yml&title=' + encodeURIComponent(title);
+        const fullUrl = baseUrl + '&json=' + encodeURIComponent(jsonText);
+
+        // GitHub rejects very long URLs: open the empty form for manual pasting
+        if(fullUrl.length > 7500){
+          statusEl.innerHTML =
+            '<span class="result-warn">This proposal is too large to pre-fill via the URL.</span> ' +
+            'The empty submission form was opened instead: use the "Copy" button, paste the JSON into the ' +
+            '<em>System proposal JSON</em> field, and press <em>Submit new issue</em>.';
+          window.open(baseUrl, '_blank', 'noopener');
+          return;
+        }
+
+        statusEl.innerHTML =
+          '<span class="result-ok">Proposal prepared.</span> Opening GitHub: check the pre-filled form and press ' +
+          '<em>Submit new issue</em>. Our automation validates the JSON and opens a pull request for maintainer ' +
+          'review — progress is reported on your issue. No fork or git knowledge needed, just a GitHub account.';
+        window.open(fullUrl, '_blank', 'noopener');
+      }
+
+      // --------------------------------------------------------------------------
+      // Search Catalog for Name and Position Matches
+      // --------------------------------------------------------------------------
+      // Shared by the Step 1 duplicate check and the batch validator.
+      // Returns { nameMatches, positionMatches } in the same shape the renderer expects.
+      function findCatalogMatches(candidateId, candidateRA, candidateDec){
+        const candidateNorm = normalizeToken(candidateId);
+        const nameMatches = [];       // Systems matching by name/ID
+        const positionMatches = [];   // Systems matching by sky position
+
+        catalogRecords.forEach((record, index) => {
+          // ---- Name Matching ----
+          // Check if any name/alias in the record matches the candidate
+          const names = getNameCandidates(record);
+          const matchedByName = names.some(name => {
+            const norm = normalizeToken(name);
+            if(!norm || !candidateNorm) return false;
+            return norm === candidateNorm || norm.includes(candidateNorm) || candidateNorm.includes(norm);
+          });
+
+          if(matchedByName){
+            nameMatches.push({
+              index,
+              record,
+              sepArcsec: null,  // Position not checked yet for name-only matches
+              reasons: ['name/ID']
+            });
+          }
+
+          // ---- Position Matching ----
+          // Check if position matches within threshold (0.1 arcsec)
+          const ra = getTripletCentralValue(record['RA']);
+          const dec = getTripletCentralValue(record['Dec']);
+          if(ra !== null && dec !== null && candidateRA !== null && candidateDec !== null){
+            const sepArcsec = angularSeparationArcsec(candidateRA, candidateDec, ra, dec);
+            if(sepArcsec <= ARCSEC_THRESHOLD){
+              positionMatches.push({
+                index,
+                record,
+                sepArcsec,
+                reasons: ['sky position <= 0.1 arcsec']
+              });
+            }
+          }
+        });
+
+        return { nameMatches, positionMatches };
       }
 
       // ==========================================================================
@@ -688,49 +919,8 @@
           return;
         }
 
-        // Normalize candidate ID for fuzzy matching
-        const candidateNorm = normalizeToken(candidateId);
-        const nameMatches = [];       // Systems matching by name/ID
-        const positionMatches = [];   // Systems matching by sky position
-
-        // --------------------------------------------------------------------------
-        // Search entire catalog for matches
-        // --------------------------------------------------------------------------
-        catalogRecords.forEach((record, index) => {
-          // ---- Name Matching ----
-          // Check if any name/alias in the record matches the candidate
-          const names = getNameCandidates(record);
-          const matchedByName = names.some(name => {
-            const norm = normalizeToken(name);
-            if(!norm || !candidateNorm) return false;
-            return norm === candidateNorm || norm.includes(candidateNorm) || candidateNorm.includes(norm);
-          });
-
-          if(matchedByName){
-            nameMatches.push({
-              index,
-              record,
-              sepArcsec: null,  // Position not checked yet for name-only matches
-              reasons: ['name/ID']
-            });
-          }
-
-          // ---- Position Matching ----
-          // Check if position matches within threshold (0.1 arcsec)
-          const ra = getTripletCentralValue(record['RA']);
-          const dec = getTripletCentralValue(record['Dec']);
-          if(ra !== null && dec !== null){
-            const sepArcsec = angularSeparationArcsec(candidateRA, candidateDec, ra, dec);
-            if(sepArcsec <= ARCSEC_THRESHOLD){
-              positionMatches.push({
-                index,
-                record,
-                sepArcsec,
-                reasons: ['sky position <= 0.1 arcsec']
-              });
-            }
-          }
-        });
+        // Search entire catalog for matches (shared with batch validator)
+        const { nameMatches, positionMatches } = findCatalogMatches(candidateId, candidateRA, candidateDec);
 
         // --------------------------------------------------------------------------
         // Merge Matches (systems can match by both name AND position)
@@ -802,6 +992,18 @@
           'Notes': reason  // Scientific justification for why this is post-MT
         };
 
+        // Validate coordinates: numeric central values within physical ranges
+        const raValue = proposal['RA'][1];
+        const decValue = proposal['Dec'][1];
+        if(raValue === null || decValue === null){
+          proposalStatus.textContent = 'RA and Dec must be numeric, in degrees, with "." as decimal separator.';
+          return;
+        }
+        if(raValue < 0 || raValue >= 360 || decValue < -90 || decValue > 90){
+          proposalStatus.textContent = 'RA must be in [0, 360) deg and Dec in [-90, +90] deg.';
+          return;
+        }
+
         // --------------------------------------------------------------------------
         // Add optional orbital/mass parameters (triplet format)
         // --------------------------------------------------------------------------
@@ -835,7 +1037,16 @@
         const detectionMethods = readOptionalList('formDetectionMethod');
         if(detectionMethods) proposal['Detection Method'] = detectionMethods;
 
-        const systemClass = readOptionalText('formSystemClass');
+        let systemClass = readOptionalText('formSystemClass');
+        if(systemClass === '__other__'){
+          // "Other / propose a new class": use the free-text description instead
+          systemClass = readOptionalText('formSystemClassOther');
+          if(!systemClass){
+            proposalStatus.textContent = 'Please describe the proposed system class (or pick an existing one).';
+            return;
+          }
+          proposal['Notes'] = reason + '\n[proposed new system_class: ' + systemClass + ']';
+        }
         if(systemClass) proposal['system_class'] = systemClass;
 
         const obsType1 = readOptionalText('formObsType1');
@@ -847,6 +1058,17 @@
         if(evolType1) proposal['evol_type_1'] = evolType1;
         const evolType2 = readOptionalText('formEvolType2');
         if(evolType2) proposal['evol_type_2'] = evolType2;
+
+        // --------------------------------------------------------------------------
+        // Collect quality flags (checkboxes + free-text extras)
+        // --------------------------------------------------------------------------
+        // Always included (possibly empty), matching the catalog records
+        const qualityFlags = Array.from(
+          document.querySelectorAll('#qualityFlagBoxes input[type="checkbox"]:checked')
+        ).map(cb => cb.value);
+        const extraFlags = readOptionalList('formQualityFlagsExtra');
+        if(extraFlags) qualityFlags.push(...extraFlags);
+        proposal['quality_flags'] = qualityFlags;
 
         // --------------------------------------------------------------------------
         // Parse and merge additional JSON fields (if provided)
@@ -873,32 +1095,27 @@
           return;
         }
 
+        // Sanity check: [0, 0, 0] triplets are almost always unintended input
+        const zeroFields = Object.entries(proposal)
+          .filter(([_, v]) => Array.isArray(v) && v.length === 3 && v.every(x => x === 0))
+          .map(([k]) => k);
+        if(zeroFields.length > 0){
+          const proceed = window.confirm(
+            'These fields are exactly [0, 0, 0]: ' + zeroFields.join(', ') +
+            '.\nIs that really intended? Leave fields empty (-> null) if the value is unknown.\n\n' +
+            'Click OK to submit anyway, or Cancel to go back and fix them.'
+          );
+          if(!proceed) return;
+        }
+
         // --------------------------------------------------------------------------
-        // Generate JSON and prepare GitHub submission
+        // Generate JSON and open a pre-filled GitHub issue
         // --------------------------------------------------------------------------
         latestProposalJson = JSON.stringify(proposal, null, 2);
         proposalPreview.textContent = latestProposalJson;
         proposalPreview.classList.remove('hidden');  // Show JSON preview to user
 
-        // Generate timestamped filename and suggested branch name
-        const date = new Date().toISOString().slice(0, 10);  // YYYY-MM-DD
-        const slug = makeSlug(systemName);                   // URL-safe system name
-        const filename = 'data/proposed_additions/' + date + '_' + slug + '.json';
-        const branchName = 'proposal-' + date + '-' + slug;  // e.g., proposal-2026-02-20-hd194335
-
-        // Build GitHub "new file" URL with pre-filled filename and content
-        const newFileUrl = REPO_NEW_FILE_URL
-          + '?filename=' + encodeURIComponent(filename)
-          + '&value=' + encodeURIComponent(latestProposalJson);
-
-        // Show instructions for creating a new branch and PR
-        proposalStatus.innerHTML =
-          '<span class="result-ok">Proposal JSON prepared.</span> Opening GitHub. ' +
-          '<strong>Important:</strong> At the bottom of the page, select <em>"Create a <u>new branch</u> for this commit and start a pull request"</em> ' +
-          'and use branch name: <code style="background:#f0f0f0;padding:2px 6px;border-radius:3px;">' + branchName + '</code>';
-
-        // Open GitHub in new tab
-        window.open(newFileUrl, '_blank', 'noopener');
+        openProposalIssue('[System proposal] ' + systemName, latestProposalJson, proposalStatus);
       });
 
       // ==========================================================================
@@ -915,6 +1132,356 @@
         } catch(_){
           // Clipboard API may fail due to permissions or browser support
           proposalStatus.textContent = 'Could not access clipboard. Copy manually from the preview box.';
+        }
+      });
+
+      // ==========================================================================
+      // EVENT HANDLER: Toggle Free-Text Input for "Other" System Class
+      // ==========================================================================
+      const systemClassSelect = document.getElementById('formSystemClass');
+      const systemClassOther = document.getElementById('formSystemClassOther');
+      systemClassSelect.addEventListener('change', function(){
+        systemClassOther.classList.toggle('hidden', this.value !== '__other__');
+      });
+
+      // ==========================================================================
+      // BATCH SUBMISSION (multiple systems in one JSON array / one PR)
+      // ==========================================================================
+
+      // --------------------------------------------------------------------------
+      // DOM Element References (Batch)
+      // --------------------------------------------------------------------------
+      const downloadTemplateBtn = document.getElementById('downloadTemplateBtn');
+      const batchFileInput = document.getElementById('batchFile');
+      const batchJsonArea = document.getElementById('batchJson');
+      const validateBatchBtn = document.getElementById('validateBatchBtn');
+      const batchStatus = document.getElementById('batchStatus');
+      const batchResults = document.getElementById('batchResults');
+      const batchSubmitCard = document.getElementById('batchSubmitCard');
+      const batchPrepareBtn = document.getElementById('batchPrepareBtn');
+      const batchCopyBtn = document.getElementById('batchCopyBtn');
+      const batchSubmitStatus = document.getElementById('batchSubmitStatus');
+
+      let latestBatchJson = '';   // Normalized batch JSON after successful validation
+      let latestBatchCount = 0;   // Number of systems in the validated batch
+
+      // --------------------------------------------------------------------------
+      // Schema Knowledge for Client-Side Validation (keep in sync with data_schema.json)
+      // --------------------------------------------------------------------------
+      const TRIPLET_FIELDS = ['RA', 'Dec', 'Period', 'Eccentricity', 'M1', 'M2', 'Mass Function', 'M1_sin3i', 'M2_sin3i'];
+      const LIST_FIELDS = ['Reference', 'Detection Method', 'quality_flags'];
+      const STRING_FIELDS = ['Notes', 'Simbad', 'obs_type_1', 'obs_type_2', 'system_class', 'evol_type_1', 'evol_type_2'];
+      const KNOWN_FIELDS = ['System Name'].concat(TRIPLET_FIELDS, LIST_FIELDS, STRING_FIELDS);
+      const EVOL_TYPES = ['MS', 'HG', 'RGB', 'AGB', 'He-star', 'WD', 'NS', 'BH'];
+      const SYSTEM_CLASSES = [
+        'Massive contact binary', 'WUMa binary', 'Algol',
+        'Hot subdwarf binary', 'He giant', 'Intermediate-M stripped star', 'WR binary',
+        'Post-AGB binary', 'EL CVn',
+        'Blue straggler binary', 'Chemically Peculiar',
+        'Astrometric WD + MS', 'Spectroscopic WD + MS', 'Self-lensing WD + MS',
+        'pulsar binary', 'Spectroscopic compact object', 'Astrometric compact object',
+        'high-mass XRB'
+      ];
+
+      // --------------------------------------------------------------------------
+      // Batch Template
+      // --------------------------------------------------------------------------
+      // Entry 1: fully filled example (users must delete it — the "_instructions"
+      // key is rejected by the validator so it cannot be submitted by accident).
+      // Entry 2: empty skeleton to copy once per system.
+      const BATCH_TEMPLATE = [
+        {
+          '_instructions': 'EXAMPLE ENTRY - delete this whole entry (including this field) before submitting. Copy the empty skeleton below once per system. Field definitions and units: data/data_schema.json. Use null for anything unknown; plain numbers with "." decimals, no unit strings.',
+          'System Name': 'Example Star AB 123',
+          'RA': [null, 132.849042, null],
+          'Dec': [null, 18.303611, null],
+          'Reference': ['2021AJ....161..190G'],
+          'Notes': 'One or two sentences on why this system is post-mass-transfer.',
+          'Period': [0.5, 42.83, 0.5],
+          'Eccentricity': [0.012, 0.016, 0.012],
+          'M1': [0.1, 1.25, 0.1],
+          'M2': [null, 0.22, null],
+          'Mass Function': [0.0001, 0.0027, 0.0001],
+          'M1_sin3i': [null, null, null],
+          'M2_sin3i': [null, null, null],
+          'system_class': 'Spectroscopic WD + MS',
+          'obs_type_1': 'Yellow straggler star',
+          'obs_type_2': 'Helium white dwarf',
+          'evol_type_1': 'HG',
+          'evol_type_2': 'WD',
+          'Detection Method': ['RV', 'SB1'],
+          'quality_flags': ['indirect_M2']
+        },
+        {
+          'System Name': '',
+          'RA': [null, null, null],
+          'Dec': [null, null, null],
+          'Reference': [],
+          'Notes': '',
+          'Period': [null, null, null],
+          'Eccentricity': [null, null, null],
+          'M1': [null, null, null],
+          'M2': [null, null, null],
+          'Mass Function': [null, null, null],
+          'M1_sin3i': [null, null, null],
+          'M2_sin3i': [null, null, null],
+          'system_class': null,
+          'obs_type_1': null,
+          'obs_type_2': null,
+          'evol_type_1': null,
+          'evol_type_2': null,
+          'Detection Method': [],
+          'quality_flags': []
+        }
+      ];
+
+      // --------------------------------------------------------------------------
+      // Utility: Finite Number or Null (allowed triplet elements)
+      // --------------------------------------------------------------------------
+      function isFiniteOrNull(x){
+        return x === null || (typeof x === 'number' && Number.isFinite(x));
+      }
+
+      // --------------------------------------------------------------------------
+      // Validate a Single Batch Entry
+      // --------------------------------------------------------------------------
+      // Returns { errors, warnings }. May normalize the entry in place
+      // (scalar -> triplet, string reference -> list).
+      function validateEntry(entry){
+        const errors = [];
+        const warnings = [];
+
+        if(!entry || typeof entry !== 'object' || Array.isArray(entry)){
+          return { errors: ['Entry is not a JSON object.'], warnings };
+        }
+
+        // Template leftovers: keys starting with "_" mean the example entry survived
+        Object.keys(entry).forEach(key => {
+          if(key.startsWith('_')){
+            errors.push('Template field "' + key + '" found — delete the example entry from the template before submitting.');
+          }
+        });
+
+        // System Name: non-empty string or list of strings
+        const name = entry['System Name'];
+        const nameOk = (typeof name === 'string' && name.trim()) ||
+                       (Array.isArray(name) && name.some(n => typeof n === 'string' && n.trim()));
+        if(!nameOk) errors.push('"System Name" is required (string or list of strings).');
+
+        // Triplet fields: [err-, value, err+] of numbers/null (scalar gets wrapped)
+        TRIPLET_FIELDS.forEach(field => {
+          if(!(field in entry) || entry[field] === null) return;
+          const v = entry[field];
+          if(typeof v === 'number' && Number.isFinite(v)){
+            entry[field] = [null, v, null];
+            warnings.push('"' + field + '": plain number converted to [null, value, null] triplet.');
+            return;
+          }
+          if(!Array.isArray(v) || v.length !== 3 || !v.every(isFiniteOrNull)){
+            errors.push('"' + field + '" must be a [err-, value, err+] triplet of plain numbers or null — no strings or unit labels (got ' + JSON.stringify(v) + ').');
+          }
+        });
+
+        // RA/Dec: central values required and within physical ranges
+        const ra = getTripletCentralValue(entry['RA']);
+        const dec = getTripletCentralValue(entry['Dec']);
+        if(ra === null || dec === null){
+          errors.push('"RA" and "Dec" central values are required, in degrees.');
+        } else if(ra < 0 || ra >= 360 || dec < -90 || dec > 90){
+          errors.push('RA must be in [0, 360) deg and Dec in [-90, +90] deg.');
+        }
+
+        // Reference: non-empty list of bibcode strings (bare string gets wrapped)
+        if(typeof entry['Reference'] === 'string' && entry['Reference'].trim()){
+          entry['Reference'] = [entry['Reference'].trim()];
+          warnings.push('"Reference": string wrapped into a list.');
+        }
+        const ref = entry['Reference'];
+        if(!Array.isArray(ref) || ref.length === 0 || !ref.every(r => typeof r === 'string' && r.trim())){
+          errors.push('"Reference" must be a non-empty list of ADS bibcodes.');
+        }
+
+        // Notes: the "why is this post-MT" justification
+        if(typeof entry['Notes'] !== 'string' || !entry['Notes'].trim()){
+          errors.push('"Notes" is required: briefly state why this system is post-mass-transfer.');
+        }
+
+        // Sanity: all-zero triplets are almost always unintended input
+        TRIPLET_FIELDS.forEach(field => {
+          const v = entry[field];
+          if(Array.isArray(v) && v.length === 3 && v.every(x => x === 0)){
+            warnings.push('"' + field + '" is exactly [0, 0, 0] — use null for unknown values.');
+          }
+        });
+
+        // Controlled vocabularies (warnings only; new classes may be proposed)
+        ['evol_type_1', 'evol_type_2'].forEach(field => {
+          const v = entry[field];
+          if(v !== undefined && v !== null && v !== '' && !EVOL_TYPES.includes(v)){
+            warnings.push('"' + field + '" = "' + v + '" is not one of: ' + EVOL_TYPES.join(', ') + '.');
+          }
+        });
+        const cls = entry['system_class'];
+        if(cls !== undefined && cls !== null && cls !== '' && !SYSTEM_CLASSES.includes(cls)){
+          warnings.push('"system_class" = "' + cls + '" is not a standard class — it will be treated as a proposed new class.');
+        }
+
+        // Unknown keys: likely typos of schema field names
+        const unknown = Object.keys(entry).filter(k => !KNOWN_FIELDS.includes(k) && !k.startsWith('_'));
+        if(unknown.length){
+          warnings.push('Unknown field(s): ' + unknown.join(', ') + ' — check spelling against the data schema.');
+        }
+
+        return { errors, warnings };
+      }
+
+      // ==========================================================================
+      // EVENT HANDLER: Download Batch Template
+      // ==========================================================================
+      downloadTemplateBtn.addEventListener('click', function(){
+        const blob = new Blob([JSON.stringify(BATCH_TEMPLATE, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'post_mt_proposed_systems.json';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      });
+
+      // ==========================================================================
+      // EVENT HANDLER: Load Uploaded File into the Textarea
+      // ==========================================================================
+      batchFileInput.addEventListener('change', function(){
+        const file = this.files && this.files[0];
+        if(!file) return;
+        const reader = new FileReader();
+        reader.onload = function(){ batchJsonArea.value = String(reader.result || ''); };
+        reader.readAsText(file);
+      });
+
+      // ==========================================================================
+      // EVENT HANDLER: Validate Batch
+      // ==========================================================================
+      validateBatchBtn.addEventListener('click', async function(){
+        batchResults.classList.add('hidden');
+        batchSubmitCard.classList.add('hidden');
+        latestBatchJson = '';
+
+        const raw = batchJsonArea.value.trim();
+        if(!raw){
+          batchStatus.textContent = 'Upload or paste your JSON array first.';
+          return;
+        }
+
+        let parsed;
+        try {
+          parsed = JSON.parse(raw);
+        } catch(err){
+          batchStatus.textContent = 'Invalid JSON: ' + err.message;
+          return;
+        }
+        if(!Array.isArray(parsed)){
+          if(parsed && typeof parsed === 'object'){
+            parsed = [parsed];  // Single object is fine: wrap into an array
+          } else {
+            batchStatus.textContent = 'Expected a JSON array of system objects.';
+            return;
+          }
+        }
+        if(parsed.length === 0){
+          batchStatus.textContent = 'The array is empty.';
+          return;
+        }
+
+        batchStatus.textContent = 'Validating ' + parsed.length + ' entr' + (parsed.length === 1 ? 'y' : 'ies') + '...';
+        await loadCatalog();  // Needed for the duplicate checks
+
+        let totalErrors = 0;
+        let html = '';
+        parsed.forEach((entry, i) => {
+          const { errors, warnings } = validateEntry(entry);
+          totalErrors += errors.length;
+
+          // Duplicate check against the catalog (same logic as Step 1)
+          let dupHtml = '';
+          if(catalogLoaded && entry && typeof entry === 'object' && !Array.isArray(entry)){
+            const rawName = Array.isArray(entry['System Name']) ? entry['System Name'][0] : entry['System Name'];
+            // Skip name matching for very short names to avoid flooding with false positives
+            const nameForMatch = normalizeToken(rawName).length >= 3 ? String(rawName) : '';
+            const { nameMatches, positionMatches } = findCatalogMatches(
+              nameForMatch,
+              getTripletCentralValue(entry['RA']),
+              getTripletCentralValue(entry['Dec'])
+            );
+            const merged = uniqueMatches(nameMatches.concat(positionMatches));
+            if(merged.length){
+              dupHtml = '<div class="result-warn">Possible duplicate(s) already in catalog: ' +
+                merged.slice(0, 5).map(m =>
+                  escapeHtml(String(m.record['System Name'] || 'Unnamed')) +
+                  ' (' + escapeHtml(m.reasons.join(', ')) +
+                  (m.sepArcsec !== null && m.sepArcsec !== undefined ? ', ' + m.sepArcsec.toFixed(3) + ' arcsec' : '') + ')'
+                ).join('; ') +
+                '</div>';
+            }
+          }
+
+          const rawLabel = entry && entry['System Name'];
+          const label = rawLabel ? String(Array.isArray(rawLabel) ? rawLabel[0] : rawLabel) : '(unnamed)';
+          html += '<div class="match-card">';
+          html += '<div><strong>Entry ' + (i + 1) + ':</strong> ' + escapeHtml(label) + '</div>';
+          if(errors.length === 0 && warnings.length === 0 && !dupHtml){
+            html += '<div class="result-none">OK</div>';
+          }
+          errors.forEach(e => { html += '<div style="color:#b91c1c;">Error: ' + escapeHtml(e) + '</div>'; });
+          warnings.forEach(w => { html += '<div class="result-warn">Warning: ' + escapeHtml(w) + '</div>'; });
+          html += dupHtml;
+          html += '</div>';
+        });
+
+        batchResults.innerHTML = html;
+        batchResults.classList.remove('hidden');
+
+        if(totalErrors > 0){
+          batchStatus.innerHTML = '<span class="result-warn">' + totalErrors + ' error(s) found — please fix them and validate again.</span>';
+          return;
+        }
+
+        // Store the normalized batch (scalar->triplet etc. applied) for submission
+        latestBatchJson = JSON.stringify(parsed, null, 2);
+        latestBatchCount = parsed.length;
+        batchSubmitCard.classList.remove('hidden');
+        batchStatus.innerHTML = '<span class="result-ok">All ' + parsed.length +
+          ' entr' + (parsed.length === 1 ? 'y' : 'ies') + ' passed validation.</span> ' +
+          'Review any warnings above, then continue to step 3 below.';
+      });
+
+      // ==========================================================================
+      // EVENT HANDLER: Submit Batch via Pre-Filled GitHub Issue
+      // ==========================================================================
+      batchPrepareBtn.addEventListener('click', function(){
+        if(!latestBatchJson){
+          batchSubmitStatus.textContent = 'Validate the batch first.';
+          return;
+        }
+        openProposalIssue('[System proposal] batch of ' + latestBatchCount + ' systems',
+                          latestBatchJson, batchSubmitStatus);
+      });
+
+      // ==========================================================================
+      // EVENT HANDLER: Copy Batch JSON to Clipboard
+      // ==========================================================================
+      batchCopyBtn.addEventListener('click', async function(){
+        if(!latestBatchJson){
+          batchSubmitStatus.textContent = 'Validate the batch first.';
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(latestBatchJson);
+          batchSubmitStatus.textContent = 'Batch JSON copied to clipboard.';
+        } catch(_){
+          batchSubmitStatus.textContent = 'Could not access clipboard. Copy the JSON from your own file/editor instead.';
         }
       });
 
