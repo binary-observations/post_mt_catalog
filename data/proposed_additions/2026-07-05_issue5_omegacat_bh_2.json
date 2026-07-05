@@ -1,0 +1,44 @@
+{
+  "System Name": "oMEGACat BH-2",
+  "RA": [
+    null,
+    201.704774,
+    null
+  ],
+  "Dec": [
+    null,
+    -47.480898,
+    null
+  ],
+  "Reference": [
+    "2026arXiv260618350W"
+  ],
+  "Notes": "alive star is near main-sequence turnoff with extinction corrected magnitude is F 814W = 17.214.",
+  "Period": [
+    42,
+    94,
+    63
+  ],
+  "Eccentricity": [
+    0.13,
+    0.72,
+    0.08
+  ],
+  "M1": [
+    0.01,
+    0.78,
+    0.01
+  ],
+  "M2": [
+    1.01,
+    4.46,
+    1.22
+  ],
+  "Detection Method": [
+    "astrometry"
+  ],
+  "system_class": "Astrometric compact object",
+  "evol_type_1": "MS",
+  "evol_type_2": "BH",
+  "quality_flags": []
+}
