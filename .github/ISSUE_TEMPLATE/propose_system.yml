@@ -1,0 +1,34 @@
+name: Propose missing post-MT system(s)
+description: Submit one or more post-mass-transfer systems for the catalog. Valid submissions are converted into a pull request automatically.
+title: "[System proposal] "
+labels: ["system-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for contributing to the post-mass-transfer catalog!
+
+        The easiest path is the [submission website](https://binary-observations.github.io/post_mt_catalog/missing_systems.html),
+        which checks for duplicates, validates your entry, and pre-fills this form for you.
+
+        The JSON below must follow the [data schema](https://github.com/binary-observations/post_mt_catalog/blob/master/data/data_schema.json):
+        a single system object, or an array of objects for a batch. Measurements are `[err-, value, err+]`
+        triplets (masses in Msun, periods in days, positions in deg) as plain numbers — use `null` for
+        anything unknown, no unit strings.
+
+        After you press *Submit new issue*, our automation validates the JSON and opens a pull request;
+        the link is posted back here. If validation fails, you get a comment explaining why — just **edit
+        this issue** to fix it and the check reruns automatically.
+  - type: textarea
+    id: json
+    attributes:
+      label: System proposal JSON
+      description: One JSON object, or an array of objects, following the data schema.
+      render: json
+    validations:
+      required: true
+  - type: textarea
+    id: remarks
+    attributes:
+      label: Anything else we should know? (optional)
+      description: Context that does not belong in the catalog entry itself, e.g. related systems or upcoming papers.
