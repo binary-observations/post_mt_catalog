@@ -130,7 +130,8 @@ def plot_period_distribution_by_category(catalog_df=None, save=True):
 		kde_values = kde(x_range)
 		kde_normalized = kde_values * bin_width
 		#
-		ax.plot(x_range,kde_normalized,color=first_system_color,linewidth=2.5,label=f"{category} (n={len(log_periods)})",alpha=0.9,)
+		cat_label = category if category != 'CO binary' else 'C.O. binary'
+		ax.plot(x_range,kde_normalized,color=first_system_color,linewidth=2.5,label=f"{cat_label} (n={len(log_periods)})",alpha=0.9,)
 
 	xticks = [0.01, 0.1, 1, 10, 100, 1000, 10000]
 	xtick_labels = ["0.01", "0.1", "1", "10", "100", "1000", "$10^4$"]

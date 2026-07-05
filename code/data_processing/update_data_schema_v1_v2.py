@@ -80,9 +80,15 @@ def map_system_class(entry: dict):
 
 
 def upgrade_entry_schema(entry: dict):
-    # Remove deprecated field: Detection method for now 
+    # Remove deprecated field: Detection method for now
     # (it contains erroneous data, so we're just removing it for now)
     entry.pop("Detection Method", None)
+
+    # Canonicalize '+' spacing in system_class ("Astrometric WD+MS" -> "Astrometric WD + MS"),
+    # so class strings always match the schema's allowed values
+    cls = entry.get("system_class")
+    if isinstance(cls, str) and "+" in cls:
+        entry["system_class"] = re.sub(r"\s*\+\s*", " + ", cls).strip()
 
     # do not overwrite if already present
     entry.setdefault("evol_type_1", None)

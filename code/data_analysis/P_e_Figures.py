@@ -540,7 +540,7 @@ def plot_p_e_by_category_median(catalog_df=None, save=True):
     5–95 percentile tracks overlaid.
 
     Categories plotted: WD binary, Ongoing RLOF, Low-M stripped stars,
-    High-M stripped stars, CO binary.
+    High-M stripped stars, C.O. binary.
 
     Parameters:
     -----------
@@ -587,7 +587,7 @@ def plot_p_e_by_category_median(catalog_df=None, save=True):
         'Ongoing RLOF': ['Ongoing RLOF'],
         'Low-M stripped stars': ['Low-M stripped'],
         'High-M stripped stars': ['High-M stripped'],
-        'CO binary': ['CO binary'],
+        'C.O. binary': ['CO binary'],
     }
 
     P_bins = np.linspace(-1, 4, 7)
