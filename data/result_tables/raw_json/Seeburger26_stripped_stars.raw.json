@@ -1,0 +1,356 @@
+[
+  {
+    "System Name": "Gaia DR3 2933630927108779776",
+    "RA": 103.6914416,
+    "Dec": -18.7216491,
+    "pos_err_mas": 0.0127,
+    "Reference": [
+      "2026A&A...705A.146S",
+      "2022MNRAS.515.1266E"
+    ],
+    "Notes": "Cool, bloated, very low-mass stripped star (proto-He WD, Teff ~ 4750 K) with a rapidly rotating A-type accretor (Teff ~ 9500 K); recently detached and contracting towards the (hot) pre-He WD phase. Originally a Gaia DR3 star-BH candidate (EB+22). Orbit from the Gaia DR3 SB1 solution; masses from disentangling + SED (Seeburger+26 Table 3). Alias: G-2933. Also known as TYC 5954-2370-1.",
+    "Period": [
+      0.000664,
+      14.717528,
+      0.000664
+    ],
+    "Eccentricity": [
+      0.0104,
+      0.0211,
+      0.0104
+    ],
+    "M1": [
+      0.2,
+      2.2,
+      0.2
+    ],
+    "M2": [
+      0.04,
+      0.27,
+      0.04
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "EL CVn",
+    "obs_type_1": "A-type",
+    "obs_type_2": "pre-He WD",
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": [
+      "indirect_M1",
+      "indirect_M2"
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 2966694650501747328",
+    "RA": 88.0152646,
+    "Dec": -18.9388306,
+    "pos_err_mas": 0.0128,
+    "Reference": [
+      "2026A&A...705A.146S",
+      "2022MNRAS.515.1266E"
+    ],
+    "Notes": "Cool, bloated, very low-mass stripped star (proto-He WD, Teff ~ 5500 K) with a rapidly rotating A-type accretor (Teff ~ 9000 K); recently detached and contracting towards the (hot) pre-He WD phase. Originally a Gaia DR3 star-BH candidate (EB+22). Orbit from the Gaia DR3 SB1 solution; masses from disentangling + SED (Seeburger+26 Table 3). Alias: G-2966.",
+    "Period": [
+      0.001063,
+      10.397987,
+      0.001063
+    ],
+    "Eccentricity": [
+      0.0132,
+      0.0195,
+      0.0132
+    ],
+    "M1": [
+      0.1,
+      2.0,
+      0.1
+    ],
+    "M2": [
+      0.03,
+      0.23,
+      0.03
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "EL CVn",
+    "obs_type_1": "A-type",
+    "obs_type_2": "pre-He WD",
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": [
+      "indirect_M1",
+      "indirect_M2"
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 5243109471519822720",
+    "RA": 148.577051,
+    "Dec": -69.6526627,
+    "pos_err_mas": 0.012,
+    "Reference": [
+      "2026A&A...705A.146S",
+      "2022MNRAS.515.1266E"
+    ],
+    "Notes": "Cool, bloated, very low-mass stripped star (proto-He WD, Teff ~ 4750 K) with a rapidly rotating A-type accretor (Teff ~ 8750 K); recently detached and contracting towards the (hot) pre-He WD phase. Originally a Gaia DR3 star-BH candidate (EB+22). Orbit from the Gaia DR3 SB1 solution; masses from disentangling + SED (Seeburger+26 Table 3). Alias: G-5243.",
+    "Period": [
+      0.000521,
+      14.913679,
+      0.000521
+    ],
+    "Eccentricity": [
+      0.0059,
+      0.0227,
+      0.0059
+    ],
+    "M1": [
+      0.2,
+      2.0,
+      0.2
+    ],
+    "M2": [
+      0.04,
+      0.28,
+      0.04
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "EL CVn",
+    "obs_type_1": "A-type",
+    "obs_type_2": "pre-He WD",
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": [
+      "indirect_M1",
+      "indirect_M2"
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 5536105058044762240",
+    "RA": 113.8482669,
+    "Dec": -42.6461457,
+    "pos_err_mas": 0.0138,
+    "Reference": [
+      "2026A&A...705A.146S",
+      "2022MNRAS.515.1266E"
+    ],
+    "Notes": "Cool, bloated, very low-mass stripped star (proto-He WD, Teff ~ 6750 K) with a rapidly rotating F-type accretor (Teff ~ 7250 K); recently detached and contracting towards the (hot) pre-He WD phase. Originally a Gaia DR3 star-BH candidate (EB+22). Orbit from the Gaia DR3 SB1 solution; masses from disentangling + SED (Seeburger+26 Table 3). Alias: G-5536.",
+    "Period": [
+      0.003852,
+      12.176559,
+      0.003852
+    ],
+    "Eccentricity": [
+      0.0462,
+      0.0858,
+      0.0462
+    ],
+    "M1": [
+      0.2,
+      1.9,
+      0.2
+    ],
+    "M2": [
+      0.04,
+      0.23,
+      0.04
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "EL CVn",
+    "obs_type_1": "F-type",
+    "obs_type_2": "pre-He WD",
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": [
+      "indirect_M1",
+      "indirect_M2"
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 5694373091078326784",
+    "RA": 123.8662171,
+    "Dec": -26.1504169,
+    "pos_err_mas": 0.0154,
+    "Reference": [
+      "2026A&A...705A.146S",
+      "2022MNRAS.515.1266E"
+    ],
+    "Notes": "Cool, bloated, very low-mass stripped star (proto-He WD, Teff ~ 4750 K) with a rapidly rotating A-type accretor (Teff ~ 9250 K); recently detached and contracting towards the (hot) pre-He WD phase. Originally a Gaia DR3 star-BH candidate (EB+22). Orbit from the Gaia DR3 SB1 solution; masses from disentangling + SED (Seeburger+26 Table 3). Alias: G-5694.",
+    "Period": [
+      0.003997,
+      12.884807,
+      0.003997
+    ],
+    "Eccentricity": [
+      0.0375,
+      0.0176,
+      0.0375
+    ],
+    "M1": [
+      0.2,
+      2.1,
+      0.2
+    ],
+    "M2": [
+      0.04,
+      0.24,
+      0.04
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "EL CVn",
+    "obs_type_1": "A-type",
+    "obs_type_2": "pre-He WD",
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": [
+      "indirect_M1",
+      "indirect_M2"
+    ]
+  },
+  {
+    "System Name": "Gaia DR3 6000420920026118656",
+    "RA": 229.0333347,
+    "Dec": -44.3223391,
+    "pos_err_mas": 0.0269,
+    "Reference": [
+      "2026A&A...705A.146S",
+      "2022MNRAS.515.1266E"
+    ],
+    "Notes": "Cool, bloated, very low-mass stripped star (proto-He WD, Teff ~ 4750 K) with a rapidly rotating A-type accretor (Teff ~ 9000 K); recently detached and contracting towards the (hot) pre-He WD phase. Originally a Gaia DR3 star-BH candidate (EB+22). Orbit from the Gaia DR3 SB1 solution; masses from disentangling + SED (Seeburger+26 Table 3). Alias: G-6000.",
+    "Period": [
+      0.002082,
+      15.318045,
+      0.002082
+    ],
+    "Eccentricity": [
+      0.0092,
+      0.0061,
+      0.0092
+    ],
+    "M1": [
+      0.2,
+      2.2,
+      0.2
+    ],
+    "M2": [
+      0.03,
+      0.19,
+      0.03
+    ],
+    "Mass Function": [
+      null,
+      null,
+      null
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "EL CVn",
+    "obs_type_1": "A-type",
+    "obs_type_2": "pre-He WD",
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": [
+      "indirect_M1",
+      "indirect_M2"
+    ]
+  }
+]
