@@ -1,0 +1,167 @@
+[
+  {
+    "System Name": "WOCS 4230",
+    "RA": 10.8495647,
+    "Dec": 85.3424133,
+    "pos_err_mas": 0.0174,
+    "Reference": [
+      "2026AJ....171..102N"
+    ],
+    "Notes": "BSS with a close WD companion, which is a potential W UMa system, with a period of 0.456 days. Alternative name: NGC 188 3135 (SIMBAD).",
+    "Period": [
+      1e-06,
+      0.455609,
+      1e-06
+    ],
+    "Eccentricity": [
+      0.03,
+      0.04,
+      0.03
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      0.0003,
+      0.0039,
+      0.0003
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "Blue straggler binary",
+    "obs_type_1": null,
+    "obs_type_2": null,
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": []
+  },
+  {
+    "System Name": "WOCS 4945",
+    "RA": 12.0776254,
+    "Dec": 85.2925745,
+    "pos_err_mas": 0.0392,
+    "Reference": [
+      "2026AJ....171..102N"
+    ],
+    "Notes": "The faintest BSS in NGC 188, which is a long period system with P about 5000 days. Alternative name: NGC 188 2099 (SIMBAD).",
+    "Period": [
+      50.0,
+      5110.0,
+      50.0
+    ],
+    "Eccentricity": [
+      0.07,
+      0.48,
+      0.07
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      0.07,
+      0.14,
+      0.07
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "Blue straggler binary",
+    "obs_type_1": null,
+    "obs_type_2": null,
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": []
+  },
+  {
+    "System Name": "WOCS 5020",
+    "RA": 11.9649426,
+    "Dec": 85.2525326,
+    "pos_err_mas": 0.0127,
+    "Reference": [
+      "2026AJ....171..102N"
+    ],
+    "Notes": "A Blue Straggler with the longest known period for a cluster BSS, with a period of 38,000 days. Alternative name: NGC 188 1003 (SIMBAD).",
+    "Period": [
+      7000.0,
+      38000.0,
+      7000.0
+    ],
+    "Eccentricity": [
+      0.16,
+      0.74,
+      0.16
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      0.05,
+      0.04,
+      0.05
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "Blue straggler binary",
+    "obs_type_1": null,
+    "obs_type_2": null,
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": []
+  }
+]
