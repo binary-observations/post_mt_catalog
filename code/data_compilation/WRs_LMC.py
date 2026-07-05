@@ -281,8 +281,8 @@ observations_df = add_observation(
 observations_df = add_observation(
         observations_df,
         'BAT99 71',
-        [0.02402164, 83.934496, 0.02402164],                           # [err-, value, err+]
-        [0.00527778, -68.993553, 0.00527778],                         # [err-, value, err+]
+        [0.00000861, 83.9344958, 0.00000861],                           # [err-, value, err+] (err = 31 mas SIMBAD error ellipse; previous 0.024 deg was erroneous)
+        [0.00000861, -68.9935528, 0.00000861],                         # [err-, value, err+]
         [0.0005, 2.3264, 0.0005],                   # day [err-, value, err+]
         [0.08, 0.09, 0.08],                # [err-, value, err+]
         np.nan,                           # Msun more massive component [err-, value, err+]
