@@ -163,5 +163,60 @@
       "SB1"
     ],
     "quality_flags": []
+  },
+  {
+    "System Name": "WOCS 8104",
+    "RA": 10.0647507,
+    "Dec": 85.0634609,
+    "pos_err_mas": 0.0259,
+    "Reference": [
+      "2026AJ....171..102N"
+    ],
+    "Notes": "Secure BSS in NGC 188 with a long-period orbit (P about 3460 days). Alternative name: Cl* NGC 188 DGV 237 (SIMBAD).",
+    "Period": [
+      100.0,
+      3460.0,
+      100.0
+    ],
+    "Eccentricity": [
+      0.05,
+      0.12,
+      0.05
+    ],
+    "M1": [
+      null,
+      null,
+      null
+    ],
+    "M2": [
+      null,
+      null,
+      null
+    ],
+    "Mass Function": [
+      0.007,
+      0.052,
+      0.007
+    ],
+    "M1_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "M2_sin3i": [
+      null,
+      null,
+      null
+    ],
+    "system_class": "Blue straggler binary",
+    "obs_type_1": null,
+    "obs_type_2": null,
+    "evol_type_1": "MS",
+    "evol_type_2": "WD",
+    "Detection Method": [
+      "RV",
+      "SB1"
+    ],
+    "quality_flags": []
   }
 ]
