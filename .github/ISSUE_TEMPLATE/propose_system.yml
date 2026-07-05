@@ -13,8 +13,9 @@ body:
 
         The JSON below must follow the [data schema](https://github.com/binary-observations/post_mt_catalog/blob/master/data/data_schema.json):
         a single system object, or an array of objects for a batch. Measurements are `[err-, value, err+]`
-        triplets (masses in Msun, periods in days, positions in deg) as plain numbers — use `null` for
-        anything unknown, no unit strings.
+        triplets (masses in Msun, periods in days) as plain numbers — use `null` for anything unknown,
+        no unit strings. RA/Dec are plain scalars in deg, with `pos_err_mas` (positional uncertainty
+        in milliarcseconds) as a separate field.
 
         After you press *Submit new issue*, our automation validates the JSON and opens a pull request;
         the link is posted back here. If validation fails, you get a comment explaining why — just **edit

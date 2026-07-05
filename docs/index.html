@@ -819,13 +819,14 @@ archivePrefix = {arXiv},
   <hr>
 
   <h3>Data Structure</h3>
-  <p>The main catalog is a JSON array of system entries. Each entry is an object containing the following fields, with numerical quantities stored as <code>[err-, value, err+]</code> triplets:</p>
-  <pre><code>System Name, RA, Dec, Period, Eccentricity, M1, M1_sin3i, M2, M2_sin3i, Mass Function, evol_type_1, evol_type_2, obs_type_1, obs_type_2, system_class, quality_flags, Reference, Simbad, Notes</code></pre>
+  <p>The main catalog is a JSON array of system entries. Each entry is an object containing the following fields. Measured quantities are stored as <code>[err-, value, err+]</code> triplets, except the coordinates: <code>RA</code> and <code>Dec</code> are plain scalars in degrees (ICRS), and <code>pos_err_mas</code> gives the 1&sigma; on-sky positional uncertainty in milliarcseconds (<code>null</code> if unknown):</p>
+  <pre><code>System Name, RA, Dec, pos_err_mas, Period, Eccentricity, M1, M1_sin3i, M2, M2_sin3i, Mass Function, evol_type_1, evol_type_2, obs_type_1, obs_type_2, system_class, quality_flags, Reference, Simbad, Notes</code></pre>
   <p>Example entry:</p>
   <pre><code>{
   "System Name": "HD 49641",
-  "RA": [1e-05, 102.3727, 1e-05],
-  "Dec": [1e-05, 3.69171, 1e-05],
+  "RA": 102.3727,
+  "Dec": 3.69171,
+  "pos_err_mas": 0.036,
   "Period": [null, 1785.0, null],
   "Eccentricity": [null, 0.07, null],
   "M1": [0.8, 2.7, 1.2],

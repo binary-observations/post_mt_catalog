@@ -16,9 +16,12 @@ import re
 import sys
 
 TRIPLET_FIELDS = [
-    "RA", "Dec", "Period", "Eccentricity",
+    "Period", "Eccentricity",
     "M1", "M2", "Mass Function", "M1_sin3i", "M2_sin3i",
 ]
+
+# RA/Dec are scalars in deg; pos_err_mas is the on-sky 1-sigma uncertainty in mas
+MAS_PER_DEG = 3.6e6
 
 
 def set_outputs(**kwargs):
@@ -79,13 +82,31 @@ def validate_entry(entry, label):
                 f'{label}: "{field}" must be a [err-, value, err+] triplet of '
                 'plain numbers or null (no unit strings)')
 
+    # Coordinates: scalar deg; legacy [err-, value, err+] triplets are converted,
+    # moving their errors (deg) into pos_err_mas
+    for field in ("RA", "Dec"):
+        value = entry.get(field)
+        if isinstance(value, list) and len(value) == 3:
+            errs = [x for x in (value[0], value[2])
+                    if x is not None and is_finite_or_null(x) and x > 0]
+            if errs and entry.get("pos_err_mas") is None:
+                entry["pos_err_mas"] = max(errs) * MAS_PER_DEG
+            entry[field] = central_value(value)
+
     ra = central_value(entry.get("RA"))
     dec = central_value(entry.get("Dec"))
     if ra is None or dec is None:
-        errors.append(f"{label}: RA and Dec central values are required (deg)")
+        errors.append(f"{label}: RA and Dec are required as plain numbers (deg)")
     elif not (0 <= ra < 360) or not (-90 <= dec <= 90):
         errors.append(
             f"{label}: RA must be in [0, 360) deg and Dec in [-90, +90] deg")
+
+    pos_err = entry.get("pos_err_mas")
+    if pos_err is not None and not (
+            isinstance(pos_err, (int, float)) and not isinstance(pos_err, bool)
+            and pos_err == pos_err and pos_err >= 0):
+        errors.append(
+            f'{label}: "pos_err_mas" must be a non-negative number (mas) or null')
 
     ref = entry.get("Reference")
     if isinstance(ref, str) and ref.strip():

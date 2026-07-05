@@ -132,6 +132,47 @@ def extract_central_value(entry: dict, key: str) -> float | None:
         return None
 
 
+MAS_PER_DEG = 3.6e6
+
+
+def round_sig(x: float, sig: int = 2) -> float:
+    """Round to `sig` significant figures."""
+    if x == 0 or not math.isfinite(x):
+        return x
+    return round(x, -int(math.floor(math.log10(abs(x)))) + (sig - 1))
+
+
+def normalize_coordinates(entry: dict) -> None:
+    """Enforce the catalog coordinate format: scalar RA/Dec in deg + pos_err_mas.
+
+    Accepts legacy [err-, value, err+] triplets in deg (older result tables),
+    scalars (new-style tables), or missing values. `pos_err_mas` is the 1-sigma
+    on-sky positional uncertainty in milliarcseconds; a positional error of 0.0
+    is an artifact of earlier rounding and is treated as unknown.
+    """
+    err_mas_candidates = []
+    for key in ("RA", "Dec"):
+        val = entry.get(key)
+        if isinstance(val, list) and len(val) == 3:
+            for e in (val[0], val[2]):
+                if isinstance(e, (int, float)) and math.isfinite(e) and e > 0:
+                    err_mas_candidates.append(e * MAS_PER_DEG)
+            val = val[1]
+        if isinstance(val, (int, float)) and math.isfinite(val):
+            entry[key] = round(float(val), 7)   # 1e-7 deg = 0.36 mas
+        else:
+            entry[key] = None
+
+    pos_err = entry.get("pos_err_mas")
+    if isinstance(pos_err, (int, float)) and math.isfinite(pos_err) and pos_err > 0:
+        entry["pos_err_mas"] = round_sig(float(pos_err), 2)
+    elif err_mas_candidates:
+        # Legacy per-coordinate errors (deg): on-sky uncertainty ~ larger component
+        entry["pos_err_mas"] = round_sig(max(err_mas_candidates), 2)
+    else:
+        entry["pos_err_mas"] = None
+
+
 def make_simbad_url_from_coords(ra_deg: float | None, dec_deg: float | None, radius_arcsec: int = 5) -> str | None:
     """Return a SIMBAD coordinate-search URL using decimal degrees and arcsec radius."""
     try:
@@ -420,7 +461,13 @@ for h5_path in sorted(HDF5_DIR.glob("*.h5")):
                             loerr = float(f[col][idx, 0])
                             val   = float(f[col][idx, 1])
                             uperr = float(f[col][idx, 2])
-                            entry[col] = [round(loerr, 5), round(val, 5), round(uperr, 5)]
+                            if col in ("RA", "Dec"):
+                                # Keep full precision: rounding to 5 decimals (=18 mas)
+                                # destroys real positional errors (Gaia: 0.02-1 mas).
+                                # normalize_coordinates() applies the final format.
+                                entry[col] = [loerr, val, uperr]
+                            else:
+                                entry[col] = [round(loerr, 5), round(val, 5), round(uperr, 5)]
                         except (IndexError, ValueError, TypeError):
                             pass
 
@@ -482,6 +529,16 @@ for jp in raw_json_files:
         all_systems.append(upgrade_entry_schema(entry))
 
 print(f"Total systems after JSON ingestion: {len(all_systems)}")
+
+# -------------------------------------------------
+# Coordinate normalization
+# -------------------------------------------------
+# Catalog format: scalar RA/Dec in deg (7 decimals) + pos_err_mas (mas).
+# Legacy triplet coordinates from older result tables are converted here.
+for entry in all_systems:
+    normalize_coordinates(entry)
+n_with_err = sum(1 for e in all_systems if e.get("pos_err_mas") is not None)
+print(f"Normalized coordinates: {n_with_err} systems have a positional uncertainty.")
 
 # -------------------------------------------------
 # Deduplication

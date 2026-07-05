@@ -41,8 +41,9 @@ from paths import DATA_DIR, MAIN_CATALOG
 # Data notes used for table metadata and sidecar documentation.
 COLUMN_DESCRIPTIONS: dict[str, str] = {
     "System Name": "Primary system identifier used in the catalog.",
-    "RA": "Right ascension in degrees.",
-    "Dec": "Declination in degrees.",
+    "RA": "Right ascension in degrees (scalar).",
+    "Dec": "Declination in degrees (scalar).",
+    "pos_err_mas": "1-sigma on-sky positional uncertainty (error-ellipse semi-major axis) in milliarcseconds.",
     "Reference": "ADS bibcode reference for the measurement.",
     "Notes": "Free-text notes, provenance remarks, and caveats for the entry.",
     "Period": "Orbital period in days.",
@@ -65,6 +66,7 @@ COLUMN_DESCRIPTIONS: dict[str, str] = {
 COLUMN_UNITS: dict[str, str] = {
     "RA": "deg",
     "Dec": "deg",
+    "pos_err_mas": "mas",
     "Period": "d",
     "M1": "solMass",
     "M2": "solMass",
@@ -74,7 +76,7 @@ COLUMN_UNITS: dict[str, str] = {
 
 
 GLOBAL_NOTES: list[str] = [
-    "RA and Dec are in degrees.",
+    "RA and Dec are scalars in degrees; pos_err_mas is the on-sky positional uncertainty in milliarcseconds.",
     "Reference values are ADS bibcodes.",
     "Period is in days.",
     "M1 is the presumed accretor mass in solar masses.",

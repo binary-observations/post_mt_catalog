@@ -8,15 +8,21 @@
     },
 
     "RA": {
-      "type": "triplet [err-, value, err+]",
+      "type": "float",
       "units": "deg",
-      "description": "Right ascension (ICRS)"
+      "description": "Right ascension (ICRS), decimal degrees"
     },
 
     "Dec": {
-      "type": "triplet [err-, value, err+]",
+      "type": "float",
       "units": "deg",
-      "description": "Declination (ICRS)"
+      "description": "Declination (ICRS), decimal degrees"
+    },
+
+    "pos_err_mas": {
+      "type": "float | null",
+      "units": "mas",
+      "description": "1-sigma on-sky positional uncertainty (semi-major axis of the error ellipse) in milliarcseconds; null if unknown. Compare to the 100 mas (0.1 arcsec) deduplication threshold."
     },
 
     "Period": {

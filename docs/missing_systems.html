@@ -193,23 +193,25 @@
           <input id="formSystemName" type="text" required>
         </div>
 
-        <div class="form-group">
-          <label>RA [err-, value, err+] in deg *</label>
-          <div class="triplet">
-            <input id="formRAErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
-            <input id="formRAValue" type="text" inputmode="decimal" autocomplete="off" required placeholder="value">
-            <input id="formRAErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
+        <div class="grid">
+          <div class="form-group">
+            <label for="formRAValue">RA (deg) *</label>
+            <input id="formRAValue" type="text" inputmode="decimal" autocomplete="off" required placeholder="e.g. 150.025">
+          </div>
+          <div class="form-group">
+            <label for="formDecValue">Dec (deg) *</label>
+            <input id="formDecValue" type="text" inputmode="decimal" autocomplete="off" required placeholder="e.g. -45.123">
+          </div>
+          <div class="form-group">
+            <label for="formPosErrMas">Positional uncertainty (mas, optional)</label>
+            <input id="formPosErrMas" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 0.02 (Gaia), 300 (ground-based)">
           </div>
         </div>
-
-        <div class="form-group">
-          <label>Dec [err-, value, err+] in deg *</label>
-          <div class="triplet">
-            <input id="formDecErrMinus" type="text" inputmode="decimal" autocomplete="off" placeholder="err-">
-            <input id="formDecValue" type="text" inputmode="decimal" autocomplete="off" required placeholder="value">
-            <input id="formDecErrPlus" type="text" inputmode="decimal" autocomplete="off" placeholder="err+">
-          </div>
-        </div>
+        <p class="help-text">
+          RA/Dec as decimal degrees. The positional uncertainty is the 1-sigma on-sky error
+          (semi-major axis of the error ellipse) in <em>milliarcseconds</em> — for reference,
+          our duplicate-matching threshold is 100 mas.
+        </p>
 
         <div class="form-group">
           <label for="formReference">Reference (ADS bibcode(s), comma-separated) *</label>
@@ -424,7 +426,9 @@
             Keys and units must follow the
             <a href="https://github.com/binary-observations/post_mt_catalog/blob/master/data/data_schema.json" target="_blank" rel="noopener">data schema format</a>:
             measurements are <code>[err-, value, err+]</code> triplets — masses in Msun, periods in
-            days, positions in deg — written as plain numbers with "." as decimal separator.
+            days — written as plain numbers with "." as decimal separator. RA/Dec are plain
+            scalars in deg, with <code>pos_err_mas</code> (positional uncertainty in mas) as a
+            separate field.
             No unit strings (write <code>[null, 0.22, null]</code>, not <code>"0.22 Msun"</code>).
           </p>
           <textarea id="formAdditionalJson" rows="5" placeholder='{"Notes": "some interesting thing to note on this system", "Simbad": "https://simbad.cds.unistra.fr/..."}'></textarea>
@@ -464,7 +468,8 @@
         The template is a JSON array: the first entry is a fully filled example
         (<strong>delete it before submitting</strong>), the second is an empty skeleton —
         copy it once per system. All measurements are <code>[err-, value, err+]</code> triplets
-        (masses in Msun, periods in days, positions in deg); use <code>null</code> for anything unknown.
+        (masses in Msun, periods in days); RA/Dec are plain scalars in deg with the positional
+        uncertainty in a separate <code>pos_err_mas</code> field (mas). Use <code>null</code> for anything unknown.
       </p>
       <button type="button" id="downloadTemplateBtn">Download template JSON</button>
     </div>
@@ -712,6 +717,7 @@ git push origin HEAD
           'System Name': record['System Name'] ?? null,
           'RA': record['RA'] ?? null,
           'Dec': record['Dec'] ?? null,
+          'pos_err_mas': record['pos_err_mas'] ?? null,
           'Period': record['Period'] ?? null,
           'Eccentricity': record['Eccentricity'] ?? null,
           'M1': record['M1'] ?? null,
@@ -775,17 +781,6 @@ git push origin HEAD
           .replace(/>/g, '&gt;')
           .replace(/"/g, '&quot;')
           .replace(/'/g, '&#39;');
-      }
-
-      // --------------------------------------------------------------------------
-      // Read Triplet from Form (Required Fields)
-      // --------------------------------------------------------------------------
-      // Catalog uses [err-, value, err+] format for measurements with uncertainties
-      function readTriplet(errMinusId, valueId, errPlusId){
-        const eMinus = toNumber(document.getElementById(errMinusId).value);
-        const value = toNumber(document.getElementById(valueId).value);
-        const ePlus = toNumber(document.getElementById(errPlusId).value);
-        return [eMinus, value, ePlus];
       }
 
       // --------------------------------------------------------------------------
@@ -987,17 +982,9 @@ git push origin HEAD
         // --------------------------------------------------------------------------
         // Build proposal JSON object following catalog schema
         // --------------------------------------------------------------------------
-        const proposal = {
-          'System Name': systemName,
-          'RA': readTriplet('formRAErrMinus', 'formRAValue', 'formRAErrPlus'),
-          'Dec': readTriplet('formDecErrMinus', 'formDecValue', 'formDecErrPlus'),
-          'Reference': readOptionalList('formReference'),
-          'Notes': reason  // Scientific justification for why this is post-MT
-        };
-
-        // Validate coordinates: numeric central values within physical ranges
-        const raValue = proposal['RA'][1];
-        const decValue = proposal['Dec'][1];
+        // Coordinates: scalar RA/Dec in deg + pos_err_mas (on-sky 1-sigma, mas)
+        const raValue = toNumber(document.getElementById('formRAValue').value);
+        const decValue = toNumber(document.getElementById('formDecValue').value);
         if(raValue === null || decValue === null){
           proposalStatus.textContent = 'RA and Dec must be numeric, in degrees, with "." as decimal separator.';
           return;
@@ -1005,6 +992,23 @@ git push origin HEAD
         if(raValue < 0 || raValue >= 360 || decValue < -90 || decValue > 90){
           proposalStatus.textContent = 'RA must be in [0, 360) deg and Dec in [-90, +90] deg.';
           return;
+        }
+
+        const proposal = {
+          'System Name': systemName,
+          'RA': raValue,
+          'Dec': decValue,
+          'Reference': readOptionalList('formReference'),
+          'Notes': reason  // Scientific justification for why this is post-MT
+        };
+
+        const posErrMas = toNumber(document.getElementById('formPosErrMas').value);
+        if(posErrMas !== null){
+          if(posErrMas < 0){
+            proposalStatus.textContent = 'Positional uncertainty (mas) must be non-negative.';
+            return;
+          }
+          proposal['pos_err_mas'] = posErrMas;
         }
 
         // --------------------------------------------------------------------------
@@ -1171,10 +1175,12 @@ git push origin HEAD
       // --------------------------------------------------------------------------
       // Schema Knowledge for Client-Side Validation (keep in sync with data_schema.json)
       // --------------------------------------------------------------------------
-      const TRIPLET_FIELDS = ['RA', 'Dec', 'Period', 'Eccentricity', 'M1', 'M2', 'Mass Function', 'M1_sin3i', 'M2_sin3i'];
+      const TRIPLET_FIELDS = ['Period', 'Eccentricity', 'M1', 'M2', 'Mass Function', 'M1_sin3i', 'M2_sin3i'];
       const LIST_FIELDS = ['Reference', 'Detection Method', 'quality_flags'];
       const STRING_FIELDS = ['Notes', 'Simbad', 'obs_type_1', 'obs_type_2', 'system_class', 'evol_type_1', 'evol_type_2'];
-      const KNOWN_FIELDS = ['System Name'].concat(TRIPLET_FIELDS, LIST_FIELDS, STRING_FIELDS);
+      // RA/Dec are scalars in deg; pos_err_mas is the on-sky 1-sigma uncertainty in mas
+      const KNOWN_FIELDS = ['System Name', 'RA', 'Dec', 'pos_err_mas'].concat(TRIPLET_FIELDS, LIST_FIELDS, STRING_FIELDS);
+      const MAS_PER_DEG = 3.6e6;
       const EVOL_TYPES = ['MS', 'HG', 'RGB', 'AGB', 'He-star', 'WD', 'NS', 'BH'];
       const SYSTEM_CLASSES = [
         'Massive contact binary', 'WUMa binary', 'Algol',
@@ -1196,8 +1202,9 @@ git push origin HEAD
         {
           '_instructions': 'EXAMPLE ENTRY - delete this whole entry (including this field) before submitting. Copy the empty skeleton below once per system. Field definitions and units: data/data_schema.json. Use null for anything unknown; plain numbers with "." decimals, no unit strings.',
           'System Name': 'Example Star AB 123',
-          'RA': [null, 132.849042, null],
-          'Dec': [null, 18.303611, null],
+          'RA': 132.849042,
+          'Dec': 18.303611,
+          'pos_err_mas': 0.02,
           'Reference': ['2021AJ....161..190G'],
           'Notes': 'One or two sentences on why this system is post-mass-transfer.',
           'Period': [0.5, 42.83, 0.5],
@@ -1217,8 +1224,9 @@ git push origin HEAD
         },
         {
           'System Name': '',
-          'RA': [null, null, null],
-          'Dec': [null, null, null],
+          'RA': null,
+          'Dec': null,
+          'pos_err_mas': null,
           'Reference': [],
           'Notes': '',
           'Period': [null, null, null],
@@ -1285,13 +1293,33 @@ git push origin HEAD
           }
         });
 
-        // RA/Dec: central values required and within physical ranges
-        const ra = getTripletCentralValue(entry['RA']);
-        const dec = getTripletCentralValue(entry['Dec']);
+        // Coordinates: scalar deg. Legacy [err-, value, err+] triplets (old
+        // template) are auto-converted; their errors (deg) move to pos_err_mas.
+        ['RA', 'Dec'].forEach(field => {
+          const v = entry[field];
+          if(Array.isArray(v) && v.length === 3){
+            const errs = [v[0], v[2]].filter(x => typeof x === 'number' && Number.isFinite(x) && x > 0);
+            if(errs.length && (entry['pos_err_mas'] === undefined || entry['pos_err_mas'] === null)){
+              entry['pos_err_mas'] = Math.max(...errs) * MAS_PER_DEG;
+            }
+            entry[field] = (typeof v[1] === 'number' && Number.isFinite(v[1])) ? v[1] : null;
+            warnings.push('"' + field + '": legacy [err-, value, err+] triplet converted to a scalar in deg' +
+                          (errs.length ? ' (errors moved to pos_err_mas)' : '') + '.');
+          }
+        });
+
+        const ra = (typeof entry['RA'] === 'number' && Number.isFinite(entry['RA'])) ? entry['RA'] : null;
+        const dec = (typeof entry['Dec'] === 'number' && Number.isFinite(entry['Dec'])) ? entry['Dec'] : null;
         if(ra === null || dec === null){
-          errors.push('"RA" and "Dec" central values are required, in degrees.');
+          errors.push('"RA" and "Dec" are required as plain numbers, in degrees.');
         } else if(ra < 0 || ra >= 360 || dec < -90 || dec > 90){
           errors.push('RA must be in [0, 360) deg and Dec in [-90, +90] deg.');
+        }
+
+        const posErr = entry['pos_err_mas'];
+        if(posErr !== undefined && posErr !== null &&
+           !(typeof posErr === 'number' && Number.isFinite(posErr) && posErr >= 0)){
+          errors.push('"pos_err_mas" must be a non-negative number (milliarcseconds) or null.');
         }
 
         // Reference: non-empty list of bibcode strings (bare string gets wrapped)

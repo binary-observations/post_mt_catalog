@@ -1,13 +1,19 @@
 #!/usr/bin/env python3
 """
-Get_Coords.py
+Get_Coords_From_SIMBAD.py
 
-Pass a list of SIMBAD object names via command-line → batch query → J2000 RA/Dec in decimal degrees
-plus 1σ errors on RA and Dec (in degrees), derived from the SIMBAD error ellipse.
-Prints out Python dicts with [err-, value, err+] arrays for RA and Dec.
+Pass a list of SIMBAD object names via command-line → batch query → J2000 RA/Dec
+in decimal degrees plus a single on-sky positional uncertainty `pos_err_mas`:
+the 1σ semi-major axis of the SIMBAD error ellipse, in milliarcseconds.
+
+mas is SIMBAD's (and Gaia's) native unit for coordinate uncertainties, so no
+unit conversion happens here — the unit is still verified against the column
+metadata to guard against upstream changes.
+
+Prints Python dicts in the catalog coordinate format:
+    "RA": <deg>, "Dec": <deg>, "pos_err_mas": <mas or None>
 """
 
-import math
 import argparse
 from astroquery.simbad import Simbad
 import astropy.units as u
@@ -41,56 +47,43 @@ def get_coords(names):
     else:
         raise RuntimeError("No Dec column in SIMBAD response")
 
-    col_maj   = colmap['coo_err_maj']
-    col_min   = colmap['coo_err_min']
-    col_angle = colmap['coo_err_angle']
-    mainid    = colmap.get('main_id')
-
+    col_maj = colmap['coo_err_maj']
+    mainid  = colmap.get('main_id')
 
     def _angle_unit(col, default):
-            unit = tbl[col].unit
-            if unit is None:
-                warnings.warn(f"SIMBAD column {col!r} has no unit; assuming {default}")
-                return default
-            try:
-                unit.to(u.deg)                      # confirm it's an angular unit
-            except u.UnitConversionError:
-                raise RuntimeError(f"SIMBAD column {col!r} has non-angular unit {unit}")
-            return u.Unit(unit)
+        unit = tbl[col].unit
+        if unit is None:
+            warnings.warn(f"SIMBAD column {col!r} has no unit; assuming {default}")
+            return default
+        try:
+            unit.to(u.deg)                      # confirm it's an angular unit
+        except u.UnitConversionError:
+            raise RuntimeError(f"SIMBAD column {col!r} has non-angular unit {unit}")
+        return u.Unit(unit)
 
-    err_unit_maj = _angle_unit(col_maj,   u.mas)
-    err_unit_min = _angle_unit(col_min,   u.mas)
-    ang_unit     = _angle_unit(col_angle, u.deg)
-
+    err_unit_maj = _angle_unit(col_maj, u.mas)
 
     out = []
     for i, row in enumerate(tbl):
         name = row[mainid].decode('utf-8') if mainid and isinstance(row[mainid], bytes) else row[mainid] if mainid else names[i]
 
-        ra_deg  = row[col_ra]  * u.deg
-        dec_deg = row[col_dec] * u.deg
-
-        maj, mn, ang = row[col_maj], row[col_min], row[col_angle]
-        if maj is ma.masked or mn is ma.masked:
-            sigma_ra = sigma_dec = float('nan')          # no error ellipse in SIMBAD
+        # On-sky positional uncertainty: semi-major axis of the error ellipse.
+        # This is the quantity to compare against the 100 mas (0.1 arcsec)
+        # deduplication threshold; no per-coordinate projection needed.
+        maj = row[col_maj]
+        if maj is ma.masked:
+            pos_err_mas = None                  # no error ellipse in SIMBAD
         else:
-            a      = (maj * err_unit_maj).to(u.deg).value
-            b      = (mn  * err_unit_min).to(u.deg).value
-            pa_rad = (ang * ang_unit).to(u.rad).value if ang is not ma.masked else 0.0
-            dec_rad = dec_deg.to(u.rad).value
-
-            sigma_dec  = math.hypot(a * math.cos(pa_rad), b * math.sin(pa_rad))
-            sigma_east = math.hypot(a * math.sin(pa_rad), b * math.cos(pa_rad))
-            sigma_ra   = sigma_east / math.cos(dec_rad)
+            pos_err_mas = float((maj * err_unit_maj).to(u.mas).value)
 
         out.append({
-            'name':     name,
-            'ra':       ra_deg.value,
-            'dec':      dec_deg.value,
-            'err_ra':   sigma_ra,
-            'err_dec':  sigma_dec
+            'name':        name,
+            'ra_deg':      float(row[col_ra]),
+            'dec_deg':     float(row[col_dec]),
+            'pos_err_mas': pos_err_mas,
         })
     return out
+
 
 def main():
     parser = argparse.ArgumentParser(description="Query SIMBAD for object coordinates.")
@@ -104,10 +97,12 @@ def main():
 
     for o in coords:
         varname = o['name'].upper().replace(' ', '_')
+        err = 'None' if o['pos_err_mas'] is None else f"{o['pos_err_mas']:.3g}"
         print(f"{varname} = {{")
         print(f"    \"System Name\": '{o['name']}',")
-        print(f"    \"RA\":  [{o['err_ra']:.8f}, {o['ra']:.6f}, {o['err_ra']:.8f}],")
-        print(f"    \"Dec\": [{o['err_dec']:.8f}, {o['dec']:.6f}, {o['err_dec']:.8f}],")
+        print(f"    \"RA\": {o['ra_deg']:.7f},")
+        print(f"    \"Dec\": {o['dec_deg']:.7f},")
+        print(f"    \"pos_err_mas\": {err},")
         print("}\n")
 
 if __name__ == "__main__":

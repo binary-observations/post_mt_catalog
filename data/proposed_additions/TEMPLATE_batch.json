@@ -1,9 +1,10 @@
 [
   {
-    "_instructions": "EXAMPLE ENTRY - delete this whole entry (including this field) before submitting. Copy the empty skeleton below once per system. Field definitions and units: data/data_schema.json. Use null for anything unknown; plain numbers with '.' decimals, no unit strings.",
+    "_instructions": "EXAMPLE ENTRY - delete this whole entry (including this field) before submitting. Copy the empty skeleton below once per system. Field definitions and units: data/data_schema.json. Use null for anything unknown; plain numbers with '.' decimals, no unit strings. RA/Dec are scalars in deg; pos_err_mas is the 1-sigma on-sky positional uncertainty in milliarcseconds.",
     "System Name": "Example Star AB 123",
-    "RA": [null, 132.849042, null],
-    "Dec": [null, 18.303611, null],
+    "RA": 132.849042,
+    "Dec": 18.303611,
+    "pos_err_mas": 0.02,
     "Reference": ["2021AJ....161..190G"],
     "Notes": "One or two sentences on why this system is post-mass-transfer.",
     "Period": [0.5, 42.83, 0.5],
@@ -23,8 +24,9 @@
   },
   {
     "System Name": "",
-    "RA": [null, null, null],
-    "Dec": [null, null, null],
+    "RA": null,
+    "Dec": null,
+    "pos_err_mas": null,
     "Reference": [],
     "Notes": "",
     "Period": [null, null, null],
