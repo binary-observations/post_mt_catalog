@@ -1,0 +1,39 @@
+{
+  "System Name": "Gaia DR3 604917728138508160",
+  "RA": 132.849042,
+  "Dec": 18.303611,
+  "Reference": [
+    "1997ApJ...481L..93L",
+    "2021AJ....161..190G"
+  ],
+  "Notes": "This is a quintessential yellow straggler star (brighter than the subgiants but with temperatures between blue stragglers and the red giants) in the well-studied open cluster M67. Yellow stragglers are supposed to be evolved blue stragglers, i.e., mass transfer products. It has a helium WD companion, which only forms via mass donation, thus providing second evidence for the mass transfer.",
+  "Period": [
+    0.001,
+    42.8251,
+    0.001
+  ],
+  "Eccentricity": [
+    0.012,
+    0.016,
+    0.012
+  ],
+  "Mass Function": [
+    0.0001,
+    0.0027,
+    0.0001
+  ],
+  "Detection Method": [
+    "RV",
+    "SB1",
+    "UV excess photometric",
+    "UV excess spectroscopic"
+  ],
+  "system_class": "Spectroscopic WD + MS",
+  "obs_type_1": "Yellow straggler star",
+  "obs_type_2": "Helium white dwarf",
+  "evol_type_1": "HG",
+  "evol_type_2": "WD",
+  "quality_flags": [
+    "indirect_M2"
+  ]
+}
