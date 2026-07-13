@@ -157,9 +157,9 @@ def main():
 
     date = datetime.date.today().isoformat()
     filename = f"data/proposed_additions/{date}_issue{issue_number}_{slug}.json"
-    payload = entries if isinstance(data, list) else entries[0]
+    # Always write an ARRAY: Combine_and_process_data.py only ingests JSON arrays
     with open(filename, "w") as fh:
-        json.dump(payload, fh, indent=2)
+        json.dump(entries, fh, indent=2)
         fh.write("\n")
 
     set_outputs(valid="true", error="", filename=filename, count=len(entries))

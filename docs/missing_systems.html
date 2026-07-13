@@ -1118,7 +1118,9 @@ git push origin HEAD
         // --------------------------------------------------------------------------
         // Generate JSON and open a pre-filled GitHub issue
         // --------------------------------------------------------------------------
-        latestProposalJson = JSON.stringify(proposal, null, 2);
+        // Always an ARRAY (even for one system): proposal files must be JSON
+        // arrays or the compile step cannot ingest them
+        latestProposalJson = JSON.stringify([proposal], null, 2);
         proposalPreview.textContent = latestProposalJson;
         proposalPreview.classList.remove('hidden');  // Show JSON preview to user
 

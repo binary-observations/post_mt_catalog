@@ -523,7 +523,10 @@ for jp in raw_json_files:
     print(f"Processing {jp.name}...")
     with open(jp, "r") as f:
         data = json.load(f)
+    if isinstance(data, dict):
+        data = [data]  # tolerate single-system proposal files written as a bare object
     if not isinstance(data, list):
+        print(f"  Skipping {jp.name}: not a JSON array of system objects")
         continue
     for entry in data:
         all_systems.append(upgrade_entry_schema(entry))
