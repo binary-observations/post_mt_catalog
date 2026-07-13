@@ -6,7 +6,7 @@
     "1997ApJ...481L..93L",
     "2021AJ....161..190G"
   ],
-  "Notes": "This is a quintessential yellow straggler star (brighter than the subgiants but with temperatures between blue stragglers and the red giants) in the well-studied open cluster M67. Yellow stragglers are supposed to be evolved blue stragglers, i.e., mass transfer products. It has a helium WD companion, which only forms via mass donation, thus providing second evidence for the mass transfer.",
+  "Notes": "A quintessential yellow straggler star (brighter than the subgiants but with T between BSS and the RG) in the open cluster M67. YSS are supposed to be evolved BSS. It has a helium WD companion.",
   "Period": [
     0.001,
     42.8251,
