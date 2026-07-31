@@ -1,7 +1,7 @@
 # Catalog Notes
 
 ## Global Notes
-- RA and Dec are in degrees.
+- RA and Dec are scalars in degrees; pos_err_mas is the on-sky positional uncertainty in milliarcseconds.
 - Reference values are ADS bibcodes.
 - Period is in days.
 - M1 is the presumed accretor mass in solar masses.
@@ -14,9 +14,7 @@
 - quality_flags marks entries with assumed values or minimum/maximum constraints.
 
 ## Column Definitions
-- Dec: Declination in degrees. (unit: deg)
-- Dec_errm: Lower uncertainty for Dec.
-- Dec_errp: Upper uncertainty for Dec.
+- Dec: Declination in degrees (scalar). (unit: deg)
 - Eccentricity: Orbital eccentricity.
 - Eccentricity_errm: Lower uncertainty for Eccentricity.
 - Eccentricity_errp: Upper uncertainty for Eccentricity.
@@ -39,9 +37,7 @@
 - Period: Orbital period in days. (unit: d)
 - Period_errm: Lower uncertainty for Period.
 - Period_errp: Upper uncertainty for Period.
-- RA: Right ascension in degrees. (unit: deg)
-- RA_errm: Lower uncertainty for RA.
-- RA_errp: Upper uncertainty for RA.
+- RA: Right ascension in degrees (scalar). (unit: deg)
 - Reference: ADS bibcode reference for the measurement.
 - Simbad: SIMBAD coordinate-query URL for the source position.
 - System Name: Primary system identifier used in the catalog.
@@ -49,5 +45,6 @@
 - evol_type_2: Assumed evolutionary stage of the donor.
 - obs_type_1: Observed classification of the accretor (for example spectral type).
 - obs_type_2: Observed classification of the donor (for example spectral type).
+- pos_err_mas: 1-sigma on-sky positional uncertainty (error-ellipse semi-major axis) in milliarcseconds. (unit: mas)
 - quality_flags: Flags marking assumed values and/or minimum/maximum constraints.
 - system_class: Class of binary system.
